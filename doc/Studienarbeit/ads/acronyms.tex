@@ -1,0 +1,53 @@
+%!TEX root = ../dokumentation.tex
+
+\addchap{Abkürzungsverzeichnis}
+%nur verwendete Akronyme werden letztlich im Abkürzungsverzeichnis des Dokuments angezeigt
+%Verwendung: 
+%		\ac{Abk.}   --> fügt die Abkürzung ein, beim ersten Aufruf wird zusätzlich automatisch die ausgeschriebene Version davor eingefügt bzw. in einer Fußnote (hierfür muss in header.tex \usepackage[printonlyused,footnote]{acronym} stehen) dargestellt
+%		\acs{Abk.}   -->  fügt die Abkürzung ein
+%		\acf{Abk.}   --> fügt die Abkürzung UND die Erklärung ein
+%		\acl{Abk.}   --> fügt nur die Erklärung ein
+%		\acp{Abk.}  --> gibt Plural aus (angefügtes 's'); das zusätzliche 'p' funktioniert auch bei obigen Befehlen
+%	siehe auch: http://golatex.de/wiki/%5Cacronym
+%	
+
+%%%%%%%%%%%%%%%% IMPORTIERTER CODE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% provides \AtBeginEnvironment, \patchcmd and \csdef:
+
+\makeatletter
+\newcommand{\acroforeign}[1]{}
+
+% patch the environment to print the foreign definition:
+\AtBeginEnvironment{acronym}{%
+	\def\acroforeign#1{ (#1)}%
+}
+
+% patch the acronym definition to safe the foreign definition:
+\expandafter\patchcmd\csname AC@\AC@prefix{}@acro\endcsname
+{\begingroup}
+{\begingroup\def\acroforeign##1{\csdef{ac@#1@foreign}{##1, }}}
+{}
+{\fail}
+
+% %   renew the first output to include the foreign definition if given:
+\renewcommand*{\@acf}[2][\AC@linebreakpenalty]{%
+	\ifAC@footnote
+	\acsfont{\csname ac@#2@foreign\endcsname\AC@acs{#2}}%
+	\footnote{\AC@placelabel{#2}\AC@acl{#2}{}}%
+	\else
+	\acffont{%
+		\AC@placelabel{#2}\AC@acl{#2}%
+		\nolinebreak[#1] %
+		\acfsfont{(\acsfont{\csname ac@#2@foreign\endcsname\AC@acs{#2}})}%
+	}%
+	\fi
+	\ifAC@starred\else\AC@logged{#2}\fi
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%% ENDE IMPORTIERTER CODE %%%%%%%%%%%%%%%%%%%%%%
+
+\begin{acronym}[AUTOSAR]
+	%\setlength{\itemsep}{-\parsep}
+	\acro{GAN}{Generative Adversarial Network}
+	\acro{GTSRB}{German Traffic Sign Recognition Benchmark}
+\end{acronym}
