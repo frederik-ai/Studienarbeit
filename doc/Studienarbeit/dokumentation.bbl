@@ -18,41 +18,47 @@
 
 \datalist[entry]{none/global//global/global}
   \entry{GTSRB}{inproceedings}{}
-    \name{author}{4}{}{%
-      {{hash=SJ}{%
-         family={Stallkamp},
-         familyi={S\bibinitperiod},
-         given={Johannes},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=SM}{%
-         family={Schlipsing},
-         familyi={S\bibinitperiod},
-         given={Marc},
-         giveni={M\bibinitperiod},
-      }}%
-      {{hash=SJ}{%
-         family={Salmen},
-         familyi={S\bibinitperiod},
-         given={Jan},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=IC}{%
-         family={Igel},
-         familyi={I\bibinitperiod},
-         given={Christian},
-         giveni={C\bibinitperiod},
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{J. Stallkamp et al.}},
+         familyi={J\bibinitperiod},
       }}%
     }
-    \strng{namehash}{SJSMSJ+1}
-    \strng{fullhash}{SJSMSJIC1}
+    \strng{namehash}{J1}
+    \strng{fullhash}{J1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{booktitle}{IEEE International Joint Conference on Neural Networks}
+    \field{booktitle}{EEE International Joint Conference on Neural Networks}
     \field{pages}{1453\bibrangedash 1460}
-    \field{title}{The {G}erman {T}raffic {S}ign {R}ecognition {B}enchmark: A
-  multi-class classification competition}
+    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
+  classification competition}}
     \field{year}{2011}
+  \endentry
+
+  \entry{visualApproach}{inbook}{}
+    \name{author}{1}{}{%
+      {{hash=GAS}{%
+         family={Glassner},
+         familyi={G\bibinitperiod},
+         given={Andrew\bibnamedelima S.},
+         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {No Starch Press}%
+    }
+    \strng{namehash}{GAS1}
+    \strng{fullhash}{GAS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{chapter}{Generative Adversarial Networks}
+    \field{isbn}{978-1-7185-0072-3}
+    \field{pages}{649\bibrangedash 673}
+    \field{title}{Deep Learning: A Visual Approach}
+    \list{location}{1}{%
+      {San Francisco}%
+    }
+    \field{year}{2021}
   \endentry
 
   \entry{Goodfellow-et-al-2016}{book}{}
@@ -88,30 +94,46 @@
     \field{year}{2016}
   \endentry
 
-  \entry{visualApproach}{inbook}{}
-    \name{author}{1}{}{%
-      {{hash=GAS}{%
-         family={Glassner},
-         familyi={G\bibinitperiod},
-         given={Andrew\bibnamedelima S.},
-         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+  \entry{cycleGAN}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=ZJY}{%
+         family={Zhu},
+         familyi={Z\bibinitperiod},
+         given={Jun-Yan},
+         giveni={J\bibinithyphendelim Y\bibinitperiod},
+      }}%
+      {{hash=PT}{%
+         family={Park},
+         familyi={P\bibinitperiod},
+         given={Taesung},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=IP}{%
+         family={Isola},
+         familyi={I\bibinitperiod},
+         given={Phillip},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=EAA}{%
+         family={Efros},
+         familyi={E\bibinitperiod},
+         given={Alexei\bibnamedelima A.},
+         giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
       }}%
     }
     \list{publisher}{1}{%
-      {No Starch Press}%
+      {arXiv}%
     }
-    \strng{namehash}{GAS1}
-    \strng{fullhash}{GAS1}
+    \strng{namehash}{ZJYPTIP+1}
+    \strng{fullhash}{ZJYPTIPEAA1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{chapter}{Generative Adversarial Networks}
-    \field{isbn}{978-1-7185-0072-3}
-    \field{pages}{649\bibrangedash 673}
-    \field{title}{Deep Learning: A Visual Approach}
-    \list{location}{1}{%
-      {San Francisco}%
-    }
-    \field{year}{2021}
+    \verb{doi}
+    \verb 10.48550/ARXIV.1703.10593
+    \endverb
+    \field{title}{Unpaired Image-to-Image Translation using Cycle-Consistent
+  Adversarial Networks}
+    \field{year}{2017}
   \endentry
 
   \entry{gtsrbGAN}{inproceedings}{}
@@ -150,34 +172,14 @@
   \endentry
 
   \entry{taiwanGAN}{article}{}
-    \name{author}{4}{}{%
-      {{hash=DC}{%
-         family={Dewi},
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{D. Christine et al.}},
          familyi={D\bibinitperiod},
-         given={Christine},
-         giveni={C\bibinitperiod},
-      }}%
-      {{hash=CRC}{%
-         family={Chen},
-         familyi={C\bibinitperiod},
-         given={Rung-Ching},
-         giveni={R\bibinithyphendelim C\bibinitperiod},
-      }}%
-      {{hash=LYT}{%
-         family={Liu},
-         familyi={L\bibinitperiod},
-         given={Yan-Ting},
-         giveni={Y\bibinithyphendelim T\bibinitperiod},
-      }}%
-      {{hash=TSK}{%
-         family={Tai},
-         familyi={T\bibinitperiod},
-         given={Shao-Kuo},
-         giveni={S\bibinithyphendelim K\bibinitperiod},
       }}%
     }
-    \strng{namehash}{DCCRCLYT+1}
-    \strng{fullhash}{DCCRCLYTTSK1}
+    \strng{namehash}{D1}
+    \strng{fullhash}{D1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \verb{doi}
@@ -189,65 +191,6 @@
     \field{journaltitle}{Neural Computing and Applications}
     \field{month}{04}
     \field{year}{2021}
-  \endentry
-
-  \entry{cvMethodsForClassification}{book}{}
-    \name{author}{1}{}{%
-      {{hash=SR}{%
-         family={Scherer},
-         familyi={S\bibinitperiod},
-         given={Rafał},
-         giveni={R\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {Springer Cham}%
-    }
-    \strng{namehash}{SR1}
-    \strng{fullhash}{SR1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1007/978-3-030-12195-2
-    \endverb
-    \field{title}{Computer Vision Methods for Fast Image Classiﬁcation and
-  Retrieval}
-    \list{location}{1}{%
-      {Cham, Schweiz}%
-    }
-    \field{year}{2020}
-  \endentry
-
-  \entry{cnnsIntroduction}{misc}{}
-    \name{author}{2}{}{%
-      {{hash=OK}{%
-         family={O'Shea},
-         familyi={O\bibinitperiod},
-         given={Keiron},
-         giveni={K\bibinitperiod},
-      }}%
-      {{hash=NR}{%
-         family={Nash},
-         familyi={N\bibinitperiod},
-         given={Ryan},
-         giveni={R\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {arXiv}%
-    }
-    \keyw{Neural and Evolutionary Computing (cs.NE), Computer Vision and
-  Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and
-  information sciences, FOS: Computer and information sciences}
-    \strng{namehash}{OKNR1}
-    \strng{fullhash}{OKNR1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.48550/ARXIV.1511.08458
-    \endverb
-    \field{title}{An Introduction to Convolutional Neural Networks}
-    \field{year}{2015}
   \endentry
 \enddatalist
 \endinput

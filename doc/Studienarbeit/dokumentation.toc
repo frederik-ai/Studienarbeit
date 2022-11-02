@@ -25,12 +25,42 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Generative Adversarial Networks}{2}{section.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Vorherige Arbeiten}{2}{section.2.3}%
+\contentsline {subsection}{\numberline {2.2.1}Spieltheorie}{3}{subsection.2.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Verwendung desselben Datensatzes}{2}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.2.2}Training}{3}{subsection.2.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Verwendung eines taiwanesischen Datensatzes}{2}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.2.3}Architekturen}{3}{subsection.2.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{5}{chapter*.11}%
+\contentsline {paragraph}{\nonumberline CycleGANs}{4}{paragraph*.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{\nonumberline Wasserstein GANs}{5}{paragraph*.15}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Vorherige Arbeiten}{5}{section.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.1}Verwendung des gleichen Datensatzes}{5}{subsection.2.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.2}Verwendung anderer Datensätze}{5}{subsection.2.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Konzeption des Generative Adversarial Networks}{6}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Generator}{6}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Discriminator}{6}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Training}{6}{section.3.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Implementierung und Training}{7}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}Wahl eines Frameworks}{7}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Generierung von Bildern mit Abweichungen von dem Datensatz}{8}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Das finale Produkt}{9}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Benchmark}{9}{section.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{10}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Anhang}{12}{chapter*.17}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

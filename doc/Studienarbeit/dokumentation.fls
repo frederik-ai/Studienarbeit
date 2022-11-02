@@ -1,6 +1,6 @@
-PWD c:\Users\Frederik\Documents\Studienarbeit\German-Street-Sign-Classification\doc\Studienarbeit
+PWD c:\Users\Frederik\Documents\Studienarbeit\doc\Studienarbeit
 INPUT C:\Users\Frederik\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\Frederik\Documents\Studienarbeit\German-Street-Sign-Classification\doc\Studienarbeit\dokumentation.tex
+INPUT c:\Users\Frederik\Documents\Studienarbeit\doc\Studienarbeit\dokumentation.tex
 OUTPUT dokumentation.log
 INPUT .\ads\header.tex
 INPUT .\ads\header.tex
@@ -1930,14 +1930,53 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1.tfm
-INPUT .\content\bib.tex
-INPUT content\bib.tex
-INPUT .\content\bib.tex
-INPUT content\bib.tex
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-t1.vf
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1--base.tfm
+INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
+INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
+INPUT images\\..\images\GAN-Prozess.drawio.pdf
+INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
+INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
+INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1--base.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx6.tfm
+INPUT .\content\3 Konzeption des Generative Adversarial Networks.tex
+INPUT content\3 Konzeption des Generative Adversarial Networks.tex
+INPUT .\content\3 Konzeption des Generative Adversarial Networks.tex
+INPUT content\3 Konzeption des Generative Adversarial Networks.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT content\4 Implementierung und Training.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\6 Das finale Produkt.tex
+INPUT content\6 Das finale Produkt.tex
+INPUT .\content\6 Das finale Produkt.tex
+INPUT content\6 Das finale Produkt.tex
+INPUT .\content\7 Zusammenfassung.tex
+INPUT content\7 Zusammenfassung.tex
+INPUT .\content\7 Zusammenfassung.tex
+INPUT content\7 Zusammenfassung.tex
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
 INPUT .\dokumentation.gls
 INPUT dokumentation.gls
@@ -1981,3 +2020,15 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\liberti
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTB.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTI.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTI.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
