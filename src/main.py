@@ -1,13 +1,15 @@
-from PIL import Image
-import numpy as np
 import tensorflow as tf
+import os
 
-# retrieve dataset
-# problem: data is not divided into classes
-# x_test = tf.keras.utils.image_dataset_from_directory('./data/Test')
-# process dataset
+# Retrieve Dataset
+training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..',
+                                              'data\\Official Train\\Final_Training\\Images'))
+x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=32)
+
+# Process Dataset
 # ...
-# initialize parameters
+
+# Initialize Parameters
 # ...
 
 # region GAN D
@@ -18,7 +20,8 @@ import tensorflow as tf
 # ...
 # endregion
 
-# define training functions
+# Define Training Functions
 # ...
-# execute training
+
+# Execute Training
 # ...
