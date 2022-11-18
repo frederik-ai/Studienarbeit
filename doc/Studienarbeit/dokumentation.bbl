@@ -17,24 +17,6 @@
 \endgroup
 
 \datalist[entry]{none/global//global/global}
-  \entry{GTSRB}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=J}{%
-         family={{J. Stallkamp et al.}},
-         familyi={J\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{J1}
-    \strng{fullhash}{J1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{booktitle}{EEE International Joint Conference on Neural Networks}
-    \field{pages}{1453\bibrangedash 1460}
-    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
-  classification competition}}
-    \field{year}{2011}
-  \endentry
-
   \entry{visualApproach}{inbook}{}
     \name{author}{1}{}{%
       {{hash=GAS}{%
@@ -191,6 +173,24 @@
     \field{journaltitle}{Neural Computing and Applications}
     \field{month}{04}
     \field{year}{2021}
+  \endentry
+
+  \entry{GTSRB}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{J. Stallkamp et al.}},
+         familyi={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{J1}
+    \strng{fullhash}{J1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{EEE International Joint Conference on Neural Networks}
+    \field{pages}{1453\bibrangedash 1460}
+    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
+  classification competition}}
+    \field{year}{2011}
   \endentry
 \enddatalist
 \endinput

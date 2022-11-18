@@ -1,10 +1,7 @@
 from PIL import Image
 import os
 
-DEFAULT_PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images'
-
-
-def convert_ppm_training_data_to_png(path_to_train_directory=DEFAULT_PATH_TO_TRAIN_DIRECTORY):
+def convert_ppm_training_data_to_png(path_to_train_directory):
     # get full system path of directory where training data is located
     train_directory = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', path_to_train_directory))
 
