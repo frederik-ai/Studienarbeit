@@ -7,7 +7,7 @@ STRIDES = (4, 4)  ###
 PADDING = 'same'
 
 
-def make_discriminator_model(target_channels):
+def make_discriminator_model():
     model = tf.keras.Sequential()
     model.add(tf.keras.layers.Conv2D(filters=INITIAL_FILTER_COUNT, kernel_size=KERNEL_SIZE, strides=STRIDES,
                                      padding=PADDING))
