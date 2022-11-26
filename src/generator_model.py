@@ -6,8 +6,8 @@ KERNEL_SIZE = (4, 4)
 
 def make_generator_model():
     model = tf.keras.Sequential()
-    model.add(tf.keras.layers.Dense(32))
-    model.add(tfa.layers.InstanceNormalization())  # add batch normalization before activation of input layer
+    # model.add(tf.keras.layers.Dense(32))
+    model.add(tfa.layers.InstanceNormalization())
     model.add(tf.keras.layers.ReLU())
 
     # TODO: Change filter size

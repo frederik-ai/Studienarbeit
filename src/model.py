@@ -1,28 +1,132 @@
+import tensorflow as tf
+import time
+
 import generator_model
 import discriminator_model
 
+# A lot of code taken from: https://www.tensorflow.org/tutorials/generative/cyclegan
+
+
 class CycleGan:
-   
-   def __init__(self):
-      # GAN 'G'
-      self.g_generator = generator_model.make_generator_model()
-      self.g_discriminator = discriminator_model.make_discriminator_model()
-      # GAN 'F'
-      self.f_generator = generator_model.make_generator_model()
-      self.f_discriminator = discriminator_model.make_discriminator_model()
-   
-   def compile(self):
-      self.g_generator.compile()
-      self.g_discriminator.compile()
-      self.f_generator.compile()
-      self.f_discriminator.compile()
-   
-   def propagate(self, x):
-      # generated_images = self.g_generator.generator(x)
-      # real_or_fake_guesses = self.g_discriminator.discriminator(generated_images)
-      # backwards_generated_images = self.f_generator.generator(generated_images)
-      # cycle_consistency_guess = self.f_discriminator.discriminator()
-      return
-   
-   def train(self):
-      return
+
+    def __init__(self):
+        # GAN 'G'
+        self.generator_g = generator_model.make_generator_model()
+        self.discriminator_x = discriminator_model.make_discriminator_model()
+        # GAN 'F'
+        self.generator_f = generator_model.make_generator_model()
+        self.discriminator_y = discriminator_model.make_discriminator_model()
+
+        # optimizers
+        self.generator_g_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
+        self.generator_f_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
+        self.discriminator_x_optimizer = tf.keras.optimizers.Adam(
+            2e-4, beta_1=0.5)
+        self.discriminator_y_optimizer = tf.keras.optimizers.Adam(
+            2e-4, beta_1=0.5)
+
+        # for computation of loss
+        self.loss_obj = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+        self.LAMBDA = 10
+
+    def compile(self):
+        self.generator_g.compile()
+        self.discriminator_x.compile()
+        self.generator_f.compile()
+        self.discriminator_y.compile()
+        
+    def fit(self, pictogram, real_images, epochs=10):
+        print('Training...')
+        # print('Shape of real image input: {}'.format(tf.shape(real_images)))
+        
+        for epoch in range(epochs):
+            
+            print(f'Epoch: {epoch + 1} / {epochs}')
+            start = time.time()
+            for image in real_images:
+                print('.', end=' ')
+                self.train_step(pictogram, image)
+            
+            print ('Time taken for epoch {} is {:.2f} sec\n'.format(epoch + 1,
+                                                      time.time()-start))
+        
+
+    def discriminator_loss(self, real, generated):
+        real_loss = self.loss_obj(tf.ones_like(real), real)
+        generated_loss = generated_loss = self.loss_obj(
+            tf.zeros_like(generated), generated)
+        total_discriminator_loss = real_loss + generated_loss
+
+        return total_discriminator_loss * 0.5
+
+    def generator_loss(self, generated):
+        return self.loss_obj(tf.ones_like(generated), generated)
+
+    def calc_cycle_loss(self, real_image, cycled_image):
+        loss1 = tf.reduce_mean(tf.abs(real_image - cycled_image))
+        return self.LAMBDA * loss1
+
+    def identity_loss(self, real_image, same_image):
+        loss = tf.reduce_mean(tf.abs(real_image - same_image))
+        return self.LAMBDA * 0.5 * loss
+
+    def train_step(self, real_x, real_y):
+        with tf.GradientTape(persistent=True) as tape:
+            # Generator G translates X -> Y
+            # Generator F translates Y -> X
+
+            fake_y = self.generator_g(real_x, training=True)
+            cycled_x = self.generator_f(fake_y, training=True)
+
+            fake_x = self.generator_f(real_y, training=True)
+            cycled_y = self.generator_g(fake_x, training=True)
+
+            # same_x and same_y are used for identity loss.
+            same_x = self.generator_f(real_x, training=True)
+            same_y = self.generator_g(real_y, training=True)
+
+            disc_real_x = self.discriminator_x(real_x, training=True)
+            disc_real_y = self.discriminator_y(real_y, training=True)
+
+            disc_fake_x = self.discriminator_x(fake_x, training=True)
+            disc_fake_y = self.discriminator_y(fake_y, training=True)
+
+            # calculate the loss
+            gen_g_loss = self.generator_loss(disc_fake_y)
+            gen_f_loss = self.generator_loss(disc_fake_x)
+
+            total_cycle_loss = self.calc_cycle_loss(
+                real_x, cycled_x) + self.calc_cycle_loss(real_y, cycled_y)
+
+            # Total generator loss = adversarial loss + cycle loss
+            total_gen_g_loss = gen_g_loss + total_cycle_loss + \
+                self.identity_loss(real_y, same_y)
+            total_gen_f_loss = gen_f_loss + total_cycle_loss + \
+                self.identity_loss(real_x, same_x)
+
+            disc_x_loss = self.discriminator_loss(disc_real_x, disc_fake_x)
+            disc_y_loss = self.discriminator_loss(disc_real_y, disc_fake_y)
+
+        # Calculate the gradients for generator and discriminator
+        generator_g_gradients = tape.gradient(total_gen_g_loss,
+                                              self.generator_g.trainable_variables)
+        generator_f_gradients = tape.gradient(total_gen_f_loss,
+                                              self.generator_f.trainable_variables)
+
+        discriminator_x_gradients = tape.gradient(disc_x_loss,
+                                                  self.discriminator_x.trainable_variables)
+        discriminator_y_gradients = tape.gradient(disc_y_loss,
+                                                  self.discriminator_y.trainable_variables)
+
+        # Apply the gradients to the optimizer
+        self.generator_g_optimizer.apply_gradients(zip(generator_g_gradients,
+                                                       self.generator_g.trainable_variables))
+
+        self.generator_f_optimizer.apply_gradients(zip(generator_f_gradients,
+                                                       self.generator_f.trainable_variables))
+
+        self.discriminator_x_optimizer.apply_gradients(zip(discriminator_x_gradients,
+                                                           self.discriminator_x.trainable_variables))
+
+        self.discriminator_y_optimizer.apply_gradients(zip(discriminator_y_gradients,
+                                                           self.discriminator_y.trainable_variables))
