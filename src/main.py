@@ -1,10 +1,10 @@
 import tensorflow as tf
 import os
 import matplotlib.pyplot as plt
-from generator_model import make_generator_model
-from discriminator_model import make_discriminator_model
-from utils.preprocess_image import normalize, normalize_tensor_of_images
-from configparser import ConfigParser
+# from generator_model import make_generator_model
+# from discriminator_model import make_discriminator_model
+import utils.preprocess_image
+# from configparser import ConfigParser
 import model
 
 # config = ConfigParser()
@@ -15,13 +15,13 @@ BUFFER_SIZE = 1000
 IMAGE_DIMENSIONS = (128, 128)
 
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images'
-# PATH_TO_TRAIN_DIRECTORY = 'data\\One Class Test\\Final Training\\Images'
+# ATH_TO_TRAIN_DIRECTORY = 'data\\Mini One Class Test\\Final Training\\Images'
 PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images\\00013'
 training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_TRAIN_DIRECTORY))
 
 x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE, image_size=IMAGE_DIMENSIONS,
                                                       labels=None)
-# x_train_processed = ...
+x_train_processed = utils.preprocess_image.normalize_dataset(x_train)
 # x_train_list = next(iter(x_train))  # convert to list
 # x_train_list = x_train.get_single_element()
 
@@ -46,8 +46,10 @@ x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batc
 # guess = discriminator(x_train_list, training=False)
 
 cycle_gan = model.CycleGan()
+cycle_gan.print_welcome()
+cycle_gan.restore_latest_checkpoint_if_exists()
 cycle_gan.compile()
-cycle_gan.fit(x_pictograms.get_single_element(), x_train, epochs=1)
+cycle_gan.fit(x_pictograms.get_single_element(), x_train_processed, epochs=1)
 # cycle_gan.train_step(x_train_list, x_pictograms_list
 generated_images = cycle_gan.generator_g(x_pictograms.get_single_element(), training=False)
 

@@ -1,5 +1,6 @@
 import tensorflow as tf
 import time
+from tqdm import tqdm
 
 import generator_model
 import discriminator_model
@@ -28,27 +29,33 @@ class CycleGan:
         # for computation of loss
         self.loss_obj = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         self.LAMBDA = 10
-
+        
+        # checkpoints
+        self.checkpoint = self.init_checkpoint()
+        self.checkpoint_manager = tf.train.CheckpointManager(self.checkpoint, './src/checkpoints', max_to_keep=5)
+        
+        
     def compile(self):
         self.generator_g.compile()
         self.discriminator_x.compile()
         self.generator_f.compile()
         self.discriminator_y.compile()
         
-    def fit(self, pictogram, real_images, epochs=10):
+    def fit(self, pictogram, real_images, epochs=1):
         print('Training...')
-        # print('Shape of real image input: {}'.format(tf.shape(real_images)))
         
+        start = time.time()
         for epoch in range(epochs):
-            
             print(f'Epoch: {epoch + 1} / {epochs}')
-            start = time.time()
-            for image in real_images:
-                print('.', end=' ')
+            for image in tqdm(real_images):
+                # print('.', end=' ', flush=True)
                 self.train_step(pictogram, image)
             
-            print ('Time taken for epoch {} is {:.2f} sec\n'.format(epoch + 1,
-                                                      time.time()-start))
+            if (epoch + 1) % 5 == 0:
+                self.checkpoint_manager.save()
+                print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+            
+        print ('Time taken for training is {:.2f} sec\n'.format(time.time()-start))
         
 
     def discriminator_loss(self, real, generated):
@@ -130,3 +137,30 @@ class CycleGan:
 
         self.discriminator_y_optimizer.apply_gradients(zip(discriminator_y_gradients,
                                                            self.discriminator_y.trainable_variables))
+
+    def init_checkpoint(self):
+        checkpoint = tf.train.Checkpoint(generator_g=self.generator_g,
+                           generator_f=self.generator_f,
+                           discriminator_x=self.discriminator_x,
+                           discriminator_y=self.discriminator_y,
+                           generator_g_optimizer=self.generator_g_optimizer,
+                           generator_f_optimizer=self.generator_f_optimizer,
+                           discriminator_x_optimizer=self.discriminator_x_optimizer,
+                           discriminator_y_optimizer=self.discriminator_y_optimizer)
+        return checkpoint
+    
+    def restore_latest_checkpoint_if_exists(self):
+        if self.checkpoint_manager.latest_checkpoint:
+            self.checkpoint.restore(self.checkpoint_manager.latest_checkpoint)
+            print("Using the latest chekckpoint of CycleGAN.")
+        else:
+            print("No checkpoint found for CycleGAN. Starting from scratch.")
+    
+    def print_welcome(self):
+        print("""
+   ___        _      ___   _   _  _ 
+  / __|  _ __| |___ / __| /_\ | \| |
+ | (_| || / _| / -_) (_ |/ _ \| .` |
+  \___\_, \__|_\___|\___/_/ \_\_|\_|
+      |__/                                              
+            """)
