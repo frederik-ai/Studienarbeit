@@ -56,6 +56,8 @@ class CycleGan:
                 print('Checkpoint saved for epoch {}.'.format(epoch + 1))
             
         print ('Time taken for training is {:.2f} sec\n'.format(time.time()-start))
+        self.checkpoint_manager.save()
+        print('Checkpoint saved for this training')
         
 
     def discriminator_loss(self, real, generated):
