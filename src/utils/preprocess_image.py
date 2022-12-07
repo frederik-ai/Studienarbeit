@@ -20,6 +20,6 @@ def normalize_tensor_of_images(tensor_of_images):
             tf.reduce_min(tensor_of_images)
         )
     )
-    
-def normalize_dataset(dataset):
-    return dataset.map(lambda tensor: (tensor/127.5)-1)
+
+def normalize_image_to_255(np_array):
+    return (np_array*127.5)+1

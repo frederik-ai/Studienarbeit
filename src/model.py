@@ -4,6 +4,8 @@ from tqdm import tqdm
 
 import generator_model
 import discriminator_model
+import utils.misc
+import utils.load_data
 
 # A lot of code taken from: https://www.tensorflow.org/tutorials/generative/cyclegan
 
@@ -41,6 +43,9 @@ class CycleGan:
         self.generator_f.compile()
         self.discriminator_y.compile()
         
+    def generate(self, input_pictogram):
+        return self.generator_g(input_pictogram, training=False)
+        
     def fit(self, pictogram, real_images, epochs=1):
         print('Training...')
         
@@ -48,12 +53,13 @@ class CycleGan:
         for epoch in range(epochs):
             print(f'Epoch: {epoch + 1} / {epochs}')
             for image in tqdm(real_images):
-                # print('.', end=' ', flush=True)
                 self.train_step(pictogram, image)
             
             if (epoch + 1) % 5 == 0:
                 self.checkpoint_manager.save()
                 print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+                generator_test_result = self.generator_g(pictogram, real_images) # USE TEST DATA NOT TRAIN DATA
+                utils.misc.store_tensor_as_img(tensor=generator_test_result[0],filename=str(epoch+1), relative_path='generated_images')
             
         print ('Time taken for training is {:.2f} sec\n'.format(time.time()-start))
         self.checkpoint_manager.save()
