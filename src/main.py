@@ -12,13 +12,14 @@ import model
 # config = ConfigParser()
 # config.read('./config/config.ini')
 
-BATCH_SIZE = 32
+BATCH_SIZE = 64
 BUFFER_SIZE = 1000
 IMAGE_DIMENSIONS = (128, 128)
 
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images'
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Mini One Class Test\\Final Training\\Images'
-PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images\\00013'
+# PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images\\00013'
+PATH_TO_TRAIN_DIRECTORY = 'data/Official Train/Final_Training/Images/00013'
 training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_TRAIN_DIRECTORY))
 
 x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE, image_size=IMAGE_DIMENSIONS,
@@ -27,7 +28,8 @@ x_train_processed = utils.load_data.normalize_dataset(x_train)
 # x_train_list = next(iter(x_train))  # convert to list
 # x_train_list = x_train.get_single_element()
 
-PATH_TO_PICTOGRAMS = 'data\\Pictograms'
+# PATH_TO_PICTOGRAMS = 'data\\Pictograms'
+PATH_TO_PICTOGRAMS = 'data/Pictograms'
 pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_PICTOGRAMS))
 
 x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batch_size=BATCH_SIZE,
@@ -51,7 +53,7 @@ cycle_gan = model.CycleGan()
 cycle_gan.print_welcome()
 cycle_gan.restore_latest_checkpoint_if_exists()
 cycle_gan.compile()
-cycle_gan.fit(x_pictograms.get_single_element(), x_train_processed, epochs=15)
+cycle_gan.fit(x_pictograms.get_single_element(), x_train_processed, epochs=100)
 # cycle_gan.train_step(x_train_list, x_pictograms_list
 # generated_images = cycle_gan.generator_g(x_pictograms.get_single_element(), training=False)
 
