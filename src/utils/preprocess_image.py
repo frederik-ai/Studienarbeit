@@ -21,5 +21,15 @@ def normalize_tensor_of_images(tensor_of_images):
         )
     )
 
+
 def normalize_image_to_255(np_array):
-    return (np_array*127.5)+1
+    return (np_array * 127.5) + 1
+
+
+def shrink_content(image, target_size, content_size):
+    image = tf.image.resize(image, content_size)  # shrink the content
+    image = 1 - image  # invert the image
+    # adds black padding around the image to match target_size
+    image = tf.image.resize_with_crop_or_pad(image, target_size[0], target_size[1])
+    image = 1 - image  # invert back to original color; now padding is white
+    return image
