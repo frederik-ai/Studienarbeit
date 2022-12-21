@@ -1,32 +1,33 @@
 import tensorflow as tf
 import time
 from tqdm import tqdm
+import uuid
 
-import generator_model
-import discriminator_model
+# import generator_model
+# import discriminator_model
+from tensorflow_examples.models.pix2pix import pix2pix
 import utils.misc
 import utils.load_data
 
 # A lot of code taken from: https://www.tensorflow.org/tutorials/generative/cyclegan
 
+OUTPUT_CHANNELS = 3
 
 class CycleGan:
 
     def __init__(self):
         # GAN 'G'
-        self.generator_g = generator_model.make_generator_model()
-        self.discriminator_x = discriminator_model.make_discriminator_model()
+        self.generator_g = pix2pix.unet_generator(OUTPUT_CHANNELS, norm_type='instancenorm')
+        self.discriminator_x = pix2pix.discriminator(norm_type='instancenorm', target=False)
         # GAN 'F'
-        self.generator_f = generator_model.make_generator_model()
-        self.discriminator_y = discriminator_model.make_discriminator_model()
+        self.generator_f = pix2pix.unet_generator(OUTPUT_CHANNELS, norm_type='instancenorm')
+        self.discriminator_y = pix2pix.discriminator(norm_type='instancenorm', target=False)
 
         # optimizers
         self.generator_g_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
         self.generator_f_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
-        self.discriminator_x_optimizer = tf.keras.optimizers.Adam(
-            2e-4, beta_1=0.5)
-        self.discriminator_y_optimizer = tf.keras.optimizers.Adam(
-            2e-4, beta_1=0.5)
+        self.discriminator_x_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
+        self.discriminator_y_optimizer = tf.keras.optimizers.Adam(2e-4, beta_1=0.5)
 
         # for computation of loss
         self.loss_obj = tf.keras.losses.BinaryCrossentropy(from_logits=True)
@@ -34,7 +35,7 @@ class CycleGan:
         
         # checkpoints
         self.checkpoint = self.init_checkpoint()
-        self.checkpoint_manager = tf.train.CheckpointManager(self.checkpoint, './src/checkpoints', max_to_keep=5)
+        self.checkpoint_manager = tf.train.CheckpointManager(self.checkpoint, './src/checkpoints', max_to_keep=1)
         
         
     def compile(self):
@@ -54,12 +55,14 @@ class CycleGan:
             print(f'Epoch: {epoch + 1} / {epochs}')
             for image in tqdm(real_images):
                 self.train_step(pictogram, image)
+
+            generator_test_result = self.generator_g(pictogram) # USE TEST DATA NOT TRAIN DATA
+            random_filename = str(uuid.uuid4())
+            utils.misc.store_tensor_as_img(tensor=generator_test_result[0],filename=random_filename, relative_path='generated_images')
             
-            if (epoch + 1) % 5 == 0:
+            if (epoch + 1) % 10 == 0:
                 self.checkpoint_manager.save()
                 print('Checkpoint saved for epoch {}.'.format(epoch + 1))
-                generator_test_result = self.generator_g(pictogram, real_images) # USE TEST DATA NOT TRAIN DATA
-                utils.misc.store_tensor_as_img(tensor=generator_test_result[0],filename=str(epoch+1), relative_path='generated_images')
             
         print ('Time taken for training is {:.2f} sec\n'.format(time.time()-start))
         self.checkpoint_manager.save()
