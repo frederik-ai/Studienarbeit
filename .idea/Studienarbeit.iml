@@ -6,7 +6,7 @@
       <excludeFolder url="file://$MODULE_DIR$/doc/Literatur" />
       <excludeFolder url="file://$MODULE_DIR$/data" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (Studienarbeit)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (mlcv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

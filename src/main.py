@@ -15,7 +15,7 @@ import model
 
 BATCH_SIZE = 16
 BUFFER_SIZE = 1000
-IMAGE_DIMENSIONS = (256, 256)
+IMAGE_DIMENSIONS = (128, 128)
 
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images'
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Mini One Class Test\\Final Training\\Images'
@@ -34,7 +34,7 @@ PATH_TO_PICTOGRAMS = 'data/Pictograms'
 pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_PICTOGRAMS))
 
 x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batch_size=BATCH_SIZE,
-                                                            image_size=IMAGE_DIMENSIONS, labels=None)
+                                                           image_size=IMAGE_DIMENSIONS, labels=None)
 
 x_pictograms_list = next(iter(x_pictograms))
 first_pictogram = x_pictograms_list[0]
@@ -44,7 +44,9 @@ first_pictogram = x_pictograms_list[0]
 # plt.show()
 # first_pictogram = tf.image.resize_with_crop_or_pad(first_pictogram, 256, 256)
 # first_pictogram = 1 - first_pictogram # invert back
-first_pictogram = utils.preprocess_image.shrink_content(first_pictogram, IMAGE_DIMENSIONS, (128, 128))
+# first_pictogram = utils.preprocess_image.shrink_content(first_pictogram, IMAGE_DIMENSIONS, (128, 128))
+# first_pictogram = utils.preprocess_image.apply_random_3d_rotation(first_pictogram, IMAGE_DIMENSIONS)
+first_pictogram = utils.preprocess_image.randomly_transform_image(first_pictogram, IMAGE_DIMENSIONS)
 plt.imshow(first_pictogram)
 plt.show()
 print('')
