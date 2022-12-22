@@ -29,6 +29,14 @@ def normalize_image_to_255(np_array):
     return (np_array * 127.5) + 1
 
 
+def randomly_transform_4d_tensor(image_as_4d_tensor, target_size=(256, 256), max_theta_xy=0.1, max_theta_z=0.0001):
+    results = []
+    for image in image_as_4d_tensor:
+        curr_result = randomly_transform_image(image, target_size, max_theta_xy, max_theta_z)
+        results.append(np.expand_dims(curr_result, axis=0))
+    return np.concatenate(results, axis=0)
+
+
 def randomly_transform_image(image, target_size, max_theta_xy=0.1, max_theta_z=0.0001):
     transformed_image = 1 - image  # invert the image
 
@@ -50,12 +58,13 @@ def randomly_transform_image(image, target_size, max_theta_xy=0.1, max_theta_z=0
     return transformed_image
 
 
-def apply_3d_rotation(image, theta_xy, theta_z, image_size=(256, 256)):
+def apply_3d_rotation(image, theta_xy, theta_z, image_size):
     transformation_matrix = np.array([
         [np.cos(theta_xy), -np.sin(theta_xy), 0],
         [np.sin(theta_xy), np.cos(theta_xy), 0],
         [0, np.sin(theta_z), 1]
     ])
-    image = tf.keras.utils.img_to_array(image)
-    rotated_image = cv2.warpPerspective(image, transformation_matrix, image_size)
+    # image = tf.keras.utils.img_to_array(image)
+    rotated_image = cv2.warpPerspective(image.numpy(), transformation_matrix, image_size)
+    # rotated_image = tf.keras.utils.array_to_img(rotated_image)
     return rotated_image

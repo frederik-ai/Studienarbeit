@@ -15,7 +15,7 @@ import model
 
 BATCH_SIZE = 16
 BUFFER_SIZE = 1000
-IMAGE_DIMENSIONS = (128, 128)
+IMAGE_DIMENSIONS = (256, 256)
 
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Official Train\\Final_Training\\Images'
 # PATH_TO_TRAIN_DIRECTORY = 'data\\Mini One Class Test\\Final Training\\Images'
@@ -46,10 +46,9 @@ first_pictogram = x_pictograms_list[0]
 # first_pictogram = 1 - first_pictogram # invert back
 # first_pictogram = utils.preprocess_image.shrink_content(first_pictogram, IMAGE_DIMENSIONS, (128, 128))
 # first_pictogram = utils.preprocess_image.apply_random_3d_rotation(first_pictogram, IMAGE_DIMENSIONS)
-first_pictogram = utils.preprocess_image.randomly_transform_image(first_pictogram, IMAGE_DIMENSIONS)
-plt.imshow(first_pictogram)
-plt.show()
-print('')
+# first_pictogram = utils.preprocess_image.randomly_transform_image(first_pictogram, IMAGE_DIMENSIONS)
+# plt.imshow(first_pictogram)
+# plt.show()
 
 # create list that contains the pictogram 10 times
 # x_pictograms_list = [next(iter(x_pictograms))[0]] * 10
@@ -65,13 +64,21 @@ print('')
 # discriminator_input = generated_images
 # guess = discriminator(x_train_list, training=False)
 
-cycle_gan = model.CycleGan()
+# x_pictograms = x_pictograms.map(lambda x: tf.py_function(utils.preprocess_image.randomly_transform_image,
+#                                                         inp=[x], Tout=tf.float32))
+
+# x_pictogram = x_pictograms.get_single_element()
+# print(tf.shape(x_pictogram))
+# x_pictogram = utils.preprocess_image.randomly_transform_4d_tensor(x_pictogram, IMAGE_DIMENSIONS)
+# plt.imshow(x_pictogram[0, :])
+# plt.show()
+
+cycle_gan = model.CycleGan(image_size=IMAGE_DIMENSIONS)
 cycle_gan.print_welcome()
 cycle_gan.restore_latest_checkpoint_if_exists()
 cycle_gan.compile()
 # generator_test_result = cycle_gan.generator_g(x_pictograms.get_single_element()) # USE TEST DATA NOT TRAIN DATA
-cycle_gan.fit(x_pictograms.get_single_element(), x_train_processed, epochs=100)
-
+cycle_gan.fit(x_pictograms, x_train_processed, epochs=100)
 # cycle_gan.train_step(x_train_list, x_pictograms_list
 # generated_images = cycle_gan.generator_g(x_pictograms.get_single_element(), training=False)
 
