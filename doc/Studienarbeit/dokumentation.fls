@@ -1895,20 +1895,42 @@ INPUT .\content\2 Stand der Technik.tex
 INPUT content\2 Stand der Technik.tex
 INPUT .\content\2 Stand der Technik.tex
 INPUT content\2 Stand der Technik.tex
+INPUT .\content\Stand der Technik\KNNs.tex
+INPUT content\Stand der Technik\KNNs.tex
+INPUT .\content\Stand der Technik\KNNs.tex
+INPUT content\Stand der Technik\KNNs.tex
+INPUT .\images\KNNs\Neuron.png
+INPUT .\images\KNNs\Neuron.png
+INPUT images\KNNs\Neuron.png
+INPUT .\images\KNNs\Neuron.png
+INPUT .\images\KNNs\Neuron.png
+INPUT .\images\KNNs\Neuron.png
+INPUT .\images\KNNs\Neuron.png
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
+INPUT .\images\KNNs\KNN_layers.png
+INPUT .\images\KNNs\KNN_layers.png
+INPUT images\KNNs\KNN_layers.png
+INPUT .\images\KNNs\KNN_layers.png
+INPUT .\images\KNNs\KNN_layers.png
+INPUT .\images\KNNs\KNN_layers.png
+INPUT .\images\KNNs\KNN_layers.png
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1--base.tfm
+INPUT .\content\Stand der Technik\GANs.tex
+INPUT content\Stand der Technik\GANs.tex
+INPUT .\content\Stand der Technik\GANs.tex
+INPUT content\Stand der Technik\GANs.tex
 INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
 INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
 INPUT images\\..\images\GAN-Prozess.drawio.pdf
 INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
 INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
 INPUT .\images\\..\images\GAN-Prozess.drawio.pdf
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx8.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx6.tfm
@@ -2011,6 +2033,8 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\liberti
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTI.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb

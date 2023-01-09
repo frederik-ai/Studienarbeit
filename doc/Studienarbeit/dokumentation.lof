@@ -9,11 +9,15 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Trainingsprozess von GANs (eigene Darstellung, angelehnt an \cite [S. 654f.]{visualApproach})\relax }}{3}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{3}{figure.caption.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Vollständiges \ac {KNN} \cite {visualApproach}\relax }}{4}{figure.caption.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Trainingsprozess von GANs (angelehnt an \cite [S. 654f.]{visualApproach})\relax }}{8}{figure.caption.12}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{6}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{11}{figure.caption.19}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

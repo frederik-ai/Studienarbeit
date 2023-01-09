@@ -46,33 +46,7 @@
     \field{year}{2021}
   \endentry
 
-  \entry{visualApproach}{inbook}{}
-    \name{author}{1}{}{%
-      {{hash=GAS}{%
-         family={Glassner},
-         familyi={G\bibinitperiod},
-         given={Andrew\bibnamedelima S.},
-         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
-      }}%
-    }
-    \list{publisher}{1}{%
-      {No Starch Press}%
-    }
-    \strng{namehash}{GAS1}
-    \strng{fullhash}{GAS1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{chapter}{Generative Adversarial Networks}
-    \field{isbn}{978-1-7185-0072-3}
-    \field{pages}{649\bibrangedash 673}
-    \field{title}{Deep Learning: A Visual Approach}
-    \list{location}{1}{%
-      {San Francisco}%
-    }
-    \field{year}{2021}
-  \endentry
-
-  \entry{Goodfellow-et-al-2016}{book}{}
+  \entry{DeepLearningBook}{book}{}
     \name{author}{3}{}{%
       {{hash=GI}{%
          family={Goodfellow},
@@ -103,6 +77,125 @@
     \field{note}{\url{http://www.deeplearningbook.org}}
     \field{title}{Deep Learning}
     \field{year}{2016}
+  \endentry
+
+  \entry{knnsKompakt}{book}{}
+    \name{author}{1}{}{%
+      {{hash=SD}{%
+         family={Sonnet},
+         familyi={S\bibinitperiod},
+         given={Daniel},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Vieweg Wiesbaden}%
+    }
+    \strng{namehash}{SD1}
+    \strng{fullhash}{SD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-3-658-29081-8
+    \endverb
+    \field{subtitle}{Vom Perceptron zum Deep Learning}
+    \field{title}{Neuronale Netze Kompakt}
+    \list{location}{1}{%
+      {Wiesbaden}%
+    }
+    \field{year}{2020}
+  \endentry
+
+  \entry{visualApproach}{inbook}{}
+    \name{author}{1}{}{%
+      {{hash=GAS}{%
+         family={Glassner},
+         familyi={G\bibinitperiod},
+         given={Andrew\bibnamedelima S.},
+         giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {No Starch Press}%
+    }
+    \strng{namehash}{GAS1}
+    \strng{fullhash}{GAS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-1-7185-0072-3}
+    \field{pages}{649\bibrangedash 673}
+    \field{title}{Deep Learning: A Visual Approach}
+    \list{location}{1}{%
+      {San Francisco}%
+    }
+    \field{year}{2021}
+  \endentry
+
+  \entry{Goodfellow-GANs}{misc}{}
+    \name{author}{8}{}{%
+      {{hash=GIJ}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian\bibnamedelima J.},
+         giveni={I\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=PAJ}{%
+         family={Pouget-Abadie},
+         familyi={P\bibinithyphendelim A\bibinitperiod},
+         given={Jean},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mirza},
+         familyi={M\bibinitperiod},
+         given={Mehdi},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=XB}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Bing},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=WFD}{%
+         family={Warde-Farley},
+         familyi={W\bibinithyphendelim F\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=OS}{%
+         family={Ozair},
+         familyi={O\bibinitperiod},
+         given={Sherjil},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Courville},
+         familyi={C\bibinitperiod},
+         given={Aaron},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BY}{%
+         family={Bengio},
+         familyi={B\bibinitperiod},
+         given={Yoshua},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {arXiv}%
+    }
+    \keyw{Machine Learning (stat.ML), Machine Learning (cs.LG), FOS: Computer
+  and information sciences, FOS: Computer and information sciences}
+    \strng{namehash}{GIJPAJMM+1}
+    \strng{fullhash}{GIJPAJMMXBWFDOSCABY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/ARXIV.1406.2661
+    \endverb
+    \field{title}{Generative Adversarial Networks}
+    \field{year}{2014}
   \endentry
 
   \entry{cycleGAN}{misc}{}

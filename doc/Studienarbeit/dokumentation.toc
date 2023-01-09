@@ -5,9 +5,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{VI}{chapter*.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.5}%
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.6}%
+\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.7}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}%
 \defcounter {refsection}{0}\relax 
@@ -23,56 +23,74 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Künstliche Neuronale Netze}{2}{section.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Convolutional Neural Networks}{2}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.1}Training}{4}{subsection.2.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Bildgenerierung}{2}{section.2.3}%
+\contentsline {subsection}{\numberline {2.2.2}Convolutional Neural Networks}{5}{subsection.2.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}Generative Adversarial Networks}{2}{section.2.4}%
+\contentsline {section}{\numberline {2.3}Bildgenerierung ohne Generative Adversarial Networks}{6}{section.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}Spieltheorie}{3}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.3.1}Boltzmann Maschinen}{6}{subsection.2.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}Training}{3}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.3.2}Deep Belief Netzwerke}{6}{subsection.2.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.3}Architekturen}{4}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.4}Bildgenerierung mit Generative Adversarial Networks}{6}{section.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline CycleGANs}{4}{paragraph*.11}%
+\contentsline {subsection}{\numberline {2.4.1}Spieltheorie}{7}{subsection.2.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Wasserstein GANs}{5}{paragraph*.13}%
+\contentsline {subsection}{\numberline {2.4.2}Training}{7}{subsection.2.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Vorherige Arbeiten}{5}{section.2.5}%
+\contentsline {subsection}{\numberline {2.4.3}Architekturen}{8}{subsection.2.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}Verwendung des gleichen Datensatzes}{5}{subsection.2.5.1}%
+\contentsline {paragraph}{\nonumberline CycleGANs}{8}{paragraph*.15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.2}Verwendung anderer Datensätze}{5}{subsection.2.5.2}%
+\contentsline {paragraph}{\nonumberline Wasserstein GANs}{9}{paragraph*.17}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.6}Machine Learning Frameworks}{5}{section.2.6}%
+\contentsline {section}{\numberline {2.5}Vorherige Arbeiten}{9}{section.2.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.1}Tensorflow}{5}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.5.1}Generierung deutscher Straßenschilder}{9}{subsection.2.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.2}Pytorch}{5}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.5.2}Generierung taiwanischer Straßenschilder}{10}{subsection.2.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.6.3}Weitere}{5}{subsection.2.6.3}%
+\contentsline {section}{\numberline {2.6}Machine Learning Frameworks}{10}{section.2.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Konzeption des Generative Adversarial Networks}{6}{chapter.3}%
+\contentsline {subsection}{\numberline {2.6.1}Tensorflow}{10}{subsection.2.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Datensatz}{6}{section.3.1}%
+\contentsline {subsection}{\numberline {2.6.2}Pytorch}{10}{subsection.2.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Architektur}{6}{section.3.2}%
+\contentsline {subsection}{\numberline {2.6.3}Weitere}{10}{subsection.2.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Generator}{6}{section.3.3}%
+\contentsline {chapter}{\numberline {3}Konzeption des Generative Adversarial Networks}{11}{chapter.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Discriminator}{6}{section.3.4}%
+\contentsline {section}{\numberline {3.1}Datensatz}{11}{section.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Training}{6}{section.3.5}%
+\contentsline {section}{\numberline {3.2}Framework}{11}{section.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Implementierung und Training}{7}{chapter.4}%
+\contentsline {section}{\numberline {3.3}Architektur}{11}{section.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Wahl eines Frameworks}{7}{section.4.1}%
+\contentsline {section}{\numberline {3.4}Datenaugmentation}{11}{section.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Evaluation}{8}{chapter.5}%
+\contentsline {section}{\numberline {3.5}Training}{11}{section.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Zusammenfassung}{9}{chapter.6}%
+\contentsline {chapter}{\numberline {4}Implementierung und Training}{12}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{11}{chapter*.17}%
+\contentsline {section}{\numberline {4.1}Hyperparameter}{12}{section.4.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Hinzufügen äußerer Einflüsse}{12}{section.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}Verwackeln}{12}{subsection.4.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}Artefakte}{12}{subsection.4.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.3}Schnee}{12}{subsection.4.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Evaluation}{13}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Metrik zur Messung der Performanz}{13}{section.5.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Vergleich von Unet und Resnet}{13}{section.5.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Zusammenfassung}{14}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Anhang}{16}{chapter*.21}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
