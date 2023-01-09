@@ -80,14 +80,14 @@ cycle_gan.compile()
 cycle_gan.restore_latest_checkpoint_if_exists()
 
 # generate random images
-for i in range(10):
-    x_pictograms_transformed = x_pictograms_processed.map(lambda t: tf.py_function(
-        utils.preprocess_image.randomly_transform_4d_tensor,
-        inp=[t],
-        Tout=tf.float32))
-    generator_result = cycle_gan.generator_g(x_pictograms_transformed.get_single_element())
-    random_filename = str(uuid.uuid4())
-    utils.misc.store_tensor_as_img(generator_result[0, :], random_filename, 'generator_test')
+#for i in range(10):
+#    x_pictograms_transformed = x_pictograms_processed.map(lambda t: tf.py_function(
+#        utils.preprocess_image.randomly_transform_4d_tensor,
+#        inp=[t],
+#        Tout=tf.float32))
+#    generator_result = cycle_gan.generator_g(x_pictograms_transformed.get_single_element())
+#    random_filename = str(uuid.uuid4())
+#    utils.misc.store_tensor_as_img(generator_result[0, :], random_filename, 'generator_test')
 
 
 def run_training():
