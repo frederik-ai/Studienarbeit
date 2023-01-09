@@ -1,3 +1,7 @@
+srC/checkpoints
+src/generated_images
+src/generator_test
+
 # INGORE TRAINING DATA
 data/
 # IGNORE LITERATURE PDFs
