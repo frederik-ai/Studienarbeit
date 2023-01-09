@@ -89,12 +89,14 @@ cycle_gan.restore_latest_checkpoint_if_exists()
 #    random_filename = str(uuid.uuid4())
 #    utils.misc.store_tensor_as_img(generator_result[0, :], random_filename, 'generator_test')
 
-
 def run_training():
     cycle_gan.print_welcome()
     # generator_test_result = cycle_gan.generator_g(x_pictograms.get_single_element()) # USE TEST DATA NOT TRAIN DATA
     cycle_gan.fit(x_pictograms_processed, x_train_processed, epochs=100)
     return
+
+run_training()
+
 # cycle_gan.train_step(x_train_list, x_pictograms_list
 # generated_images = cycle_gan.generator_g(x_pictograms.get_single_element(), training=False)
 
