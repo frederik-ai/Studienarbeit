@@ -1,0 +1,14 @@
+[paths]
+# Windows:  Paths with '\\' for subdirectories
+# Linux:    Paths with '/' for subdirectories
+train_data = 'data/Official Train/Final_Training/Images/00013'
+pictograms = 'data/Pictograms'
+
+[model]
+# It is recommended not to change the image_dimensions
+# The model only supports specific image dimensions
+image_dimensions = [256, 256]
+
+[training]
+number_of_epochs = 100
+batch_size = 16
