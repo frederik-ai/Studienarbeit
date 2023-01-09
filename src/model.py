@@ -2,6 +2,7 @@ import tensorflow as tf
 import time
 from tqdm import tqdm
 import uuid
+import os
 
 # import generator_model
 # import discriminator_model
@@ -37,7 +38,10 @@ class CycleGan:
 
         # checkpoints
         self.checkpoint = self.init_checkpoint()
-        self.checkpoint_manager = tf.train.CheckpointManager(self.checkpoint, './checkpoints', max_to_keep=1)
+        if os.name == 'posix':
+            self.checkpoint_manager = tf.train.CheckpointManager(self.checkpoint, './checkpoints', max_to_keep=1)
+        elif os.name == 'nt':
+            self.checkpoint_manager = tf.train.CheckpointManager(self.checkpoint, './src/checkpoints', max_to_keep=1)
 
         self.image_size = image_size
 
@@ -68,7 +72,7 @@ class CycleGan:
             utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
                                            relative_path='generated_images')
 
-            if (epoch + 1) % 10 == 0:
+            if ((epoch + 1) % 50 == 0) and ((epoch + 1) < epochs):
                 self.checkpoint_manager.save()
                 print('Checkpoint saved for epoch {}.'.format(epoch + 1))
 
