@@ -123,12 +123,256 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{isbn}{978-1-7185-0072-3}
-    \field{pages}{649\bibrangedash 673}
     \field{title}{Deep Learning: A Visual Approach}
     \list{location}{1}{%
       {San Francisco}%
     }
     \field{year}{2021}
+  \endentry
+
+  \entry{cnnsIntroduction}{misc}{}
+    \name{author}{2}{}{%
+      {{hash=OK}{%
+         family={O'Shea},
+         familyi={O\bibinitperiod},
+         given={Keiron},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=NR}{%
+         family={Nash},
+         familyi={N\bibinitperiod},
+         given={Ryan},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {arXiv}%
+    }
+    \keyw{Neural and Evolutionary Computing (cs.NE), Computer Vision and
+  Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and
+  information sciences, FOS: Computer and information sciences}
+    \strng{namehash}{OKNR1}
+    \strng{fullhash}{OKNR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/ARXIV.1511.08458
+    \endverb
+    \field{title}{An Introduction to Convolutional Neural Networks}
+    \field{year}{2015}
+  \endentry
+
+  \entry{openAiGenerativeNets}{misc}{}
+    \name{author}{14}{}{%
+      {{hash=KA}{%
+         family={Karpathy},
+         familyi={K\bibinitperiod},
+         given={Andrej},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=AP}{%
+         family={Abbeel},
+         familyi={A\bibinitperiod},
+         given={Pieter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=BG}{%
+         family={Brockman},
+         familyi={B\bibinitperiod},
+         given={Greg},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=CP}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=CV}{%
+         family={Cheung},
+         familyi={C\bibinitperiod},
+         given={Vicki},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=DR}{%
+         family={Duan},
+         familyi={D\bibinitperiod},
+         given={Rocky},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=KD}{%
+         family={Kingma},
+         familyi={K\bibinitperiod},
+         given={Durk},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=HJ}{%
+         family={Ho},
+         familyi={H\bibinitperiod},
+         given={Jonathan},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HR}{%
+         family={Houthooft},
+         familyi={H\bibinitperiod},
+         given={Rein},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=ST}{%
+         family={Salimans},
+         familyi={S\bibinitperiod},
+         given={Tim},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Schulman},
+         familyi={S\bibinitperiod},
+         given={John},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=SI}{%
+         family={Sutskever},
+         familyi={S\bibinitperiod},
+         given={Ilya},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=ZW}{%
+         family={Zaremba},
+         familyi={Z\bibinitperiod},
+         given={Wojciech},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{KAAPBG+1}
+    \strng{fullhash}{KAAPBGCPCVDRGIKDHJHRSTSJSIZW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{howpublished}{\url{https://openai.com/blog/generative-models/}}
+    \field{note}{Letzter Zugriff: 13.01.2023}
+    \field{title}{Generative Models}
+    \field{day}{16}
+    \field{month}{06}
+    \field{year}{2016}
+  \endentry
+
+  \entry{generativeModelsBook}{inbook}{}
+    \name{author}{1}{}{%
+      {{hash=NSI}{%
+         family={Nikolenko},
+         familyi={N\bibinitperiod},
+         given={Sergey\bibnamedelima I.},
+         giveni={S\bibinitperiod\bibinitdelim I\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer International Publishing}%
+    }
+    \strng{namehash}{NSI1}
+    \strng{fullhash}{NSI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Synthetic Data for Deep Learning}
+    \verb{doi}
+    \verb 10.1007/978-3-030-75178-4_4
+    \endverb
+    \field{pages}{97\bibrangedash 137}
+    \field{title}{Generative Models in Deep Learning}
+    \list{location}{1}{%
+      {Cham}%
+    }
+    \field{year}{2021}
+  \endentry
+
+  \entry{pixelRNN}{article}{}
+    \name{author}{3}{}{%
+      {{hash=vdOA}{%
+         prefix={van\bibnamedelima den},
+         prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod},
+         family={Oord},
+         familyi={O\bibinitperiod},
+         given={A{\"{a}}ron},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=KN}{%
+         family={Kalchbrenner},
+         familyi={K\bibinitperiod},
+         given={Nal},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=KK}{%
+         family={Kavukcuoglu},
+         familyi={K\bibinitperiod},
+         given={Koray},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OAvdKNKK1}
+    \strng{fullhash}{OAvdKNKK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/arXiv.1601.06759
+    \endverb
+    \field{title}{Pixel Recurrent Neural Networks}
+    \field{journaltitle}{CoRR}
+    \field{eprinttype}{arXiv}
+    \field{year}{2016}
+  \endentry
+
+  \entry{ibmRNN}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=JMT}{%
+         family={Jones},
+         familyi={J\bibinitperiod},
+         given={M.\bibnamedelima Tim},
+         giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{JMT1}
+    \strng{fullhash}{JMT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://developer.ibm.com/articles/cc-cognitive-recurrent-neural-networks}}
+    \field{note}{Letzter Zugriff: 15.01.2023}
+    \field{title}{Recurrent neural networks deep dive}
+    \field{day}{16}
+    \field{month}{08}
+    \field{year}{2017}
+  \endentry
+
+  \entry{generativeModelsSurvey}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=OA}{%
+         family={Oussidi},
+         familyi={O\bibinitperiod},
+         given={Achraf},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=EA}{%
+         family={Elhassouny},
+         familyi={E\bibinitperiod},
+         given={Azeddine},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OAEA1}
+    \strng{fullhash}{OAEA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2018 International Conference on Intelligent Systems and
+  Computer Vision (ISCV)}
+    \verb{doi}
+    \verb 10.1109/ISACV.2018.8354080
+    \endverb
+    \field{pages}{1\bibrangedash 8}
+    \field{title}{Deep generative models: Survey}
+    \field{year}{2018}
   \endentry
 
   \entry{Goodfellow-GANs}{misc}{}

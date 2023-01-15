@@ -1921,6 +1921,49 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-t1--base.tfm
+INPUT .\images\KNNs\CNN Convolution.png
+INPUT .\images\KNNs\CNN Convolution.png
+INPUT images\KNNs\CNN Convolution.png
+INPUT .\images\KNNs\CNN Convolution.png
+INPUT .\images\KNNs\CNN Convolution.png
+INPUT .\images\KNNs\CNN Convolution.png
+INPUT .\images\KNNs\CNN Convolution.png
+INPUT .\content\Stand der Technik\NoGANs.tex
+INPUT content\Stand der Technik\NoGANs.tex
+INPUT .\content\Stand der Technik\NoGANs.tex
+INPUT content\Stand der Technik\NoGANs.tex
+INPUT .\images\Generative Networks\p(x) Distribution.png
+INPUT .\images\Generative Networks\p(x) Distribution.png
+INPUT images\Generative Networks\p(x) Distribution.png
+INPUT .\images\Generative Networks\p(x) Distribution.png
+INPUT .\images\Generative Networks\p(x) Distribution.png
+INPUT .\images\Generative Networks\p(x) Distribution.png
+INPUT .\images\Generative Networks\p(x) Distribution.png
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr10.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmmi10.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmex10.tfm
+INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
+INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
+INPUT images\Generative Networks\Taxonomy of Generative Models.png
+INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
+INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
+INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
+INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
+INPUT .\images\Generative Networks\PixelRNN.png
+INPUT .\images\Generative Networks\PixelRNN.png
+INPUT images\Generative Networks\PixelRNN.png
+INPUT .\images\Generative Networks\PixelRNN.png
+INPUT .\images\Generative Networks\PixelRNN.png
+INPUT .\images\Generative Networks\PixelRNN.png
+INPUT .\images\Generative Networks\PixelRNN.png
+INPUT .\images\Generative Networks\RNN.png
+INPUT .\images\Generative Networks\RNN.png
+INPUT images\Generative Networks\RNN.png
+INPUT .\images\Generative Networks\RNN.png
+INPUT .\images\Generative Networks\RNN.png
+INPUT .\images\Generative Networks\RNN.png
+INPUT .\images\Generative Networks\RNN.png
 INPUT .\content\Stand der Technik\GANs.tex
 INPUT content\Stand der Technik\GANs.tex
 INPUT .\content\Stand der Technik\GANs.tex
@@ -1989,14 +2032,14 @@ INPUT content\7 Zusammenfassung.tex
 INPUT .\content\7 Zusammenfassung.tex
 INPUT content\7 Zusammenfassung.tex
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1.tfm
-INPUT .\dokumentation.gls
-INPUT dokumentation.gls
-INPUT .\dokumentation.gls
-INPUT dokumentation.gls
-INPUT .\dokumentation.gls
-INPUT dokumentation.gls
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-sc-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-sc-t1--base.tfm
+INPUT .\dokumentation.gls
+INPUT dokumentation.gls
+INPUT .\dokumentation.gls
+INPUT dokumentation.gls
+INPUT .\dokumentation.gls
+INPUT dokumentation.gls
 INPUT .\ads\appendix.tex
 INPUT .\ads\appendix.tex
 INPUT .\ads\appendix.tex
@@ -2035,13 +2078,21 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfont
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr6.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb

@@ -49,11 +49,21 @@ Anhand der nachfolgenden Abbildung, soll der Gradientenabtieg visuell verdeutlic
 \subsection{Convolutional Neural Networks}
 \acp{KNN} bewähren sich mitunter besonders im Bereich \emph{Computer Vision}. Ein Bereich, der sich mit der Interpretation von Bild- und Videodaten beschäftigt. Hier spielt die Mustererkennung eine tragende Rolle. Es sollen Merkmale erkannt werden, die jedes Objekt eines bestimmten Typs auszeichnen, die jedoch nicht auf jedem Bild die exakt identischen Pixelwerte besitzen. Die typische Form von Katzenohren ist beispielsweise ein Muster, das bei der Katzenerkennung verwendet werden kann. Es ist nicht trivial, allgemeine Regeln zu definieren, welche Pixelmuster als Katzenohr erkannt werden sollen und welche nicht. Deshalb wird hier auf \acp{KNN} zurückgegriffen.
 
-Verwendet man hierfür jedoch die bisher beschriebene Netzwerkarchitektur, treten verschiedene Probleme auf. Jedes sogenannte \emph{Feature} des Eingangs wird über die Eingangsschicht in das \ac{KNN} gespeist. Bei einem Schachalgorithmus kann die Menge aller Features beispielsweise durch die momentane Position aller Figuren auf dem Schachbrett beschrieben werden. Das liegt daran, dass genau diese Werte den Ausgang des Netzwerks beeinflussen. In diesem Fall, welchen Zug der Algorithmus als nächstes spielt. Bei der Bildklassifizierung ist jeder Pixel des Bildes ein Feature. Ein Netz, das Bilder der Größe 1024x1024 Pixel klassifizieren soll, muss demnach folgende Anzahl an Eingängen verarbeiten:
+Verwendet man hierfür jedoch die bisher beschriebene Netzwerkarchitektur, treten verschiedene Probleme auf. Jedes sogenannte \emph{Feature} des Eingangs wird über die Eingangsschicht in das \ac{KNN} gespeist. Bei einem Schachalgorithmus kann die Menge aller Features beispielsweise durch die momentane Position aller Figuren auf dem Schachbrett beschrieben werden. Das liegt daran, dass genau diese Werte den Ausgang des Netzwerks beeinflussen. In diesem Fall, welchen Zug der Algorithmus als nächstes spielt. Bei der Bildklassifizierung ist jeder Pixel des Bildes ein Feature. Ein Netz, das Bilder der Größe 1024x1024 Pixel mit drei Farbkanälen (rot, grün blau) klassifizieren soll, muss demnach folgende Anzahl an Eingängen verarbeiten:
 
 \begin{equation}
-   1024 \cdot 1024 = 1.048.576
+   1024 \cdot 1024 \cdot 3 = 3.145.728
 \end{equation}
 
-Um eine derartige Anzahl an Eingängen sinnvoll interpretieren zu können, ist ein Netzwerk mit vielen Schichten und Neuronen notwendig. So vielen, dass auch heutige Computer an die grenzen ihrer Rechenleistung gelangen. Mitunter deshalb wird im Bereich Computer Vision auf \acp{CNN} zurückgegriffen. Der Begriff \emph{Convolution}, zu deutsch \emph{Faltung}, gibt einen Hinweis auf die Funktionsweise dieser Netze. Schichten, die so eine Faltung in einem \ac{CNN} durchführen, werden als \emph{Convolutional Layers} bezeichnet.
+Um eine derartige Anzahl an Eingängen sinnvoll interpretieren zu können, ist ein Netzwerk mit vielen Schichten und Neuronen notwendig. So vielen, dass auch heutige Computer an die grenzen ihrer Rechenleistung gelangen. Mitunter deshalb wird im Bereich Computer Vision auf \acp{CNN} zurückgegriffen. 
 
+\acp{CNN} basieren auf der Faltung (engl.: Convolution) einer Eingangsmatrix mit einer Faltungsmatrix. Jedes \ac{CNN} besitzt dabei mitunter mindestens eine Schicht, die eine Faltung durchführt. Diese Schichten werden auch \emph{Convolutional Layer} genannt. Ein Bestandteil eines jeden Convolutional Layers ist die Faltmatrix, welche auch \emph{Kernel} genannt wird. Die Faltung besteht darin, dass diese Matrix über die Werte der Eingangsmatrix geschoben wird, und an jeder Position das Skalarprodukt der jeweiligen Pixelwerte mit den Parametern des Kernels berechnet wird. Dieses Ergebnis ergibt dann den jeweiligen Wert der Ausgangsmatrix.
+
+\begin{figure}[H]
+      \centering
+      \includegraphics[width=0.8\textwidth]{images/KNNs/CNN Convolution.png}
+      \caption{Beispiel für eine Faltung (engl.: Convolution) \cite{cnnsIntroduction}}
+      \label{fig:convolution}
+\end{figure}
+
+Zunächst wird der Kernel beispielsweise auf die Teilmatrix \emph{links oben} der Eingangsmatrix angewendet. In Abbildung \ref{fig:convolution} ist dies visualisiert. Der betrachtete Teil der Eingangsmatrix wird hier als \emph{Pooled Vector} bezeichnet. Hierauf wird der Kernel, in diesem Fall ein sogenannter \emph{3x3-Kernel}, angewendet. Es wird also das Skalarprodukt der Werte mit dem gleichen Index aus dem \emph{Pooled Vector} und dem Kernel berechnet. In diesem Fall:
