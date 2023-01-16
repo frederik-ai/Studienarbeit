@@ -375,6 +375,40 @@
     \field{year}{2018}
   \endentry
 
+  \entry{autoencoders}{article}{}
+    \name{author}{3}{}{%
+      {{hash=BD}{%
+         family={Bank},
+         familyi={B\bibinitperiod},
+         given={Dor},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=KN}{%
+         family={Koenigstein},
+         familyi={K\bibinitperiod},
+         given={Noam},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=GR}{%
+         family={Giryes},
+         familyi={G\bibinitperiod},
+         given={Raja},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BDKNGR1}
+    \strng{fullhash}{BDKNGR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/arXiv.2003.05991
+    \endverb
+    \field{title}{Autoencoders}
+    \field{journaltitle}{CoRR}
+    \field{eprinttype}{arXiv}
+    \field{year}{2020}
+  \endentry
+
   \entry{Goodfellow-GANs}{misc}{}
     \name{author}{8}{}{%
       {{hash=GIJ}{%

@@ -41,7 +41,7 @@ Die Idee von PixelRNNs ist, dass bei der Generierung in einer Ecke des Bildes ge
 
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.35\textwidth]{images/Generative Networks/PixelRNN.png}
+   \includegraphics[width=0.25\textwidth]{images/Generative Networks/PixelRNN.png}
    \caption{Bestimmung von $\hat{p}(x)$ mit PixelRNNs \cite{pixelRNN}}
    \label{fig:pixelRNN}
 \end{figure}
@@ -50,7 +50,7 @@ Um die beschriebene Abhängigkeit des momentan generierten Pixels zu allen bishe
 
 \begin{figure}[H]
    \centering
-   \includegraphics[width=0.4\textwidth]{images/Generative Networks/RNN.png}
+   \includegraphics[width=0.375\textwidth]{images/Generative Networks/RNN.png}
    \caption{Darstellung eines Recurrent Neural Networks \cite{ibmRNN}}
    \label{fig:RNN}
 \end{figure}
@@ -59,9 +59,42 @@ In Recurrent Neural Networks spielen die \emph{Zustände} eines Netzes eine beso
 
 Da die durch ein \ac{PixelRNN} umgesetzte Verteilung $\hat{p}(x)$ direkt erfassbar ist, wird ihnen nachgesagt, dass die Performanz solcher Netze gut evaluiert werden kann. Es gilt als vergleichsweise leicht, für solche Netze Metriken zur Messung der Performanz umzusetzen. Ein grundlegender Nachteil von \acp{PixelRNN} ist, dass die Generierung sequenziell erfolgt. Es ist in dem beschriebenen Verfahren nicht möglich, mehrere Pixel parallel zu generieren, da der Wert eines Pixels von denen aller vorher generierten Pixel abhängig ist. Dies verlangsamt die Generierung, da keine Parallelisierung möglich ist. \cite{generativeModelsSurvey}
 
-Es existieren auch sogenannte \emph{PixelCNNs}, bei denen sich die Generierung stets nur auf bestimmte Bildbereiche konzentriert. Diese Bildbereiche können parallel zueinander sequenziell berechnet werden. Die Parallelisierung ist jedoch nur während des Trainings des Netzwerks oder während der Evaluation von $\hat{p}(x)$ für gegebene Bilder möglich. Die Bildgenerierung erfolgt auch hier, analog zu \acp{PixelRNN}, vollständig sequenziell. \cite{pixelRNN}
+Es existieren auch sogenannte \emph{PixelCNNs}, bei denen sich die Berechnung stets nur auf bestimmte Bildbereiche konzentriert. Diese Bildbereiche können parallel zueinander sequenziell berechnet werden. Die Parallelisierung ist jedoch nur während des Trainings des Netzwerks oder während der Evaluation von $\hat{p}(x)$ für gegebene Bilder möglich. Die Bildgenerierung erfolgt auch hier, analog zu \acp{PixelRNN}, vollständig sequenziell. \cite{pixelRNN}
 
-\subsection{Variational Autoencoder}
+\subsection{Autoencoder}
+
+Das Ziel von Autoencodern ist, den Eingang des Netzes am Ausgang zu rekonstruieren. Dazu setzen sich diese Netze aus drei Bestandteilen zusammen: dem Kodierer, dem latenten Raum und dem Dekodierer. In Abbildung \ref{fig:Autoencoder} ist eine beispielhafte Autoencoderarchitektur dargestellt.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=0.65\textwidth]{images/Generative Networks/autoencoder_architecture.png}
+   \caption{Architektur eines Autoencoders}
+   \label{fig:Autoencoder}
+\end{figure}
+
+Der \textbf{Kodierer} besitzt die Aufgabe, Merkmale aus dem Eingang des Netzes zu extrahieren. Diese Merkmale sollen daraufhin mit einer begrenzten Anzahl an Parametern durch den latenten Raum repäsentiert werden. Somit besteht die Aufgabe des Kodierers darin, den Eingang auf seine für das Netz wesentlichen Eigenschaften zu reduzieren. Und zwar erfolgt die Komprimierung dabei so, dass die Informationen gerade so durch den latenten Raum dargestellt werden können. 
+
+Bei dem \textbf{latenten Raum} handelt es sich um eine einzelne Schicht von Parametern, oder in diesem Kontext: Neuronen. Je mehr Neuronen sich in dem latenten Raum befinden, desto mehr Informationen können von der Kodierung an die Dekodierung übertragen werden. Die Merkmale, die sich in dem latenden Raum befinden, können durch einen Vektor $\vec{z}$ beschrieben werden. Der latente Raum sollte klein genug sein, damit dort nicht alle Merkmale des Eingangs gespeichert werden können. So wird der Kodierer dazu gezwungen, vereinzeilte Merkmale zu extrahieren. 
+
+Der \textbf{Dekodierer} nutzt die Werte aus dem latenten Raum, um den Eingang nachzubilden. Diese Nachbildung stellt den Ausgang des Autoencoders dar. Die Kosten eines Autoencoders können durch die Abweichung zwischen Ein- und Ausgang festgestellt werden. 
+
+Da der Zweck von Autoencodern darin besteht, einen Eingang auf seine relevanten Merkmale zu reduzieren, wird der Dekodierer nur während des Trainings verwendet. Beim praktischen Einsatz eines Autoencoders werden lediglich der Kodierer und der latente Raum eingesetzt. Im Gegensatz zu \acp{PixelRNN} basieren Autoencoder klassischerweise nicht auf Recurrent Neural Networks, sondern auf Feedforward Netzen.
+
+Diese beschriebene Architektur der Autoencoder ist nicht für die generative Modellierung geeignet, da sie deterministisch ist. Erhält das Modell bestimmte Eingangswerte, so liefert es stets die gleichen Ausgangswerte. Es versucht den Eingang möglichst zu rekonstruieren, wobei der Inhalt $\vec{z}$ des latenten Raums für ein gegebenes Eingangsbild stets gleich ist. Eine zufällige Erzeugung neuer Bilder ist damit nicht möglich. Die sogenannten \emph{Variational Autoencoder} sind eine Architektur, die für die Generierung neuer Daten verwendet werden können. \cite{visualApproach}
+
+\textbf{Variational Autoencoder} verfolgen das Ziel, eine Zufallskomponente in die Bilderzeugung einfließen zu lassen. Ein entscheidender Unterschied zu klassischen Autoencodern ist deshalb der folgende: Ein gegebener Eingang $x$ wird auf kein festes $\vec{z}$ kodiert, sondern auf eine Wahrscheinlichkeitsverteilung. Sie wird bezeichnet als:
+\begin{equation}
+   p(z|x)
+\end{equation}
+Im Gegensatz zu \acp{PixelRNN} versucht das Netz somit nicht die Verteilung der Trainingsdaten $p(x)$ zu approximieren, sondern die Verteilung der Merkmale $\vec{z}$ der Trainingsdaten $x$.
+Es wird angenommen, dass jedes Merkmal normalverteilt ist. Damit kann jede Komponente des Vektors $\vec{z} = [z_{1}, z_{2}, ..., z_{n}]^\mathsf{T}$ durch eine Gaußsche Normalverteilung $\mathcal{N}(\mu_{i}, {\sigma_{i}}^{2})$ beschrieben werden. Aufgabe des Kodierers ist damit nicht mehr, aus einem gegebenen $x$ eine Menge von Merkmalen $\vec{z}$ zu bestimmen. Stattdessen soll der Kodierer die Vektoren $\vec{\mu}$ und $\vec{\sigma}$ bestimmen, durch die sich die einzelnen Normalerteilungen von $\vec{z}$ beschreiben lassen. 
+
+An den Dekodierer wird ein zufällig aus der Verteilung $p(z|x)$ entnommenes Set an Merkmalen $\vec{z}$ übergeben.
+Der Dekodierer übersetzt dieses gegebene $\vec{z}$ daraufhin in ein Bild. Im praktischen Einsatz werden bei einem Variational Autoencoder nur der latente Raum und der Dekodierer genutzt. Der Dekodierer erhält zufällige Werte für $\vec{z}$ und generiert daraus ein Bild.
+
+\textbf{Vor- Nachteile?}
+
+\cite{autoencoders}
 
 %In dieser Studienarbeit sollen \acp{GAN} zur Generierung künstlicher Bilder von Straßenschildern eingesetzt %werden. Dies ist jedoch nicht die einzige Möglichkeit, wie mittels \acp{KNN} künstliche Bilder erzeugt werden %können. In diesem Kapitel werden daher weitere Methoden vorgestellt, die ebenfalls dazu eingesetzt werden können.
 
@@ -76,7 +109,6 @@ Es existieren auch sogenannte \emph{PixelCNNs}, bei denen sich die Generierung s
 %   p(x)
 %\end{equation}
 %Wobei $p(x)$ als die Wahrscheinlichkeit interpretiert werden kann, dass ein gegebenes $x$ aus der Verteilung der %Trainingsdaten stammt.
-
 
 %\subsection{Boltzmann Maschinen}
 %\subsection{Deep Belief Netzwerke}
