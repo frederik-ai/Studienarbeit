@@ -43,7 +43,7 @@ def randomly_transform_image(image, target_size, max_theta_xy=0.1, max_theta_z=0
     # randomly shrink the content, add padding to preserve the target_size of the image
     assert (len(target_size) == 2)
     assert (target_size[0] == target_size[1])
-    shrink_length = np.random.randint(low=target_size[0] / 4, high=target_size[0])
+    shrink_length = np.random.randint(low=target_size[0] / 2, high=target_size[0])
     shrink_size = (shrink_length, shrink_length)
     transformed_image = tf.image.resize(transformed_image, shrink_size)
     transformed_image = tf.image.resize_with_crop_or_pad(transformed_image, target_size[0], target_size[1])

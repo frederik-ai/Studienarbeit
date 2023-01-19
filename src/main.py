@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 import toml
 import os
+import uuid
 
 import utils.load_data
 import utils.preprocess_image
@@ -39,12 +40,13 @@ x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
 # plt.imshow(x_pictogram[0, :])
 # plt.show()
 
-cycle_gan = model.CycleGan(image_size=IMAGE_DIMENSIONS)
+# cycle_gan = model.CycleGan(image_size=IMAGE_DIMENSIONS, batch_size=BATCH_SIZE)
+cycle_gan = model.CycleGan(image_size=IMAGE_DIMENSIONS, batch_size=BATCH_SIZE)
 cycle_gan.compile()
 cycle_gan.restore_latest_checkpoint_if_exists()
 
 # generate random images
-#for i in range(10):
+# for i in range(10):
 #    x_pictograms_transformed = x_pictograms_processed.map(lambda t: tf.py_function(
 #        utils.preprocess_image.randomly_transform_4d_tensor,
 #        inp=[t],
@@ -53,8 +55,12 @@ cycle_gan.restore_latest_checkpoint_if_exists()
 #    random_filename = str(uuid.uuid4())
 #    utils.misc.store_tensor_as_img(generator_result[0, :], random_filename, 'generator_test')
 
+
 def run_training():
     cycle_gan.print_welcome()
     # generator_test_result = cycle_gan.generator_g(x_pictograms.get_single_element()) # USE TEST DATA NOT TRAIN DATA
     cycle_gan.fit(x_pictograms_processed, x_train_processed, epochs=config['training']['number_of_epochs'])
     return
+
+
+run_training()
