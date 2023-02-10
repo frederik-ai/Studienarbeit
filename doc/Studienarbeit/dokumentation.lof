@@ -9,27 +9,35 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{3}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Vollständiges \ac {KNN} \cite {visualApproach}\relax }}{4}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }}{6}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Beispielhafter Vergleich von $\hat {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }}{8}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Vollständiges \ac {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }}{8}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }}{8}{figure.caption.13}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Bestimmung von $\hat {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }}{10}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Beispielhafter Vergleich von $\hat {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }}{9}{figure.caption.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }}{10}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }}{10}{figure.caption.15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Architektur eines Autoencoders\relax }}{11}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Bestimmung von $\hat {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }}{11}{figure.caption.18}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Trainingsprozess von GANs (angelehnt an \cite [S. 654f.]{visualApproach})\relax }}{14}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }}{12}{figure.caption.19}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Architektur eines Autoencoders\relax }}{13}{figure.caption.20}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Zusammenspiel zwischen Generator und Discriminator\relax }}{15}{figure.caption.21}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }}{19}{figure.caption.29}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{17}{figure.caption.26}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{22}{figure.caption.35}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

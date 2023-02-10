@@ -46,6 +46,87 @@
     \field{year}{2021}
   \endentry
 
+  \entry{eu-regulation}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={{EU-Kommission}},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E1}
+    \strng{fullhash}{E1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{Art. 6 Abs. 2c}
+    \field{title}{Regulation (EU) 2019/2144 of the European Parliament and of
+  the Council}
+    \field{day}{05}
+    \field{month}{09}
+    \field{year}{2021}
+  \endentry
+
+  \entry{strassenschilderkennungTest}{article}{}
+    \name{author}{2}{}{%
+      {{hash=IH}{%
+         family={Ippen},
+         familyi={I\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Bach},
+         familyi={B\bibinitperiod},
+         given={Markus},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IHBM1}
+    \strng{fullhash}{IHBM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Verkehrsschild-Erkennung Test}
+    \field{journaltitle}{Autozeitung}
+    \field{day}{02}
+    \field{month}{04}
+    \field{year}{2019}
+  \endentry
+
+  \entry{traffic-sign-detection-review-2014}{article}{}
+    \name{author}{3}{}{%
+      {{hash=GA}{%
+         family={Gudigar},
+         familyi={G\bibinitperiod},
+         given={Anjan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=CS}{%
+         family={Chokkadi},
+         familyi={C\bibinitperiod},
+         given={Shreesha},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=UR}{%
+         family={U},
+         familyi={U},
+         given={Raghavendra},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GACSUR1}
+    \strng{fullhash}{GACSUR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s11042-014-2293-7
+    \endverb
+    \field{pages}{333\bibrangedash 364}
+    \field{title}{A review on automatic detection and recognition of traffic
+  sign}
+    \field{volume}{75}
+    \field{journaltitle}{Multimedia Tools and Applications}
+    \field{year}{2016}
+  \endentry
+
   \entry{DeepLearningBook}{book}{}
     \name{author}{3}{}{%
       {{hash=GI}{%
@@ -518,6 +599,28 @@
     \field{year}{2017}
   \endentry
 
+  \entry{taiwanGAN}{article}{}
+    \name{author}{1}{}{%
+      {{hash=D}{%
+         family={{D. Christine et al.}},
+         familyi={D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{D1}
+    \strng{fullhash}{D1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s00521-021-05982-z
+    \endverb
+    \field{pages}{1\bibrangedash 16}
+    \field{title}{Synthetic Data generation using DCGAN for improved traffic
+  sign recognition}
+    \field{journaltitle}{Neural Computing and Applications}
+    \field{month}{04}
+    \field{year}{2021}
+  \endentry
+
   \entry{gtsrbGAN}{inproceedings}{}
     \name{author}{3}{}{%
       {{hash=SD}{%
@@ -553,28 +656,6 @@
     \field{year}{2019}
   \endentry
 
-  \entry{taiwanGAN}{article}{}
-    \name{author}{1}{}{%
-      {{hash=D}{%
-         family={{D. Christine et al.}},
-         familyi={D\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{D1}
-    \strng{fullhash}{D1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1007/s00521-021-05982-z
-    \endverb
-    \field{pages}{1\bibrangedash 16}
-    \field{title}{Synthetic Data generation using DCGAN for improved traffic
-  sign recognition}
-    \field{journaltitle}{Neural Computing and Applications}
-    \field{month}{04}
-    \field{year}{2021}
-  \endentry
-
   \entry{GTSRB}{inproceedings}{}
     \name{author}{1}{}{%
       {{hash=J}{%
@@ -591,6 +672,27 @@
     \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
   classification competition}}
     \field{year}{2011}
+  \endentry
+
+  \entry{vienna-convention}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=U}{%
+         family={{United Nations Economic Commission for Europe}},
+         familyi={U\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {United Nations Publication}%
+    }
+    \strng{namehash}{U1}
+    \strng{fullhash}{U1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-92-1-116973-7}
+    \field{title}{Convention on Road Traffic}
+    \field{day}{28}
+    \field{month}{03}
+    \field{year}{2006}
   \endentry
 \enddatalist
 \endinput

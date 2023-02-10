@@ -1,4 +1,5 @@
 \acused{KNN}
+\label{chap:KNNs}
 Durch künstliche neuronale Netze (\acsp{KNN}) können Maschinen lernen, bestimmte Probleme zu lösen, ohne dass ein Mensch vorher explizite Regeln dafür definieren muss. Dies steht im Kontrast zur Methode, der Maschine  vorher einen festen, vollständigen Regelsatz bereitzustellen. Letztgenannter Ansatz zeigt in einigen Gebieten nur begrenzten Erfolg, da es für Menschen herausfordernd sein kann, Regelsätze für Vorgänge zu definieren, die unbewusst im Gehirn stattfinden oder viel Kontext erfordern. Zu nennen sind hierbei die visuelle Objekterkennung oder menschliche Sprache. Außerdem können neue, nicht in den Regeln beachtete Situationen dazu führen, dass die Maschine das Problem nicht mehr lösen kann. Die Grundidee hinter \acp{KNN} ist deshalb, dass sich die Maschine selber einen Wissensschatz aufbaut, der ihr beim Lösen des Problems hilft. Dies geschieht, indem die Entwickler ihr reale Trainingsbeispiele zeigen. Möchte man einen Algorithmus trainieren, der Schach spielen soll, kann man ihm beispielsweise eine Vielzahl an realen Schachpartien zeigen. Anhand dessen lernt der Algorithmus verschiedene Strategien und baut ein Spielverständnis auf, das womöglich über die menschlichen Fähigkeiten hinausgeht. \cite[S. 1ff.]{DeepLearningBook}
 
 In den letzten Jahrzehnten erlebte das maschinelle Lernen und damit auch das Gebiet der \acp{KNN} einen Aufschwung. Es existiert bereits seit Mitte des vergangenen Jarhunderts, wird allerdings erst durch die zunehmende Rechenleistung und die Verfügbarkeit von großen Datenmengen flächendeckend eingesetzt. Einsatzgebiete für \acp{KNN} sind unter anderem die Objekterkennung, das Verstehen von natürlicher Sprache und die Generierung von Text und Bildern. \cite[S. 4,17]{knnsKompakt}
@@ -32,7 +33,7 @@ Die Kostenfunktion in Abhängigkeit von der Gesamtheit der Gewichte und Biases $
    J(\theta) = \frac{1}{2m} \sum_{i=1}^{m} (\hat{y}^{(i)} - y^{(i)})^2
 \end{equation}
 
-Anstelle des Terms $\frac{1}{2}(\hat{y}^{(i)} - y^{(i)})^2$ können auch andere Metriken verwendet werden. Bezeichnet man dies verallgemeinert als Verlustfunktion $L$ \emph{(engl.: loss-function)}, so kann die Kostenfunktion wie folgt definiert werden:
+Anstelle des Terms $\frac{1}{2}(\hat{y}^{(i)} - y^{(i)})^2$, der die quadratische Abweichung der vorhergesagten von den erwarteten Werten beschreibt, können auch andere Metriken verwendet werden. Bezeichnet man dies verallgemeinert als Verlustfunktion $L$ \emph{(engl.: loss-function)}, so kann die Kostenfunktion wie folgt definiert werden:
 \begin{equation}
    \label{eq:costFunctionGeneral}
    J(\theta) = \frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)}, y^{(i)})

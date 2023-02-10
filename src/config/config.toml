@@ -1,16 +1,17 @@
 [paths]
 train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
 pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms"
-# train_data = '/data/Official Train/Final_Training/Images'
-# pictograms = '/data/Pictograms'
+#train_data = '/data/Official Train/Final_Training/Images'
+#pictograms = '/data/Pictograms'
 
 [model]
-image_dimensions = [256, 256]   # Do not change this, can lead to errors
+image_size = 256                # Do not change this, can lead to errors
+generator_type = 'resnet'       # 'resnet' or 'unet'
 
 [training]
 number_of_epochs = 100
-batch_size = 32                 # reduce batch_size if your system cannot handle this value
+batch_size = 4                  # reduce batch size if your system cannot handle this value; increase if you still have headroom
 learning_rate = 2e-4
 beta_1 = 0.5                    # value given by cyclegan paper
 beta_2 = 0.999                  # value given by cyclegan paper
-lambda = 10                     # value given by cyclegan paper
+lambda = 10                     # weight of cycle_loss compared to adversarial loss; value given by cyclegan paper
