@@ -1,15 +1,6 @@
 # TSIG
 Welcome to the Traffic Sign Image Generator 👋
 
-<p>
-  <a href="doc/Software%20Documentation/src/index.html" target="_blank">
-    <img alt="software documentation" src="https://img.shields.io/badge/software%20documentation-yes-brightgreen" />
-  </a>
-  <a href="doc/dokumentation.pdf" target="_blank">
-    <img alt="project documentation" src="https://img.shields.io/badge/project%20documentation-yes-brightgreen" />
-  </a>
-</p>
-
 This project implements a generation of artificial traffic sign images using **generative adversarial networks** (more specifically: **CycleGANs**).
 
 # Getting Started
@@ -17,8 +8,17 @@ This project implements a generation of artificial traffic sign images using **g
 ## Locally
 
 # Documentation
+<p>
+  <a href="doc/Software%20Documentation/src" target="_blank">
+    <img alt="software documentation" src="https://img.shields.io/badge/software%20documentation-html-brightgreen" />
+  </a>
+  <a href="doc/dokumentation.pdf" target="_blank">
+    <img alt="project documentation" src="https://img.shields.io/badge/project%20documentation-pdf-brightgreen" />
+  </a>
+</p>
+
 ## Software Documentation
-### Live Server
+Live Server
 ```bash
 $ pdoc --http localhost:8080 src
 ```
