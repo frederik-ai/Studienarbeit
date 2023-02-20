@@ -3,6 +3,13 @@ Welcome to the Traffic Sign Image Generator 👋
 
 This project implements a generation of artificial traffic sign images using **generative adversarial networks** (more specifically: **CycleGANs**).
 
+## Examples
+![raw](https://user-images.githubusercontent.com/83597198/220124845-941839b9-3061-4f90-b1a4-943ab25b996c.gif) | ![motion_blur](https://user-images.githubusercontent.com/83597198/220123815-ad5a0949-1b44-4bf1-8921-e62346251feb.gif) | ![invalid](https://user-images.githubusercontent.com/83597198/220123835-f01edba3-22e4-4d49-8b73-36c1de62f0ff.gif) |
+|:--:|:--:|:--:|
+| **Raw** | **Motion Blur** | **Invalid Traffic Signs** |
+
+
+
 # Getting Started
 ## Google Colab
 ## Locally
