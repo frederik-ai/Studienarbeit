@@ -694,5 +694,36 @@
     \field{month}{03}
     \field{year}{2006}
   \endentry
+
+  \entry{geometric-ops}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=BW}{%
+         family={Burger},
+         familyi={B\bibinitperiod},
+         given={Wilhelm},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=BMJ}{%
+         family={Burge},
+         familyi={B\bibinitperiod},
+         given={Mark\bibnamedelima J.},
+         giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer Cham}%
+    }
+    \strng{namehash}{BWBMJ1}
+    \strng{fullhash}{BWBMJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{chapter}{Geometric Operations}
+    \verb{doi}
+    \verb 10.1007/978-3-031-05744-1
+    \endverb
+    \field{pages}{601\bibrangedash 637}
+    \field{title}{Digital Image Processing: An Algorithmic introduction}
+    \field{year}{2022}
+  \endentry
 \enddatalist
 \endinput

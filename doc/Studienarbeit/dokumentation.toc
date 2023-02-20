@@ -67,32 +67,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.4}Datenaugmentation}{23}{section.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Training}{23}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Training}{25}{section.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Implementierung und Training}{24}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Implementierung und Training}{26}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Hyperparameter}{24}{section.4.1}%
+\contentsline {section}{\numberline {4.1}Hyperparameter}{26}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Erweiterung der Bilder um äußere Einflüsse}{25}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Erweiterung der Bilder um äußere Einflüsse}{27}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Verwackeln}{25}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Verwackeln}{27}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Artefakte}{25}{section.5.2}%
+\contentsline {section}{\numberline {5.2}Artefakte}{27}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Schnee}{25}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Schnee}{27}{section.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation}{26}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Evaluation}{28}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Metrik}{26}{section.6.1}%
+\contentsline {section}{\numberline {6.1}Metrik}{28}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Vergleich von Resnet, Unet und Densenet}{26}{section.6.2}%
+\contentsline {section}{\numberline {6.2}Vergleich von Resnet, Unet und Densenet}{28}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Hyperparameter}{26}{section.6.3}%
+\contentsline {section}{\numberline {6.3}Hyperparameter}{28}{section.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Schildererkennung mit generierten Trainingsdaten}{26}{section.6.4}%
+\contentsline {section}{\numberline {6.4}Schildererkennung mit generierten Trainingsdaten}{28}{section.6.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{27}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{29}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{30}{chapter*.37}%
+\contentsline {chapter}{\nonumberline Anhang}{32}{chapter*.37}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
