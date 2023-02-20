@@ -16,15 +16,17 @@ This project implements a generation of artificial traffic sign images using **g
 
 # Getting Started
 ## Google Colab
+<a href="https://colab.research.google.com/drive/1b8sW0nHd4J2G3D7BPG5zZ8DI1P8atOfP?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+
 ## Locally
 
 # Documentation
 <p>
   <a href="doc/Software%20Documentation/src" target="_blank">
-    <img alt="software documentation" src="https://img.shields.io/badge/software%20documentation-html-brightgreen" />
+    <img alt="software documentation" src="https://img.shields.io/badge/software%20documentation-html-blue" />
   </a>
   <a href="doc/dokumentation.pdf" target="_blank">
-    <img alt="project documentation" src="https://img.shields.io/badge/project%20documentation-pdf-brightgreen" />
+    <img alt="project documentation" src="https://img.shields.io/badge/project%20documentation-pdf-blue" />
   </a>
 </p>
 
