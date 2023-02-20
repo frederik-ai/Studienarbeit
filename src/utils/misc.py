@@ -12,3 +12,9 @@ def store_tensor_as_img(tensor, filename, relative_path=''):
         image.save(r'{}/{}.png'.format(full_path, filename))
     elif os.name == 'nt':
         image.save(r'{}\{}.png'.format(full_path, filename))
+
+
+def normalize_img(img):
+    img = img.astype(np.float32)
+    img = (img / 127.5) - 1
+    return img

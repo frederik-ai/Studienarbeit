@@ -1,8 +1,10 @@
 [paths]
-train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
-pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms"
-#train_data = '/data/Official Train/Final_Training/Images'
-#pictograms = '/data/Pictograms'
+# train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
+# pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms"
+pictograms = "../data/Pictograms"
+train_data = "../data/Official Train/Final_Training/Images"
+augmentation_data = "../data/Augmentation"
+destination = "generator_test"
 
 [model]
 image_size = 256                # Do not change this, can lead to errors

@@ -1,6 +1,11 @@
-srC/checkpoints
+src/checkpoints
 src/generated_images
 src/generator_test
+
+.vscode
+
+# ignore all desktop.ini files
+desktop.ini
 
 # INGORE TRAINING DATA
 data/
