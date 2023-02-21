@@ -19,6 +19,13 @@ This project implements a generation of artificial traffic sign images using **g
 <a href="https://colab.research.google.com/drive/1b8sW0nHd4J2G3D7BPG5zZ8DI1P8atOfP?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 
 ## Locally
+### Troubleshoot
+#### **[Windows]** Installation of Tensorflow Graphics fails because of OpenEXR
+  ```bash
+  $ pip install pipwin
+  $ pipwin install openexr
+  ```
+  Then: re-run setup
 
 # Documentation
 <p>
