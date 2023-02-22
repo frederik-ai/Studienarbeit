@@ -6,9 +6,21 @@ This project implements a generation of artificial traffic sign images using **g
 <details open>
 <summary>Examples</summary>
 
+<div align=center>
+<h2>UNet</h2>
+
 ![raw](https://user-images.githubusercontent.com/83597198/220124845-941839b9-3061-4f90-b1a4-943ab25b996c.gif) | ![motion_blur](https://user-images.githubusercontent.com/83597198/220123815-ad5a0949-1b44-4bf1-8921-e62346251feb.gif) | ![invalid](https://user-images.githubusercontent.com/83597198/220123835-f01edba3-22e4-4d49-8b73-36c1de62f0ff.gif) |
 |:--:|:--:|:--:|
 | **Raw** | **Motion Blur** | **Invalid Traffic Signs** |
+</div>
+
+<div align=center>
+<h2>ResNet</h2>
+
+![resnet_raw](https://user-images.githubusercontent.com/83597198/220563790-d180cd2a-8e52-400b-8883-e1ccd00856c1.gif) | ![resnet_motion_blur](https://user-images.githubusercontent.com/83597198/220563976-6202825f-febd-4966-b534-9c542a21b46d.gif) | ![resnet_invalid](https://user-images.githubusercontent.com/83597198/220564027-1718936e-0521-460a-aba3-b88d605a3f12.gif) |
+|:--:|:--:|:--:|
+| **Raw** | **Motion Blur** | **Invalid Traffic Signs** |
+</div>
 
 </details>
 
