@@ -1,4 +1,4 @@
-\chapter{Konzeption des Generative Adversarial Networks}
+\chapter{Konzeption des Modells}
 \label{chap:konzept}
 \section{Datensatz}
 Analog zu der in Kapitel \ref{chap:vorherige-arbeiten-rub} beschriebenen Arbeit wird der \ac{GTSRB} als Datensatz für diese Studienarbeit verwendet. Dies hängt mit der Größe des Datensatzes zusammen, mit der vergleichsweise kleinen Auflösung der einzelnen Bilder und damit, dass sich diese Arbeit auf die Genereriung deutscher Straßenschilder beschränkt. Es soll jedoch in Kapitel \ref{chap:Evaluation} ebenfalls geprüft werden, inwiefern das Resultat der Arbeit genutzt werden kann, um Bilder zu generieren, die Straßenschilder aus anderen Ländern zeigen. Länder, die das Wiener Übereinkommen über Straßenschilder unterzeichnet haben, besitzen vergleichsweise ähnlich aussehende Straßenschilder. Durch das Übereinkommen wird mitunter die grundlegende Form und Farbe verschiedener Schilder bestimmt. \cite{GTSRB} \cite{vienna-convention}
@@ -41,6 +41,10 @@ Die Bilder des Datensatzes besitzen unterschiedliche Seitenverhältnisse und ver
 
 Der Datensatz wird in dieser Arbeit zunächst so präpariert, dass nur Bilder für das Training verwendet werden, die mindestens 50 Pixel breit oder hoch sind. Dies wird im Verlauf geändert, sodass die Mindestgröße 75 Pixel beträgt.
 \section{Framework}
+\paragraph{Tensorflow Addons}
+\paragraph{Tensorflow Graphics}
+Erklären: Wieso benutze ich, wo möglich, Tensorflow Graphics statt OpenCV? Wieso gibt es Tensorflow Graphics überhaupt?
+
 \section{Architektur}
 In Kapitel \ref{chap:NoGANs} werden verschiedene generative Netzwerkarchitekturen vorgestellt. Zunächst soll darauf eingegangen werden, welche dieser Herangehensweisen gewählt wird. Jede der Architekturen besitzt ihre Vor- und Nachteile. Der größte Nachteil von \acp{PixelRNN} ist, dass die Pixel eines Bildes nicht parallel zueinander generiert werden können. Dies verlangsamt die Generierung und damit das Training des Modells.
 

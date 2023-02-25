@@ -57,11 +57,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.5.3}Weitere}{21}{subsection.2.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Konzeption des Generative Adversarial Networks}{22}{chapter.3}%
+\contentsline {chapter}{\numberline {3}Konzeption des Modells}{22}{chapter.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Datensatz}{22}{section.3.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Framework}{23}{section.3.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{\nonumberline Tensorflow Addons}{23}{paragraph*.37}%
+\defcounter {refsection}{0}\relax 
+\contentsline {paragraph}{\nonumberline Tensorflow Graphics}{23}{paragraph*.39}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.3}Architektur}{23}{section.3.3}%
 \defcounter {refsection}{0}\relax 
@@ -73,26 +77,28 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.1}Hyperparameter}{26}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Erweiterung der Bilder um äußere Einflüsse}{27}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{27}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Verwackeln}{27}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{27}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Artefakte}{27}{section.5.2}%
+\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{27}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Schnee}{27}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Artefakte}{28}{section.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation}{28}{chapter.6}%
+\contentsline {section}{\numberline {5.4}Schnee}{28}{section.5.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Metrik}{28}{section.6.1}%
+\contentsline {chapter}{\numberline {6}Evaluation}{29}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Vergleich von Resnet, Unet und Densenet}{28}{section.6.2}%
+\contentsline {section}{\numberline {6.1}Metrik}{29}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Hyperparameter}{28}{section.6.3}%
+\contentsline {section}{\numberline {6.2}Vergleich von Resnet, Unet und Densenet}{29}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Schildererkennung mit generierten Trainingsdaten}{28}{section.6.4}%
+\contentsline {section}{\numberline {6.3}Hyperparameter}{29}{section.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{29}{chapter.7}%
+\contentsline {section}{\numberline {6.4}Schildererkennung mit generierten Trainingsdaten}{29}{section.6.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{32}{chapter*.37}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{30}{chapter.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\nonumberline Anhang}{33}{chapter*.41}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

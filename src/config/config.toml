@@ -11,7 +11,7 @@ image_size = 256                # Do not change this, can lead to errors
 generator_type = 'resnet'       # 'resnet' or 'unet'
 
 [training]
-number_of_epochs = 100
+number_of_epochs = 5
 batch_size = 4                  # reduce batch size if your system cannot handle this value; increase if you still have headroom
 learning_rate = 2e-4
 beta_1 = 0.5                    # value given by cyclegan paper

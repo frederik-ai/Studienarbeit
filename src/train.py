@@ -20,13 +20,16 @@ def main():
     IMAGE_SIZE = config['model']['image_size']
 
     PATH_TO_TRAIN_DIRECTORY = config['paths']['train_data']
-    training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_TRAIN_DIRECTORY))
+    #training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_TRAIN_DIRECTORY))
+    training_path = PATH_TO_TRAIN_DIRECTORY
     x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE,
                                                           image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
     x_train_processed = utils.load_data.normalize_dataset(x_train)
+    x_train_processed = x_train_processed.take(10)  # REMOVE THIS LINE
 
     PATH_TO_PICTOGRAMS = config['paths']['pictograms']
-    pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_PICTOGRAMS))
+    # pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_PICTOGRAMS))
+    pictograms_path = PATH_TO_PICTOGRAMS
     x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batch_size=BATCH_SIZE,
                                                                image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)

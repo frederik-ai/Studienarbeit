@@ -16,11 +16,11 @@ Example:
 """
 
 import tensorflow as tf
-import toml
 import uuid
 import argparse
 import math
 from tqdm import tqdm
+import toml
 
 import utils.load_data
 import utils.preprocess_image

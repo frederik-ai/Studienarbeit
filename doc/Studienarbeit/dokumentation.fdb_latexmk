@@ -1,17 +1,17 @@
 # Fdb version 3
-["bibtex dokumentation"] 1676309542 "dokumentation.aux" "dokumentation.bbl" "dokumentation" 1676478082
+["bibtex dokumentation"] 1677066794 "dokumentation.aux" "dokumentation.bbl" "dokumentation" 1677066839
   "C:/Users/Frederik/AppData/Local/Programs/MiKTeX/bibtex/bst/biblatex/biblatex.bst" 1598187198 65407 92c6ecef324f045ffcac78ce2a7a8298 ""
   "bibliography.bib" 1676132669 7237 883f1e72fca09998aef46db33c8382d6 ""
-  "dokumentation-blx.bib" 1676478079 341 1d38a31d3f23a7d9de3b0126e0f412a2 "pdflatex"
-  "dokumentation.aux" 1676478079 40008 ff57a8812e624c845c29beba76e7c6c2 "pdflatex"
+  "dokumentation-blx.bib" 1677066835 341 1d38a31d3f23a7d9de3b0126e0f412a2 "pdflatex"
+  "dokumentation.aux" 1677066835 40694 0007da153ab64f66d79bc4fca1c0b52a "pdflatex"
   (generated)
   "dokumentation.bbl"
   "dokumentation.blg"
-["cusdep glo gls dokumentation"] 1676309051 "dokumentation.glo" "dokumentation.gls" "dokumentation" 1676478082
+["cusdep glo gls dokumentation"] 1677057716 "dokumentation.glo" "dokumentation.gls" "dokumentation" 1677066839
   "dokumentation.glo" 0 -1 0 "pdflatex"
   (generated)
   "dokumentation.gls"
-["pdflatex"] 1676478037 "c:/Users/Frederik/Documents/Studienarbeit/doc/Studienarbeit/dokumentation.tex" "dokumentation.pdf" "dokumentation" 1676478082
+["pdflatex"] 1677066795 "c:/Users/Frederik/Documents/Studienarbeit/doc/Studienarbeit/dokumentation.tex" "dokumentation.pdf" "dokumentation" 1677066839
   "C:/Users/Frederik/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1641450953 10293848 45d23c126abb33e6d6f06836ffaa1942 ""
   "C:/Users/Frederik/AppData/Local/MiKTeX/pdftex/config/pdftex.map" 1676286068 134005 058c4942d70eb80e6abaed729834a5b0 ""
   "C:/Users/Frederik/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/libertine/lbtn_25tcsq.enc" 1497086288 2921 8ca0eb0831f9bc5da080d3697cfe67bf ""
@@ -359,24 +359,24 @@
   "c:/Users/Frederik/Documents/Studienarbeit/doc/Studienarbeit/dokumentation.tex" 1674579615 2661 db8f616242f43fd2222b957105e6d794 ""
   "content/1 Einleitung.tex" 1669667497 379 558c3b993e1997561dd05dc58b3502e9 ""
   "content/2 Stand der Technik.tex" 1675110877 613 f678f86ad0b91ff14d307dcfd13d5a33 ""
-  "content/3 Konzeption des Generative Adversarial Networks.tex" 1676478035 8490 c2914942eb92437e1b593199ea2f8317 ""
+  "content/3 Konzeption des Generative Adversarial Networks.tex" 1677066741 8656 1cf243cf92471128784940729dc3bea7 ""
   "content/4 Implementierung und Training.tex" 1674579615 64 0b544e6ef56a2ba24a2123da5e22d336 ""
-  "content/5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex" 1674579583 116 458c47478cb57e600f091bdf3426af50 ""
+  "content/5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex" 1677066519 2193 6500e400e56597732a346d031f287acc ""
   "content/6 Evaluation.tex" 1675363811 202 62f1dd0c9d3941ab517e4439df2c5303 ""
   "content/7 Zusammenfassung.tex" 1666884811 25 92e53abadeb24a6fcb93e506d7bcf506 ""
   "content/Stand der Technik/KNNs.tex" 1675102102 12388 892f7e606ced39bec5b0eff8cf0f715e ""
   "content/Stand der Technik/NoGANs.tex" 1675111077 28308 7b365ccfd99ffa8e3a656e4f9cfd1f43 ""
-  "content/Stand der Technik/Strassenschilderkennung.tex" 1674678265 7628 c011270b8b671931dc6a51f0f418321c ""
+  "content/Stand der Technik/Strassenschilderkennung.tex" 1676996711 7684 4d2a189d6656bee3dd8ca27275cdf917 ""
   "content/Stand der Technik/VorherigeArbeiten.tex" 1676030664 11586 1a76246d4d986c6767c5bef6406b572c ""
-  "dokumentation.aux" 1676478079 40008 ff57a8812e624c845c29beba76e7c6c2 "pdflatex"
-  "dokumentation.bbl" 1676309543 20330 11ec7e5561a95997557488f91cf60bd7 "bibtex dokumentation"
-  "dokumentation.gls" 1676309052 7 9f404503043ec80c08484be9f659189e "cusdep glo gls dokumentation"
-  "dokumentation.lof" 1676478079 3144 0138f5cceb5368ede5b35aa067a0758d "pdflatex"
-  "dokumentation.lol" 1676478079 1252 68b25c76c20e876917dd7af34664be7c "pdflatex"
-  "dokumentation.lot" 1676478079 1178 b76bd381c80f1b5a9e463a3b034d37bb "pdflatex"
-  "dokumentation.run.xml" 1676478079 2801 9a33b4de547f1c5c819c44abbb40a9e3 "pdflatex"
+  "dokumentation.aux" 1677066835 40694 0007da153ab64f66d79bc4fca1c0b52a "pdflatex"
+  "dokumentation.bbl" 1677066795 20330 11ec7e5561a95997557488f91cf60bd7 "bibtex dokumentation"
+  "dokumentation.gls" 1677057716 7 9f404503043ec80c08484be9f659189e "cusdep glo gls dokumentation"
+  "dokumentation.lof" 1677066835 3144 0138f5cceb5368ede5b35aa067a0758d "pdflatex"
+  "dokumentation.lol" 1677066835 1252 68b25c76c20e876917dd7af34664be7c "pdflatex"
+  "dokumentation.lot" 1677066835 1178 b76bd381c80f1b5a9e463a3b034d37bb "pdflatex"
+  "dokumentation.run.xml" 1677066835 2801 9a33b4de547f1c5c819c44abbb40a9e3 "pdflatex"
   "dokumentation.tex" 1674579615 2661 db8f616242f43fd2222b957105e6d794 ""
-  "dokumentation.toc" 1676478079 5745 a78174be6729a82c857d5b2ea221c202 "pdflatex"
+  "dokumentation.toc" 1677066835 6073 7df0fbffd2441f98bf98848e928ae443 "pdflatex"
   "einstellungen.tex" 1676359870 5300 ccdde21cbd0323109fb59de3200b128d ""
   "images//../images/GANs/GAN.drawio.png" 1674910876 42141 2e26fe0b85611292810a53e38213574a ""
   "images//../images/GTSRB/00040.png" 1666081203 8829 fb7bb13b245158eaa52fd78416fa4c98 ""

@@ -1,4 +1,19 @@
-\chapter{Erweiterung der Bilder um äußere Einflüsse}
-\section{Verwackeln}
+\chapter{Augmentation der generierten Bilder}
+Die Augmentation der generieten Bilder wird durch das Python Modul \lstinline[texcl=false]{utils.preprocess_image.py} implementiert.
+\section{Ungültige Straßenschilder}
+In Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} ist bereits beschrieben, dass als ungültig markierte Schilder offenbar eine Herausforderung für heutige Straßenschilderkennungen darstellen können. Das Ziel dieser Studienarbeit ist, solche Fälle simulieren zu können. Aus diesem Grund ist dieser Anwendungsfall implementiert.
+
+Beispiele für durch dieses Projekt erzeugte, ungültige Straßenschilder sind in der nachfolgenden Abbildung dargestellt:
+
+Bei der Umsetzung bieten sich zwei Möglichkeiten. Zum einen kann das \ac{CycleGAN} darauf trainiert werden, solche Bilder eigenständig zu generieren. Dafür würden Trainingsdaten benötigt, die solche Schilder zeigen. Der Datensatz müsste somit um weitere Bilder ergänzt werden. Weitere reale Bilder hinzuzufügen ist nicht ohne weiteres möglich. Es wäre jedoch auch denkbar, bereits vorhandene TRainingsbilder mit einer Bildbearbeitungssoftware so anzupassen, dass die ungültige Schilder zeigen.
+
+Eine weitere Möglichkeit ist, das Kreuz, das die Ungültigkeit eines Schildes markiert, nachträglich in die generierten Bilder einzufügen. Die Schwierigkeit ist hierbei, dass die Straßenschilder zufällig rotiert und skaliert sind. Das Kreuz muss so angepasst werden, dass es sich stest zentral und mit der gleichen Rotation auf dem Schild befindet.
+
+\section{Bewegungsunschärfe}
+Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug mit einer hohen Geschwindigkeit bewegt. Hierbei kann eine sogenannte Bewegungsunschärfe auftreten. Dies tritt bei einer Kamera auf, wenn sich das Bild während der Belichtungszeit deutlich verändert. Wenn also die Geschwindigkeit des Fahrzeugs groß ist im Vergleich zur Belichtungszeit.
+
+~Darauf eingehen, dass man das auch mit einer Fourier Transformation umgesetzen kann~
+
+Eine Bewegungsunschärfe kann mittels einer Faltung des Bildes mit einer Faltmatrix realisiert werden.
 \section{Artefakte}
 \section{Schnee}

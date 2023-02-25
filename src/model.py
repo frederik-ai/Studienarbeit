@@ -4,6 +4,7 @@ Implementation of the CycleGAN model. Partly derived from: https://www.tensorflo
 
 import tensorflow as tf
 import time
+import pickle
 from tqdm import tqdm
 import uuid
 import os
@@ -82,7 +83,13 @@ class CycleGan:
         self.l1_loss = tf.keras.losses.MeanAbsoluteError()
         self.LAMBDA = config['training']['lambda']
 
-        # checkpoints
+        # For Tensorboard
+        self.total_epochs = tf.Variable(0)
+        self.total_steps = tf.Variable(0)
+        self.log_path = 'logs/' + config['model']['generator_type']
+        self.summary_writer = tf.summary.create_file_writer(self.log_path)
+
+        # Checkpoints
         self.checkpoint = self.init_checkpoint()
         if self.generator_type == GeneratorType.U_NET:
             checkpoint_path = './checkpoints/cyclegan_u_net'
@@ -115,32 +122,49 @@ class CycleGan:
         Args:
             pictograms: 4d tensor containing the raw pictograms (batch_size, height, width, channels).
             real_images: 4d tensor containing the training images of street signs (batch_size, height, width, channels).
-            epochs (int): Number of epochs to train the model.
+            epochs: Number of epochs to train the model.
         """
         print('Training...')
-        start = time.time()
-        for epoch in range(epochs):
-            print(f'Epoch: {epoch + 1} / {epochs}')
-            for image_batch in tqdm(real_images):
+        with self.summary_writer.as_default():
+            for epoch in range(epochs):
+                self.total_epochs.assign_add(1) # increment
+                print(f'Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs-(epoch+1)}')
+                for image_batch in tqdm(real_images):
+                    self.total_steps.assign_add(1)  # increment
+                    pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+                    single_pictogram_batch = pictograms.take(1).get_single_element()
+                    single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                        single_pictogram_batch)
+                    losses = self.train_step(single_pictogram_batch, image_batch)
+
+                    # For Tensorboard
+                    for loss_name in losses:
+                        tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
+
+                    # tf.summary.scalar('discriminator_x_loss', losses['discriminator_x_loss'], self.total_steps)
+                    # tf.summary.scalar('discriminator_y_loss', losses['discriminator_y_loss'], self.total_steps)
+                    # tf.summary.scalar('generator_g_loss', losses['generator_g_loss'], self.total_steps)
+                    # tf.summary.scalar('generator_f_loss', losses['generator_f_loss'], self.total_steps)
+                    # tf.summary.scalar('total_loss', losses['total_loss'], self.total_steps)
+
+                # After each epoch: Generate an image
                 pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
                 single_pictogram_batch = pictograms.take(1).get_single_element()
-                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(single_pictogram_batch)
-                self.train_step(single_pictogram_batch, image_batch)
+                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                    single_pictogram_batch)
+                generator_test_result = self.generator_g(single_pictogram_batch)
+                random_filename = str(uuid.uuid4())
+                utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
+                                               relative_path='generated_images')
+                self.summary_writer.flush()
 
-            pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
-            single_pictogram = pictograms.take(1).get_single_element()[0]
-            generator_test_result = self.generator_g(single_pictogram)
-            random_filename = str(uuid.uuid4())
-            utils.misc.store_tensor_as_img(tensor=generator_test_result, filename=random_filename,
-                                           relative_path='generated_images')
+                # for next training; is stored in checkpoint
 
-            self.checkpoint_manager.save()
-            print('Checkpoint saved for epoch {}.'.format(epoch + 1))
-            # if ((epoch + 1) % 1 == 0) and ((epoch + 1) < epochs):
-            #    self.checkpoint_manager.save()
-            #    print('Checkpoint saved for epoch {}.'.format(epoch + 1))
-
-        print('Time taken for training is {:.2f} sec\n'.format(time.time() - start))
+                # self.checkpoint_manager.save()
+                # print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+                # if ((epoch + 1) % 1 == 0) and ((epoch + 1) < epochs):
+                #     self.checkpoint_manager.save()
+                #     print('Checkpoint saved for epoch {}.'.format(epoch + 1))
         self.checkpoint_manager.save()
         print('Checkpoint saved for this training')
 
@@ -154,6 +178,11 @@ class CycleGan:
         Args:
             real_pictogram: 4d tensor containing the pictograms (batch_size, height, width, channels).
             real_street_sign: 4d tensor containing real street sign images (batch_size, height, width, channels).
+            step: Current training step.
+            summary: Whether to write tensorboard summaries. Requires a default summary writer.
+
+        Returns:
+            Losses (dict): Dictionary containing the losses of the generators and discriminators.
         """
         with tf.GradientTape(persistent=True) as tape:
             # Generate
@@ -185,10 +214,14 @@ class CycleGan:
                 real_pictogram, cycled_pictogram) + self.calc_cycle_loss(real_street_sign, cycled_street_sign)
 
             # Generators G&F loss
-            generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign), discriminator_y_fake_street_sign)
-            generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram), discriminator_x_fake_pictogram)
+            generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign),
+                                                     discriminator_y_fake_street_sign)
+            generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
+                                                     discriminator_x_fake_pictogram)
             total_gen_g_loss = generator_g_loss + total_cycle_loss
             total_gen_f_loss = generator_f_loss + total_cycle_loss
+
+            total_loss = disc_x_loss + disc_y_loss + total_gen_g_loss + total_gen_f_loss
 
         # Gradients for optimization
         generator_g_gradients = tape.gradient(total_gen_g_loss,
@@ -214,6 +247,14 @@ class CycleGan:
         self.discriminator_y_optimizer.apply_gradients(zip(discriminator_y_gradients,
                                                            self.discriminator_y.trainable_variables))
 
+        return {
+            'discriminator_x_loss': disc_x_loss,
+            'discriminator_y_loss': disc_y_loss,
+            'generator_g_loss': total_gen_g_loss,
+            'generator_f_loss': total_gen_f_loss,
+            'total_loss': total_loss
+        }
+
     def init_checkpoint(self):
         """Create a checkpoint object.
 
@@ -228,7 +269,9 @@ class CycleGan:
                                          generator_g_optimizer=self.generator_g_optimizer,
                                          generator_f_optimizer=self.generator_f_optimizer,
                                          discriminator_x_optimizer=self.discriminator_x_optimizer,
-                                         discriminator_y_optimizer=self.discriminator_y_optimizer)
+                                         discriminator_y_optimizer=self.discriminator_y_optimizer,
+                                         step=self.total_steps,
+                                         epoch=self.total_epochs)
         return checkpoint
 
     def restore_latest_checkpoint_if_exists(self):
