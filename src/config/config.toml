@@ -8,7 +8,7 @@ destination = "generator_test"
 
 [model]
 image_size = 256                # Do not change this, can lead to errors
-generator_type = 'resnet'       # 'resnet' or 'unet'
+generator_type = 'unet'       # 'resnet' or 'unet'
 
 [training]
 number_of_epochs = 5

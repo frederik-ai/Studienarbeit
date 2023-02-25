@@ -25,7 +25,7 @@ def main():
     x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE,
                                                           image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
     x_train_processed = utils.load_data.normalize_dataset(x_train)
-    x_train_processed = x_train_processed.take(10)  # REMOVE THIS LINE
+    x_train_processed = x_train_processed.take(200)  # REMOVE THIS LINE
 
     PATH_TO_PICTOGRAMS = config['paths']['pictograms']
     # pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_PICTOGRAMS))
