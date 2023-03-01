@@ -10,7 +10,7 @@ import numpy as np
 import tensorflow_graphics.image.transformer as tfg_image_transformer
 
 
-def randomly_transform_image_batch(img_tensor_batch, target_size=256, max_theta_xy=0.1, max_theta_z=0.0001):
+def randomly_transform_image_batch(img_tensor_batch, target_size=256):
     batch_size = img_tensor_batch.shape[0]
 
     # resize content
@@ -52,6 +52,17 @@ def transform_image(img_tensor, content_size, transformation_matrix, target_size
 
 
 def create_rotation_matrix(yaw, pitch, roll):
+    """Create a rotation matrix from yaw, pitch and roll angles.
+    All angles shall be provided in degrees.
+
+    Args:
+        yaw: rotation around z-axis
+        pitch: rotation around y-axis
+        roll: rotation around x-axis
+
+    Returns:
+        (3, 3) tensor containing the rotation matrix.
+    """
     yaw = np.radians(yaw)
     pitch = np.radians(pitch)
     roll = np.radians(roll)
@@ -72,7 +83,9 @@ def create_rotation_matrix(yaw, pitch, roll):
         [0, np.sin(roll), np.cos(roll)]
     ])
 
-    return rotation_matrix_z @ rotation_matrix_y @ rotation_matrix_x
+    rotation_matrix = rotation_matrix_z @ rotation_matrix_y @ rotation_matrix_x
+
+    return tf.convert_to_tensor(rotation_matrix, dtype=tf.float32)
 
 
 def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=True):

@@ -2,7 +2,7 @@
 # train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
 # pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms"
 pictograms = "../data/Pictograms"
-train_data = "../data/Official Train/Final_Training/Images"
+train_data = "../data/Train"
 augmentation_data = "../data/Augmentation"
 destination = "generator_test"
 

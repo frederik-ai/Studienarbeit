@@ -76,8 +76,7 @@ def main():
         single_pictogram_batch, content_sizes, transform_matrices = utils.preprocess_image.randomly_transform_image_batch(
             single_pictogram_batch)
         transform_matrices = [matrix for matrix in transform_matrices]  # convert to list to be able to pop() it
-        # generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False)
-        generator_result = single_pictogram_batch
+        generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False)
 
         if MAKE_SIGNS_INVALID:
             cross_img_path = config['paths']['augmentation_data'] + '/cross.png'

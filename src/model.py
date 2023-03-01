@@ -127,7 +127,7 @@ class CycleGan:
         print('Training...')
         with self.summary_writer.as_default():
             for epoch in range(epochs):
-                self.total_epochs.assign_add(1) # increment
+                self.total_epochs.assign_add(1)  # increment
                 print(f'Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs-(epoch+1)}')
                 for image_batch in tqdm(real_images):
                     self.total_steps.assign_add(1)  # increment
@@ -137,15 +137,9 @@ class CycleGan:
                         single_pictogram_batch)
                     losses = self.train_step(single_pictogram_batch, image_batch)
 
-                    # For Tensorboard
+                    # For Tensorboard; Log the losses
                     for loss_name in losses:
                         tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
-
-                    # tf.summary.scalar('discriminator_x_loss', losses['discriminator_x_loss'], self.total_steps)
-                    # tf.summary.scalar('discriminator_y_loss', losses['discriminator_y_loss'], self.total_steps)
-                    # tf.summary.scalar('generator_g_loss', losses['generator_g_loss'], self.total_steps)
-                    # tf.summary.scalar('generator_f_loss', losses['generator_f_loss'], self.total_steps)
-                    # tf.summary.scalar('total_loss', losses['total_loss'], self.total_steps)
 
                 # After each epoch: Generate an image
                 pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
@@ -178,8 +172,6 @@ class CycleGan:
         Args:
             real_pictogram: 4d tensor containing the pictograms (batch_size, height, width, channels).
             real_street_sign: 4d tensor containing real street sign images (batch_size, height, width, channels).
-            step: Current training step.
-            summary: Whether to write tensorboard summaries. Requires a default summary writer.
 
         Returns:
             Losses (dict): Dictionary containing the losses of the generators and discriminators.
@@ -190,30 +182,39 @@ class CycleGan:
             generated_pictogram = self.generator_f(real_street_sign, training=True)
 
             # Discriminator X loss
+            # -- how well does it identify real pictograms as real?
             discriminator_x_real_pictogram = self.discriminator_x(real_pictogram, training=True)
             discriminator_x_real_loss = self.adversarial_loss(tf.ones_like(discriminator_x_real_pictogram),
                                                               discriminator_x_real_pictogram)
+            # -- how well does it identify fake pictograms as fake?
             discriminator_x_fake_pictogram = self.discriminator_x(generated_pictogram, training=True)
             discriminator_x_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_x_fake_pictogram),
                                                               discriminator_x_fake_pictogram)
+            # -- total loss
             disc_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
 
             # Discriminator Y loss
+            # -- how well does it identify real traffic signs as real?
             discriminator_y_real_street_sign = self.discriminator_y(real_street_sign, training=True)
             discriminator_y_real_loss = self.adversarial_loss(tf.ones_like(discriminator_y_real_street_sign),
                                                               discriminator_y_real_street_sign)
+            # -- how well does it identify fake traffic signs as fake?
             discriminator_y_fake_street_sign = self.discriminator_y(generated_street_sign, training=True)
             discriminator_y_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_y_fake_street_sign),
                                                               discriminator_y_fake_street_sign)
+            # -- total loss
             disc_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
 
             # Cycle consistency loss
+            # -- pictogram -> street sign -> pictogram
+            # -- how well does the input pictogram match the generated pictogram?
             cycled_pictogram = self.generator_f(generated_street_sign, training=True)
             cycled_street_sign = self.generator_g(generated_pictogram, training=True)
             total_cycle_loss = self.calc_cycle_loss(
                 real_pictogram, cycled_pictogram) + self.calc_cycle_loss(real_street_sign, cycled_street_sign)
 
             # Generators G&F loss
+            # -- how well do the generators fool the discriminators?
             generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign),
                                                      discriminator_y_fake_street_sign)
             generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
