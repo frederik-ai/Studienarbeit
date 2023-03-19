@@ -85,7 +85,7 @@
 %% Programmiersprachen Highlighting (Listings)
 \newcommand{\listingsettings}{%
 	\lstset{%
-		language=Java,			% Standardsprache des Quellcodes
+		language=Python,			% Standardsprache des Quellcodes
 		numbers=left,			% Zeilennummern links
 		stepnumber=1,			% Jede Zeile nummerieren.
 		numbersep=5pt,			% 5pt Abstand zum Quellcode
@@ -123,7 +123,10 @@
 \usepackage{amssymb}
 \usepackage{mathtools}
 \usepackage{listings}
-\usepackage{minted}
+\usepackage[newfloat]{minted}
 \usepackage{caption}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Listing}
+\captionsetup[listing]{skip=-3pt}
 \usepackage{color}
 \usepackage{pgfplots}

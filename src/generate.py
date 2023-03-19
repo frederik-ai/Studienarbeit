@@ -2,14 +2,15 @@
 Run traffic sign image generation with a trained CycleGAN model.
 
 Usage:
-    `$ python generate.py --num-imgs <int> [--o <str>] [--model <str>] [--make-invalid] [--motion-blur]`
+    `$ python generate.py --num-imgs <int> [--o <str>] [--model <str>] [--make-invalid] [--motion-blur] [--snow]`
 
 Options:
-    `--num-imgs <int>`      Number of generated images. <br>
-    `[--o <str>]`             Path to directory where generated images are stored. Default: value from config file. <br>
-    `[--model <str>]`         Model name [unet or resnet]. Default: value from config file. <br>
-    `[--make-invalid]`        Make generated street signs invalid. <br>
-    `[--motion-blur]`         Add random motion blur to the generated images. <br>
+    `--num-imgs <int>       Number of generated images. <br>
+    `[--o <str>]`           Path to directory where generated images are stored. Default: value from config file. <br>
+    `[--model <str>]`       Model name [unet or resnet]. Default: value from config file. <br>
+    `[--make-invalid]`      Make generated street signs invalid. <br>
+    `[--motion-blur]`       Add random motion blur to the generated images. <br>
+    '[--snow]'              Add random snow to the generated images. <br>
 
 Example:
     `$ python generate.py --model unet --num-imgs 10 --make-invalid`
@@ -46,6 +47,7 @@ def main():
                         help='make street signs invalid')
     parser.add_argument('--motion-blur', dest='motion_blur', default=False, action='store_true',
                         help='add random motion blur')
+    parser.add_argument('--snow', dest='snow', default=False, action='store_true', help='add snow')
     args = parser.parse_args()
     if args.model == 'unet' or args.model == 'resnet':
         config['model']['generator_type'] = args.model
@@ -53,6 +55,7 @@ def main():
         raise ValueError('model must be "unet" or "resnet". This argument is optional')
     DESTINATION_PATH = args.o
     NUM_GENERATED_IMAGES = args.num_imgs
+    SNOW = args.snow
     MAKE_SIGNS_INVALID = args.make_invalid
     MOTION_BLUR = args.motion_blur
 
@@ -76,7 +79,7 @@ def main():
         single_pictogram_batch, content_sizes, transform_matrices = utils.preprocess_image.randomly_transform_image_batch(
             single_pictogram_batch)
         transform_matrices = [matrix for matrix in transform_matrices]  # convert to list to be able to pop() it
-        generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False)
+        generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False) # UNCOMMENT
 
         if MAKE_SIGNS_INVALID:
             cross_img_path = config['paths']['augmentation_data'] + '/cross.png'
@@ -84,6 +87,10 @@ def main():
                 lambda t: utils.image_augmentation.make_street_sign_invalid(t, cross_img_path, content_sizes.pop(0),
                                                                             transform_matrices.pop(0)),
                 generator_result)
+        if SNOW:
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 20, 30), generator_result)
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 10, 20), generator_result)
+            #generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 5, 2), generator_result)
         if MOTION_BLUR:
             generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_motion_blur(t, 100), generator_result)
 

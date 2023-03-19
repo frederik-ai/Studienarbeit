@@ -1,5 +1,5 @@
 \chapter{Implementierung und Training}
-- Viele Trainingsbilder haben nicht das passende Seitenverhältnis. Sie einfach so zu laden würde dazu führen, dass ie verzerrt werden. load_dataset_from_directory bietet Parameter an, der dafür sorgt, dass die Bilder gecropppt werden. Central crop -> genau das, was ich möchte.
+Viele Trainingsbilder haben nicht das passende Seitenverhältnis. Sie einfach so zu laden würde dazu führen, dass die verzerrt werden. load dataset from directory bietet Parameter an, der dafür sorgt, dass die Bilder gecropppt werden. Central crop, genau das, was ich möchte.
 
-- Trainingsbilder die kleiner als 256x256 Pixel sind (was die meisten sind) werden bei der Vergrößerung durch tensorflow vergälttet. Dadurch sind sie nicht verpixelt, sondern nur etwas verschwommen. -> Gut so.
+Trainingsbilder die kleiner als 256x256 Pixel sind (was die meisten sind) werden bei der Vergrößerung durch tensorflow vergälttet. Dadurch sind sie nicht verpixelt, sondern nur etwas verschwommen. Gut so.
 \section{Hyperparameter}

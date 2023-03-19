@@ -53,10 +53,62 @@ def apply_motion_blur(img_tensor, intensity, direction=Direction.HORIZONTAL, min
     kernel = kernel / kernel_size
     transformed_img = cv2.filter2D(img_tensor.numpy(), -1, kernel)
     return tf.convert_to_tensor(transformed_img)
+
+
 # endregion
 
 # region Invalid Street Sign
 # invalid_cross_path = r'C:\Users\Frederik\Documents\Studienarbeit\data\Augmentation\Schild Durchgestrichen.png'
+
+# region snow
+def add_snow(img_tensor, snow_intensity, motion_blur_intensity, motion_blur_direction=Direction.DIAGONAL,
+             p_snowflake_min=0.02, p_snowflake_max=0.5):
+    """Add snow to an image tensor
+
+    Args:
+        img_tensor: 3d image tensor on which snow will be added (height, width, 3)
+        snow_intensity: intensity of the snow [0-100]
+        motion_blur_intensity: intensity of the motion blur [0-100]
+        motion_blur_direction: direction of the motion blur
+        p_snowflake_min: minimum probability of a snowflake (default value empirically determined)
+        p_snowflake_max: maximum probability of a snowflake (default value empirically determined)
+
+    Returns:
+        image tensor with added snow
+    """
+
+    # probability for a snowflake
+    p = p_snowflake_min + (p_snowflake_max - p_snowflake_min) * snow_intensity / 100
+
+    # Generate random white/black pixels with probability p resp. (1-p); one white pixel equals one snowflake
+    # Binomial distribution is used for generation; 1 = white pixel, 0 = black pixel
+    seed_1 = tf.random.uniform([], minval=0, maxval=999)
+    seed_2 = tf.random.uniform([], minval=0, maxval=999)
+    random_particles = tf.random.stateless_binomial(shape=(256, 256, 1), seed=[seed_1, seed_2], counts=1, probs=p,
+                                                    output_dtype=tf.float32)
+    random_particles = random_particles * 2.0 - 1.0  # normalize from range [0, 1] to range [-1, 1]
+    # add alpha channel to turn image into rgba; white pixels have alpha 1.0, black pixels have alpha -1.0
+    random_particles = tf.tile(random_particles, [1, 1, 4])
+    # blur the snowflakes
+    random_particles = tfa.image.gaussian_filter2d(random_particles, filter_shape=(3, 3), sigma=7)
+    # Add wind effect
+    random_particles = apply_motion_blur(random_particles, motion_blur_intensity,
+                                         motion_blur_direction)
+
+    # add alpha channel to img_tensor
+    img_tensor = tf.concat([img_tensor, tf.ones_like(img_tensor[:, :, 0:1])], axis=-1)
+    # paste generated snowflake image onto given image tensor
+    snowy_image = tf.math.add(img_tensor, random_particles)
+    # normalize to range [-1, 1]
+    max_val = tf.math.reduce_max(snowy_image)
+    min_val = tf.math.reduce_min(snowy_image)
+    snowy_image = tf.math.divide(tf.math.subtract(snowy_image, min_val), tf.math.subtract(max_val, min_val)) * 2 - 1
+    # remove 4th channel; now is rgb instead of rgba
+    snowy_image = snowy_image[:, :, 0:3]
+    return snowy_image
+
+
+# endregion snow
 
 
 def make_street_sign_invalid(img_tensor, cross_path, content_size=None, transformation_matrix=None):

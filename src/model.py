@@ -129,12 +129,18 @@ class CycleGan:
             for epoch in range(epochs):
                 self.total_epochs.assign_add(1)  # increment
                 print(f'Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs-(epoch+1)}')
+
+                # Single training step
                 for image_batch in tqdm(real_images):
                     self.total_steps.assign_add(1)  # increment
+
+                    # Transform the pictograms
                     pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
                     single_pictogram_batch = pictograms.take(1).get_single_element()
                     single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
                         single_pictogram_batch)
+
+                    # Train the model
                     losses = self.train_step(single_pictogram_batch, image_batch)
 
                     # For Tensorboard; Log the losses
@@ -150,15 +156,15 @@ class CycleGan:
                 random_filename = str(uuid.uuid4())
                 utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
                                                relative_path='generated_images')
-                self.summary_writer.flush()
+                self.summary_writer.flush()  # write tensorboard logs to log file
 
                 # for next training; is stored in checkpoint
 
                 # self.checkpoint_manager.save()
-                # print('Checkpoint saved for epoch {}.'.format(epoch + 1))
-                # if ((epoch + 1) % 1 == 0) and ((epoch + 1) < epochs):
-                #     self.checkpoint_manager.save()
-                #     print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+                print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+                if ((epoch + 1) % 2 == 0) and ((epoch + 1) < epochs):
+                     self.checkpoint_manager.save()
+                     print('Checkpoint saved for epoch {}.'.format(epoch + 1))
         self.checkpoint_manager.save()
         print('Checkpoint saved for this training')
 

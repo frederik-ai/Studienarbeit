@@ -658,16 +658,16 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\framed\framed.st
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\framed\framed.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\framed\framed.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\framed\framed.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\newfloat\newfloat.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
@@ -1119,6 +1119,16 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pppdfte
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pppdftex.def
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pppdftex.def
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\pdfpages\pppdftex.def
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\float\float.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
@@ -2366,38 +2376,69 @@ INPUT .\images\\..\images\GTSRB\00052.png
 INPUT .\images\\..\images\GTSRB\00052.png
 INPUT .\images\\..\images\GTSRB\00052.png
 INPUT .\images\\..\images\GTSRB\00052.png
+INPUT .\images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT .\images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT .\images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT .\images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT .\images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT .\images\\..\images\3 Konzeption des Generative Adversarial Networks\Datenaugmentation\Rotation.png
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT .\content\4 Implementierung und Training.tex
+INPUT content\4 Implementierung und Training.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+INPUT content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineMT-tlf-t1.tfm
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT .\content\4 Implementierung und Training.tex
-INPUT content\4 Implementierung und Training.tex
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineMT-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineMT-tlf-t1--base.tfm
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT .\content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
-INPUT content\5 Generierung von Bildern mit Abweichung von den Trainingsdaten.tex
+OUTPUT dokumentation.pyg
+INPUT .\_minted-dokumentation\default.pygstyle
+INPUT _minted-dokumentation\default.pygstyle
+INPUT .\_minted-dokumentation\default.pygstyle
+INPUT _minted-dokumentation\default.pygstyle
+INPUT _minted-dokumentation\default.pygstyle
+INPUT .\dokumentation.pyg
+INPUT .\_minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT _minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT .\_minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT _minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT .\_minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT _minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT .\_minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT _minted-dokumentation\A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineMTB-tlf-t1.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineMT-tlf-t1.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx5.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss8.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1.tfm
 INPUT .\content\6 Evaluation.tex
 INPUT content\6 Evaluation.tex
 INPUT .\content\6 Evaluation.tex
 INPUT content\6 Evaluation.tex
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineMTB-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineMTB-tlf-t1--base.tfm
 INPUT .\content\7 Zusammenfassung.tex
 INPUT content\7 Zusammenfassung.tex
 INPUT .\content\7 Zusammenfassung.tex
@@ -2426,11 +2467,13 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT dokumentation.aux
+INPUT .\dokumentation.pyg
+INPUT dokumentation.pyg
 INPUT dokumentation.run.xml
 OUTPUT dokumentation.run.xml
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_ncsllp.enc
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_naooyc.enc
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_dhi6qf.enc
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_naooyc.enc
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_7grukw.enc
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_25tcsq.enc
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\libertine\lbtn_76gpa5.enc
@@ -2439,6 +2482,8 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\liberti
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinBiolinumTB.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineMT.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineMT.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineMTB.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineMTB.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineT.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineT.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTB.pfb
@@ -2453,6 +2498,8 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfont
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi6.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
@@ -2467,6 +2514,8 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfont
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy6.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy6.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy8.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb

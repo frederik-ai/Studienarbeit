@@ -133,6 +133,8 @@ ytick=data, xmax=2600, xtick={0, 500, 1000, 1500, 2000, 2500}
 \paragraph{Tensorflow Addons}
 \paragraph{Tensorflow Graphics}
 Erklären: Wieso benutze ich, wo möglich, Tensorflow Graphics statt OpenCV? Wieso gibt es Tensorflow Graphics überhaupt?
+\paragraph{OpenCV}
+Erwähnen: OpenCV wird nur da benutzt, wo keine Tensorflow funktionen verwendet werden können. Beeinträchtigt die Performance.
 
 \section{Architektur}
 In Kapitel \ref{chap:NoGANs} werden verschiedene generative Netzwerkarchitekturen vorgestellt. Zunächst soll darauf eingegangen werden, welche dieser Herangehensweisen gewählt wird. Jede der Architekturen besitzt ihre Vor- und Nachteile. Der größte Nachteil von \acp{PixelRNN} ist, dass die Pixel eines Bildes nicht parallel zueinander generiert werden können. Dies verlangsamt die Generierung und damit das Training des Modells.
@@ -142,34 +144,69 @@ In Kapitel \ref{chap:NoGANs} werden verschiedene generative Netzwerkarchitekture
 \section{Datenaugmentation}
 Bevor die Piktogramme an den Generator übergeben werden, werden sie zufällig rotiert. Dadurch muss der Generator die Rotation nicht eigenständig lernen und dieser Aspekt der Generierung lässt sich deterministisch bestimmen. Dabei soll die Rotation nicht nur in x-y-Richtung erfolgen, sondern auch eine dreidimensionale Rotation simuliert werden. Und zwar so, als sei das Schild aus einer beliebigen Frontalperspektive aufgenommen worden.
 
-Um bestimmte Transformationen eines Bilds mitels einer Matrixpultiplikation darstellen zu können, wird häufig ein sogenanntes \emph{homogenes Koordinatensystem} verwendet. Dabei wird das Koordinatensystem um eine weitere Dimension erweitert. Ein Punkt $p = [x, y]^\mathsf{T}$ kann somit um einen beliebigen Wert in z-Richtung verschoben werden. Dadurch wird ein Punkt $\tilde{p}$ im homogenen Koordinatensystem durch drei Koordinaten $\tilde{x}$, $\tilde{y}$ und $\tilde{z}$ beschrieben. Transormationen werden in der homogenen Darstellung durchgeführt und anschließend werden daraus die kartesischen Koordinaten $x$ und $y$ bestimmt. \cite{geometric-ops}
+Um bestimmte Transformationen eines Bilds mittels einer Matrixpultiplikation darstellen zu können, wird häufig ein sogenanntes \emph{homogenes Koordinatensystem} verwendet. Dabei wird das Koordinatensystem um eine weitere Dimension erweitert. Ein Punkt $p = [x, y]^\mathsf{T}$ kann somit um einen beliebigen Wert in z-Richtung verschoben werden. Dadurch wird ein Punkt $\tilde{p}$ im homogenen Koordinatensystem durch drei Koordinaten $\tilde{x}$, $\tilde{y}$ und $\tilde{z}$ beschrieben. Transormationen werden in der homogenen Darstellung durchgeführt und anschließend werden daraus die kartesischen Koordinaten $x$ und $y$ bestimmt. Somit erhält man aus der Transformation erneut ein zweidimensionales Bild. \cite{geometric-ops} \cite{math-primer}
 
-Eine Rotation in x- und y-Richtung besitzt folgende sogenannte \emph{Transformationsmatrix} \cite{geometric-ops}:
+Dies wird für eine dreidimensionale Rotation der Piktogramme benötigt. Die Rotation soll durch drei \emph{eulersche Winkel} beschrieben werden. Das bedeutet, dass sie sich aus einer Rotation um die z-Achse, einer um die y-Achse und einer um die x-Achse zusammensetzt. Dies ist in der nachfolgenden Grafik abgebildet. Die bläulichen Balken zeigen dabei die Achse an, um die gedreht wird. Die erste Rotation ist um die z-Achse, wodurch der Balken in die dritte Bildebene geht. \cite{math-primer}
 
-\begin{equation}
-    \begin{bmatrix}
-        \cos{\theta} & -\sin{\theta} & 0\\
-        \sin{\theta} & \cos{\theta} & 0\\
-        0 & 0 & 1
-    \end{bmatrix}
-\end{equation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Datenaugmentation/Rotation.png}
+	\caption{Rotation der Straßenschilder mittels eulerscher Winkel}
+	\label{fig:rotation}
+\end{figure}
 
-Um ein Bild zu Rotieren, multipliziert man in der homogenen Darstellung jeden Pixel des Bilds mit dieser Matrix. Die Winkel $\theta$ sollten alle gleich groß sein, damit das Bild durch die Rotation nicht verzerrt wird. Für die Rotation der Piktogramme der Straßenschilder wird diese Matrix um eine Rotation in z-Richtung erweitert. Die vollständige Gleichung sieht damit wie folgt aus:
+%\begin{figure}[H]
+%    \centering
+%    \begin{subfigure}[b]{0.2\textwidth}
+%        \centering
+%        \includegraphics[height=\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Datenaugmentation/z-axis.png}
+%        \caption{Rotation um die z-Achse (\emph{rollen})}
+%    \end{subfigure}
+%    \hspace{3em}%
+%    \begin{subfigure}[b]{0.2\textwidth}
+%        \centering
+%        \includegraphics[height=\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Datenaugmentation/y-axis.png}
+%        \caption{Rotation um die y-Achse \emph{}}
+%    \end{subfigure}
+%    \hspace{3em}%
+%    \begin{subfigure}[b]{0.2\textwidth}
+%        \centering
+%        \includegraphics[height=\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Datenaugmentation/x-axis.png}
+%        \caption{Rotation um die x-Achse}
+%    \end{subfigure}
+%    \caption{Rotationen mittels eulerscher Winkel}
+% \end{figure}
 
-\begin{equation}
-    \begin{bmatrix} \tilde{x} \\ \tilde{y} \\ \tilde{z} \end{bmatrix}
-    =
-    \begin{bmatrix}
-        \cos{\theta_{xy}} & -\sin{\theta_{xy}} & 0\\
-        \sin{\theta_{xy}} & \cos{\theta_{xy}} & 0\\
-        0                 & \sin{\theta_{z}} & 1
-    \end{bmatrix}
-    \cdot \begin{bmatrix} x \\ y \\ 1 \end{bmatrix}
-\end{equation}
+Jede Rotation ist durch einen einzelnen Winkel um die jeweilige Achse bestimmt. Kombiniert man die Rotationen, kann die resultierende Tranformation somit durch drei Winkel $(\alpha_z, \alpha_y, \alpha_x)$ eindeutig beschrieben werden. Für die Erzeugung einer zufälligen Rotation müssen randomisierte Werte für diese Winkel bestimmt werden. \cite{math-primer}
 
-Die linke Seite der Gleichung zeigt $\tilde{p}$, das Ergebnis der Rotation im dreidimensionalen Raum. Die Rotationsmatrix wird dafür mit der homogenen Darstellung des zweidimensionalen Punktes $p$ multipliziert. Die letzte Zeile der Rotationsmatrix stellt die Rotation in z-Richtung dar. Der Term $\sin{\theta_{z}}$ verändert die Pixelwerte in y-Richtung, das heißt das Piktogramm wird in z-Richtung geneigt. Rückblickend wäre jedoch auch eine Rotation in x-Richtung sinnvoll. Dadurch würde der Effekt entstehen, das Foto sei von der Seite aufgenommen worden. Die Rotation der Piktogramme in z-Richtung soll weitaus subtiler sein als in x- und y-Richtung. Deshalb ist $\theta_{z}$ allgemein kleiner als $\theta_{xy}$. \cite{geometric-ops}
+Zusätzlich zu der Rotation, soll das Modell die Piktogramme zufällig in ihrer Größe skalieren. Die genannten Augmentationen dienen dazu, die Verteilung der real aufgenommenen Schilder abbilden zu können. Im Datensatz besitzen die Schilder eine unterschiedliche Größe und sind aus verschiedenen Perspektiven aufgenommen. Dadurch dass die Augmentation deterministisch ist, kann sie dazu genutzt werden, um gezielt nur Bilder durch das Modell zu generieren, die aus bestimmten Perspektiven und mit festgelegten Größen generiert wurden. Alternativ kann auch die randomisierte Augmentation beibehalten werden, um eine möglichst große Bandbreite an unterschiedlichen Bildern zu erzeugen.
 
-Für die programmatische Implementierung der Rotation mit dem Framework OpenCV muss die Überführung des Bildes aus der homogenen Darstellung zurück in den zweidimensionalen Raum nicht manuell erfolgen. Deshalb soll darauf nicht weiter eingegangen werden. Grundsätzlich wäre dies jedoch der nächste Schritt, um das rotierte Schild in einem zweidimensionalen Bild darstellen zu können.
+%Eine Rotation in x- und y-Richtung besitzt folgende sogenannte \emph{Transformationsmatrix} \cite{geometric-ops}:
+
+%\begin{equation}
+%    \begin{bmatrix}
+%        \cos{\theta} & -\sin{\theta} & 0\\
+%        \sin{\theta} & \cos{\theta} & 0\\
+%        0 & 0 & 1
+%    \end{bmatrix}
+%\end{equation}
+
+%Um ein Bild zu Rotieren, multipliziert man in der homogenen Darstellung jeden Pixel des Bilds mit dieser Matrix. Die Winkel $\theta$ sollten alle gleich groß sein, damit das Bild durch die Rotation nicht verzerrt wird. Für die Rotation der Piktogramme der Straßenschilder wird diese Matrix um eine Rotation in z-Richtung erweitert. Die vollständige Gleichung sieht damit wie folgt aus:
+
+%\begin{equation}
+%    \begin{bmatrix} \tilde{x} \\ \tilde{y} \\ \tilde{z} \end{bmatrix}
+%    =
+%    \begin{bmatrix}
+%        \cos{\theta_{xy}} & -\sin{\theta_{xy}} & 0\\
+%        \sin{\theta_{xy}} & \cos{\theta_{xy}} & 0\\
+%        0                 & \sin{\theta_{z}} & 1
+%    \end{bmatrix}
+%    \cdot \begin{bmatrix} x \\ y \\ 1 \end{bmatrix}
+%\end{equation}
+
+%Die linke Seite der Gleichung zeigt $\tilde{p}$, das Ergebnis der Rotation im dreidimensionalen Raum. Die Rotationsmatrix wird dafür mit der homogenen Darstellung des zweidimensionalen Punktes $p$ multipliziert. Die letzte Zeile der Rotationsmatrix stellt die Rotation in z-Richtung dar. Der Term $\sin{\theta_{z}}$ verändert die Pixelwerte in y-Richtung, das heißt das Piktogramm wird in z-Richtung geneigt. Rückblickend wäre jedoch auch eine Rotation in x-Richtung sinnvoll. Dadurch würde der Effekt entstehen, das Foto sei von der Seite aufgenommen worden. Die Rotation der Piktogramme in z-Richtung soll weitaus subtiler sein als in x- und y-Richtung. Deshalb ist $\theta_{z}$ allgemein kleiner als $\theta_{xy}$. \cite{geometric-ops}
+
+%Für die programmatische Implementierung der Rotation mit dem Framework OpenCV muss die Überführung des Bildes aus der homogenen Darstellung zurück in den zweidimensionalen Raum nicht manuell erfolgen. Deshalb soll darauf nicht weiter eingegangen werden. Grundsätzlich wäre dies jedoch der nächste Schritt, um das rotierte Schild in einem zweidimensionalen Bild darstellen zu können.
 
 %\begin{listing}[H]
 %    \caption{Rotation der Piktogramme mit OpenCV}
@@ -188,18 +225,19 @@ Für die programmatische Implementierung der Rotation mit dem Framework OpenCV m
 %    \end{minted}
 %\end{listing}
 
-\begin{lstlisting}[language=Python, caption={Rotation der Piktograme mit OpenCV}]
-def apply_3d_rotation(img_tensor, theta_xy, theta_z, image_size):
-    """
-    Rotate the img_tensor in x, y and z direction.
-    """
-    transformation_matrix = np.array([
-    [np.cos(theta_xy), -np.sin(theta_xy), 0],
-    [np.sin(theta_xy),  np.cos(theta_xy), 0],
-    [0,                 np.sin(theta_z),  1] 
-    ])
-    rotated_image = cv2.warpPerspective(img_tensor.numpy(), transformation_matrix, (image_size, image_size))
-    return rotated_image    
-\end{lstlisting}
+%\begin{lstlisting}[language=Python, caption={Rotation der Piktograme mit OpenCV}]
+%def apply_3d_rotation(img_tensor, theta_xy, theta_z, image_size):
+%    """
+%    Rotate the img_tensor in x, y and z direction.
+%    """
+%    transformation_matrix = np.array([
+%    [np.cos(theta_xy), -np.sin(theta_xy), 0],
+%    [np.sin(theta_xy),  np.cos(theta_xy), 0],
+%    [0,                 np.sin(theta_z),  1] 
+%    ])
+%    rotated_image = cv2.warpPerspective(img_tensor.numpy(), transformation_matrix, (image_size, image_size))
+%    return rotated_image    
+%\end{lstlisting}
 
 \section{Training}
+Überlicherweise soll beim Training von neuronalen Netzen die Verlustfunktion gegen den Wert \emph{null} streben. Bei diesem Modell soll die Verlustfunktion jedoch gegen einen Wert konvergieren, der größer ist als \emph{null}. In diesem Fall schaffen es weder die Generatoren, die Funktionswerte zu minimieren, noch können die Diskriminatoren die Funktionswerte weiter maximieren. In diesem Fall ist das sogenannte \emph{Nash-Gleichgewicht} erreicht. Das Training ist somit beendet, da sich das Modell mit den gegebenen Daten nicht weiter verbessern kann.

@@ -1,5 +1,5 @@
 \chapter{Augmentation der generierten Bilder}
-Die Augmentation der generieten Bilder wird durch das Python Modul \lstinline[texcl=false]{utils.preprocess_image.py} implementiert.
+Die Augmentation der generieten Bilder wird durch das Python Modul \lstinline[texcl=false]{utils.image_augmentation} implementiert.
 \section{Ungültige Straßenschilder}
 In Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} ist bereits beschrieben, dass als ungültig markierte Schilder offenbar eine Herausforderung für heutige Straßenschilderkennungen darstellen können. Das Ziel dieser Studienarbeit ist, solche Fälle simulieren zu können. Aus diesem Grund ist dieser Anwendungsfall implementiert.
 
@@ -15,5 +15,22 @@ Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug m
 ~Darauf eingehen, dass man das auch mit einer Fourier Transformation umgesetzen kann~
 
 Eine Bewegungsunschärfe kann mittels einer Faltung des Bildes mit einer Faltmatrix realisiert werden.
-\section{Artefakte}
 \section{Schnee}
+Die Generierung von Schnee erfolgt in mehreren Schritten:
+\begin{enumerate}
+  \item Erstelle ein Bild, das aus zufälligen schwarzen und weißen Pixeln besteht. Die Anzahl an weißen Pixel soll kleiner sein als die der schwarzen Pixel.
+  \item Führe auf dem Bild ein Gaußsches Weichzeichen aus. Hierdurch verschmieren die einzelnen weißen Pixel zu größeren Punkten.
+  \item Führe auf dem Bild eine Bewegungsunschärfe aus. Dadurch wird die Bewegung der Schneeflocken entlang einer Windrichtung simuliert.
+  \item Mache den schwarzen Hintergrund transparent und füge das erstellte Bild auf ein generiertes Straßenschild-Bild ein.
+\end{enumerate}
+
+\textbf{TODO: Datei einbinden und so linenumbers fixen}
+\begin{code}
+\label{code:snow-delcaration}
+\begin{minted}[fontsize=\footnotesize, linenos, breaklines, autogobble, frame=lines]{python}
+def add_snow(img_tensor, snow_intensity, motion_blur_intensity, motion_blur_direction, p_snowflake_min=0.02, p_snowflake_max=0.5):
+\end{minted}
+\captionof{listing}{Hizufügen von Schnee: Funktionsdeklaration}
+\end{code}
+
+Test Test

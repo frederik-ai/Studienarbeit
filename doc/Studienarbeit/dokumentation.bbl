@@ -725,5 +725,35 @@
     \field{title}{Digital Image Processing: An Algorithmic introduction}
     \field{year}{2022}
   \endentry
+
+  \entry{math-primer}{inbook}{}
+    \name{author}{2}{}{%
+      {{hash=DF}{%
+         family={Dunn},
+         familyi={D\bibinitperiod},
+         given={Fletcher},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=PI}{%
+         family={Parberry},
+         familyi={P\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {A K Peters/CRC Press}%
+    }
+    \strng{namehash}{DFPI1}
+    \strng{fullhash}{DFPI1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{chapter}{Rotation in Three Dimensions}
+    \field{title}{3D Math Primer for Graphics and Game Development}
+    \verb{url}
+    \verb https://gamemath.com/book/orient.html
+    \endverb
+    \field{year}{2011}
+  \endentry
 \enddatalist
 \endinput
