@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{    }\PYG{l+s}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s}{    Rotate the img\PYGZus{}tensor in x,y and z direction.}
+\PYG{l+s}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{+w}{    }\PYG{n}{transformation\PYGZus{}matrix}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{np}\PYG{p}{.}\PYG{n}{array}\PYG{p}{([}
+\PYG{+w}{        }\PYG{p}{[}\PYG{n}{np}\PYG{p}{.}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{\PYGZhy{}}\PYG{n}{np}\PYG{p}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{],}
+\PYG{+w}{        }\PYG{p}{[}\PYG{n}{np}\PYG{p}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{np}\PYG{p}{.}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{],}
+\PYG{+w}{        }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{np}\PYG{p}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta\PYGZus{}z}\PYG{p}{),}\PYG{+w}{ }\PYG{l+m+mi}{1}\PYG{p}{]}
+\PYG{+w}{    }\PYG{p}{])}
+\PYG{+w}{    }\PYG{err}{\PYGZsh{}}\PYG{+w}{ }\PYG{n}{image}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{tf}\PYG{p}{.}\PYG{n}{keras}\PYG{p}{.}\PYG{n}{utils}\PYG{p}{.}\PYG{n}{img\PYGZus{}to\PYGZus{}array}\PYG{p}{(}\PYG{n}{image}\PYG{p}{)}
+\PYG{+w}{    }\PYG{n}{rotated\PYGZus{}image}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{cv2}\PYG{p}{.}\PYG{n}{warpPerspective}\PYG{p}{(}\PYG{n}{img\PYGZus{}tensor}\PYG{p}{.}\PYG{n}{numpy}\PYG{p}{(),}\PYG{+w}{ }\PYG{n}{transformation\PYGZus{}matrix}\PYG{p}{,}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{image\PYGZus{}size}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{image\PYGZus{}size}\PYG{p}{))}
+\PYG{+w}{    }\PYG{err}{\PYGZsh{}}\PYG{+w}{ }\PYG{n}{rotated\PYGZus{}image}\PYG{+w}{ }\PYG{p}{=}\PYG{+w}{ }\PYG{n}{tf}\PYG{p}{.}\PYG{n}{keras}\PYG{p}{.}\PYG{n}{utils}\PYG{p}{.}\PYG{n}{array\PYGZus{}to\PYGZus{}img}\PYG{p}{(}\PYG{n}{rotated\PYGZus{}image}\PYG{p}{)}
+\PYG{+w}{    }\PYG{k}{return}\PYG{+w}{ }\PYG{n}{rotated\PYGZus{}image}
+\end{Verbatim}

@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{apply\PYGZus{}3d\PYGZus{}rotation}\PYG{p}{(}\PYG{n}{img\PYGZus{}tensor}\PYG{p}{,} \PYG{n}{theta\PYGZus{}xy}\PYG{p}{,} \PYG{n}{theta\PYGZus{}z}\PYG{p}{,} \PYG{n}{image\PYGZus{}size}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    Rotate the img\PYGZus{}tensor in x, y and z direction.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{n}{transformation\PYGZus{}matrix} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{array}\PYG{p}{([}
+        \PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),} \PYG{o}{\PYGZhy{}}\PYG{n}{np}\PYG{o}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),} \PYG{l+m+mi}{0}\PYG{p}{],}
+        \PYG{p}{[}\PYG{n}{np}\PYG{o}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),}  \PYG{n}{np}\PYG{o}{.}\PYG{n}{cos}\PYG{p}{(}\PYG{n}{theta\PYGZus{}xy}\PYG{p}{),} \PYG{l+m+mi}{0}\PYG{p}{],}
+        \PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{,}                 \PYG{n}{np}\PYG{o}{.}\PYG{n}{sin}\PYG{p}{(}\PYG{n}{theta\PYGZus{}z}\PYG{p}{),}  \PYG{l+m+mi}{1}\PYG{p}{]}
+    \PYG{p}{])}
+    \PYG{n}{rotated\PYGZus{}image} \PYG{o}{=} \PYG{n}{cv2}\PYG{o}{.}\PYG{n}{warpPerspective}\PYG{p}{(}\PYG{n}{img\PYGZus{}tensor}\PYG{o}{.}\PYG{n}{numpy}\PYG{p}{(),} \PYG{n}{transformation\PYGZus{}matrix}\PYG{p}{,} \PYG{p}{(}\PYG{n}{image\PYGZus{}size}\PYG{p}{,} \PYG{n}{image\PYGZus{}size}\PYG{p}{))}
+    \PYG{k}{return} \PYG{n}{rotated\PYGZus{}image}
+\end{Verbatim}

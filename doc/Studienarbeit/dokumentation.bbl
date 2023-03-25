@@ -674,25 +674,23 @@
     \field{year}{2011}
   \endentry
 
-  \entry{vienna-convention}{misc}{}
+  \entry{chinese-dataset}{misc}{}
     \name{author}{1}{}{%
-      {{hash=U}{%
-         family={{United Nations Economic Commission for Europe}},
-         familyi={U\bibinitperiod},
+      {{hash=HL}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={LinLin},
+         giveni={L\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {United Nations Publication}%
-    }
-    \strng{namehash}{U1}
-    \strng{fullhash}{U1}
+    \strng{namehash}{HL1}
+    \strng{fullhash}{HL1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{isbn}{978-92-1-116973-7}
-    \field{title}{Convention on Road Traffic}
-    \field{day}{28}
-    \field{month}{03}
-    \field{year}{2006}
+  \field{howpublished}{\url{http://www.nlpr.ia.ac.cn/pal/trafficdata/recognition.html}}
+    \field{note}{Letzter Zugriff: 25.03.2023}
+    \field{title}{Chinese Traffic Sign Database: Traffic Sign Recognition
+  Database}
   \endentry
 
   \entry{geometric-ops}{inbook}{}

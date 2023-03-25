@@ -37,11 +37,13 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{22}{figure.caption.35}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Häufigkeitsverteilung der Arten von Straßenschildern im präparierten Datensatz\relax }}{23}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten Datensatz\relax }}{23}{figure.caption.36}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz\relax }}{23}{figure.caption.37}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Beispielbilder aus der chinesischen Traffic Sign Recognition Database \cite {chinese-dataset}\relax }}{24}{figure.caption.37}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Rotation der Straßenschilder mittels eulerscher Winkel\relax }}{25}{figure.caption.44}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz\relax }}{24}{figure.caption.38}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Rotation der Straßenschilder mittels eulerscher Winkel\relax }}{26}{figure.caption.45}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

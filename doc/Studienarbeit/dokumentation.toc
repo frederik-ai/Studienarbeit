@@ -61,48 +61,48 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Datensatz}{22}{section.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Framework}{23}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Framework}{24}{section.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Tensorflow Addons}{23}{paragraph*.39}%
+\contentsline {paragraph}{\nonumberline Tensorflow Addons}{24}{paragraph*.40}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Tensorflow Graphics}{23}{paragraph*.41}%
+\contentsline {paragraph}{\nonumberline Tensorflow Graphics}{24}{paragraph*.42}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline OpenCV}{24}{paragraph*.43}%
+\contentsline {paragraph}{\nonumberline OpenCV}{25}{paragraph*.44}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Architektur}{24}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Architektur}{25}{section.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Datenaugmentation}{24}{section.3.4}%
+\contentsline {section}{\numberline {3.4}Datenaugmentation}{25}{section.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Training}{25}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Training}{26}{section.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Implementierung und Training}{26}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Implementierung und Training}{27}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Hyperparameter}{26}{section.4.1}%
+\contentsline {section}{\numberline {4.1}Hyperparameter}{27}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{27}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{28}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{27}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{28}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{27}{section.5.2}%
+\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{28}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Schnee}{28}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Schnee}{29}{section.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation}{29}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Evaluation}{30}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{29}{section.6.1}%
+\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{30}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Farbhistogramme}{29}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.1}Farbhistogramme}{30}{subsection.6.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Wasserstein-Distanz}{29}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.2}Wasserstein-Distanz}{30}{subsection.6.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Klassifizierung}{29}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.3}Klassifizierung}{30}{subsection.6.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{29}{section.6.2}%
+\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{30}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}Mean Opinion Score}{29}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.1}Mean Opinion Score}{30}{subsection.6.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{30}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{31}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{33}{chapter*.47}%
+\contentsline {chapter}{\nonumberline Anhang}{34}{chapter*.48}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

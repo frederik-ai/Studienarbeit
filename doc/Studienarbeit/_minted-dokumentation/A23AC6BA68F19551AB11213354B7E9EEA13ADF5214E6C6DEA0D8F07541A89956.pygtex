@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{add\PYGZus{}snow}\PYG{p}{(}\PYG{n}{img\PYGZus{}tensor}\PYG{p}{,} \PYG{n}{snow\PYGZus{}intensity}\PYG{p}{,} \PYG{n}{motion\PYGZus{}blur\PYGZus{}intensity}\PYG{p}{,} \PYG{n}{motion\PYGZus{}blur\PYGZus{}direction}\PYG{p}{,} \PYG{n}{p\PYGZus{}snowflake\PYGZus{}min}\PYG{o}{=}\PYG{l+m+mf}{0.02}\PYG{p}{,} \PYG{n}{p\PYGZus{}snowflake\PYGZus{}max}\PYG{o}{=}\PYG{l+m+mf}{0.5}\PYG{p}{):}
+\end{Verbatim}
