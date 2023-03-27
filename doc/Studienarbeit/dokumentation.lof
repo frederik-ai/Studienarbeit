@@ -9,41 +9,43 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.11}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Vollständiges \ac {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Vollständiges \ac {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.12}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }}{8}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }}{8}{figure.caption.14}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Beispielhafter Vergleich von $\hat {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }}{9}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Beispielhafter Vergleich von $\hat {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }}{9}{figure.caption.15}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }}{10}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }}{10}{figure.caption.16}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Bestimmung von $\hat {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }}{11}{figure.caption.18}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Bestimmung von $\hat {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }}{11}{figure.caption.19}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }}{12}{figure.caption.19}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }}{12}{figure.caption.20}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Architektur eines Autoencoders\relax }}{13}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Architektur eines Autoencoders\relax }}{13}{figure.caption.21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Zusammenspiel zwischen Generator und Discriminator\relax }}{15}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Zusammenspiel zwischen Generator und Discriminator\relax }}{15}{figure.caption.22}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }}{19}{figure.caption.29}%
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }}{19}{figure.caption.30}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{22}{figure.caption.35}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten Datensatz\relax }}{23}{figure.caption.36}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten \ac {GTSRB}\relax }}{23}{figure.caption.36}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Beispielbilder aus der chinesischen Traffic Sign Recognition Database \cite {chinese-dataset}\relax }}{24}{figure.caption.37}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz\relax }}{24}{figure.caption.38}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Beispielbild aus dem \emph {Mapillary} Datensatz \cite {dataset-mapillary}\relax }}{24}{figure.caption.38}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Rotation der Straßenschilder mittels eulerscher Winkel\relax }}{26}{figure.caption.45}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz\relax }}{25}{figure.caption.39}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Rotation der Straßenschilder mittels eulerscher Winkel\relax }}{27}{figure.caption.46}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

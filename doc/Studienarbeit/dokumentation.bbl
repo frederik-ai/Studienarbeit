@@ -621,6 +621,24 @@
     \field{year}{2021}
   \endentry
 
+  \entry{GTSRB}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{J. Stallkamp et al.}},
+         familyi={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{J1}
+    \strng{fullhash}{J1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{EEE International Joint Conference on Neural Networks}
+    \field{pages}{1453\bibrangedash 1460}
+    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
+  classification competition}}
+    \field{year}{2011}
+  \endentry
+
   \entry{gtsrbGAN}{inproceedings}{}
     \name{author}{3}{}{%
       {{hash=SD}{%
@@ -656,24 +674,6 @@
     \field{year}{2019}
   \endentry
 
-  \entry{GTSRB}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=J}{%
-         family={{J. Stallkamp et al.}},
-         familyi={J\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{J1}
-    \strng{fullhash}{J1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{booktitle}{EEE International Joint Conference on Neural Networks}
-    \field{pages}{1453\bibrangedash 1460}
-    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
-  classification competition}}
-    \field{year}{2011}
-  \endentry
-
   \entry{chinese-dataset}{misc}{}
     \name{author}{1}{}{%
       {{hash=HL}{%
@@ -691,6 +691,131 @@
     \field{note}{Letzter Zugriff: 25.03.2023}
     \field{title}{Chinese Traffic Sign Database: Traffic Sign Recognition
   Database}
+  \endentry
+
+  \entry{vienna-convention}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=U}{%
+         family={{United Nations Economic Commission for Europe}},
+         familyi={U\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {United Nations Publication}%
+    }
+    \strng{namehash}{U1}
+    \strng{fullhash}{U1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{isbn}{978-92-1-116973-7}
+    \field{title}{Convention on Road Traffic}
+    \field{day}{28}
+    \field{month}{03}
+    \field{year}{2006}
+  \endentry
+
+  \entry{dataset-mapillary}{misc}{}
+    \name{author}{6}{}{%
+      {{hash=EC}{%
+         family={Ertler},
+         familyi={E\bibinitperiod},
+         given={Christian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=MJ}{%
+         family={Mislej},
+         familyi={M\bibinitperiod},
+         given={Jerneja},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=OT}{%
+         family={Ollmann},
+         familyi={O\bibinitperiod},
+         given={Tobias},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=PL}{%
+         family={Porzi},
+         familyi={P\bibinitperiod},
+         given={Lorenzo},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=NG}{%
+         family={Neuhold},
+         familyi={N\bibinitperiod},
+         given={Gerhard},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=KY}{%
+         family={Kuang},
+         familyi={K\bibinitperiod},
+         given={Yubin},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Mapillary Research}%
+    }
+    \strng{namehash}{ECMJOT+1}
+    \strng{fullhash}{ECMJOTPLNGKY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.48550/arXiv.1909.04422
+    \endverb
+    \field{title}{The Mapillary Traffic Sign Dataset for Detection and
+  Classification on a Global Scale}
+    \field{year}{2020}
+  \endentry
+
+  \entry{dataset-belgiants}{article}{}
+    \name{author}{4}{}{%
+      {{hash=TR}{%
+         family={Timofte},
+         familyi={T\bibinitperiod},
+         given={Radu},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=ZK}{%
+         family={Zimmermann},
+         familyi={Z\bibinitperiod},
+         given={Karel},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=}{%
+      }}%
+      {{hash=vGL}{%
+         prefix={van},
+         prefixi={v\bibinitperiod},
+         family={Gool},
+         familyi={G\bibinitperiod},
+         given={Luc},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer-Verlag}%
+    }
+    \strng{namehash}{TRZK+1}
+    \strng{fullhash}{TRZKGLv1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s00138-011-0391-3
+    \endverb
+    \field{title}{Multi-view traffic sign detection, recognition, and 3D
+  localisation}
+    \field{journaltitle}{Journal of Machine Vision and Applications (MVA 2011)}
+    \field{year}{2011}
+  \endentry
+
+  \entry{dataset-make-ml}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{title}{Road Signs Dataset}
+    \verb{url}
+    \verb https://makeml.app/datasets/road-signs
+    \endverb
+    \field{journaltitle}{Make ML}
   \endentry
 
   \entry{geometric-ops}{inbook}{}
@@ -752,6 +877,23 @@
     \verb https://gamemath.com/book/orient.html
     \endverb
     \field{year}{2011}
+  \endentry
+
+  \entry{piktogramme}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=B}{%
+         family={{Bundesanstalt für Straßenwesen (BASt)}},
+         familyi={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{B1}
+    \strng{fullhash}{B1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-verkehrszeichen/vz-start.html}}
+    \field{note}{Letzter Zugriff: 27.03.2023}
+    \field{subtitle}{Verkehrszeichenkatalog 2017}
+    \field{title}{Verkehrszeichen und Symbole}
   \endentry
 \enddatalist
 \endinput

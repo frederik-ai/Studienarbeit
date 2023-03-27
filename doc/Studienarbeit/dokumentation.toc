@@ -5,9 +5,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{VI}{chapter*.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.6}%
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.7}%
+\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.8}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}%
 \defcounter {refsection}{0}\relax 
@@ -37,11 +37,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.4}Generative Adversarial Networks}{15}{subsection.2.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Training}{15}{paragraph*.23}%
+\contentsline {paragraph}{\nonumberline Training}{15}{paragraph*.24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline CycleGANs}{17}{paragraph*.26}%
+\contentsline {paragraph}{\nonumberline CycleGANs}{17}{paragraph*.27}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Wasserstein GANs}{18}{paragraph*.28}%
+\contentsline {paragraph}{\nonumberline Wasserstein GANs}{18}{paragraph*.29}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}Vorherige Arbeiten}{18}{section.2.4}%
 \defcounter {refsection}{0}\relax 
@@ -61,48 +61,48 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Datensatz}{22}{section.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Framework}{24}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Framework}{25}{section.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Tensorflow Addons}{24}{paragraph*.40}%
+\contentsline {paragraph}{\nonumberline Tensorflow Addons}{25}{paragraph*.41}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline Tensorflow Graphics}{24}{paragraph*.42}%
+\contentsline {paragraph}{\nonumberline Tensorflow Graphics}{25}{paragraph*.43}%
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\nonumberline OpenCV}{25}{paragraph*.44}%
+\contentsline {paragraph}{\nonumberline OpenCV}{25}{paragraph*.45}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Architektur}{25}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Architektur}{26}{section.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Datenaugmentation}{25}{section.3.4}%
+\contentsline {section}{\numberline {3.4}Datenaugmentation}{26}{section.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Training}{26}{section.3.5}%
+\contentsline {section}{\numberline {3.5}Training}{27}{section.3.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Implementierung und Training}{27}{chapter.4}%
+\contentsline {chapter}{\numberline {4}Implementierung und Training}{28}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Hyperparameter}{27}{section.4.1}%
+\contentsline {section}{\numberline {4.1}Hyperparameter}{28}{section.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{28}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{29}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{28}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{29}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{28}{section.5.2}%
+\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{29}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Schnee}{29}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Schnee}{30}{section.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation}{30}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Evaluation}{31}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{30}{section.6.1}%
+\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{31}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Farbhistogramme}{30}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.1}Farbhistogramme}{31}{subsection.6.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Wasserstein-Distanz}{30}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.2}Wasserstein-Distanz}{31}{subsection.6.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Klassifizierung}{30}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.3}Klassifizierung}{31}{subsection.6.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{30}{section.6.2}%
+\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{31}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}Mean Opinion Score}{30}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.1}Mean Opinion Score}{31}{subsection.6.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{31}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{32}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{34}{chapter*.48}%
+\contentsline {chapter}{\nonumberline Anhang}{36}{chapter*.49}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
