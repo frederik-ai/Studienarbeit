@@ -82,6 +82,8 @@ class CycleGan:
             self.adversarial_loss = tf.keras.losses.MeanSquaredError()
         self.l1_loss = tf.keras.losses.MeanAbsoluteError()
         self.LAMBDA = config['training']['lambda']
+        
+        self.loss_obj = tf.keras.losses.BinaryCrossentropy(from_logits=True)
 
         # For Tensorboard
         self.total_epochs = tf.Variable(0)
@@ -156,23 +158,32 @@ class CycleGan:
                 random_filename = str(uuid.uuid4())
                 utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
                                                relative_path='generated_images')
+                
                 self.summary_writer.flush()  # write tensorboard logs to log file
 
-                # for next training; is stored in checkpoint
-
-                # self.checkpoint_manager.save()
-                print('Checkpoint saved for epoch {}.'.format(epoch + 1))
-                if ((epoch + 1) % 2 == 0) and ((epoch + 1) < epochs):
+                if ((epoch + 1) % 10 == 0) and ((epoch + 1) < epochs):
                      self.checkpoint_manager.save()
                      print('Checkpoint saved for epoch {}.'.format(epoch + 1))
         self.checkpoint_manager.save()
         print('Checkpoint saved for this training')
 
+    def discriminator_loss(self, real, generated):
+        real_loss = self.loss_obj(tf.ones_like(real), real)
+        generated_loss = generated_loss = self.loss_obj(
+            tf.zeros_like(generated), generated)
+        total_discriminator_loss = real_loss + generated_loss
+
+        return total_discriminator_loss * 0.5
+
     def calc_cycle_loss(self, real_image, cycled_image):
         loss1 = tf.reduce_mean(tf.abs(real_image - cycled_image))
         return self.LAMBDA * loss1
 
-    def train_step(self, real_pictogram, real_street_sign):
+    def identity_loss(self, real_image, same_image):
+        loss = tf.reduce_mean(tf.abs(real_image - same_image))
+        return self.LAMBDA * 0.5 * loss
+
+    def train_step(self, real_x, real_y):
         """Train the model on a single batch of images.
 
         Args:
@@ -183,6 +194,13 @@ class CycleGan:
             Losses (dict): Dictionary containing the losses of the generators and discriminators.
         """
         with tf.GradientTape(persistent=True) as tape:
+            real_pictogram = real_x
+            real_street_sign = real_y
+            
+            # same_x and same_y are used for identity loss.
+            same_x = self.generator_f(real_x, training=True)
+            same_y = self.generator_g(real_y, training=True)
+            
             # Generate
             generated_street_sign = self.generator_g(real_pictogram, training=True)
             generated_pictogram = self.generator_f(real_street_sign, training=True)
@@ -225,8 +243,8 @@ class CycleGan:
                                                      discriminator_y_fake_street_sign)
             generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
                                                      discriminator_x_fake_pictogram)
-            total_gen_g_loss = generator_g_loss + total_cycle_loss
-            total_gen_f_loss = generator_f_loss + total_cycle_loss
+            total_gen_g_loss = generator_g_loss + total_cycle_loss + self.identity_loss(real_y, same_y)
+            total_gen_f_loss = generator_f_loss + total_cycle_loss + self.identity_loss(real_x, same_x)
 
             total_loss = disc_x_loss + disc_y_loss + total_gen_g_loss + total_gen_f_loss
 

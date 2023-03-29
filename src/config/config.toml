@@ -1,10 +1,10 @@
 [paths]
 # train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
 # pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms"
-pictograms = "../data/Pictograms"
-train_data = "C:\\Users\\Frederik\\Desktop\\data\\Train\\GTSRB"
-test_data = "C:\\Users\\Frederik\\Desktop\\data\\Test"
-augmentation_data = "../data/Augmentation"
+pictograms = "/home/inf20092/repositories/Studienarbeit/data/Pictograms"
+train_data = "/home/inf20092/repositories/Studienarbeit/data/Train"
+test_data = "/home/inf20092/repositories/Studienarbeit/data/Test"
+augmentation_data = "/home/inf20092/repositories/Studienarbeit/data/Augmentation"
 destination = "generator_test"
 
 [paths.evaluation]
@@ -13,10 +13,10 @@ resnet_data = "C:/Users/Frederik/Desktop/data/ResNet generated images"
 
 [model]
 image_size = 256                # Do not change this, can lead to errors
-generator_type = 'unet'         # 'resnet' or 'unet'
+generator_type = 'resnet'         # 'resnet' or 'unet'
 
 [training]
-number_of_epochs = 2
+number_of_epochs = 50
 batch_size = 4                  # reduce batch size if your system cannot handle this value; increase if you still have headroom
 learning_rate = 2e-4
 beta_1 = 0.5                    # value given by cyclegan paper
