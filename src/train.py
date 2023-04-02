@@ -34,7 +34,7 @@ def main():
     pictograms_path = PATH_TO_PICTOGRAMS
     x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batch_size=BATCH_SIZE,
                                                                image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
-                                                               shuffle=True, crop_to_aspect_ratio=True)
+                                                               shuffle=True, crop_to_aspect_ratio=False) # change last param to True!
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
 
     #for pictograms in x_pictograms_processed:
