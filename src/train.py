@@ -21,9 +21,9 @@ def main():
     BUFFER_SIZE = 1000
     IMAGE_SIZE = config['model']['image_size']
 
-    PATH_TO_TRAIN_DIRECTORY = config['paths']['train_data']
-    #training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', PATH_TO_TRAIN_DIRECTORY))
-    training_path = PATH_TO_TRAIN_DIRECTORY
+    path_to_train_directory = config['paths']['train_data']
+    #training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), '..', path_to_train_directory))
+    training_path = path_to_train_directory
     x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE,
                                                           image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
                                                           shuffle=True, crop_to_aspect_ratio=True)
@@ -36,6 +36,11 @@ def main():
                                                                image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
                                                                shuffle=True, crop_to_aspect_ratio=True)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
+
+    #for pictograms in x_pictograms_processed:
+    #    for pictogram in pictograms:
+    #        plt.imshow(pictogram)
+    #        plt.show()
 
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()

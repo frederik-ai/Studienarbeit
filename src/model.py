@@ -47,6 +47,9 @@ class CycleGan:
     """
 
     def __init__(self, config):
+        # Set TensorFlow log level
+        tf.get_logger().setLevel('ERROR')    # Set TensorFlow log level to ERROR
+
         if config['model']['generator_type'] == 'unet':
             self.generator_type = GeneratorType.U_NET
         elif config['model']['generator_type'] == 'resnet':

@@ -10,7 +10,8 @@ image_size = config['model']['image_size']
 test_data_path = config['paths']['test_data']
 real_train_data_path = config['paths']['train_data']
 
-classifier = model.create_model()
+# classifier = model.create_model()
+classifier = model.get_model()
 
 test_data = tf.keras.utils.image_dataset_from_directory(test_data_path, batch_size=batch_size, label_mode='categorical',
                                                         image_size=(image_size, image_size), shuffle=True)

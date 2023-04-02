@@ -2,10 +2,10 @@
 Run traffic sign image generation with a trained CycleGAN model.
 
 Usage:
-    `$ python generate.py --num-imgs <int> [--o <str>] [--model <str>] [--make-invalid] [--motion-blur] [--snow]`
+    `$ python generate.py [--num-imgs <int>] [--o <str>] [--model <str>] [--make-invalid] [--motion-blur] [--snow]`
 
 Options:
-    `--num-imgs <int>       Number of generated images. <br>
+    `[--num-imgs <int>]`       Number of generated images. <br>
     `[--o <str>]`           Path to directory where generated images are stored. Default: value from config file. <br>
     `[--model <str>]`       Model name [unet or resnet]. Default: value from config file. <br>
     `[--make-invalid]`      Make generated street signs invalid. <br>
@@ -16,10 +16,12 @@ Example:
     `$ python generate.py --model unet --num-imgs 10 --make-invalid`
 """
 
-import tensorflow as tf
+
 import uuid
 import argparse
 import math
+import os
+import tensorflow as tf
 from tqdm import tqdm
 import toml
 
@@ -53,7 +55,7 @@ def main():
         config['model']['generator_type'] = args.model
     else:
         raise ValueError('model must be "unet" or "resnet". This argument is optional')
-    DESTINATION_PATH = args.o
+    DESTINATION_PATH = os.path.join(args.o, args.model)
     NUM_GENERATED_IMAGES = args.num_imgs
     SNOW = args.snow
     MAKE_SIGNS_INVALID = args.make_invalid
@@ -65,6 +67,10 @@ def main():
                                                                image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
 
+    # Currently, batch size cannot be larger than the number of pictograms
+    number_of_pictograms = x_pictograms_processed.cardinality().numpy()
+    BATCH_SIZE = min(BATCH_SIZE, number_of_pictograms)
+
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()
     cycle_gan.restore_latest_checkpoint_if_exists()
@@ -75,11 +81,15 @@ def main():
     num_generated_images_left = NUM_GENERATED_IMAGES
     for iteration in tqdm(range(num_iterations)):
         x_pictograms_processed.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+
+        # Transform pictograms
         single_pictogram_batch = x_pictograms_processed.take(1).get_single_element()
         single_pictogram_batch, content_sizes, transform_matrices = utils.preprocess_image.randomly_transform_image_batch(
             single_pictogram_batch)
         transform_matrices = [matrix for matrix in transform_matrices]  # convert to list to be able to pop() it
-        generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False)
+
+        # Put transformed pictograms into the generator
+        generator_result = cycle_gan.generate(single_pictogram_batch)
 
         if MAKE_SIGNS_INVALID:
             cross_img_path = config['paths']['augmentation_data'] + '/cross.png'
@@ -103,4 +113,5 @@ def main():
 
 
 if __name__ == '__main__':
+    tf.get_logger().setLevel('ERROR')    # Set TensorFlow log level to ERROR
     main()
