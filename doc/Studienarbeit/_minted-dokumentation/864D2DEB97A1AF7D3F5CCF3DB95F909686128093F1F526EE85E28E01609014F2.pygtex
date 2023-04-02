@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{training\PYGZus{}path} \PYG{o}{=} \PYG{n}{config}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}paths\PYGZsq{}}\PYG{p}{][}\PYG{l+s+s1}{\PYGZsq{}train\PYGZus{}data\PYGZsq{}}\PYG{p}{]}
+
+\PYG{n}{x\PYGZus{}train} \PYG{o}{=} \PYG{n}{tf}\PYG{o}{.}\PYG{n}{keras}\PYG{o}{.}\PYG{n}{utils}\PYG{o}{.}\PYG{n}{image\PYGZus{}dataset\PYGZus{}from\PYGZus{}directory}\PYG{p}{(}\PYG{n}{training\PYGZus{}path}\PYG{p}{,} \PYG{n}{batch\PYGZus{}size}\PYG{o}{=}\PYG{n}{BATCH\PYGZus{}SIZE}\PYG{p}{,} \PYG{n}{image\PYGZus{}size}\PYG{o}{=}\PYG{p}{(}\PYG{n}{IMAGE\PYGZus{}SIZE}\PYG{p}{,} \PYG{n}{IMAGE\PYGZus{}SIZE}\PYG{p}{),} \PYG{n}{labels}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{,} \PYG{n}{shuffle}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,} \PYG{n}{crop\PYGZus{}to\PYGZus{}aspect\PYGZus{}ratio}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+
+\PYG{n}{x\PYGZus{}train\PYGZus{}processed} \PYG{o}{=} \PYG{n}{utils}\PYG{o}{.}\PYG{n}{load\PYGZus{}data}\PYG{o}{.}\PYG{n}{normalize\PYGZus{}dataset}\PYG{p}{(}\PYG{n}{x\PYGZus{}train}\PYG{p}{)}
+\end{Verbatim}

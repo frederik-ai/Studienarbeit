@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYGZdl{} tensorboard \PYGZhy{}\PYGZhy{}logdir ./logs/unet
+\PYGZdl{} tensorboard \PYGZhy{}\PYGZhy{}logdir ./logs/resnet
+\end{Verbatim}

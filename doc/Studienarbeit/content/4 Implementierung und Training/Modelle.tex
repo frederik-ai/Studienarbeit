@@ -1,0 +1,32 @@
+\section{Modelle}
+Das Modell ist in der Datei \lstinline{model.py} implementiert. Innerhalb dieser Datei existiert eine Klasse \ac{CycleGAN}, die im wesentlichen folgende Methoden besitzt:
+
+%\begin{description}
+%   \item[\lstinline[python]{__init__(self, config)}] This method does something.
+%   \item[method2] This method does something else.
+%   \item[method3] This method does yet another thing.
+% \end{description}
+
+\begin{table}[H]
+   \centering
+   \begin{tabular}{|l|l|}
+   \hline
+   \textbf{Methode}                    & \textbf{Aufgabe} \\ \hline
+   \_\_init\_\_ & Initialisieren der Attribute mittels der Konfigurationsdatei \\ \hline
+   compile  & Kompilieren der Generator- und Diskriminatormodelle      \\ \hline
+   generate & Generieren eines einzelnen Batches von Bildern  \\ \hline
+   fit & Trainieren des \acp{CycleGAN} über mehrere Epochen \\ \hline
+   train\_step & Durchführen eines einzelnen Trainingsschritts \\ \hline
+   restore\_...\_checkpoint\_...\tablefootnote{Vollständiger Methodenname: restore\_latest\_checkpoint\_if\_exists} & Laden der aktuell gespeicherten Parameter des Modells \\
+   \hline
+   \end{tabular}
+   \caption{Auswahl an Methoden aus der CycleGAN Klasse}
+\end{table}
+
+
+
+Das Modell objektorientiert zu implementieren scheint entgegen üblicher Konventionen zu stehen. 
+
+Um schnellere Ergebnisse zu erzielen, damit sich vor allem auf die Optimierung der Implementierung und der Augmentierung der generierten Bilder konzentriert werden kann, basiert der Inhalt dieser Klasse zum Teil auf einem Beispiel von TensorFlow \cite{cyclegan-tutorial}. Dieses Beispiel beinhaltet eine Implementierung eines \acp{CycleGAN}. Der Quelltext dieses Beispiels wird für die Umsetzung des \acp{CycleGAN} dieser Studienarbeit als Basis genommen und verändert, beziehungsweise erweitert. Es sei hierbei betont, dass jede Codezeile, die identisch mit dem Code aus dem Beispiel ist, vorher hinterfragt und bezüglich ihrer Sinnhaftigkeit für diesen Anwendungsfall getestet worden ist. Darauf soll explizit in diesem Kapitel eingegangen werden.
+
+Wie bereits erwähnt, besteht ein \ac{CycleGAN} aus vier \acp{KNN}: Generator X, Generator Y, Diskriminator X, Diskriminator Y.

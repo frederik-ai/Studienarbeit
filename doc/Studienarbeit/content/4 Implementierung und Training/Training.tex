@@ -1,0 +1,65 @@
+\section{Training}
+
+\section{Laden der Datensätze}
+Die lokalen Pfade der Datensätze können innerhalb einer \ac{TOML}-Datei konfiguriert werden. 
+
+\todo[inline]{Erklären was TOML ist und wie es geladen wird.} 
+
+Es wird nun das Skript \lstinline{train.py} betrachtet, das für das Training des Modells verwendet wird. Prinzipiell besitzt dieses Skript zwei Aufgaben: Es muss einerseits sowohl den Datensatz als auch die Piktogramme laden und andererseits soll es die Trainingsfunktion des Modells aufrufen.
+
+Zunächst wird betrachtet, wie der Trainingsdatensatz des Modells geladen werden kann. Die Konfigurationsdatei enthält den Pfad der Trainingsdaten unter dem Punkt \lstinline{train_data} innerhalb der Kategorie \lstinline{paths}.
+
+TensorFlow stellt eine Funktion bereit, mit der ein Datensatz an Bildern aus einem Dateipfad geladen werden kann. Anhand der Ordnerstruktur sortiert die Funktion die Bilder automatisch in ihre Klassen ein. Die Funktion nennt sich \lstinline{load_image_dataset_from_directory} \cite{tf-keras-utils}. In folgendem Listing ist der Teil der \lstinline{train.py} dargestellt, der für das Laden des Datensatzes zuständig ist.
+
+\begin{code}
+   \label{code:train-set-laden}
+   \begin{minted}[fontsize=\footnotesize, linenos, breaklines, autogobble, frame=single, framesep=5pt, autogobble, bgcolor=LightGray]{python}
+training_path = config['paths']['train_data']
+
+x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE, image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None, shuffle=True, crop_to_aspect_ratio=True)
+
+x_train_processed = utils.load_data.normalize_dataset(x_train)
+   \end{minted}
+   \captionof{listing}{\lstinline{train.py} - Laden des Trainingsdatensatzes}
+\end{code}
+
+An die genannte TensorFlow Funktion werden mitunter der Pfad zu den Trainingsdaten, die Batch Size und die Bildauflösung übergeben. Die Auflösung muss deshalb übergeben werden, da die Funktion \lstinline{load_image_dataset_from_directory} alle Bilder auf diese Größe skaliert. Hierzu nutzt die Funktion standardmäßig \emph{bilineare Interpolation}. Dadurch erscheint das Bild nicht als \emph{verpixelt}, sondern fehlende Pixel, die bei der Vergrößerung unweigerlich auftreten, werden durch eine Kombination der benachbarten Pixel aufgefüllt. Dadurch wirkt das Bild statt \emph{verpixelt} eher \emph{verwaschen}. Es kann argumentiert werden, ob nicht eine andere Interpolation besser geeignet sei für diese Studienarbeit.
+
+\todo[inline]{Bilineare Interpolation erklären. Abbildung einfügen, die vergrößertes Bild zeigt}
+
+Das \ac{CycleGAN} benötigt die Daten nicht nach ihren Klassen sortiert. Deshalb wird der Parameter \lstinline{labels} auf \lstinline[language=python]{None} gesetzt. Das bedeutet, dass die unterschiedlichen Klassen der Daten ignoriert werden. Das kann gemacht werden, da mittels des \emph{Cycle Consistency Losses} bestimmt werden soll, ob das Ausgangsbild von Generator X der gleichen Klasse entspricht wie sein Eingangsbild. \acp{GAN} arbeiten im allgemeinen mit unüberwachtem lernen.
+
+Durch den nächsten Parameter erfolgt die Einstellung, dass der Datensatz zufällig durchmischt werden soll. Abschließend folgt ein entscheidender Parameter, der einer näherer Erläuterung bedarf. Wie bereits in Kapitel \ref{chap:3-Datensatz} beschrieben, besitzen die Trainingsbilder des Datensatzes verschiedene Auflösungen. Das bedeutet, dass Bilder die nicht quadratisch sind, durch die Funktion \lstinline{load_image_dataset_from_directory} verzerrt würden, damit sie in ein quadratisches Seitenverhältnis von 256x256 Pixel passen. Dies ist in der nachfolgenden Abbildung beispielhaft dargestellt:
+
+\todo[inline]{Abbildung einfügen}
+
+Tests haben ergeben, dass die meisten Bilder des Datensatzes nur gerinfügig verzerrt werden. Einige Bilder besitzen jedoch signifikant mehr Pixel in der Höhe als in der Breite oder umgekehrt. Um dafür zu sorgen, dass alle Bilder ohne Verzerrung in das Modell gespeist werden, existiert der Parameter \lstinline{crop_to_aspect_ratio}. Dieser Parameter sorgt dafür, dass das Bild derart zugeschnitten wird, dass es in das angegebene Bildformat passt. Hierbei wird stets der zentrale Teil des Bilds erhalten, während aus dem Rand des Bilds Teile abgeschnitten werden können. Da sich die Straßenschilder in den meisten Fällen mittig im Bild befinden, ist dies genau das gewünschte Verhalten.
+
+Was die Funktion \lstinline{load_image_dataset_from_directory} zurückgibt, ist ein TensorFlow \emph{Dataset} Objekt. Eine besonderheit hiervon ist, dass dieses Objekt seine Daten automatisch in Batches zurückgibt. Iteriert man beispielsweise mittels einer \lstinline{for}-Schleife über ein \emph{Dataset}, so ist jedes Element ein vierdimensionaler Tensor des Formats: \emph{(Batch Größe, Breite, Höhe, Anzahl Farbkanäle)}. \cite{tf-dataset}
+
+\begin{table}[H]
+   \centering
+   \begin{tabular}{lllll}
+   \toprule
+   & \multicolumn{2}{c}{Trainingsdauer pro Epoche} & \\
+   
+   \cmidrule(r){2-3}
+   
+   Modell & Google Colab & DHBW Server & Parameter & Checkpoint Größe \\
+   \midrule
+   UNet & 30 min. & 5 min. & 0 & 1.340.240 KB \\
+   ResNet & 90 min. & 30 min. & 0 & 331.709 KB \\
+   \bottomrule
+   \end{tabular}
+   \caption{Case-studies}
+   \label{case-studies}
+\end{table}
+
+\subsection{Logging}
+
+\begin{code}
+   \begin{minted}[fontsize=\footnotesize, breaklines, autogobble, frame=lines, autogobble]{bash}
+$ tensorboard --logdir ./logs/unet
+$ tensorboard --logdir ./logs/resnet
+   \end{minted}
+\end{code}
