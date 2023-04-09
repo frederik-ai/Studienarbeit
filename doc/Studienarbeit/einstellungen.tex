@@ -122,20 +122,35 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{mathtools}
+\usepackage{xcolor}
+
+% LISTINGS
 \usepackage{listings}
+\definecolor{LightGray}{gray}{0.95}
 \usepackage[newfloat]{minted}
+\setminted{
+	fontsize=\footnotesize, 
+	linenos, 
+	breaklines, 
+	autogobble, 
+	frame=single, 
+	framesep=5pt, 
+	autogobble, 
+	bgcolor=LightGray}
 \usepackage{caption}
 \newenvironment{code}{\captionsetup{type=listing}}{}
 \SetupFloatingEnvironment{listing}{name=Listing}
 \captionsetup[listing]{skip=-3pt}
-\usepackage{color}
+
 \usepackage{pgfplots}
+\usetikzlibrary{positioning}
+
+% TABLES
 \usepackage{tablefootnote}
 \usepackage{multirow}
 \usepackage{booktabs}
-\definecolor{LightGray}{gray}{0.95}
 
-% Directory tree
+% DIRECTORY TREE
 \usepackage[edges]{forest}
 \definecolor{folderbg}{RGB}{124,166,198}
 \definecolor{folderborder}{RGB}{110,144,169}

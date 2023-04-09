@@ -818,6 +818,40 @@
     \field{journaltitle}{Make ML}
   \endentry
 
+  \entry{learn-tensorflow}{book}{}
+    \name{author}{2}{}{%
+      {{hash=SP}{%
+         family={Singh},
+         familyi={S\bibinitperiod},
+         given={Pramod},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Manure},
+         familyi={M\bibinitperiod},
+         given={Avinash},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Apress}%
+    }
+    \strng{namehash}{SPMA1}
+    \strng{fullhash}{SPMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-1-4842-5558-2_1
+    \endverb
+    \field{subtitle}{Implement Machine Learning and Deep Learning Models with
+  Python}
+    \field{title}{Learn TensorFlow 2.0}
+    \list{location}{1}{%
+      {Berkeley, CA}%
+    }
+    \field{year}{2020}
+  \endentry
+
   \entry{generative-models-comparison}{article}{}
     \name{author}{4}{}{%
       {{hash=BTS}{%
@@ -941,6 +975,31 @@
   \field{howpublished}{\url{hhttps://www.tensorflow.org/tutorials/generative/cyclegan}}
     \field{note}{Letzter Zugriff: 01.04.2023}
     \field{title}{{CycleGAN}}
+  \endentry
+
+  \entry{tensorflow-graphics}{misc}{}
+    \name{author}{2}{}{%
+      {{hash=VJ}{%
+         family={Valentin},
+         familyi={V\bibinitperiod},
+         given={Julien},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Bouaziz},
+         familyi={B\bibinitperiod},
+         given={Sofien},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VJBS1}
+    \strng{fullhash}{VJBS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils}}
+    \field{note}{Letzter Zugriff: 31.03.2023}
+    \field{title}{Introducing TensorFlow Graphics: Computer Graphics Meets Deep
+  Learning}
   \endentry
 
   \entry{tf-keras-utils}{misc}{}

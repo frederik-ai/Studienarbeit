@@ -1,4 +1,5 @@
 \chapter{Augmentation der generierten Bilder}
+\label{chap:5}
 Die Augmentation der generieten Bilder wird durch das Python Modul \lstinline[texcl=false]{utils.image_augmentation} implementiert.
 \section{Ungültige Straßenschilder}
 In Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} ist bereits beschrieben, dass als ungültig markierte Schilder offenbar eine Herausforderung für heutige Straßenschilderkennungen darstellen können. Das Ziel dieser Studienarbeit ist, solche Fälle simulieren zu können. Aus diesem Grund ist dieser Anwendungsfall implementiert.
@@ -27,7 +28,7 @@ Die Generierung von Schnee erfolgt in mehreren Schritten:
 \textbf{TODO: Datei einbinden und so linenumbers fixen}
 \begin{code}
 \label{code:snow-delcaration}
-\begin{minted}[fontsize=\footnotesize, linenos, breaklines, autogobble, frame=lines]{python}
+\begin{minted}{python}
 def add_snow(img_tensor, snow_intensity, motion_blur_intensity, motion_blur_direction, p_snowflake_min=0.02, p_snowflake_max=0.5):
 \end{minted}
 \captionof{listing}{Hizufügen von Schnee: Funktionsdeklaration}

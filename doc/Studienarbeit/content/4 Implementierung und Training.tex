@@ -2,20 +2,20 @@
 
 Die Ordnerstruktur der Implementierung ist im Anhang abgebildet. Im wesentlichen wird in diesem Kapitel auf folgende Bestandteile eingegangen:
 \begin{itemize}
-   \item Die Konfigurationsdatei für das Projekt befindet sich im Pfad \lstinline{config/config.toml}
-   \item Selbst-definierte Hilfsfunktionen befinden sich im Python-Modul \lstinline{utils}
-   \item Die Datei \lstinline{model.py} implementiert das \ac{CycleGAN} Modell
-   \item Das Modell wird mittels des Python-Skripts \lstinline{train.py} trainiert
-   \item Das Modell kann mittels des Python-Skripts \lstinline{generate.py} zum Generieren von Bildern genutzt werden
+   \item Die Konfigurationsdatei für das Projekt befindet sich im Pfad \mintinline{python}{config/config.toml}
+   \item Selbst-definierte Hilfsfunktionen befinden sich im Python-Modul \mintinline{python}{utils}
+   \item Die Datei \mintinline{python}{model.py} implementiert das \ac{CycleGAN} Modell
+   \item Das Modell wird mittels des Python-Skripts \mintinline{python}{train.py} trainiert
+   \item Das Modell kann mittels des Python-Skripts \mintinline{python}{generate.py} zum Generieren von Bildern genutzt werden
 \end{itemize}
 
-Es finden sich hierbei verschiedene Programmierparadigmen: objektorientierte Programmierung, prozedurale Programmierung und funktionale Programmierung. Das \ac{CycleGAN} ist als Klasse implementiert und lässt sich somit innerhalb der Skripte instanziieren. Das Modul \lstinline{utils} 
+Es finden sich hierbei verschiedene Programmierparadigmen: objektorientierte Programmierung, prozedurale Programmierung und funktionale Programmierung. Das \ac{CycleGAN} ist als Klasse implementiert und lässt sich somit innerhalb der Skripte instanziieren. Das Modul \mintinline{python}{utils} 
 
 \acused{TOML}
 
-\todo[inline]{Rotation der Piktogramme erklären}
-
 \input{content/4 Implementierung und Training/Modelle.tex}
+
+\input{content/4 Implementierung und Training/Augmentierung der Piktogramme.tex}
 
 \input{content/4 Implementierung und Training/Training.tex}
 
