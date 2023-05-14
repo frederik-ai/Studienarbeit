@@ -1,13 +1,15 @@
 \section{Framework}
 
-Seit Version 2.0 unterstützt TensorFlow die \emph{EagerExecution}. Diese wird für die Implementierung der Studienarbeit genutzt. \cite{learn-tensorflow}
+Für das Modell ist nicht nur relevant, auf welchem Datensatz es trainiert wird. Die Wahl eines Frameworks hat einen signifikanten Einfluss die Art der Implementierung. Die Wahl liegt darauf, \textbf{TensorFlow} für die Umsetzung zu nutzen. Das hängt einerseits damit zusammen, dass es als das am meisten verbreitete Framework für maschinelles Lernen gilt \cite{frameworks}. Somit existieren hier einige vorgefertigte Implementierungen, die als Basis für die Studienarbeit genutzt werden können. Erwähnenswert ist, dass das bei anderen Frameworks wie etwa PyTorch jedoch ebenso der Fall ist. Ein weiterer Vorteil von TensorFlow ist, dass es standardmäßig von \href{https://colab.research.google.com/}{Google Colab} unterstützt wird. Bei Google Colab ist es möglich, Rechner von Google zu benutzen, um Modelle zu trainieren. Außerdem ist TensorFlow nicht nur in der Forschung, sondern auch in der Industrie verbreitet. Diese Studienarbeit soll ein Verfahren darlegen, das in der Art auch in der Industrie eingesetzt werden könnte. Somit soll hier eine Basis genutzt werden, die dort bereits Verwendung findet. Es wäre jedoch ebenso möglich, ein anderes Framework zu nutzen um vergleichbare Ergebnisse zu erzielen.
+
+Ein Nachteil, den die Literatur bei TensorFlow nennt, ist auf folgendes zurückzuführen: TensorFlow 1.0 übersetzt den Quellcode in Graphen. Das verbessert die Performanz der Berechnungen, sorgt aber dafür, dass die Berechnungen während der Laufzeit statisch sind. Außerdem benötigen einige Operationen dadurch eine spezielle Syntax. Auch erschwert das eine Anbindung anderer Python-Bibliotheken.  TensorFlow 2.0, eine neuere Version des Frameworks, erlaubt jedoch zusätzlich eine \emph{Eager Execution}. Hierbei erstellt das Framework standardmäßig keine Graphen. Das Ziel von TensorFlow 2.0 ist unter anderem, einfachere Programmierschnittstellen zu bieten und somit den genannten Nachteil zu beheben. \cite{learn-tensorflow} 
+
+TensorFlow ist analog zu anderen Frameworks für das maschinelle Lernen auf eine performante Ausführung ausgelegt. Die Geschwindigkeit der Berechnungen hat Auswirkungen auf die Trainingsdauer des Modells. Aus diesem Grund sollen möglichst viele Funktionen in dieser Studienarbeit ausschließlich mit TensorFlow implementiert werden. Andere Python-Pakete werden dann eingesetzt, wenn TensorFlow zu einem bestimmten Problem keine Funktion bietet. Zur Bildverarbeitung stellt TensorFlow die Bibliothek \textbf{TensorFlow Graphics} zur Verfügung \cite{tensorflow-graphics}. Hiermit können nicht nur einzelne Bilder bearbeitet werden, sondern gesamte Batches von Bildern. Die Bibliothek \textbf{TensorFlow Addons} bietet zudem zusätzliche Funktionen an, die standardmäßig nicht in TensorFlow vorhanden sind.
+
+In Fällen, in denen TensorFlow Graphics keine geeigneten Funktionen besitzt, wird \textbf{OpenCV} oder \textbf{Pillow} verwendet. Beides sind Python-Pakete zur Bildverarbeitung, wobei erstere vor allem für Computer-Vision Aufgaben gedacht ist, während Pillow das Manipulieren von Bilddateien erlaubt. \cite{opencv} \cite{pillow}
+
+\todo[inline]{Numpy erklären}
 
 \dots
-Eine Konvention bei Tensorflow ist, es folgendermaßen zu importieren: \mintinline{python}{import tensorflow as tf}. Rufen Codeblöcke in dieser Studienarbeit Tensorflow-Funktionen auf, werden sie deshalb als \mintinline{python}{tf.some_function()} referenziert.
+Eine Konvention bei TensorFlow ist, es folgendermaßen zu importieren: \mintinline{python}{import tensorflow as tf}. Rufen Codeblöcke in dieser Studienarbeit TensorFlow-Funktionen auf, werden sie deshalb als \mintinline{python}{tf.some_function()} referenziert.
 \dots
-
-\paragraph{Tensorflow Addons}
-\paragraph{Tensorflow Graphics}
-Erklären: Wieso benutze ich, wo möglich, Tensorflow Graphics statt OpenCV? Wieso gibt es Tensorflow Graphics überhaupt?
-\paragraph{OpenCV}
-Erwähnen: OpenCV wird nur da benutzt, wo keine Tensorflow funktionen verwendet werden können. Beeinträchtigt die Performance.

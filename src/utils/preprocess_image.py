@@ -5,7 +5,6 @@ Used for augmentation of street sign pictograms before feeding them to generator
 Also used for post-processing of generated images.
 """
 import tensorflow as tf
-import cv2
 import numpy as np
 import tensorflow_graphics.image.transformer as tfg_image_transformer
 
@@ -22,12 +21,12 @@ def randomly_transform_image_batch(img_tensor_batch, target_size=256):
                                  img_tensor_batch)
 
     # randomly rotate the image in x,y and z direction; scale values are empirically chosen
-    bank_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
-    pitch_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
-    heading_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
+    alpha_z_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
+    alpha_y_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
+    alpha_x_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
     transform_matrices = np.zeros((batch_size, 3, 3))
     for i in range(batch_size):
-        transform_matrices[i] = create_rotation_matrix(bank_values[i], pitch_values[i], heading_values[i])
+        transform_matrices[i] = create_rotation_matrix(alpha_z_values[i], alpha_y_values[i], alpha_x_values[i])
     transform_matrices = tf.convert_to_tensor(transform_matrices, dtype=tf.float32)
 
     transformed_imgs = 1 - transformed_imgs
@@ -43,7 +42,7 @@ def transform_image(img_tensor, content_size, transformation_matrix, target_size
     transformation_matrix = tf.expand_dims(transformation_matrix, axis=0)
     # transform
     img_tensor = resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=bg_is_white)
-    img_tensor = 1 - img_tensor
+    img_tensor = 1 - img_tensor     # invert the image colors, because padding is black
     img_tensor = tfg_image_transformer.perspective_transform(img_tensor, transformation_matrix,
                                                              border_type=tfg_image_transformer.BorderType.DUPLICATE)
     img_tensor = 1 - img_tensor
@@ -51,38 +50,38 @@ def transform_image(img_tensor, content_size, transformation_matrix, target_size
     return img_tensor
 
 
-def create_rotation_matrix(bank, pitch, heading, angles_in_degrees=True):
-    """Create a rotation matrix from yaw, pitch and roll angles.
+def create_rotation_matrix(alpha_z, alpha_y, alpha_x, angles_in_degrees=True):
+    """Create a rotation matrix from alpha_z, alpha_y and alpha_x angles.
     All angles shall be provided in degrees or radians. Set the parameter 'angles_in_degrees' accordingly.
 
     Args:
-        bank: rotation around z-axis
-        pitch: rotation around y-axis
-        heading: rotation around x-axis
+        alpha_z: rotation around z-axis
+        alpha_y: rotation around y-axis
+        alpha_x: rotation around x-axis
         angles_in_degrees: whether the angles are provided in degrees. Otherwise radians are assumed.
 
     Returns:
         (3, 3) tensor containing the rotation matrix.
     """
     if angles_in_degrees:
-        bank = np.radians(bank)
-        pitch = np.radians(pitch)
-        heading = np.radians(heading)
+        alpha_z = np.radians(alpha_z)
+        alpha_y = np.radians(alpha_y)
+        alpha_x = np.radians(alpha_x)
 
     rotation_matrix_z = np.array([
-        [np.cos(bank), -np.sin(bank), 0],
-        [np.sin(bank),  np.cos(bank), 0],
-        [0,             0,            1]
+        [np.cos(alpha_z), -np.sin(alpha_z), 0],
+        [np.sin(alpha_z),  np.cos(alpha_z), 0],
+        [0,                0,               1]
     ])
     rotation_matrix_y = np.array([
-        [np.cos(pitch), 0, np.sin(pitch)],
-        [0, 1, 0],
-        [-np.sin(pitch), 0, np.cos(pitch)]
+        [np.cos(alpha_y),  0, np.sin(alpha_y)],
+        [0,                1,               0],
+        [-np.sin(alpha_y), 0, np.cos(alpha_y)]
     ])
     rotation_matrix_x = np.array([
-        [1, 0, 0],
-        [0, np.cos(heading), -np.sin(heading)],
-        [0, np.sin(heading), np.cos(heading)]
+        [1,               0,                0],
+        [0, np.cos(alpha_x), -np.sin(alpha_x)],
+        [0, np.sin(alpha_x),  np.cos(alpha_x)]
     ])
 
     rotation_matrix = rotation_matrix_z @ rotation_matrix_y @ rotation_matrix_x
@@ -107,7 +106,6 @@ def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=Tru
         img_tensor = 1 - img_tensor  # invert the image colors, because padding is black
     else:
         img_tensor = (img_tensor + 1) / 2  # convert from range [-1, 1] to [0, 1] because added padding has value 0
-    transformed_image = img_tensor
 
     # shrink the content, add padding to preserve the target_size of the image
     shrink_size = (content_size, content_size)

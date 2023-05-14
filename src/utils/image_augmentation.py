@@ -1,3 +1,4 @@
+import random
 import numpy as np
 from enum import Enum
 import tensorflow as tf
@@ -15,7 +16,17 @@ class Direction(Enum):
 
 # region Motion Blur
 def apply_random_motion_blur(img_tensor):
-    return
+    """ Applies random motion blur to an image tensor
+
+    Args:
+        img_tensor: 3d image tensor that will be blurred (height, width, channels)
+
+    Returns:
+        image tensor with applied motion blur
+    """
+    intensity = np.random.randint(0, 100)
+    direction = random.choice(list(Direction))
+    return apply_motion_blur(img_tensor, intensity, direction)
 
 
 def apply_motion_blur(img_tensor, intensity, direction=Direction.HORIZONTAL, min_kernel_size=1, max_kernel_size=30):

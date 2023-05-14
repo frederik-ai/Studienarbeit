@@ -2,6 +2,14 @@
 
 \addchap{\langanhang}
 
+%%% CUSTOM FIGURE, TABLE AND LISTINGS COUNTERS
+\renewcommand{\thefigure}{A.\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{A.\arabic{table}}
+\setcounter{table}{0}
+\renewcommand{\thelstlisting}{A.\arabic{lstlisting}}
+\setcounter{lstlisting}{0}
+
 %(Beispielhafter Anhang)
  
 
@@ -280,6 +288,211 @@
       \label{fig:all-pictograms}
 \end{figure}
 
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=0.95\textwidth]{../images/Tensorboard/Unet/g.png}
+    \caption{Verlust $\mathcal{L}_G$ von $G$}
+\end{subfigure} \\
+\begin{subfigure}[b]{\textwidth}
+  \centering
+  \includegraphics[width=0.95\textwidth]{../images/Tensorboard/Unet/dy.png}
+  \caption{Verlust $\mathcal{L}_{D_y}$ von $D_y$}
+\end{subfigure} \\
+\begin{subfigure}[b]{\textwidth}
+  \centering
+  \includegraphics[width=0.95\textwidth]{../images/Tensorboard/Unet/f.png}
+  \caption{Verlust $\mathcal{L}_F$ von $F$}
+\end{subfigure} \\
+  \begin{subfigure}[b]{\textwidth}
+      \centering
+      \includegraphics[width=0.95\textwidth]{../images/Tensorboard/Unet/dx.png}
+      \caption{Verlust $\mathcal{L}_{D_x}$ von $D_x$}
+  \end{subfigure} \\
+  \begin{subfigure}[b]{\textwidth}
+    \centering
+    \includegraphics[width=0.9\textwidth]{../images/Tensorboard/Unet/total-loss.png}
+    \caption{Gesamtverlust $\mathcal{L}(G, F, D_X, D_Y)$}
+  \end{subfigure}
+  \caption{Trainingsverlauf des U-Net bis Epoche 200 (x-Achse: Trainingsschritt, y-Achse: Verlust)}
+  \label{fig:unet-tensorboard}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+ \captionsetup[subfigure]{labelformat=empty}
+  \begin{subfigure}[b]{0.1\textwidth}
+      \centering
+      \includegraphics[height=\textwidth]{../images/generated_images/unet/1.png}
+      \caption{Epoche 1}
+  \end{subfigure}
+  \hspace{1em}%
+  \begin{subfigure}[b]{0.1\textwidth}
+      \centering
+      \includegraphics[height=\textwidth]{../images/generated_images/unet/2.png}
+      \caption{Epoche 2}
+  \end{subfigure}
+  \hspace{1em}%
+  \begin{subfigure}[b]{0.1\textwidth}
+      \centering
+      \includegraphics[height=\textwidth]{../images/generated_images/unet/3.png}
+      \caption{Epoche 3}
+  \end{subfigure}
+  \hspace{1em}%
+  \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/4.png}
+   \caption{Epoche 4}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/5.png}
+   \caption{Epoche 5}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/6.png}
+   \caption{Epoche 6}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/7.png}
+   \caption{Epoche 7}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/8.png}
+ \caption{Epoche 8}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/9.png}
+   \caption{Epoche 9}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/10.png}
+   \caption{Epoche 10}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/11.png}
+   \caption{Epoche 11}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/12.png}
+ \caption{Epoche 12}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/13.png}
+   \caption{Epoche 13}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/14.png}
+   \caption{Epoche 14}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+   \centering
+   \includegraphics[height=\textwidth]{../images/generated_images/unet/15.png}
+   \caption{Epoche 15}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/16.png}
+ \caption{Epoche 16}
+ \end{subfigure}
+ \hspace{1em}%
+ \begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/17.png}
+ \caption{Epoche 17}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/18.png}
+ \caption{Epoche 18}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/19.png}
+ \caption{Epoche 19}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+\centering
+\includegraphics[height=\textwidth]{../images/generated_images/unet/20.png}
+\caption{Epoche 20}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/30.png}
+ \caption{Epoche 30}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/40.png}
+ \caption{Epoche 40}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/50.png}
+ \caption{Epoche 50}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+\centering
+\includegraphics[height=\textwidth]{../images/generated_images/unet/60.png}
+\caption{Epoche 60}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/70.png}
+ \caption{Epoche 70}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/80.png}
+ \caption{Epoche 80}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+ \centering
+ \includegraphics[height=\textwidth]{../images/generated_images/unet/90.png}
+ \caption{Epoche 90}
+\end{subfigure}
+\hspace{1em}%
+\begin{subfigure}[b]{0.1\textwidth}
+\centering
+\includegraphics[height=\textwidth]{../images/generated_images/unet/100.png}
+\caption{Epoche 100}
+\end{subfigure}
+     \caption{Trainingsverlauf des U-Net-basierten \ac{CycleGAN} bis Epoche 100}
+     \label{fig:unet-generated-imgs}
+\end{figure}
+
 \chapter*{Listings}
 
 \begin{forest}
@@ -322,6 +535,99 @@
        [train.py, file]
   ]
 \end{forest}
+
+\section*{\lstinline{utils/preprocess_image.py}}
+
+\begin{code}
+  \begin{minted}{python}
+def randomly_transform_image_batch(img_tensor_batch, target_size=256):
+  batch_size = img_tensor_batch.shape[0]
+
+  # resize content
+  min_content_size = target_size / 1.5
+  # we have to work with default python lists because we need the pop function
+  content_sizes = [np.random.randint(low=min_content_size, high=target_size) for el in range(batch_size)]
+  # copy of content_sizes; will be used to pop the elements
+  content_sizes_tmp = content_sizes[:]
+  transformed_imgs = tf.map_fn(lambda img: resize_content_of_img(img, target_size, content_sizes_tmp.pop(0)), img_tensor_batch)
+
+  # randomly rotate the image in x,y and z direction; scale values are empirically chosen
+  bank_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
+  pitch_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
+  heading_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
+  transform_matrices = np.zeros((batch_size, 3, 3))
+  for i in range(batch_size):
+        transform_matrices[i] = create_rotation_matrix(bank_values[i], pitch_values[i], heading_values[i])
+  transform_matrices = tf.convert_to_tensor(transform_matrices, dtype=tf.float32)
+
+  transformed_imgs = 1 - transformed_imgs
+  transformed_imgs = tfg_image_transformer.perspective_transform(transformed_imgs, transform_matrices)
+  transformed_imgs = 1 - transformed_imgs
+
+  return transformed_imgs, content_sizes, transform_matrices
+\end{minted}
+  \captionof{listing}{Augmentierung eines Batches von Bildern}
+  \label{lst:pictogram-augmentation}
+  \end{code}
+
+\section*{\lstinline{model.py}}
+
+\begin{code}
+  \begin{minted}{python}
+def fit(self, pictograms, real_images, epochs=1):
+    """Train the model for a specific number of epochs. Checkpoints are saved every epoch.
+
+    Args:
+        pictograms: 4d tensor containing the raw pictograms (batch_size, height, width, channels).
+        real_images: 4d tensor containing the training images of street signs (batch_size, height, width, channels).
+        epochs: Number of epochs to train the model.
+    """
+    print('Training...')
+    with self.summary_writer.as_default():
+        for epoch in range(epochs):
+            self.total_epochs.assign_add(1)  # increment
+            print(f'Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs-(epoch+1)}')
+
+            # Single training step
+            for image_batch in tqdm(real_images):
+                self.total_steps.assign_add(1)  # increment
+
+                # Transform the pictograms
+                pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+                single_pictogram_batch = pictograms.take(1).get_single_element()
+                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                    single_pictogram_batch)
+
+                # Train the model
+                losses = self.train_step(single_pictogram_batch, image_batch)
+
+                # For Tensorboard; Log the losses
+                for loss_name in losses:
+                    tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
+
+            # After each epoch: Generate an image
+            pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+            single_pictogram_batch = pictograms.take(1).get_single_element()
+            single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                single_pictogram_batch)
+            generator_test_result = self.generator_g(single_pictogram_batch)
+            random_filename = str(uuid.uuid4())
+            utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
+                                            relative_path='generated_images')
+            
+            self.summary_writer.flush()  # write tensorboard logs to log file
+
+            if ((epoch + 1) % 10 == 0) and ((epoch + 1) < epochs):
+                  self.checkpoint_manager.save()
+                  print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+    self.checkpoint_manager.save()
+    print('Checkpoint saved for this training')
+    
+\end{minted}
+  \captionof{listing}{Augmentierung eines Batches von Bildern}
+  \label{lst:fit-full}
+  \end{code}
+
 
 %\begin{forest}
 %  for tree={font=\sffamily, %grow'=0,

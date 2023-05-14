@@ -43,7 +43,8 @@
     author={Ian Goodfellow and Yoshua Bengio and Aaron Courville},
     publisher={MIT Press},
     note={\url{http://www.deeplearningbook.org}},
-    year={2016}
+    year={2016},
+    urldate = {2023-05-11}
 }
 
 @INPROCEEDINGS{gtsrbGAN,
@@ -69,7 +70,7 @@ doi = {10.1007/s00521-021-05982-z}
 
 @inproceedings{GTSRB,
     author = {{J. Stallkamp et al.}},
-    booktitle = {EEE International Joint Conference on Neural Networks},
+    booktitle = {IEEE International Joint Conference on Neural Networks},
     title = {{The German Traffic Sign Recognition Benchmark: A multi-class classification competition}},
     year = {2011},
     pages = {1453--1460}
@@ -119,7 +120,7 @@ doi="10.1007/978-3-030-65939-4_5",
   author = {Andrej Karpathy and Pieter Abbeel and Greg Brockman and Peter Chen and Vicki Cheung and Rocky Duan and Ian Goodfellow and Durk Kingma and Jonathan Ho and Rein Houthooft and Tim Salimans and John Schulman and Ilya Sutskever and Wojciech Zaremba},
   howpublished = {\url{https://openai.com/blog/generative-models/}},
   date = {2016-06-16},
-  note = {Letzter Zugriff: 13.01.2023}
+  urldate = {2023-01-13}
 }
 
 @INPROCEEDINGS{generativeModelsSurvey,
@@ -160,7 +161,7 @@ doi="10.1007/978-3-030-75178-4_4",
   author = {M. Tim Jones},
   howpublished = {\url{https://developer.ibm.com/articles/cc-cognitive-recurrent-neural-networks}},
   date = {2017-08-16},
-  note = {Letzter Zugriff: 15.01.2023}
+  urldate = {2023-01-15}
 }
 
 @article{autoencoders,
@@ -231,7 +232,7 @@ url = {https://gamemath.com/book/orient.html}
   author = {LinLin Huang},
   howpublished = {\url{http://www.nlpr.ia.ac.cn/pal/trafficdata/recognition.html}},
   date = {},
-  note = {Letzter Zugriff: 25.03.2023}
+  urldate = {2023-03-25}
 }
 
 @misc{piktogramme,
@@ -240,7 +241,7 @@ url = {https://gamemath.com/book/orient.html}
   author = {{Bundesanstalt für Straßenwesen (BASt)}},
   howpublished = {\url{https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-verkehrszeichen/vz-start.html}},
   date = {},
-  note = {Letzter Zugriff: 27.03.2023}
+  urldate = {2023-03-27}
 }
 
 @misc{dataset-mapillary,
@@ -269,7 +270,7 @@ journal={Make ML}
 @article{generative-models-comparison,
 	doi = {10.1109/tpami.2021.3116668},
 	year = 2022,
-	publisher = {Institute of Electrical and Electronics Engineers ({IEEE})},
+	publisher = {IEEE},
 	volume = {44},
 	number = {11},
 	pages = {7327--7347},
@@ -284,7 +285,15 @@ journal={Make ML}
   author = {{TensorFlow}},
   year = {},
   howpublished = {\url{https://www.tensorflow.org/api_docs/python/tf/data/Dataset}},
-  note = {Letzter Zugriff: 30.03.2023}
+  urldate = {2023-03-30}
+}
+
+@misc{tf-map-fn,
+  title = {{tf.map\_fn}},
+  author = {{TensorFlow}},
+  year = {},
+  url = {https://www.tensorflow.org/api_docs/python/tf/map_fn},
+  urldate = {2023-05-11}
 }
 
 @misc{tf-keras-utils,
@@ -292,7 +301,7 @@ journal={Make ML}
   author = {{TensorFlow}},
   year = {},
   howpublished = {\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils}},
-  note = {Letzter Zugriff: 31.03.2023}
+  urldate = {2023-03-31}
 }
 
 @misc{tensorflow-graphics,
@@ -300,15 +309,15 @@ journal={Make ML}
   author = {Julien Valentin and Sofien Bouaziz},
   year = {},
   howpublished = {\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils}},
-  note = {Letzter Zugriff: 31.03.2023}
+  urldate = {2023-03-31}
 }
 
 @misc{cyclegan-tutorial,
   title = {{CycleGAN}},
   author = {{TensorFlow}},
   year = {},
-  howpublished = {\url{hhttps://www.tensorflow.org/tutorials/generative/cyclegan}},
-  note = {Letzter Zugriff: 01.04.2023}
+  howpublished = {\url{https://www.tensorflow.org/tutorials/generative/cyclegan}},
+  urldate = {2023-04-01}
 }
 
 @book{learn-tensorflow,
@@ -319,4 +328,144 @@ year="2020",
 publisher="Apress",
 address="Berkeley, CA",
 doi="10.1007/978-1-4842-5558-2_1"
+}
+
+@INPROCEEDINGS{traffic-sign-anomalies,
+  author={Lengyel, Henrietta and Szalay, Zsolt},
+  booktitle={2019 IEEE 19th International Symposium on Computational Intelligence and Informatics}, 
+  title={Test Scenario for Road Sign Recognition Systems with Special Attention on Traffic Sign Anomalies}, 
+  year={2019},
+  volume={},
+  number={},
+  pages={000193-000198},
+  doi={10.1109/CINTI-MACRo49179.2019.9105238}
+}
+
+@ARTICLE{bce-loss,
+  author={Ho, Yaoshiang and Wookey, Samuel},
+  journal={IEEE Access}, 
+  title={The Real-World-Weight Cross-Entropy Loss Function: Modeling the Costs of Mislabeling}, 
+  year={2020},
+  volume={8},
+  number={},
+  pages={4806-4813},
+  doi={10.1109/ACCESS.2019.2962617}}
+
+@article{GANs,
+author = {Goodfellow, Ian and Pouget-Abadie, Jean and Mirza, Mehdi and Xu, Bing and Warde-Farley, David and Ozair, Sherjil and Courville, Aaron and Bengio, Yoshua},
+title = {Generative Adversarial Networks},
+year = {2020},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {63},
+number = {11},
+doi = {10.1145/3422622},
+journal = {Commun. ACM},
+pages = {139–144},
+}
+
+@Inbook{generative-modellierung,
+	author      = {Cicero, Marcus Tullius},
+	translator      = {Fraaß, Marcus and Mach, Konstantin},
+	title       = {Generatives Deep Learning},
+	chapter = {Einführung ins Generative Deep Learning},
+	publisher   = {O'Reilly Verlag},
+	location    = {Heidelberg},
+	date        = {2020},
+	isbn = {9781492041948}
+}
+
+@misc{cyclegan-resnet,
+  author = {Zhenliang He},
+  title = {CycleGAN-Tensorflow-2},
+  date = {2021-12-13},
+  url = {https://github.com/LynnHo/CycleGAN-Tensorflow-2},
+  urldate = {2023-05-06},
+}
+
+@misc{pix2pix,
+      title={Image-to-Image Translation with Conditional Adversarial Networks}, 
+      author={Phillip Isola and Jun-Yan Zhu and Tinghui Zhou and Alexei A. Efros},
+      year={2018},
+      eprint={1611.07004},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
+@misc{unet,
+      title={U-Net: Convolutional Networks for Biomedical Image Segmentation}, 
+      author={Olaf Ronneberger and Philipp Fischer and Thomas Brox},
+      year={2015},
+      eprint={1505.04597},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+
+@misc{resnet,
+	title={Deep Residual Learning for Image Recognition}, 
+	author={Kaiming He and Xiangyu Zhang and Shaoqing Ren and Jian Sun},
+	year={2015},
+	eprint={1512.03385},
+	archivePrefix={arXiv},
+	primaryClass={cs.CV}
+}
+
+@article{frameworks,
+	author = {Nguyen, Giang and Dlugolinsky, Stefan and Bob\'{a}k, Martin and Tran, Viet and L\'{o}pez Garc\'{\i}a, \'{A}lvaro and Heredia, Ignacio and Mal\'{\i}k, Peter and Hluch?, Ladislav},
+	title = {Machine Learning and Deep Learning Frameworks and Libraries for Large-Scale Data Mining: A Survey},
+	year = {2019},
+	publisher = {Kluwer Academic Publishers},
+	address = {USA},
+	volume = {52},
+	number = {1},
+	doi = {10.1007/s10462-018-09679-z},
+	journal = {Artif. Intell. Rev.},
+	month = {jun},
+	pages = {77–124}
+}
+
+@misc{opencv,
+	title = {{Introduction}},
+	author = {{OpenCV}},
+	year = {},
+	url = {https://docs.opencv.org/4.x/d1/dfb/intro.html},
+	urldate = {2023-05-08}
+}
+
+@misc{pillow,
+	title = {{Pillow}},
+	subtitle = {Overview},
+	author = {{ J. A. Clark u.a.}},
+	year = {},
+	url = {https://pillow.readthedocs.io/en/stable/handbook/overview.html},
+	urldate = {2023-05-08}
+}
+
+@article{identity-loss,
+doi = {10.1088/1742-6596/2400/1/012030},
+year = {2022},
+month = {dec},
+publisher = {IOP Publishing},
+volume = {2400},
+number = {1},
+pages = {012030},
+author = {Sizhe Liu},
+title = {Study for Identity Losses in Image-to-Image Domain Translation with Cycle-Consistent Generative Adversarial Network},
+journal = {Journal of Physics: Conference Series},
+}
+
+@misc{feature-scaling,
+  title = {Downsides of the sigmiod activation and why you should center your inputs},
+  author = {Roman Varma},
+  url = {https://rohanvarma.me/inputnormalization},
+  urldate = {2023-05-11},
+  date = {}
+}
+
+@misc{tensorflow-examples,
+  title = {TensorFlow Examples},
+  author = {Roman Varma},
+  url = {https://rohanvarma.me/inputnormalization},
+  urldate = {2023-05-11},
+  date = {}
 }

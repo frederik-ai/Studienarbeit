@@ -1,19 +1,11 @@
 \section{Modell}
-Das Modell ist in der Datei \mintinline{python}{model.py} implementiert. Innerhalb dieser Datei existiert eine Klasse \ac{CycleGAN}, die im wesentlichen folgende Methoden besitzt:
-
-%\begin{description}
-%   \item[\lstinline[python]{__init__(self, config)}] This method does something.
-%   \item[method2] This method does something else.
-%   \item[method3] This method does yet another thing.
-% \end{description}
-
-\begin{table}[H]
+Das Modell ist in der Datei \mintinline{python}{model.py} implementiert. Innerhalb dieser Datei existiert eine Klasse \mintinline{python}{CycleGan}, die im wesentlichen die in Tabelle \ref{cyclegan-methods} aufgefürten Methoden besitzt.
+\begin{table}[h]
    \centering
    \begin{tabular}{|l|l|}
    \hline
-   \textbf{Methode}                    & \textbf{Aufgabe} \\ \hline
-   \_\_init\_\_ & Initialisieren der Attribute mittels der Konfigurationsdatei \\ \hline
-   compile  & Kompilieren der Generator- und Diskriminatormodelle      \\ \hline
+   \textbf{Methode}                    & \textbf{Aufgabe} \\ \hline \hline
+   \_\_init\_\_ & Initialisieren des \ac{CycleGAN} mittels der Konfigurationsdatei \\ \hline
    generate & Generieren eines einzelnen Batches von Bildern  \\ \hline
    fit & Trainieren des \acp{CycleGAN} über mehrere Epochen \\ \hline
    train\_step & Durchführen eines einzelnen Trainingsschritts \\ \hline
@@ -21,18 +13,104 @@ Das Modell ist in der Datei \mintinline{python}{model.py} implementiert. Innerha
    \hline
    \end{tabular}
    \caption{Auswahl an Methoden aus der CycleGAN Klasse}
+   \label{cyclegan-methods}
 \end{table}
+Der Inhalt dieser Klasse basiert zum Teil auf einem Beispiel von TensorFlow \cite{cyclegan-tutorial}. Dieses Beispiel beinhaltet eine Implementierung eines \ac{CycleGAN}. Teile des Quellcodes stellen die Basis für die Umsetzung der Studienarbeit dar. In erster Linie basieren die Trainingsfunktionen des \ac{CycleGAN} auf dem Beispiel sowie der Fakt, dass das Modell die Bilder auf Pixelwerte zwischen -1 und 1 skaliert. Die Skalierung kann das Training des Modells beschleunigen und stabilisieren \cite{feature-scaling}. Das Modell aus dem TensorFlow Beispiel verwendet einen U-Net Generator, wie es normalerweise bei pix2pix statt bei \acp{CycleGAN} der Fall ist. Aus diesem Grund beinhaltet die Implementierung dieser Studienarbeit zusätzlich einen ResNet Generator und den dazugehörigen Diskriminator. Diese befinden sich in dem Pfad \mintinline{python}{src/external/resnet.py} und entstammen ebenfalls einer bereits existierenden \ac{CycleGAN} Implementierung \cite{cyclegan-resnet}. Die Architekturen der \acp{KNN} entsprechen dabei den Vorgaben der \ac{CycleGAN} Veröffentlichung \cite{cycleGAN}. Die Klasse \mintinline{python}|CycleGAN| erlaubt eine Auswahl zwischen der U-Net- und der ResNet-Architektur. Das Ziel dieser Studienarbeit ist damit unter anderem zu prüfen, ob ein U-Net- oder ein ResNet-basierter Generator für diesen Anwendungsfall besser geeignet ist.
 
+Nachfolgend soll näher auf einige Methoden der Klasse \ac{CycleGAN} eingegangen werden.
 
+\subsection{Konstruktor}
 
-Das Modell objektorientiert zu implementieren scheint entgegen üblicher Konventionen zu stehen. 
+Die \mintinline{python}{__init__}-Funktion stellt in Python den Konstruktor einer Klasse dar. Die Klasse \mintinline{python}{CycleGan} erwartet hier den Parameter \mintinline{python}{config}. Dies ist ein Python-Dictionary, das die Werte der Konfigurationsdatei enthält. Es existieren hier somit Schlüssel-Werte-Paare für die verschiedenen Trainingseinstellungen des Modells. Ein Vorteil dieses Ansatzes ist, dass Anwendende des Modells die Parameter in der \ac{TOML}-Datei ändern können, ohne den Python-Quellcode aufrufen zu müssen. Allgemein verfolgt die Implementierung des \ac{CycleGAN} das Ziel, dass Anwendende sich mit keinem Python Quellcode auseinander setzen müssen, um das Modell zu trainieren und zu verwenden.
 
-Um schnellere Ergebnisse zu erzielen, damit sich vor allem auf die Optimierung der Implementierung und der Augmentierung der generierten Bilder konzentriert werden kann, basiert der Inhalt dieser Klasse zum Teil auf einem Beispiel von TensorFlow \cite{cyclegan-tutorial}. Dieses Beispiel beinhaltet eine Implementierung eines \acp{CycleGAN}. Der Quelltext dieses Beispiels wird für die Umsetzung des \acp{CycleGAN} dieser Studienarbeit als Basis genommen und verändert, beziehungsweise erweitert. Es sei hierbei betont, dass jede Codezeile, die identisch mit dem Code aus dem Beispiel ist, vorher hinterfragt und bezüglich ihrer Sinnhaftigkeit für diesen Anwendungsfall getestet worden ist. Darauf soll explizit in diesem Kapitel eingegangen werden.
+Eines der Attribute der Klasse \mintinline{python}{CycleGan} heißt \mintinline{python}{generator_type}. Es handelt sich dabei um ein Enum, das bestimmt, ob der Generator ein U-Net oder ein ResNet ist. Der Wert für das Attribut ist durch die Konfigurationsdatei und somit durch den Parameter \mintinline{python}{config} bestimmt. In Listing \ref{lst:generator-type} ist der Codeabschnitt zu sehen, der die \mintinline{python}{generator_type}-Eigenschaft der Klasse \mintinline{python}{CycleGan} initialisiert.
 
-\section{Generator- und Diskriminatorarchitekturen}
-Wie bereits erwähnt, besteht ein \ac{CycleGAN} aus vier \acp{KNN}: Generator X, Generator Y, Diskriminator X, Diskriminator Y. Initiale Versuche, diese \acp{KNN} eigenständig zu implementieren, haben zu keinen Ergebnissen geführt. In dem Sinne, dass die Modelle nicht gelernt haben. Auch unter der Verwendung von Veröffentlichungen, die Richtlinien über die Architektur solcher Netze geben. In der Konfigurationsdatei kann deshalb zwischen zwei vorgefertigten Architekturen gewählt werden: \emph{U-Net} und \emph{ResNet}.
+\begin{code}
+	\begin{minted}{python}
+class GeneratorType(Enum):
+   RESNET = 0
+   U_NET = 1
 
-\subsection{U-Net}
-Es existiert eine Veröffentlichung, die \emph{Conditional \acp{GAN}} für die Bild-zu-Bild Generierung verwendet. Das Modell der Veröffentlichung ist mitunter dazu in der Lage, schwarz-weiß-Bilder einzufärben oder aus Zeichnungen ein möglichst fotorealistisches Bild zu erzeugen. Der Generator verwendet eine abgewandelte Form eines \emph{U-Net}. Dies ist eine Architektur, die das Eingangsbild zunächst auf eine geringere Anzahl an Neuronen Kodiert und anschließend zu einem neuen Bild dekodiert. Die Architektur ähnelt somit konzeptionell der eines Autoencoders. Der Diskriminator verwendet eine Architektur, die sich \emph{PatchGAN} nennt. Die Besonderheit ist hierbei, dass der Diskriminator weniger einzelne Pixel betrachtet, sondern Teile eines Bilds als echt oder unecht klassifizieren kann.
+class CycleGan:
+...
+   def __init__(self, config):
+   ...
+      if config['model']['generator_type'] == 'unet':
+         self.generator_type = GeneratorType.U_NET
+      elif config['model']['generator_type'] == 'resnet':
+         self.generator_type = GeneratorType.RESNET
+   ...
+	\end{minted}
+	\captionof{listing}{\lstinline{model.py} - Auswahl der Generator-Architektur}
+   \label{lst:generator-type}
+\end{code}
 
-Der Quellcode der Veröffentlichung ist unter dem Namen \emph{Pix2Pix} bekannt und wird auch so importiert. 
+Das Modell verwendet den U-Net Generator mit drei Farbkanälen und einer \emph{Instace Normalization} \emph{(hier \mintinline{python}{'instancenorm'})} statt einer \emph{Batch Normalization}. Die pix2pix-Veröffentlichung schlägt dies für die Bildgenerierung vor \cite{pix2pix}. Beides sind bestimmte Schichten in \acp{CNN} zur Normalisierung von Werten. Die Klasse \mintinline{python}{CycleGan} import die Generator- und Diskriminatorarchitekturen von pix2pix aus dem GitHub Repository von \emph{TensorFlow Examples} als Python-Modul \mintinline{python}{pix2pix} \cite{tensorflow-examples}. Das ist analog zu dem Quellcode des genannten TensorFlow Beispiels \cite{cyclegan-tutorial}.
+
+Der ResNet Generator erhält als einen Parameter die Dimensionen des Bilds, das er generieren soll. Hier ist demnach nicht nur die Anzahl an Farbkanälen variabel, sondern auch die Höhe und Breite des Bilds. Der U-Net Generator erzeugt hingegen Bilder mit einer Höhe und Breite von 256 Pixeln. Ein weiterer Parameter nennt sich \mintinline{python}{n_blocks}. Er gibt die Anzahl an Residual Blocks an. Die \ac{CycleGAN}-Veröffentlichung schlägt hier für eine Bildgröße von 256x256 einen Wert von 9 vor \cite{cycleGAN}. Falls dieser Wert zu keinen zufriedenstellenden Ergebnissen führt, soll er verändert werden. Listing \ref{lst:generator-init} zeigt die Initialisierung der Generatoren abhängig von der gewählten Generator-Architektur.
+
+\begin{code}
+	\begin{minted}{python}
+   ...
+      # Generators
+      if self.generator_type == GeneratorType.U_NET:
+         self.generator_g = pix2pix.unet_generator(3, norm_type='instancenorm')
+         self.generator_f = pix2pix.unet_generator(3, norm_type='instancenorm')
+      else:
+         self.generator_g = resnet.ResnetGenerator((self.image_size, self.image_size, 3), n_blocks=9)
+         self.generator_f = resnet.ResnetGenerator((self.image_size, self.image_size, 3), n_blocks=9)
+   ...
+   \end{minted}
+   \captionof{listing}{\lstinline{model.py} - Initialisierung der Generatoren}
+   \label{lst:generator-init}
+\end{code}
+
+Analog dazu initialisiert die Klasse \mintinline{python}{CycleGan} die Diskriminatoren $D_y$ und $D_x$. Die Klasse besitzt weitere Attribute, die für die weiteren Methoden der Klasse von Relevanz sind.
+
+\subsection{fit-Methode}
+Bevor das Modell zur Generierung von Bildern genutzt werden kann, muss es trainiert werden. Hierfür existiert die \mintinline{python}{fit}-Methode. Die vollständige Methode ist aufgrund ihrer Länge im Anhang in Listing \ref{lst:fit-full} abgebildet. Als Parameter benötigt die Methode zum einen den Datensatz an Piktogrammen und zum anderen den Trainingsdatensatz mit realen Straßenschildaufnahmen. Diese Parameter tragen die Bezeichnungen \mintinline{python}{pictograms} und \mintinline{python}{real_images}. Die beiden Datensätze müssen dabei als \mintinline{python}{tf.data.Dataset} Objekte übergeben werden \cite{tf-dataset}. Die Klasse \mintinline{python}{tf.data.Dataset} ist Teil des \mintinline{python}{tf.data} Frameworks. Sie ist explizit auf die Performanz beim Laden großer Datensätze ausgelegt. Über \mintinline{python}{tf.data.Dataset} Objekte kann beispielsweise mittels einer \mintinline{python}{for}-Schleife iteriert werden. Bei jeder Iteration gibt der Datensatz dabei einen Batch zurück. Somit muss sich nicht manuell um das Laden einzelner Elemente des Datensatzes gekümmert werden. Auch erfolgt das Laden der Batches asynchron. Batches werden dann in den Arbeitsspeicher geladen, wenn sie benötigt werden. \cite{tf-dataset} 
+
+Ein optionaler Parameter ist zusätzlich die Anzahl an Epochen, die das Modell trainieren soll. Die Anzahl an Epochen ist standardmäßig auf 1 gesetzt. Listing \ref{lst:fit} zeigt die Funktionsdeklaration sowie einen Ausschnitt aus der Implementierung.
+
+\begin{code}
+   \begin{minted}{python}
+def fit(self, pictograms, real_images, epochs=1):
+   ...
+   for epoch in range(epochs):
+      ...
+      # Single training step
+      for image_batch in tqdm(real_images):
+         ...
+         # Transform the pictograms
+         pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+         single_pictogram_batch = pictograms.take(1).get_single_element()
+         single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+               single_pictogram_batch)
+
+         # Train the model
+         losses = self.train_step(single_pictogram_batch, image_batch)
+         ...
+   \end{minted}
+   \captionof{listing}{\lstinline{model.py} - \mintinline{python}{fit}-Methode}
+   \label{lst:fit}
+\end{code}
+
+Die \mintinline{python}{fit}-Methode iteriert zunächst über die Anzahl an Trainingsepochen. In jedem Durchlauf trainiert das \ac{CycleGAN} über den gesamten Trainingsdatensatz. Das realisiert die zweite \mintinline{python}{for}-Schleife. Hier iteriert die Funktion über das \mintinline{python}{tf.data.Dataset} Objekt \mintinline{python}{real_images}. Bei jeder Iteration gibt das Objekt einen neuen Batch an Bildern zurück. Die Funktion \mintinline{python}{tqdm} stammt aus dem gleichnamigen Python-Paket. Sie dient dazu, eine Fortschritssanzeige \emph{(engl.: progress bar)} in der Konsole anzuzeigen, die sich nach jeder Epoche aktualisiert.
+
+Bevor das Modell auf einem einzelnen Batch trainiert, muss die \mintinline{python}{fit}-Methode die Piktogramme zunächst augmentieren. Das besteht aus verschiedenen Schritten. Als erstes wird der Datensatz der Piktogramme gemischt. Dies geschieht mit Hilfe der Methode \mintinline{python}{shuffle}. Anschließend erzeugen die Methoden \mintinline{python}{take(1)} und \mintinline{python}{get_single_element} daraus einen neuen Datensatz, der nur einen Batch aus dem Piktogramm-Datensatz beinhaltet und geben diesen einzigen Batch zurück. Zusammengefasst dient dieser Codeabschnitt dazu, die Piktogramme zufällig zu mischen und einen einzelnen Batch an Piktogrammen daraus zu entnehmen.
+
+Zur Augmentierung der Piktogramme ruft die \mintinline{python}{fit}-Methode dann die Methode \mintinline{python}{randomly_transform_image_batch} auf. Diese Methode ist in dem für diese Studienarbeit erstelltem Modul \mintinline{python}{utils} implementiert. Diese Methode gibt nicht nur die augmentierten Bilder zurück, sondern auch sowohl eine Liste der Rotationsmatrizen als auch der zufälligen Skalierung der Piktogramme. Für das Training werden nur die augmentierten Bilder benötigt. Die zusätzlich zurückgegebnen Daten sind hierfür nicht notwendig. Dass die Rückgabewerte der Methode \mintinline{python}{randomly_transform_image_batch} nicht benötigt werden, soll der Variablenname \mintinline{python}{_} signalisieren.
+
+Anschließend dazu führt die Methode \mintinline{python}{train_step} den eigentlichen Trainingsdurchlauf durch. Sie erhält dabei den zufälligen Batch an Piktogrammen sowie den Batch an realen Straßenschildaufnahmen aus der \mintinline{python}{for}-Schleife. Damit berechnet sie die Verlustfunktionen des \ac{CycleGAN} und führt basierend darauf Gradientenabstiege für $G$, $F$, $D_y$ und $D_x$ aus. Da der Inhalt dieser Methode größtenteils durch das TensorFlow Beispiel gegeben ist, soll darauf nicht im Detail eingegangen werden. Die Methode implementiert die Kostenfunktionen \ref{eq:cyclegan-losses} sowie den Identity Loss. Es wird hier jedoch von Verlust- statt von Kostenfunktionen gesprochen, da sie sich hier auf einen einzelnen Batch statt auf den gesamten Datensatz beziehen. Deshalb verwenden die Veröffentlichungen häufig den Begriff \emph{loss} für die Kostenfunktionen. Hat die \mintinline{python}{train_step}-Methode die Verlustfunktionen berechnet, führt sie den Gradientenabstieg für das \ac{CycleGAN} durch.
+
+\subsection{generate-Methode}
+Ist ein \ac{CycleGAN} trainiert, dient die \mintinline{python}{generate}-Methode zur Generierung von Bildern. Dafür wird lediglich der Generator $G$ benötigt, der Bilder von Piktogrammen in Bilder von Straßenschildern übersetzt. Die \mintinline{python}{generate}-Methode besteht deshalb nur aus einer Zeile Code. Als Parameter erhält die Methode einen Batch an Piktogrammen, welche sie an Generator $G$ übergibt. Aus diesen Piktogrammen erzeugt der Generator Bilder von Straßenschildern. Die Methode gibt diese Bilder anschließend zurück. Listing \ref{lst:generate} zeigt die \mintinline{python}{generate}-Methode.
+
+\begin{code}
+   \begin{minted}{python}
+   def generate(self, pictograms):
+      return self.generator_g(pictograms)
+   \end{minted}
+   \captionof{listing}{\lstinline{model.py} - generate-Methode}
+   \label{lst:generate}
+\end{code}

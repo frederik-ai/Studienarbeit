@@ -1,6 +1,29 @@
 \section{Architektur}
-In Kapitel \ref{chap:NoGANs} werden verschiedene generative Netzwerkarchitekturen vorgestellt. Zunächst soll darauf eingegangen werden, welche dieser Herangehensweisen gewählt wird. Jede der Architekturen besitzt ihre Vor- und Nachteile. Der größte Nachteil von \acp{PixelRNN} ist, dass die Pixel eines Bildes nicht parallel zueinander generiert werden können. Dies verlangsamt die Generierung und damit das Training des Modells.
+In Kapitel \ref{chap:NoGANs} sind verschiedene generative Netzwerkarchitekturen vorgestellt. Jede dieser Architekturen besitzt ihre Vor- und Nachteile. Die Entscheidung liegt darauf, kein \ac{PixelRNN} zu benutzen, da die ausschließlich sequentielle Generierung die Performanz des Modells beeinträchtigt. \acp{GAN} gelten von den vorgestellten Modellen als die am schwierigsten zu trainierende Kategorie. Das hängt vor allem damit zusammen, dass die Kostenfunktion nicht gegen \emph{null} streben soll, sondern gegen einen Wert größer als \emph{null} konvergieren soll. Das Training gilt als instabil, da die Kostenfunktion oszillieren kann und in dem Fall nicht konvergiert. Weiterhin ist es möglich, dass der Generator oder der Diskriminator jeweils den Gegenspieler soweit überlistet, dass das Modell nicht mehr lernt. Da die Literautr \acp{GAN} nachgesagt, qualitativ hochwertigere Bilder zu erzeugen als Variational Autoencoder, sollen trotzdem \acp{GAN} die Basis für diese Studienarbeit bilden. \cite{generativeModelsSurvey} \cite{generative-models-comparison}
 
-\textbf{Entscheidungsmatrix?}
+Die Problemstellung dieser Arbeit soll jedoch nicht als eine reine Bildgenerierung interpretiert werden, sondern als eine Bild-zu-Bild Übersetzung. Damit muss das Netzwerk nicht von alleine lernen, die Symbole der Straßenschilder zu erzeugen. Das ist aus einem bestimmten Grund von Vorteil: Es heißt in der Literatur, dass \acp{GAN} nicht sonderlich gut darin seien, bestimmte Formen exakt zu erzeugen \cite{generativeModelsSurvey}. Eine reine Bildgenerierung mit einem zufälligen Eingangsvektor könnte also dazu führen, dass das \ac{GAN} verschwommene oder verformte Schilder erzeugt. Außerdem soll das Netzwerk lernen, verschiedene Arten von Straßenschildern zu erzeugen. Am besten so, dass Anwendende die Arten der generierten Schilder selbst bestimmen können. Das wäre mit einem klassischen \ac{cGAN} möglich. Da jedoch Straßenschilder genormt sind und somit die Schilder eines Landes stets identisch aussehen, ist es auch möglich, dem \acp{GAN} das zu erzeugende Schild bereits in minimaler Form als Eingangsbild zu geben. Das Modell muss dann lernen, dieses Bild in die Zieldomäne $Y$ zu übersetzen, die das Schild in einer möglichst fotorealistischen Umgebung zeigt. Was in dem Fall variabel ist, ist die Perspektive des Schilds, die Helligkeit des Bilds sowie das Aussehen der Umgebung. Hier soll das Modell eine möglichst Große Varianz erzeugen.
 
-\cite{generative-models-comparison}
+Die Basis für die Bild-zu-Bild Übersetzung bilden Piktogramme von Straßenschildern. Entnommen sind diese Piktogramme von der Internetseite der \emph{Bundesanstalt für Straßenwesen}. Sie zeigen das jeweilige Straßenschild-Symbol auf einem hellgrauen Hintergrund. Daraus wird ein zusätzlicher Datensatz an Bildern erstellt, der die Domäne $X$ darstellt. Er beinhaltet die Piktogramme für alle 43 Klassen von Straßenschildern, die in dem \ac{GTSRB} vorkommen. Im Anhang befindet sich eine Abbildung, die alle Piktogramme zeigt. Abbildung \ref{fig:domains} soll verdeutlichen, was die Domänen $X$ und $Y$ sind, die das Modell ineinander übersetzen soll. \cite{piktogramme}
+
+\begin{figure}[h]
+	\centering
+	\captionsetup[subfigure]{labelformat=empty}
+	\begin{subfigure}[b]{0.125\textwidth}
+		\centering
+		\includegraphics[height=\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Architektur/X.png}
+		\caption{Domäne \textbf{X}}
+		\label{fig:domain-x}
+	\end{subfigure}
+	\hspace{3em}%
+	\begin{subfigure}[b]{0.125\textwidth}
+		\centering
+		\includegraphics[height=\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Architektur/Y.png}
+		\caption{Domäne \textbf{Y}}
+		\label{fig:domain-y}
+	\end{subfigure}
+	\caption{Domänen für die Bild-zu-Bild Übersetzung}
+	\label{fig:domains}
+\end{figure}
+
+Eine letzte Fragestellung ist, ob \acp{cGAN} analog zu pix2pix verwendet werden sollen oder aber \acp{CycleGAN}. Wie bereits beschrieben, benötigt pix2pix gepaarte Trainingsdaten. Zu jedem echten Bild aus $Y$ muss hinterlegt werden, welches Piktogramm aus $X$ dazu gehört. Das kann insofern als unproblematisch betrachtet werden, als dass die Bilder des \ac{GTSRB} nach ihren Klassen sortiert sind. Soll diese Studienarbeit jedoch mit einem größeren Datensatz fortgeführt werden, ist es von Vorteil, wenn die Trainingsdaten nicht annotiert werden müssen. Außerdem schreiben die Autoren von pix2pix, dass die erzeugten Bilder keine sonderlich hohe Varianz aufzeigen würden, da, wie bereits erwähnt, der Vektor $z$ einen geringen Einfluss auf die Generierung habe.
+Die Veröffentlichung der \acp{CycleGAN} baut auf pix2pix auf. Es wird davon ausgegangen, dass die Bildgenerierung deshalb nicht signifikant schlechter, oder noch besser ist als mit pix2pix, während das Modell die genannten Vorteile besitzt. Aus diesem Grund basiert das Modell für diese Studienarbeit auf einem \acp{CycleGAN}.

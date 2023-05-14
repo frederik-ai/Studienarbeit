@@ -127,6 +127,54 @@
     \field{year}{2016}
   \endentry
 
+  \entry{GTSRB}{inproceedings}{}
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{J. Stallkamp et al.}},
+         familyi={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{J2}
+    \strng{fullhash}{J2}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{IEEE International Joint Conference on Neural Networks}
+    \field{pages}{1453\bibrangedash 1460}
+    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
+  classification competition}}
+    \field{year}{2011}
+  \endentry
+
+  \entry{traffic-sign-anomalies}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=LH}{%
+         family={Lengyel},
+         familyi={L\bibinitperiod},
+         given={Henrietta},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=SZ}{%
+         family={Szalay},
+         familyi={S\bibinitperiod},
+         given={Zsolt},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{LHSZ1}
+    \strng{fullhash}{LHSZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2019 IEEE 19th International Symposium on Computational
+  Intelligence and Informatics}
+    \verb{doi}
+    \verb 10.1109/CINTI-MACRo49179.2019.9105238
+    \endverb
+    \field{pages}{000193\bibrangedash 000198}
+    \field{title}{Test Scenario for Road Sign Recognition Systems with Special
+  Attention on Traffic Sign Anomalies}
+    \field{year}{2019}
+  \endentry
+
   \entry{DeepLearningBook}{book}{}
     \name{author}{3}{}{%
       {{hash=GI}{%
@@ -158,6 +206,9 @@
     \field{note}{\url{http://www.deeplearningbook.org}}
     \field{title}{Deep Learning}
     \field{year}{2016}
+    \field{urlday}{11}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{knnsKompakt}{book}{}
@@ -211,6 +262,36 @@
     \field{year}{2021}
   \endentry
 
+  \entry{bce-loss}{article}{}
+    \name{author}{2}{}{%
+      {{hash=HY}{%
+         family={Ho},
+         familyi={H\bibinitperiod},
+         given={Yaoshiang},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=WS}{%
+         family={Wookey},
+         familyi={W\bibinitperiod},
+         given={Samuel},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HYWS1}
+    \strng{fullhash}{HYWS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1109/ACCESS.2019.2962617
+    \endverb
+    \field{pages}{4806\bibrangedash 4813}
+    \field{title}{The Real-World-Weight Cross-Entropy Loss Function: Modeling
+  the Costs of Mislabeling}
+    \field{volume}{8}
+    \field{journaltitle}{IEEE Access}
+    \field{year}{2020}
+  \endentry
+
   \entry{cnnsIntroduction}{misc}{}
     \name{author}{2}{}{%
       {{hash=OK}{%
@@ -241,6 +322,45 @@
     \endverb
     \field{title}{An Introduction to Convolutional Neural Networks}
     \field{year}{2015}
+  \endentry
+
+  \entry{generative-modellierung}{inbook}{}
+    \name{author}{1}{}{%
+      {{hash=CMT}{%
+         family={Cicero},
+         familyi={C\bibinitperiod},
+         given={Marcus\bibnamedelima Tullius},
+         giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+    }
+    \name{translator}{2}{}{%
+      {{hash=FM}{%
+         family={Fraaß},
+         familyi={F\bibinitperiod},
+         given={Marcus},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=MK}{%
+         family={Mach},
+         familyi={M\bibinitperiod},
+         given={Konstantin},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {O'Reilly Verlag}%
+    }
+    \strng{namehash}{CMT1}
+    \strng{fullhash}{CMT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{chapter}{Einführung ins Generative Deep Learning}
+    \field{isbn}{9781492041948}
+    \field{title}{Generatives Deep Learning}
+    \list{location}{1}{%
+      {Heidelberg}%
+    }
+    \field{year}{2020}
   \endentry
 
   \entry{openAiGenerativeNets}{misc}{}
@@ -335,11 +455,13 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
     \field{howpublished}{\url{https://openai.com/blog/generative-models/}}
-    \field{note}{Letzter Zugriff: 13.01.2023}
     \field{title}{Generative Models}
     \field{day}{16}
     \field{month}{06}
     \field{year}{2016}
+    \field{urlday}{13}
+    \field{urlmonth}{01}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{generativeModelsBook}{inbook}{}
@@ -420,11 +542,13 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
   \field{howpublished}{\url{https://developer.ibm.com/articles/cc-cognitive-recurrent-neural-networks}}
-    \field{note}{Letzter Zugriff: 15.01.2023}
     \field{title}{Recurrent neural networks deep dive}
     \field{day}{16}
     \field{month}{08}
     \field{year}{2017}
+    \field{urlday}{15}
+    \field{urlmonth}{01}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{generativeModelsSurvey}{inproceedings}{}
@@ -557,6 +681,78 @@
     \field{year}{2014}
   \endentry
 
+  \entry{GANs}{article}{}
+    \name{author}{8}{}{%
+      {{hash=GI}{%
+         family={Goodfellow},
+         familyi={G\bibinitperiod},
+         given={Ian},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=PAJ}{%
+         family={Pouget-Abadie},
+         familyi={P\bibinithyphendelim A\bibinitperiod},
+         given={Jean},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Mirza},
+         familyi={M\bibinitperiod},
+         given={Mehdi},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=XB}{%
+         family={Xu},
+         familyi={X\bibinitperiod},
+         given={Bing},
+         giveni={B\bibinitperiod},
+      }}%
+      {{hash=WFD}{%
+         family={Warde-Farley},
+         familyi={W\bibinithyphendelim F\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=OS}{%
+         family={Ozair},
+         familyi={O\bibinitperiod},
+         given={Sherjil},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CA}{%
+         family={Courville},
+         familyi={C\bibinitperiod},
+         given={Aaron},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=BY}{%
+         family={Bengio},
+         familyi={B\bibinitperiod},
+         given={Yoshua},
+         giveni={Y\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Association for Computing Machinery}%
+    }
+    \strng{namehash}{GIPAJMM+1}
+    \strng{fullhash}{GIPAJMMXBWFDOSCABY1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1145/3422622
+    \endverb
+    \field{number}{11}
+    \field{pages}{139–144}
+    \field{title}{Generative Adversarial Networks}
+    \field{volume}{63}
+    \list{location}{1}{%
+      {New York, NY, USA}%
+    }
+    \field{journaltitle}{Commun. ACM}
+    \field{year}{2020}
+  \endentry
+
   \entry{cycleGAN}{misc}{}
     \name{author}{4}{}{%
       {{hash=ZJY}{%
@@ -599,6 +795,165 @@
     \field{year}{2017}
   \endentry
 
+  \entry{cyclegan-tutorial}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{TensorFlow}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.tensorflow.org/tutorials/generative/cyclegan}}
+    \field{title}{{CycleGAN}}
+    \field{urlday}{01}
+    \field{urlmonth}{04}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{cyclegan-resnet}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=HZ}{%
+         family={He},
+         familyi={H\bibinitperiod},
+         given={Zhenliang},
+         giveni={Z\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HZ1}
+    \strng{fullhash}{HZ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{CycleGAN-Tensorflow-2}
+    \verb{url}
+    \verb https://github.com/LynnHo/CycleGAN-Tensorflow-2
+    \endverb
+    \field{day}{13}
+    \field{month}{12}
+    \field{year}{2021}
+    \field{urlday}{06}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{resnet}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=HK}{%
+         family={He},
+         familyi={H\bibinitperiod},
+         given={Kaiming},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=ZX}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Xiangyu},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=RS}{%
+         family={Ren},
+         familyi={R\bibinitperiod},
+         given={Shaoqing},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SJ}{%
+         family={Sun},
+         familyi={S\bibinitperiod},
+         given={Jian},
+         giveni={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HKZXRS+1}
+    \strng{fullhash}{HKZXRSSJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1512.03385
+    \endverb
+    \field{title}{Deep Residual Learning for Image Recognition}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2015}
+  \endentry
+
+  \entry{pix2pix}{misc}{}
+    \name{author}{4}{}{%
+      {{hash=IP}{%
+         family={Isola},
+         familyi={I\bibinitperiod},
+         given={Phillip},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=ZJY}{%
+         family={Zhu},
+         familyi={Z\bibinitperiod},
+         given={Jun-Yan},
+         giveni={J\bibinithyphendelim Y\bibinitperiod},
+      }}%
+      {{hash=ZT}{%
+         family={Zhou},
+         familyi={Z\bibinitperiod},
+         given={Tinghui},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=EAA}{%
+         family={Efros},
+         familyi={E\bibinitperiod},
+         given={Alexei\bibnamedelima A.},
+         giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IPZJYZT+1}
+    \strng{fullhash}{IPZJYZTEAA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1611.07004
+    \endverb
+    \field{title}{Image-to-Image Translation with Conditional Adversarial
+  Networks}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2018}
+  \endentry
+
+  \entry{unet}{misc}{}
+    \name{author}{3}{}{%
+      {{hash=RO}{%
+         family={Ronneberger},
+         familyi={R\bibinitperiod},
+         given={Olaf},
+         giveni={O\bibinitperiod},
+      }}%
+      {{hash=FP}{%
+         family={Fischer},
+         familyi={F\bibinitperiod},
+         given={Philipp},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=BT}{%
+         family={Brox},
+         familyi={B\bibinitperiod},
+         given={Thomas},
+         giveni={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ROFPBT1}
+    \strng{fullhash}{ROFPBT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{eprint}
+    \verb 1505.04597
+    \endverb
+    \field{title}{U-Net: Convolutional Networks for Biomedical Image
+  Segmentation}
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{cs.CV}
+    \field{year}{2015}
+  \endentry
+
   \entry{taiwanGAN}{article}{}
     \name{author}{1}{}{%
       {{hash=D}{%
@@ -619,24 +974,6 @@
     \field{journaltitle}{Neural Computing and Applications}
     \field{month}{04}
     \field{year}{2021}
-  \endentry
-
-  \entry{GTSRB}{inproceedings}{}
-    \name{author}{1}{}{%
-      {{hash=J}{%
-         family={{J. Stallkamp et al.}},
-         familyi={J\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{J1}
-    \strng{fullhash}{J1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{booktitle}{EEE International Joint Conference on Neural Networks}
-    \field{pages}{1453\bibrangedash 1460}
-    \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
-  classification competition}}
-    \field{year}{2011}
   \endentry
 
   \entry{gtsrbGAN}{inproceedings}{}
@@ -674,6 +1011,132 @@
     \field{year}{2019}
   \endentry
 
+  \entry{frameworks}{article}{}
+    \name{author}{8}{}{%
+      {{hash=NG}{%
+         family={Nguyen},
+         familyi={N\bibinitperiod},
+         given={Giang},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=DS}{%
+         family={Dlugolinsky},
+         familyi={D\bibinitperiod},
+         given={Stefan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Bob\'{a}k},
+         familyi={B\bibinitperiod},
+         given={Martin},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=TV}{%
+         family={Tran},
+         familyi={T\bibinitperiod},
+         given={Viet},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=LGA}{%
+         family={L\'{o}pez\bibnamedelima Garc\'{\i}a},
+         familyi={L\bibinitperiod\bibinitdelim G\bibinitperiod},
+         given={\'{A}lvaro},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=HI}{%
+         family={Heredia},
+         familyi={H\bibinitperiod},
+         given={Ignacio},
+         giveni={I\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={Mal\'{\i}k},
+         familyi={M\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=HL}{%
+         family={Hluch?},
+         familyi={H\bibinitperiod},
+         given={Ladislav},
+         giveni={L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Kluwer Academic Publishers}%
+    }
+    \strng{namehash}{NGDSBM+1}
+    \strng{fullhash}{NGDSBMTVLGAHIMPHL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/s10462-018-09679-z
+    \endverb
+    \field{number}{1}
+    \field{pages}{77–124}
+    \field{title}{Machine Learning and Deep Learning Frameworks and Libraries
+  for Large-Scale Data Mining: A Survey}
+    \field{volume}{52}
+    \list{location}{1}{%
+      {USA}%
+    }
+    \field{journaltitle}{Artif. Intell. Rev.}
+    \field{year}{2019}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{tf-dataset}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=T}{%
+         family={{TensorFlow}},
+         familyi={T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{T1}
+    \strng{fullhash}{T1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.tensorflow.org/api_docs/python/tf/data/Dataset}}
+    \field{title}{{tf.data.Dataset}}
+    \field{urlday}{30}
+    \field{urlmonth}{03}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{learn-tensorflow}{book}{}
+    \name{author}{2}{}{%
+      {{hash=SP}{%
+         family={Singh},
+         familyi={S\bibinitperiod},
+         given={Pramod},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=MA}{%
+         family={Manure},
+         familyi={M\bibinitperiod},
+         given={Avinash},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Apress}%
+    }
+    \strng{namehash}{SPMA1}
+    \strng{fullhash}{SPMA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1007/978-1-4842-5558-2_1
+    \endverb
+    \field{subtitle}{Implement Machine Learning and Deep Learning Models with
+  Python}
+    \field{title}{Learn TensorFlow 2.0}
+    \list{location}{1}{%
+      {Berkeley, CA}%
+    }
+    \field{year}{2020}
+  \endentry
+
   \entry{chinese-dataset}{misc}{}
     \name{author}{1}{}{%
       {{hash=HL}{%
@@ -688,9 +1151,11 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
   \field{howpublished}{\url{http://www.nlpr.ia.ac.cn/pal/trafficdata/recognition.html}}
-    \field{note}{Letzter Zugriff: 25.03.2023}
     \field{title}{Chinese Traffic Sign Database: Traffic Sign Recognition
   Database}
+    \field{urlday}{25}
+    \field{urlmonth}{03}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{vienna-convention}{misc}{}
@@ -818,38 +1283,72 @@
     \field{journaltitle}{Make ML}
   \endentry
 
-  \entry{learn-tensorflow}{book}{}
+  \entry{tensorflow-graphics}{misc}{}
     \name{author}{2}{}{%
-      {{hash=SP}{%
-         family={Singh},
-         familyi={S\bibinitperiod},
-         given={Pramod},
-         giveni={P\bibinitperiod},
+      {{hash=VJ}{%
+         family={Valentin},
+         familyi={V\bibinitperiod},
+         given={Julien},
+         giveni={J\bibinitperiod},
       }}%
-      {{hash=MA}{%
-         family={Manure},
-         familyi={M\bibinitperiod},
-         given={Avinash},
-         giveni={A\bibinitperiod},
+      {{hash=BS}{%
+         family={Bouaziz},
+         familyi={B\bibinitperiod},
+         given={Sofien},
+         giveni={S\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {Apress}%
-    }
-    \strng{namehash}{SPMA1}
-    \strng{fullhash}{SPMA1}
+    \strng{namehash}{VJBS1}
+    \strng{fullhash}{VJBS1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.1007/978-1-4842-5558-2_1
-    \endverb
-    \field{subtitle}{Implement Machine Learning and Deep Learning Models with
-  Python}
-    \field{title}{Learn TensorFlow 2.0}
-    \list{location}{1}{%
-      {Berkeley, CA}%
+  \field{howpublished}{\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils}}
+    \field{title}{Introducing TensorFlow Graphics: Computer Graphics Meets Deep
+  Learning}
+    \field{urlday}{31}
+    \field{urlmonth}{03}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{opencv}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=O}{%
+         family={{OpenCV}},
+         familyi={O\bibinitperiod},
+      }}%
     }
-    \field{year}{2020}
+    \strng{namehash}{O1}
+    \strng{fullhash}{O1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{{Introduction}}
+    \verb{url}
+    \verb https://docs.opencv.org/4.x/d1/dfb/intro.html
+    \endverb
+    \field{urlday}{08}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{pillow}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=J}{%
+         family={{ J. A. Clark u.a.}},
+         familyi={J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{J1}
+    \strng{fullhash}{J1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{subtitle}{Overview}
+    \field{title}{{Pillow}}
+    \verb{url}
+    \verb https://pillow.readthedocs.io/en/stable/handbook/overview.html
+    \endverb
+    \field{urlday}{08}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{generative-models-comparison}{article}{}
@@ -879,9 +1378,8 @@
          giveni={C\bibinitperiod\bibinitdelim G\bibinitperiod},
       }}%
     }
-    \list{publisher}{2}{%
-      {Institute of Electrical}%
-      {Electronics Engineers ({IEEE})}%
+    \list{publisher}{1}{%
+      {IEEE}%
     }
     \strng{namehash}{BTSLALY+1}
     \strng{fullhash}{BTSLALYWCG1}
@@ -898,6 +1396,25 @@
     \field{journaltitle}{{IEEE} Transactions on Pattern Analysis and Machine
   Intelligence}
     \field{year}{2022}
+  \endentry
+
+  \entry{piktogramme}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=B}{%
+         family={{Bundesanstalt für Straßenwesen (BASt)}},
+         familyi={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{B1}
+    \strng{fullhash}{B1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+  \field{howpublished}{\url{https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-verkehrszeichen/vz-start.html}}
+    \field{subtitle}{Verkehrszeichenkatalog 2017}
+    \field{title}{Verkehrszeichen und Symbole}
+    \field{urlday}{27}
+    \field{urlmonth}{03}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{geometric-ops}{inbook}{}
@@ -961,7 +1478,81 @@
     \field{year}{2011}
   \endentry
 
-  \entry{cyclegan-tutorial}{misc}{}
+  \entry{identity-loss}{article}{}
+    \name{author}{1}{}{%
+      {{hash=LS}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Sizhe},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {IOP Publishing}%
+    }
+    \strng{namehash}{LS1}
+    \strng{fullhash}{LS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \verb{doi}
+    \verb 10.1088/1742-6596/2400/1/012030
+    \endverb
+    \field{number}{1}
+    \field{pages}{012030}
+    \field{title}{Study for Identity Losses in Image-to-Image Domain
+  Translation with Cycle-Consistent Generative Adversarial Network}
+    \field{volume}{2400}
+    \field{journaltitle}{Journal of Physics: Conference Series}
+    \field{year}{2022}
+    \warn{\item Invalid format of field 'month'}
+  \endentry
+
+  \entry{feature-scaling}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=VR}{%
+         family={Varma},
+         familyi={V\bibinitperiod},
+         given={Roman},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VR1}
+    \strng{fullhash}{VR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Downsides of the sigmiod activation and why you should center
+  your inputs}
+    \verb{url}
+    \verb https://rohanvarma.me/inputnormalization
+    \endverb
+    \field{urlday}{11}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{tensorflow-examples}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=VR}{%
+         family={Varma},
+         familyi={V\bibinitperiod},
+         given={Roman},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VR1}
+    \strng{fullhash}{VR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{TensorFlow Examples}
+    \verb{url}
+    \verb https://rohanvarma.me/inputnormalization
+    \endverb
+    \field{urlday}{11}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{tf-map-fn}{misc}{}
     \name{author}{1}{}{%
       {{hash=T}{%
          family={{TensorFlow}},
@@ -972,34 +1563,13 @@
     \strng{fullhash}{T1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-  \field{howpublished}{\url{hhttps://www.tensorflow.org/tutorials/generative/cyclegan}}
-    \field{note}{Letzter Zugriff: 01.04.2023}
-    \field{title}{{CycleGAN}}
-  \endentry
-
-  \entry{tensorflow-graphics}{misc}{}
-    \name{author}{2}{}{%
-      {{hash=VJ}{%
-         family={Valentin},
-         familyi={V\bibinitperiod},
-         given={Julien},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=BS}{%
-         family={Bouaziz},
-         familyi={B\bibinitperiod},
-         given={Sofien},
-         giveni={S\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{VJBS1}
-    \strng{fullhash}{VJBS1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-  \field{howpublished}{\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils}}
-    \field{note}{Letzter Zugriff: 31.03.2023}
-    \field{title}{Introducing TensorFlow Graphics: Computer Graphics Meets Deep
-  Learning}
+    \field{title}{{tf.map\_fn}}
+    \verb{url}
+    \verb https://www.tensorflow.org/api_docs/python/tf/map_fn
+    \endverb
+    \field{urlday}{11}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{tf-keras-utils}{misc}{}
@@ -1014,41 +1584,10 @@
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
   \field{howpublished}{\url{https://www.tensorflow.org/api_docs/python/tf/keras/utils}}
-    \field{note}{Letzter Zugriff: 31.03.2023}
     \field{title}{{tf.keras.utils}}
-  \endentry
-
-  \entry{tf-dataset}{misc}{}
-    \name{author}{1}{}{%
-      {{hash=T}{%
-         family={{TensorFlow}},
-         familyi={T\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{T1}
-    \strng{fullhash}{T1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-  \field{howpublished}{\url{https://www.tensorflow.org/api_docs/python/tf/data/Dataset}}
-    \field{note}{Letzter Zugriff: 30.03.2023}
-    \field{title}{{tf.data.Dataset}}
-  \endentry
-
-  \entry{piktogramme}{misc}{}
-    \name{author}{1}{}{%
-      {{hash=B}{%
-         family={{Bundesanstalt für Straßenwesen (BASt)}},
-         familyi={B\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{B1}
-    \strng{fullhash}{B1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-  \field{howpublished}{\url{https://www.bast.de/DE/Verkehrstechnik/Fachthemen/v1-verkehrszeichen/vz-start.html}}
-    \field{note}{Letzter Zugriff: 27.03.2023}
-    \field{subtitle}{Verkehrszeichenkatalog 2017}
-    \field{title}{Verkehrszeichen und Symbole}
+    \field{urlday}{31}
+    \field{urlmonth}{03}
+    \field{urlyear}{2023}
   \endentry
 \enddatalist
 \endinput

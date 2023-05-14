@@ -1,15 +1,8 @@
 \section{Training}
+Anwendende können das \ac{CycleGAN} mit dem Skript \mintinline{python}{train.py} trainieren. Prinzipiell besitzt dieses Skript zwei Aufgaben: Es lädt sowohl den Trainingsdatensatz als auch die Piktogramme und ruft die Trainingsfunktion des Modells \ac{CycleGAN} auf.
 
 \subsection{Laden der Datensätze}
-Die lokalen Pfade der Datensätze können innerhalb einer \ac{TOML}-Datei konfiguriert werden. 
-
-\todo[inline]{Erklären was TOML ist und wie es geladen wird.} 
-
-Es wird nun das Skript \mintinline{python}{train.py} betrachtet, das für das Training des Modells verwendet wird. Prinzipiell besitzt dieses Skript zwei Aufgaben: Es muss einerseits sowohl den Datensatz als auch die Piktogramme laden und andererseits soll es die Trainingsfunktion des Modells aufrufen.
-
-Zunächst wird betrachtet, wie der Trainingsdatensatz des Modells geladen werden kann. Die Konfigurationsdatei enthält den Pfad der Trainingsdaten unter dem Punkt \mintinline{python}{train_data} innerhalb der Kategorie \mintinline{python}{paths}.
-
-TensorFlow stellt eine Funktion bereit, mit der ein Datensatz an Bildern aus einem Dateipfad geladen werden kann. Anhand der Ordnerstruktur sortiert die Funktion die Bilder automatisch in ihre Klassen ein. Die Funktion nennt sich \mintinline{python}{load_image_dataset_from_directory} \cite{tf-keras-utils}. In folgendem Listing ist der Teil der \mintinline{python}{train.py} dargestellt, der für das Laden des Datensatzes zuständig ist.
+Die Konfigurationsdatei enthält in der Kategorie \mintinline{python}{paths} den Eintrag \mintinline{python}{train_data}. Das ist der relative oder absolute Pfad zu dem Trainingsdatensatz. Das Skript \mintinline{python}{train.py} lädt den Datensatz in ein \mintinline{python}{tf.data.Dataset} Objekt. Dafür stellt TensorFlow eine Funktion bereit, mit der ein Datensatz an Bildern aus einem Dateipfad geladen werden kann. Anhand der Ordnerstruktur sortiert die Funktion die Bilder automatisch in ihre Klassen ein. Die Funktion nennt sich \mintinline{python}{load_image_dataset_from_directory} \cite{tf-keras-utils}. In folgendem Listing ist der Teil des Skripts dargestellt, der mittels dieser Funktion den Datensatz lädt.
 
 \begin{code}
    \label{code:train-set-laden}
@@ -23,19 +16,26 @@ x_train_processed = utils.load_data.normalize_dataset(x_train)
    \captionof{listing}{\lstinline{train.py} - Laden des Trainingsdatensatzes}
 \end{code}
 
-An die genannte TensorFlow Funktion werden mitunter der Pfad zu den Trainingsdaten, die Batch Size und die Bildauflösung übergeben. Die Auflösung muss deshalb übergeben werden, da die Funktion \mintinline{python}{load_image_dataset_from_directory} alle Bilder auf diese Größe skaliert. Hierzu nutzt die Funktion standardmäßig \emph{bilineare Interpolation}. Dadurch erscheint das Bild nicht als \emph{verpixelt}, sondern fehlende Pixel, die bei der Vergrößerung unweigerlich auftreten, werden durch eine Kombination der benachbarten Pixel aufgefüllt. Dadurch wirkt das Bild statt \emph{verpixelt} eher \emph{verwaschen}. Es kann argumentiert werden, ob nicht eine andere Interpolation besser geeignet sei für diese Studienarbeit.
+An die genannte TensorFlow Funktion übergibt das Skript mitunter den Pfad zu den Trainingsdaten, die Batch Größe und die Bildauflösung. Die Auflösung muss deshalb übergeben werden, da die Funktion \mintinline{python}{load_image_dataset_from_directory} alle Bilder auf diese Größe skaliert. Hierzu nutzt die Funktion standardmäßig \emph{bilineare Interpolation}. Dadurch erscheint das Bild nicht als \emph{verpixelt}, sondern fehlende Pixel, die bei der Vergrößerung unweigerlich auftreten, werden durch eine Kombination der benachbarten Pixel aufgefüllt. Dadurch wirkt das Bild statt \emph{verpixelt} eher \emph{verwaschen}. Das \ac{CycleGAN} benötigt die Daten nicht nach ihren Klassen sortiert, da es mit unüberwachtem Lernen arbeitet. Deshalb wird zusätzlich der Parameter \mintinline{python}{labels} auf \mintinline{python}{None} gesetzt.
 
-\todo[inline]{Bilineare Interpolation erklären. Abbildung einfügen, die vergrößertes Bild zeigt}
+Durch den nächsten Parameter \mintinline{python}{shuffle} erfolgt die Einstellung, dass der Datensatz zufällig durchmischt werden soll. Abschließend folgt ein entscheidender Parameter, der einer näherer Erläuterung bedarf. Wie bereits in Kapitel \ref{chap:3-Datensatz} beschrieben, besitzen die Trainingsbilder des Datensatzes verschiedene Auflösungen. Das bedeutet, dass Bilder die nicht quadratisch sind, durch die Funktion \mintinline{python}{load_image_dataset_from_directory} verzerrt würden, damit sie in ein quadratisches Seitenverhältnis von 256x256 Pixel passen. Tests haben ergeben, dass die meisten Bilder des Datensatzes nur gerinfügig verzerrt werden. Einige Bilder besitzen jedoch signifikant mehr Pixel in der Höhe als in der Breite oder umgekehrt. Um dafür zu sorgen, dass alle Bilder ohne Verzerrung in das Modell gespeist werden, existiert der Parameter \mintinline{python}{crop_to_aspect_ratio}. Dieser Parameter sorgt dafür, dass das Bild derart zugeschnitten wird, dass es in das angegebene Bildformat passt. Hierbei wird stets der zentrale Teil des Bilds erhalten, während aus dem Rand des Bilds Teile abgeschnitten werden können. Da sich die Straßenschilder in den meisten Fällen mittig im Bild befinden, ist dies genau das gewünschte Verhalten.
 
-Das \ac{CycleGAN} benötigt die Daten nicht nach ihren Klassen sortiert. Deshalb wird der Parameter \mintinline{python}{labels} auf \mintinline{python}{None} gesetzt. Das bedeutet, dass die unterschiedlichen Klassen der Daten ignoriert werden. Das kann gemacht werden, da mittels des \emph{Cycle Consistency Losses} bestimmt werden soll, ob das Ausgangsbild von Generator X der gleichen Klasse entspricht wie sein Eingangsbild. \acp{GAN} arbeiten im allgemeinen mit unüberwachtem lernen.
+Was die Funktion \mintinline{python}{load_image_dataset_from_directory} zurückgibt, ist ein \mintinline{python}{tf.data.Dataset} Objekt. Es kann somit direkt für die \mintinline{python}{CycleGan.fit}-Methode verwendet werden. Ein letzter Schritt ist, die Bilder zu normalisieren. Dies geschieht mittels der Funktion \mintinline{python}{normalize_dataset} aus dem eigens definierten Modul \mintinline{python}{utils.load_data}. Diese Funktion normalisiert die Pixelwerte der Bilder auf den Bereich von -1 bis 1. Dies ist notwendig, um die Bilder in die \acp{KNN} einzuspeisen.
 
-Durch den nächsten Parameter erfolgt die Einstellung, dass der Datensatz zufällig durchmischt werden soll. Abschließend folgt ein entscheidender Parameter, der einer näherer Erläuterung bedarf. Wie bereits in Kapitel \ref{chap:3-Datensatz} beschrieben, besitzen die Trainingsbilder des Datensatzes verschiedene Auflösungen. Das bedeutet, dass Bilder die nicht quadratisch sind, durch die Funktion \mintinline{python}{load_image_dataset_from_directory} verzerrt würden, damit sie in ein quadratisches Seitenverhältnis von 256x256 Pixel passen. Dies ist in der nachfolgenden Abbildung beispielhaft dargestellt:
+Damit ist das Laden der Trainingsdaten abgeschlossen. Die Piktogramme werden unter der Verwendung des gleichen Schemas geladen. Es ergibt sich ein \mintinline{python}{tf.data.Dataset} Objekt mit dem Namen \mintinline{python}{x_pictograms_processed}.
 
-\todo[inline]{Abbildung einfügen}
+\subsection{Ausführen des Trainings}
+Das Training wird vollständig durch die Klasse \mintinline{python}{CycleGan} durchgeführt. Für den Aufruf mit den gelandenen Datensatz-Objekten sind folgende Codezeilen notwendig:
+\begin{code}
+    \begin{minted}{python}
+cycle_gan = model.CycleGan(config)
+cycle_gan.restore_latest_checkpoint_if_exists()
+cycle_gan.fit(x_pictograms_processed, x_train_processed, epochs=config['training']['number_of_epochs'])
+    \end{minted}
+    \captionof{listing}{\lstinline{train.py} - Laden des Trainingsdatensatzes}
+ \end{code}
 
-Tests haben ergeben, dass die meisten Bilder des Datensatzes nur gerinfügig verzerrt werden. Einige Bilder besitzen jedoch signifikant mehr Pixel in der Höhe als in der Breite oder umgekehrt. Um dafür zu sorgen, dass alle Bilder ohne Verzerrung in das Modell gespeist werden, existiert der Parameter \mintinline{python}{crop_to_aspect_ratio}. Dieser Parameter sorgt dafür, dass das Bild derart zugeschnitten wird, dass es in das angegebene Bildformat passt. Hierbei wird stets der zentrale Teil des Bilds erhalten, während aus dem Rand des Bilds Teile abgeschnitten werden können. Da sich die Straßenschilder in den meisten Fällen mittig im Bild befinden, ist dies genau das gewünschte Verhalten.
-
-Was die Funktion \mintinline{python}{load_image_dataset_from_directory} zurückgibt, ist ein TensorFlow \emph{Dataset} Objekt. Eine besonderheit hiervon ist, dass dieses Objekt seine Daten automatisch in Batches zurückgibt. Iteriert man beispielsweise mittels einer \mintinline{python}{for}-Schleife über ein \emph{Dataset}, so ist jedes Element ein vierdimensionaler Tensor des Formats: \emph{(Batch Größe, Breite, Höhe, Anzahl Farbkanäle)}. \cite{tf-dataset}
+Das Skript \mintinline{python}{train.py} instanziiert zunächst ein \mintinline{python}{CycleGan} Objekt. Falls vorherige Parameter in einem Checkpoint gespeichert sind, werden diese anschließend geladen. Ansonsten werden die Parameter durch TensorFlow zufällig initialisiert. Abschließend erfolgt der Aufruf der \mintinline{python}{fit}-Methode mit der in der Konfigurationsdatei angegebenen Anzahl an Epochen.
 
 \subsection{Logging}
 
@@ -46,7 +46,12 @@ $ tensorboard --logdir ./logs/resnet
    \end{minted}
 \end{code}
 
-\subsection{Ergebnisse}
+\subsection{Vorgehensweise}
+
+\section{Trainingsergebnisse}
+
+Für das Training der U-Net- und ResNet-basierten \acp{CycleGAN} dienen zwei verschiedene Systeme. Dabei zum einen Google Colab. Hier bietet Google eine kostenfreie Version sowie ein Premium-Abonnement an. In der kostenfreien Version ist jedoch kein Training über Nacht möglich, da das System nach einer etwa zwanzig-minütigen Inaktivität die Verbindung zum Rechner trennt. Unter anderem aus diesem Grund wird das Training zusätzlich auf einem Server der DHBW durchgeführt. Dieser besitzt eine Grafikkarte mit 25 Gigabyte Speicher und ist damit leistungsstärker als die von Google Colab angebotenen Systeme. Die Trainingsdauer pro Epoche ist für die traininerten Modelle in der nachfolgenden Tabelle aufgeführt. Es zeigt sich hier außerdem, dass das U-Net signifikant schneller trainiert als das ResNet, jedoch Checkpoints besitzt, die mehr Speicherplatz verbrauchen. 
+
 \begin{table}[H]
    \centering
    \begin{tabular}{lllll}
@@ -57,9 +62,178 @@ $ tensorboard --logdir ./logs/resnet
    
    Modell & Google Colab & DHBW Server & Parameter & Checkpoint Größe \\
    \midrule
-   UNet & 30 min. & 5 min. & 0 & 1.340.240 KB \\
-   ResNet & 90 min. & 30 min. & 0 & 331.709 KB \\
+   U-Net & 30 min. & 5 min. & 0 & 1.340.240 Byte \\
+   ResNet & 90 min. & 30 min. & 0 & 331.709 Byte \\
    \bottomrule
-   \end{tabular}
-   \caption{Vergleich von UNet und ResNet}
+    \end{tabular}
+    \caption{Vergleich von UNet und ResNet}
 \end{table}
+
+\subsection{U-Net}
+Das U-Net-basierte \ac{CycleGAN} verbessert sich während des Trainings nahezu kontinuierlich. Das Modell ist mit einer Anzahl von 200 Epochen trainiert. Der Verlauf der Verlustfunktionen über die Anzahl der Trainingsschritte ist im Anhang in Abbildung \ref{fig:unet-tensorboard} gezeigt. Ein Trainingsschritt eintspricht einem Durchlauf der \mintinline{python}{train_step} Funktion des \ac{CycleGAN} über einem Batch.  Es lassen sich verschiedene Dinge aus den Graphen ablesen: Die Verluste der Generatoren scheinen gegen einen Wert zu konvergieren. Die Verluste der Diskriminatoren zeigen hingegen deutliche Schwankungen ohne ein erkennbares Muster. Die Verluste der Generatoren sind beinahe um einen Faktor 10 größer als die der Diskriminatoren. Aus diesem Grund konvergiert der Gesamtverlust des \ac{CycleGAN} gegen einen Wert. Dieser liegt bei 6.
+
+Abbildung \ref{fig:unet-generated-imgs} im Anhang zeigt zudem für die Epochen 1 bis 100, wie sich die Qualität der Generierung mit den Trainingsepochen verbessert. Hier lässt sich außerdem erkennen, dass das Modell durch die Wahl einer Bild-zu-Bild-Übersetzung die Schilder nicht selber erzeugen muss. Verschiedenen Trainingsdurchläufe haben ergeben, dass der Identity Loss für das UNet keinen signifikanten Einfluss hat. Damit kann argumentiert werden, dass er für dieses \ac{CycleGAN} nicht nötig sei.
+
+Die generierten Bilder zeigen verschiedene Hintergründe. Diese Varianz an Hintergründen ist allgemein pro Kategorie von Straßenschild gleich. Somit besitzen beispielsweise alle Schilder der Kategorie Geschwindigkeitsbegrenzung die gleichen Arten von Hintergründen. Die Schilder der Kategorie Aufhebung können allgemein als wenig fotorealistisch bewertet werden. Das ist vermutlich auf die geringere Anzahl an Trainingsdaten für diese Klassen zurückzuführen.
+
+\todo[inline]{Wurde jetzt auf 200 Epochen trainiert. Hier scheint der total loss gegen einen Wert zu konvergieren. Die Qualität der Schilder sieht etwas besser aus als nach 150 Epochen. Die Hintergründe sind kaum bessser. In der Evaluation den Unterschied der Prozentzahl von 150 Epochen zu 200 Epochen zeigen.}
+
+\subsection{ResNet}
+
+Für das ResNet-basierte \ac{CycleGAN} zeigen die Verlustfunktionen einen ähnlichen Verlauf wie bei dem U-Net-basierten \ac{CycleGAN}. Aus diesem Grund sind hierfür die Graphen nicht im Anhang abgebildet. Der Unterschied ist, dass der Verlauf der Verlustfunktionen hier eine geringere Aussagekraft für die Qualität der generierten Bilder zu haben scheint. Das Training des ResNet-basierten Modells ist oszillierend, da das \ac{CycleGAN} einige Klassen in nachfolgenden Epochen besser erzeugt, während andere Klassen eine schlechtere Generierungsqualität als davor aufweisen. Um diesem Verhalten entgegenzuwirken, verwendet dieses \ac{CycleGAN}-Modell eine $\mathcal{L}_2$ Verlustfunktion für den Adversarial Loss, während das U-Net-basierte Modell weiterhin eine logarithmische Verlustfunktion verwendet. Auch diese Veränderung der Verlustfunktion, die laut der Literatur das Training stabilisieren kann, behebt das oszillierende Verhalten nicht.
+
+Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Collaps auftritt. Das ist in Abbildung \ref{fig:modal-collaps} dargestellt, wobei Epochen mit \emph{Ep.} abgekürzt ist. Für jedes Piktogramm und jede Perspektive erzeugt das Modell einen beinahe identischen Hintergrund. Das gibt Hinweise darauf, dass die Generatoren die Diskriminatoren derart überlisten, dass letztere nicht mehr lernen.
+
+% MODAL COLLAPS
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs.png}
+        \caption{200 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs 2.png}
+        \caption{200 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs 3.png}
+        \caption{200 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs 4.png}
+        \caption{200 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+    \centering
+    \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs 6.png}
+    \caption{200 Ep.}
+\end{subfigure}
+        \caption{Modal Collaps des ResNet nach 200 Trainingsepochen}
+        \label{fig:modal-collaps}
+\end{figure}
+
+Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stopping)}. Diese Lösung wird gewählt. Dabei muss für jede infrage kommende Epochen manuell geprüft werden, welche davon das zufriedenstellendste Ergebnis zeigt. Auch da die Werte der Verlustfunktionen hierauf, wie bereits erwähnt, nur eine begrenzte Aussagekraft haben. Jede der Epochen 120 bis 190 erzeugt eine Bandbreite an Generierungsqualitäten. Abbildung \ref{fig:resnet-guter-bilder} zeigt positiv herausstechende Bilder für verschiedene Epochen, während \ref{fig:resnet-schlechte-bilder} negativ herausstechende Bilder zeigt. Die finale Entscheidung ist, das auf 170 Epochen trainierte ResNet-basierte Modell zu verwenden.
+
+% RESNET 9 BLOCK GUTE BILDER
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Gute Bilder/120 epochs.png}
+        \caption{120 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Gute Bilder/160 epochs.png}
+        \caption{160 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Gute Bilder/170 epochs.png}
+        \caption{170 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Gute Bilder/170 epochs 2.png}
+        \caption{170 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+    \centering
+    \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Gute Bilder/180 epochs.png}
+    \caption{180 Ep.}
+\end{subfigure}
+        \caption{Positiv herausstechende Bilder des ResNets verschiedener Epochen}
+        \label{fig:resnet-gute-bilder}
+\end{figure}
+
+% RESNET 9 BLOCKS SCHLECHTE BILDER
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Schlechte Bilder/120 epochs.png}
+        \caption{120 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Schlechte Bilder/140 epochs 2.png}
+        \caption{140 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Schlechte Bilder/140 epochs.png}
+        \caption{140 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Schlechte Bilder/180 epochs 2.png}
+        \caption{180 Ep.}
+    \end{subfigure}
+    \hspace{3em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+    \centering
+    \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Schlechte Bilder/180 epochs.png}
+    \caption{180 Ep.}
+\end{subfigure}
+        \caption{Negativ herausstechende Bilder des ResNets verschiedener Epochen}
+        \label{fig:resnet-schlechte-bilder}
+\end{figure}
+
+Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass die Generatoren ein anderes ResNet-Modell verwenden. Ein Modell, das verhindern kann, dass die Generatoren die Diskriminatoren vollständig überlisten. Aus diesem Grund besitzen die Generatoren in einem nächsten Trainingsdurchlauf 6 Residual Blocks, statt der durch die \ac{CycleGAN} Veröffentlichung vorgeschlagene Anazahl an 9 für Bilder der Auflösung 256x256. Während hier kein Modal Collaps auftritt, ist das Training weiterhin oszillierend. Auch hier zeigt die Epoche 200 nicht die höchste Generierungsqualität. Bei diesem ResNet-basierten Modell wird deshalb Epoche 150 für die Evaluation in Kapitel \ref{chap:Evaluation} gewählt. Damit soll geprüft werden, welche Anzahl an Residual Blocks sich eignet. Die Abbildung \ref{resnet-6-blocks} zeigt Beispielsbilder für verschiedene Epochen.
+
+% RESNET 6 BLOCKS
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 6 res blocks/Schlechte Bilder/epoche 140.png}
+        \caption{140 Ep.}
+    \end{subfigure}
+    \hspace{1em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 6 res blocks/Gute Bilder/epoch 170.png}
+        \caption{170 Ep.}
+    \end{subfigure}
+    \hspace{1em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+        \centering
+        \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 6 res blocks/Schlechte Bilder/epoche 180.png}
+        \caption{180 Ep.}
+    \end{subfigure}
+    \hspace{1em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+    \centering
+    \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 6 res blocks/Gute Bilder/epoche 180 2.png}
+    \caption{180 Ep.}
+\end{subfigure}
+\hspace{1em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+    \centering
+    \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 6 res blocks/Gute Bilder/epoche 180.png}
+    \caption{180 Ep.}
+\end{subfigure}
+\hspace{1em}%
+    \begin{subfigure}[b]{0.12\textwidth}
+    \centering
+    \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 6 res blocks/Schlechte Bilder/epoche 190.png}
+    \caption{190 Ep.}
+\end{subfigure}
+        \caption{Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks}
+        \label{fig:resnet-6-blocks}
+\end{figure}

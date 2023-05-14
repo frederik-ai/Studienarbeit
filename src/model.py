@@ -3,18 +3,15 @@ Implementation of the CycleGAN model. Partly derived from: https://www.tensorflo
 """
 
 import tensorflow as tf
-import time
-import pickle
 from tqdm import tqdm
 import uuid
-import os
 from enum import Enum
 
 from tensorflow_examples.models.pix2pix import pix2pix
 import utils.misc
 import utils.load_data
 import utils.preprocess_image
-import resnet
+import external.resnet as resnet
 
 
 class GeneratorType(Enum):
@@ -48,7 +45,7 @@ class CycleGan:
 
     def __init__(self, config):
         # Set TensorFlow log level
-        tf.get_logger().setLevel('ERROR')    # Set TensorFlow log level to ERROR
+        tf.get_logger().setLevel('ERROR')  # Set TensorFlow log level to ERROR
 
         if config['model']['generator_type'] == 'unet':
             self.generator_type = GeneratorType.U_NET
@@ -68,8 +65,8 @@ class CycleGan:
             self.discriminator_x = pix2pix.discriminator(norm_type='instancenorm', target=False)
             self.discriminator_y = pix2pix.discriminator(norm_type='instancenorm', target=False)
         else:
-            self.discriminator_x = resnet.ConvDiscriminator((256, 256, 3))
-            self.discriminator_y = resnet.ConvDiscriminator((256, 256, 3))
+            self.discriminator_x = resnet.ConvDiscriminator((self.image_size, self.image_size, 3))
+            self.discriminator_y = resnet.ConvDiscriminator((self.image_size, self.image_size, 3))
 
         # Optimizers
         self.generator_g_optimizer = tf.keras.optimizers.legacy.Adam(2e-4, beta_1=0.5)
@@ -79,14 +76,14 @@ class CycleGan:
 
         # Loss functions
         if self.generator_type == GeneratorType.U_NET:
-            # Showed better performance with unet
             self.adversarial_loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         else:
+            # Because ResNet training is unstable
             self.adversarial_loss = tf.keras.losses.MeanSquaredError()
         self.l1_loss = tf.keras.losses.MeanAbsoluteError()
         self.LAMBDA = config['training']['lambda']
-        
-        self.loss_obj = tf.keras.losses.BinaryCrossentropy(from_logits=True)
+
+        self.loss_obj = self.adversarial_loss
 
         # For Tensorboard
         self.total_epochs = tf.Variable(0)
@@ -121,19 +118,20 @@ class CycleGan:
         """
         return self.generator_g(input_pictogram, training=False)
 
-    def fit(self, pictograms, real_images, epochs=1):
-        """Train the model for a specific number of epochs. Checkpoints are saved every epoch.
+    def fit(self, pictograms, real_images, epochs=1, epochs_per_checkpoint=10):
+        """Train the model for a specific number of epochs. Checkpoints are saved every 10 epochs.
 
         Args:
             pictograms: 4d tensor containing the raw pictograms (batch_size, height, width, channels).
             real_images: 4d tensor containing the training images of street signs (batch_size, height, width, channels).
             epochs: Number of epochs to train the model.
+            epochs_per_checkpoint: Number of epochs before a new checkpoint is saved.
         """
         print('Training...')
         with self.summary_writer.as_default():
             for epoch in range(epochs):
                 self.total_epochs.assign_add(1)  # increment
-                print(f'Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs-(epoch+1)}')
+                print(f'Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs - (epoch + 1)}')
 
                 # Single training step
                 for image_batch in tqdm(real_images):
@@ -161,32 +159,17 @@ class CycleGan:
                 random_filename = str(uuid.uuid4())
                 utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
                                                relative_path='generated_images')
-                
+
                 self.summary_writer.flush()  # write tensorboard logs to log file
 
-                if ((epoch + 1) % 10 == 0) and ((epoch + 1) < epochs):
-                     self.checkpoint_manager.save()
-                     print('Checkpoint saved for epoch {}.'.format(epoch + 1))
+                # Save a checkpoint each epochs_per_checkpoint epochs
+                if ((epoch + 1) % epochs_per_checkpoint == 0) and ((epoch + 1) < epochs):
+                    self.checkpoint_manager.save()
+                    print('Checkpoint saved for epoch {}.'.format(epoch + 1))
         self.checkpoint_manager.save()
         print('Checkpoint saved for this training')
 
-    def discriminator_loss(self, real, generated):
-        real_loss = self.loss_obj(tf.ones_like(real), real)
-        generated_loss = generated_loss = self.loss_obj(
-            tf.zeros_like(generated), generated)
-        total_discriminator_loss = real_loss + generated_loss
-
-        return total_discriminator_loss * 0.5
-
-    def calc_cycle_loss(self, real_image, cycled_image):
-        loss1 = tf.reduce_mean(tf.abs(real_image - cycled_image))
-        return self.LAMBDA * loss1
-
-    def identity_loss(self, real_image, same_image):
-        loss = tf.reduce_mean(tf.abs(real_image - same_image))
-        return self.LAMBDA * 0.5 * loss
-
-    def train_step(self, real_x, real_y):
+    def train_step(self, real_pictogram, real_street_sign, identity_loss=False):
         """Train the model on a single batch of images.
 
         Args:
@@ -197,13 +180,6 @@ class CycleGan:
             Losses (dict): Dictionary containing the losses of the generators and discriminators.
         """
         with tf.GradientTape(persistent=True) as tape:
-            real_pictogram = real_x
-            real_street_sign = real_y
-            
-            # same_x and same_y are used for identity loss.
-            same_x = self.generator_f(real_x, training=True)
-            same_y = self.generator_g(real_y, training=True)
-            
             # Generate
             generated_street_sign = self.generator_g(real_pictogram, training=True)
             generated_pictogram = self.generator_f(real_street_sign, training=True)
@@ -218,7 +194,7 @@ class CycleGan:
             discriminator_x_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_x_fake_pictogram),
                                                               discriminator_x_fake_pictogram)
             # -- total loss
-            disc_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
+            discriminator_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
 
             # Discriminator Y loss
             # -- how well does it identify real traffic signs as real?
@@ -230,15 +206,18 @@ class CycleGan:
             discriminator_y_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_y_fake_street_sign),
                                                               discriminator_y_fake_street_sign)
             # -- total loss
-            disc_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
+            discriminator_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
 
             # Cycle consistency loss
+            # -- how well does the generated image match the input images?
             # -- pictogram -> street sign -> pictogram
-            # -- how well does the input pictogram match the generated pictogram?
             cycled_pictogram = self.generator_f(generated_street_sign, training=True)
+            cycled_pictogram_loss = self.l1_loss(real_pictogram, cycled_pictogram)
+            # -- street sign -> pictogram -> street sign
             cycled_street_sign = self.generator_g(generated_pictogram, training=True)
-            total_cycle_loss = self.calc_cycle_loss(
-                real_pictogram, cycled_pictogram) + self.calc_cycle_loss(real_street_sign, cycled_street_sign)
+            cycled_street_sign_loss = self.l1_loss(real_street_sign, cycled_street_sign)
+            # -- total loss
+            cycle_consistency_loss = cycled_pictogram_loss + cycled_street_sign_loss
 
             # Generators G&F loss
             # -- how well do the generators fool the discriminators?
@@ -246,20 +225,29 @@ class CycleGan:
                                                      discriminator_y_fake_street_sign)
             generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
                                                      discriminator_x_fake_pictogram)
-            total_gen_g_loss = generator_g_loss + total_cycle_loss + self.identity_loss(real_y, same_y)
-            total_gen_f_loss = generator_f_loss + total_cycle_loss + self.identity_loss(real_x, same_x)
+            total_generator_g_loss = generator_g_loss + cycle_consistency_loss
+            total_generator_f_loss = generator_f_loss + cycle_consistency_loss
 
-            total_loss = disc_x_loss + disc_y_loss + total_gen_g_loss + total_gen_f_loss
+            # -- how much do the generators change an image that is already from their target domain?
+            if identity_loss:
+                same_x = self.generator_f(real_pictogram, training=True)
+                generator_g_identity_loss = self.l1_loss(real_pictogram, same_x)
+                same_y = self.generator_g(real_street_sign, training=True)
+                generator_f_identity_loss = self.l1_loss(real_street_sign, same_y)
+                total_generator_g_loss += generator_g_identity_loss * self.LAMBDA * 0.5
+                total_generator_f_loss += generator_f_identity_loss * self.LAMBDA * 0.5
+
+            total_loss = discriminator_x_loss + discriminator_y_loss + total_generator_g_loss + total_generator_f_loss
 
         # Gradients for optimization
-        generator_g_gradients = tape.gradient(total_gen_g_loss,
+        generator_g_gradients = tape.gradient(total_generator_g_loss,
                                               self.generator_g.trainable_variables)
-        generator_f_gradients = tape.gradient(total_gen_f_loss,
+        generator_f_gradients = tape.gradient(total_generator_f_loss,
                                               self.generator_f.trainable_variables)
 
-        discriminator_x_gradients = tape.gradient(disc_x_loss,
+        discriminator_x_gradients = tape.gradient(discriminator_x_loss,
                                                   self.discriminator_x.trainable_variables)
-        discriminator_y_gradients = tape.gradient(disc_y_loss,
+        discriminator_y_gradients = tape.gradient(discriminator_y_loss,
                                                   self.discriminator_y.trainable_variables)
 
         # Apply the gradients
@@ -276,10 +264,10 @@ class CycleGan:
                                                            self.discriminator_y.trainable_variables))
 
         return {
-            'discriminator_x_loss': disc_x_loss,
-            'discriminator_y_loss': disc_y_loss,
-            'generator_g_loss': total_gen_g_loss,
-            'generator_f_loss': total_gen_f_loss,
+            'discriminator_x_loss': discriminator_x_loss,
+            'discriminator_y_loss': discriminator_y_loss,
+            'generator_g_loss': total_generator_g_loss,
+            'generator_f_loss': total_generator_f_loss,
             'total_loss': total_loss
         }
 

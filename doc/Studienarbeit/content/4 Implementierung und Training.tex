@@ -1,6 +1,6 @@
 \chapter{Implementierung und Training}
 
-Die Ordnerstruktur der Implementierung ist im Anhang abgebildet. Im wesentlichen wird in diesem Kapitel auf folgende Bestandteile eingegangen:
+Die Implementierung des \ac{CycleGAN} basiert auf den bisher beschriebenen Entscheidungen. In einem Ordner \mintinline{python}{src} befinden sich alle Dateien der Implementierung. Hier existieren neben Dateien für das Training und die Anwendung des Modells auch eine Konfigurationsdatei und verschiedene Hilfsfunktionen. Die Ordnerstruktur der Implementierung ist im Anhang abgebildet. Im wesentlichen geht dieses Kapitel auf folgende Bestandteile ein:
 \begin{itemize}
    \item Die Konfigurationsdatei für das Projekt befindet sich im Pfad \mintinline{python}{config/config.toml}
    \item Selbst-definierte Hilfsfunktionen befinden sich im Python-Modul \mintinline{python}{utils}
@@ -9,7 +9,7 @@ Die Ordnerstruktur der Implementierung ist im Anhang abgebildet. Im wesentlichen
    \item Das Modell kann mittels des Python-Skripts \mintinline{python}{generate.py} zum Generieren von Bildern genutzt werden
 \end{itemize}
 
-Es finden sich hierbei verschiedene Programmierparadigmen: objektorientierte Programmierung, prozedurale Programmierung und funktionale Programmierung. Das \ac{CycleGAN} ist als Klasse implementiert und lässt sich somit innerhalb der Skripte instanziieren. Das Modul \mintinline{python}{utils} 
+Das \ac{CycleGAN} ist als Klasse implementiert und lässt sich somit innerhalb der Skripte instanziieren. Die Konfigurationsdatei ist eine \acs{TOML}-Datei. \ac{TOML} ist eine Konfigurationssprache, die Daten als Schlüssel-Werte-Paare speichert. Die Konfigurationsdatei ist in die Kategorien \mintinline{python}{paths}, \mintinline{python}{model} und \mintinline{python}{training} unterteilt. Anwendende können hier die Pfade zu den Trainingsdaten oder aber Parameter wie \mintinline{python}{batch_size} oder \mintinline{python}{number_of_epochs} angeben.
 
 \acused{TOML}
 
@@ -19,4 +19,4 @@ Es finden sich hierbei verschiedene Programmierparadigmen: objektorientierte Pro
 
 \input{content/4 Implementierung und Training/Training.tex}
 
-\section{Generierung}
+\input{content/4 Implementierung und Training/Generierung.tex}

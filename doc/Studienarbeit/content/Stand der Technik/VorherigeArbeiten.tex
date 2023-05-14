@@ -98,12 +98,14 @@ Der Nutzen der generierten Bildern wird anhand eines Modells zur Objektdetektion
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{l|cc|c}
-    Modell   & \begin{tabular}[c]{@{}c@{}}Reale Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Künstliche Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}} Genauigkeit\end{tabular} \\ \hline
+    \begin{tabular}{|l||c|c||l|}
+    \hline
+    Modell   & \begin{tabular}[c]{@{}c@{}}Reale Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Künstliche Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}} Genauigkeit\end{tabular} \\ \hline \hline
     Densenet & Ja                                                                & Ja                                                                    & 92\%                                                                  \\
     Resnet   & Ja                                                                & Ja                                                                    & 91\%                                                                  \\
     Densenet & Ja                                                                & Nein                                                                  & 88\%                                                                  \\
-    Resnet   & Ja                                                                & Nein                                                                  & 63\%                                                                 
+    Resnet   & Ja                                                                & Nein                                                                  & 63\%  \\                                                               
+    \hline
     \end{tabular}
     \caption{Vergleich der Objekterkennung mit und ohne künstliche Trainingsdaten}
 \end{table}
@@ -130,14 +132,16 @@ Für die Generierung erhält das Netzwerk das Piktogramm eines Straßenschilds a
 Es erfolgt eine Evaluation, inwiefern die künstlich generierten Trainingsbilder zwei verschiedene Klassifikatoren verbessern können. Dabei handelt es sich um eine sogenannte \ac{SVM} und ein \ac{CNN}. \acp{SVM} sind eine Art von trainierbaren Klassifikatoren, die nicht auf \acp{KNN} basieren \cite{visualApproach}. Einerseits werden die Algorithmen mit realen Trainingsdaten trainiert und andererseits vollständig mit generierten Daten. Die Ergebnisse bezüglich der Genauigkeit der Klassifikation je nach der Art der Trainingsbilder ist in Tabelle \ref{tab:cyclegan-eval} dargestellt. Es lässt sich erkennen, dass die Klassifikation um jeweils etwa 7-9\% ungenauer ist, als mit realen Trainingsdaten. Es ist jedoch auch erwartbar, dass die Genauigkeit etwas geringer ausfällt, da die generierten Bilder der Verteilung des echten Trainingsdatensatzes folgen sollen, dies jedoch nicht zu 100\% möglich ist. \cite{gtsrbGAN}
 
 \begin{table}[H]
-    \label{tab:cyclegan-eval}
     \centering
-    \begin{tabular}{l|cc|c}
-    Modell & \begin{tabular}[c]{@{}c@{}}Reale Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Künstliche Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Genauigkeit\end{tabular} \\ \hline
+    \begin{tabular}{|l||c|c||l|}
+    \hline
+    Modell & \begin{tabular}[c]{@{}c@{}}Reale Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Künstliche Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Genauigkeit\end{tabular} \\ \hline \hline
     CNN    & Ja                                                                & Nein                                                                  & 95,42\%                                                               \\
     SVM    & Ja                                                                & Nein                                                                  & 87,97\%                                                               \\
     CNN    & Nein                                                              & Ja                                                                    & 87,57\%                                                               \\
-    SVM    & Nein                                                              & Ja                                                                    & 79,27\%                                                              
+    SVM    & Nein                                                              & Ja                                                                    & 79,27\% \\
+    \hline                                                              
     \end{tabular}
     \caption{Vergleich der Klassifikation mit echten und künstlichen Trainingsdaten \cite{gtsrbGAN}}
+    \label{tab:cyclegan-eval}
 \end{table}

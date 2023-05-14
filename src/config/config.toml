@@ -1,18 +1,22 @@
 [paths]
-# train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
-# pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms"
-pictograms = "../data/Pictograms"
-train_data = "C:\\Users\\Frederik\\Desktop\\data\\Train\\GTSRB"
+# These paths are relative to the directory src; you can also use absolute paths
+train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
+# pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms All Resized"
+pictograms = "C:\\Users\\Frederik\\Desktop\\data\\Pictograms All Resized"
+# train_data = "C:\\Users\\Frederik\\Desktop\\data\\Train\\GTSRB"
 augmentation_data = "../data/Augmentation"
 destination = "generator_test"  # Images generated with generate.py will be stored here
 
     [paths.classifier]
-    train_data = "C:\\Users\\Frederik\\Desktop\\data\\Train\\GTSRB"
-    test_data = "C:\\Users\\Frederik\\Desktop\\data\\Test"
-    checkpoint_directory_name = "real_and_generated_data"
+    # These paths are relative to the directory src/classifier; you can also use absolute paths
+    train_data = "../../data/Augmented Pictograms"
+    test_data = "../../data/Test"
+    # train_data = "C:\\Users\\Frederik\\Desktop\\data\\U-Net generated images"
+    # test_data = "C:\\Users\\Frederik\\Desktop\\data\\Test"
+    checkpoint_directory_name = "all_training_data"
 
 [model]
-image_size = 256                # Do not change this, can lead to errors
+image_size = 256                  # Changing this can lead to errors
 generator_type = 'resnet'         # 'resnet' or 'unet'
 
 [training]

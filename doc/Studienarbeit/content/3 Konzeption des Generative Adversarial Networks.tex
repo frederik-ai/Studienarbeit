@@ -13,11 +13,11 @@ Bevor die Piktogramme an den Generator übergeben werden, werden sie zufällig r
 
 Um bestimmte Transformationen eines Bilds mittels einer Matrixpultiplikation darstellen zu können, wird häufig ein sogenanntes \emph{homogenes Koordinatensystem} verwendet. Dabei wird das Koordinatensystem um eine weitere Dimension erweitert. Ein Punkt $p = [x, y]^\mathsf{T}$ kann somit um einen beliebigen Wert in z-Richtung verschoben werden. Dadurch wird ein Punkt $\tilde{p}$ im homogenen Koordinatensystem durch drei Koordinaten $\tilde{x}$, $\tilde{y}$ und $\tilde{z}$ beschrieben. Transormationen werden in der homogenen Darstellung durchgeführt und anschließend werden daraus die kartesischen Koordinaten $x$ und $y$ bestimmt. Somit erhält man aus der Transformation erneut ein zweidimensionales Bild. \cite{geometric-ops} \cite{math-primer}
 
-Dies wird für eine dreidimensionale Rotation der Piktogramme benötigt. Die Rotation soll durch drei \emph{eulersche Winkel} beschrieben werden. Das bedeutet, dass sie sich aus einer Rotation um die z-Achse, einer um die y-Achse und einer um die x-Achse zusammensetzt. Dies ist in der nachfolgenden Grafik abgebildet. Die bläulichen Balken zeigen dabei die Achse an, um die gedreht wird. Die erste Rotation ist um die z-Achse, wodurch der Balken in die dritte Bildebene geht. \cite{math-primer}
+Dies wird für eine dreidimensionale Rotation der Piktogramme benötigt. Die Rotation soll durch drei \emph{eulersche Winkel} beschrieben werden. Das bedeutet, dass sie sich aus einer Rotation um die z-Achse, einer um die y-Achse und einer um die x-Achse zusammensetzt. Dies ist in Abbildung \ref{fig:rotation} gezeigt. Die bläulichen Balken zeigen dabei die Achse an, um die gedreht wird. Die erste Rotation ist um die z-Achse, wodurch der Balken in die dritte Bildebene geht. \cite{math-primer}
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Datenaugmentation/Rotation.png}
+	\includegraphics[width=0.6\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Datenaugmentation/Rotation.png}
 	\caption{Rotation der Straßenschilder mittels eulerscher Winkel}
 	\label{fig:rotation}
 \end{figure}
@@ -107,4 +107,19 @@ Zusätzlich zu der Rotation, soll das Modell die Piktogramme zufällig in ihrer 
 %\end{lstlisting}
 
 \section{Training}
-Überlicherweise soll beim Training von neuronalen Netzen die Verlustfunktion gegen den Wert \emph{null} streben. Bei diesem Modell soll die Verlustfunktion jedoch gegen einen Wert konvergieren, der größer ist als \emph{null}. In diesem Fall schaffen es weder die Generatoren, die Funktionswerte zu minimieren, noch können die Diskriminatoren die Funktionswerte weiter maximieren. In diesem Fall ist das sogenannte \emph{Nash-Gleichgewicht} erreicht. Das Training ist somit beendet, da sich das Modell mit den gegebenen Daten nicht weiter verbessern kann.
+Das Training basiert auf den in Kapitel \ref{chap:GANs} vorgestellten Verlustfunktionen für \acp{CycleGAN}. In Abbildung \ref{fig:training} sind hierfür die drei Trainingsschritte des \ac{CycleGAN} dargestellt. Die ersten beiden Schritte berechnen den \emph{Adversarial Loss} von Generator $G$ und Diskriminator $D_y$, beziehungsweise von Generator $F$ und Diskriminator $D_X$. Was hier trainiert wird, ist die Übersetzung von Domäne X in Y, beziehungsweise von Domäne Y in X. Im Anschluss daran erfolgt die Berechnung des \emph{Cycle Consistency Loss}. Das ist der Trainingsschritt der überprüfen soll, dass die von Generator $G$ erzeugten Bilder das erwartete Straßenschild zeigen. Dazu erzeugt $G$ aus einem Piktogramm das Bild eines Straßenschilds woraus $F$ wiederum das Piktogramm erzeugen soll. Der Generator $G$ ist hierbei grün hervorgehoben, da dies das einzige \ac{KNN} ist, dass für die praktische Generierung von Bildern verwendet wird. Die weiteren \acp{KNN} sollen lediglich den Generator $G$ trainieren. \cite{cycleGAN}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{../images/3 Konzeption des Generative Adversarial Networks/Training/traffic_signs.png}
+	\caption{Trainingsschritte des \ac{CycleGAN}}
+	\label{fig:training}
+\end{figure}
+
+Für bestimmte Anwendungsfälle schlägt das \ac{CycleGAN} Paper vor, einen \emph{Identity Loss} hinzuzufügen. Dabei wird Generator $G$ ein echtes Bild eines Straßenschilds und Generator $F$ ein echtes Bild eines Piktogramms zugeführt. Da das Eingabebild für $G$ und $F$ bereits aus der Zieldomäne entstammt, wird hier von den Generatoren erwartet, dass sie das Eingabebild möglichst wenig verändern. Die Veröffentlichung schlägt das vor, wenn die Generatoren beispielsweise die Farben der Eingangsbilder beibehalten sollen. \cite{cycleGAN}
+
+Die Vermutung ist, dass der Identity Loss auch für diese Studienarbeit sinnvoll sein kann. Hierdurch könnte das Netzwerk dazu gebracht werden, das Straßenschild möglichst wenig zu verformen und es könnte aus den Eingabebildern erlernen, verschiedene Hintergründe um die Schilder zu erzeugen. Deshalb wird der Identity Loss in diesem Projekt erprobt. Eine Veröffentlichung deutet außerdem darauf hin, dass der Identity Loss die allgemeine Qualität der generierten Bilder verbessern kann \cite{identity-loss}. \cite{cycleGAN}
+
+Zusätzlich schreiben die Autoren der \ac{CycleGAN} Veröffentlichung, dass es sinnvoll sein kann, den \emph{Adversarial Loss} mit einer $\mathcal{L}_2$ Verlustfunktion zu berechnen statt mit einer Binary Crossentropy Verlustfunktion. Das soll das Training stabilisieren. Die pix2pix-Veröffentlichung erwähnt das ebenfalls \cite{pix2pix}. Streng genommen handelt es sich dabei dann bei den Paaren $G$ und $D_y$, beziehungsweise $F$ und $D_x$ nicht mehr um klassiche \acp{GAN}, sondern um sogenannte \emph{least squared \acp{GAN} (LS-GANs)}. In dieser Studienarbeit soll das Training zunächst mit einer klassischen \ac{CycleGAN} Architektur erfolgen. Zeigt sich ein instabiles Training, soll getestet werden, ob sich das Training mittels $\mathcal{L}_2$ Verlustfunktionen stabilisieren lässt. \cite{cycleGAN}
+
+Das Training gilt als beendet, wenn die Verlustfunktionen des Modells gegen einen Wert konvergieren. Um das zu messen, ist eine Form des \emph{Loggings} notwendig. Es müssen demnach über den Verlauf des Trainings die Werte der Kostenfunktionen gespeichert werden. 

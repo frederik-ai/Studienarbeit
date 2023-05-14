@@ -1,0 +1,32 @@
+\section{Generierung}
+Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu trainieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwender keinen Python-Code anpassen müssen. Das Skript besitzt folgende Kommandozeilenargumente:
+
+\begin{table}[H]
+   \centering
+   \begin{tabular}{|l|c|l|}
+   \hline
+   \textbf{Argument} & \textbf{Parameter} & \textbf{Aufgabe} \\ \hline \hline
+   -{}-num-imgs & Ganzzahl & Anzahl der zu generierenden Bilder \\ \hline
+   -{}-model & \mintinline{python}{'unet'} oder \mintinline{python}{'resnet'} & Art des Modells \\ \hline
+   -{}-motion-blur & - & Fügt Bewegungsunschärfe hinzu \\ \hline
+   -{}-make-invalid & - & Markiert Schilder als ungültig \\ \hline
+   -{}-snow & - & Fügt Schnee hinzu \\
+   \hline
+   \end{tabular}
+   \caption{Auswahl an Methoden aus der CycleGAN Klasse}
+\end{table}
+
+Dabei können die Parameter \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} miteinander kombiniert werden. Beispielhafte Aufrufe des Skripts sind:
+
+\begin{code}
+   \begin{minted}{bash}
+      $ python generate.py --num-imgs 10 --motion-blur
+      $ python generate.py --num-imgs 10 --model 'resnet' --make-invalid
+      $ python generate.py --num-imgs 10 --snow --motion-blur
+      $ python generate.py --num-imgs 50 --model 'unet'
+   \end{minted}
+\end{code}
+
+Ein spezieller Anwendungsfall dieses Modells könnte der folgende sein: Anwender möchten nur für bestimmte Arten von Straßenschildern Bilder generieren, statt für alle 43. Beispielsweise nur für Stopp-Schilder. Das ist insbesondere dann relevant, wenn das Modell dazu genutzt werden soll, einen bestehenden Datensatz auszugleichen. Wenn etwa bestimmte Klassen unterrepräsentiert sind.
+
+Das Skript \mintinline{python}{generate.py} erlaubt explizit das folgende Vorgehen: Anwender können aus dem Ordner, in dem sich die Bilder der Piktogramme befinden, alle Arten von Straßenschildern löschen, die nicht generiert werden sollen. Befindet sich in dem Ordner beispielsweise nur ein Piktogramm für Stopp-Schilder, dann werden auch nur Bilder von Stopp-Schildern generiert. Dafür kann zum Beispiel ein zweiter Ordner für die Piktogramme angelegt werden, der dann in der \ac{TOML}-Konfigurationsdatei unter dem Wert \mintinline{python}{'pictograms'} innerhalb der Kategorie \mintinline{python}{'paths'} angegeben wird.

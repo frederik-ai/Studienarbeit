@@ -35,7 +35,7 @@ import model
 def main():
     # Setup
     config = toml.load('./config/config.toml')
-    BATCH_SIZE = config['training']['batch_size']
+    batch_size = config['training']['batch_size']
     IMAGE_SIZE = config['model']['image_size']
 
     # Command line arguments
@@ -55,21 +55,21 @@ def main():
         config['model']['generator_type'] = args.model
     else:
         raise ValueError('model must be "unet" or "resnet". This argument is optional')
-    DESTINATION_PATH = os.path.join(args.o, args.model)
-    NUM_GENERATED_IMAGES = args.num_imgs
-    SNOW = args.snow
-    MAKE_SIGNS_INVALID = args.make_invalid
-    MOTION_BLUR = args.motion_blur
+    destination_path = os.path.join(args.o, args.model)
+    num_generated_images = args.num_imgs
+    snow = args.snow
+    make_signs_invalid = args.make_invalid
+    motion_blur = args.motion_blur
 
     # PATH_TO_PICTOGRAMS = r'C:\Users\Frederik\Documents\Studienarbeit\data\Pictograms'
-    PATH_TO_PICTOGRAMS = config['paths']['pictograms']
-    x_pictograms = tf.keras.utils.image_dataset_from_directory(PATH_TO_PICTOGRAMS, batch_size=BATCH_SIZE,
+    path_to_pictograms = config['paths']['pictograms']
+    x_pictograms = tf.keras.utils.image_dataset_from_directory(path_to_pictograms, batch_size=batch_size,
                                                                image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
 
     # Currently, batch size cannot be larger than the number of pictograms
-    number_of_pictograms = x_pictograms_processed.cardinality().numpy()
-    BATCH_SIZE = min(BATCH_SIZE, number_of_pictograms)
+    number_of_pictograms = x_pictograms_processed.cardinality().numpy()  # number of elements in pictogram dataset
+    batch_size = min(batch_size, number_of_pictograms)
 
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()
@@ -77,8 +77,8 @@ def main():
 
     # Generate images
     print('Generating images...')
-    num_iterations = math.ceil(NUM_GENERATED_IMAGES / BATCH_SIZE)
-    num_generated_images_left = NUM_GENERATED_IMAGES
+    num_iterations = math.ceil(num_generated_images / batch_size)
+    num_generated_images_left = num_generated_images
     for iteration in tqdm(range(num_iterations)):
         x_pictograms_processed.shuffle(buffer_size=100, reshuffle_each_iteration=True)
 
@@ -91,27 +91,27 @@ def main():
         # Put transformed pictograms into the generator
         generator_result = cycle_gan.generate(single_pictogram_batch)
 
-        if MAKE_SIGNS_INVALID:
+        if make_signs_invalid:
             cross_img_path = config['paths']['augmentation_data'] + '/cross.png'
             generator_result = tf.map_fn(
                 lambda t: utils.image_augmentation.make_street_sign_invalid(t, cross_img_path, content_sizes.pop(0),
                                                                             transform_matrices.pop(0)),
                 generator_result)
-        if SNOW:
+        if snow:
             generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 20, 30), generator_result)
             generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 10, 20), generator_result)
-        if MOTION_BLUR:
-            generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_motion_blur(t, 100), generator_result)
-
-        if BATCH_SIZE < num_generated_images_left:
-            num_images = BATCH_SIZE
-            num_generated_images_left -= BATCH_SIZE
+        if motion_blur:
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_random_motion_blur(t),
+                                         generator_result)
+        if batch_size < num_generated_images_left:
+            num_images = batch_size
+            num_generated_images_left -= batch_size
         else:
             num_images = num_generated_images_left
         for i in range(num_images):
-            utils.misc.store_tensor_as_img(generator_result[i, :], str(uuid.uuid4()), DESTINATION_PATH)
+            utils.misc.store_tensor_as_img(generator_result[i, :], str(uuid.uuid4()), destination_path)
 
 
 if __name__ == '__main__':
-    tf.get_logger().setLevel('ERROR')    # Set TensorFlow log level to ERROR
+    tf.get_logger().setLevel('ERROR')
     main()

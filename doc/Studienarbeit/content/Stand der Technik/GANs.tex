@@ -2,8 +2,8 @@
 
 Eine weitere Architektur, die zur Bildgenerierung verwendet werden kann, sind die sogenannten \emph{Generative Adversarial Networks} (\acsp{GAN}). \textbf{Auf Taxonomie eingehen} \textbf{Allgemeine Infos hinzufügen}.
 
-Ein \ac{GAN} besteht aus zwei Komponenten. Dem sogenannten \emph{Generator} und dem \emph{Discriminator}.
-Der Generator erzeugt aus einem zufälligen Eingangsvektor ein Bild. Der Discriminator erhält ein Bild als Eingang und gibt entweder den Wert \emph{0} oder den Wert \emph{1} aus. Er soll erkennen, ob das gegebene Bild aus den Trainingsdaten stammt, oder ob es künstlich generiert wurde. Bei sowohl dem Generator als auch dem Discriminator handelt es sich um \acp{KNN}. Diese beiden Komponenten werden so miteinander gekoppelt, dass der Discriminator stets entweder ein erzeugtes Bild des Generators oder ein Bild aus den Trainingsdaten erhält. Dies ist in der nachfolgenden Abbildung beispielhaft dargestellt:
+Ein \ac{GAN} besteht aus zwei Komponenten. Dem sogenannten \emph{Generator} und dem \emph{Diskriminator} \emph{(engl.: Discriminator)}. Der Generator erzeugt aus einem zufälligen Eingangsvektor ein Bild. Der Diskriminator erhält ein Bild als Eingang und soll bewerten, ob das Bild echt oder künstlich generiert ist. Bei beiden Komponenten handelt es sich um \acp{KNN}. Das Ziel des Trainings ist, dass der Generator Bilder erzeugen kann, die der Diskriminator nicht von echten Trainingsbildern unterscheiden kann. Dabei wird der Generator besser in seiner Generierung, während der Diskriminator besser in seiner Unterscheidung wird. Je besser der Generator wird, desto besser muss der Diskriminator werden, um die Bilder unterscheiden zu können. Somit handelt es sich um ein direktes Gegenspiel zwischen Generator und Diskriminator. Das Zusammenspiel zwischen Generator und Diskriminator während des Trainings ist in Abbildung \ref{fig:gan} dargestellt. \cite{GANs}
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{../images/GANs/GAN.drawio.png}
@@ -58,14 +58,17 @@ Adversarial Loss:
 \end{equation}
 Cyclic Loss:
 \begin{equation}
-	L_{cyc}(G, F) = \mathbb{E}_x[||F(G(x))-x||_1] + \mathbb{E}_y[||G(F(y))-y||_1]
+	L_{cyc}(G, F) = \mathbb{E}_x[\mathcal{L}_{1}(F(G(x))-x)] + \mathbb{E}_y[\mathcal{L}_{2}(G(F(y))-y)]
 \end{equation}
 Total loss:
 \begin{equation}
 	L(G, F, D_X, D_Y) = L_{GAN}(G, D_Y, X, Y) + L_{GAN}(F, D_X, Y, X) + \lambda L_{cyc}(G, F)
 \end{equation}
 \cite{cycleGAN}
-\paragraph{Wasserstein GANs}
+
+\todo[inline]{Erwähnen, dass die Loss-Funktionen in Implementierungen häufig zu Werten für generatorXLoss generatorYLoss, dicsriminatorXLoss und discriminatorYLoss aufgeteilt werden, statt der hier gezeigten Aufteilung.}
+
+\paragraph{Conditional GANs}
 
 \cite{DeepLearningBook}
 \cite{visualApproach}

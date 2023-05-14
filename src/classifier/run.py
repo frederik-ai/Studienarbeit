@@ -20,8 +20,11 @@ from tensorflow.keras.applications import VGG16
 from tensorflow.keras.layers import Dense, Flatten, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
 
+tf.get_logger().setLevel('ERROR')
+
 config = toml.load('../config/config.toml')
-num_epochs = 10
+num_epochs = 20
+batch_size = 32
 
 
 def run():
@@ -34,12 +37,35 @@ def run():
                                help="Evaluate the trained classifier")
     args = parser.parse_args()
 
-    checkpoint_path = (os.path.join(os.path.dirname(__file__), 'checkpoints'))
+    checkpoint_directory = f"checkpoints/{config['paths']['classifier']['checkpoint_directory_name']}"
+    checkpoint_path = os.path.join(os.path.dirname(__file__), checkpoint_directory)
+
+    model = get_model()
+
+    # Load the latest checkpoint if it exists
+    latest_checkpoint = tf.train.latest_checkpoint(checkpoint_path)
+    if latest_checkpoint is not None:
+        model.load_weights(latest_checkpoint)
+        print(f'Loaded checkpoint: {latest_checkpoint}')
+    else:
+        print('No checkpoint found, hence no weights were loaded.')
+
+    val_set = tf.keras.utils.image_dataset_from_directory(config['paths']['classifier']['test_data'],
+                                                          batch_size=batch_size, seed=123,
+                                                          image_size=(256, 256), label_mode='categorical',
+                                                          crop_to_aspect_ratio=True)
 
     if args.train:
-        train(checkpoint_path)
+        print('Training...')
+        train_set = tf.keras.utils.image_dataset_from_directory(config['paths']['classifier']['train_data'],
+                                                                batch_size=batch_size, seed=123,
+                                                                image_size=(256, 256), label_mode='categorical',
+                                                                crop_to_aspect_ratio=True)
+        model.fit(x=train_set, validation_data=val_set, epochs=20)
+        model.save_weights(checkpoint_path)
     elif args.evaluate:
-        evaluate(checkpoint_path)
+        print('Evaluating...')
+        model.evaluate(val_set)
     else:
         raise ValueError('No argument for train or evaluate was given.')
 
@@ -48,6 +74,7 @@ def get_model():
     num_classes = 43
     base_model = VGG16(weights='imagenet', include_top=False, input_shape=(256, 256, 3))
 
+    # Freeze all layers
     for layer in base_model.layers:
         layer.trainable = False
 
@@ -66,29 +93,19 @@ def get_model():
     return model
 
 
-def train(checkpoint_path):
-    batch_size = 32
-
-    # vassert (use_real_data or use_unet_data or use_resnet_data)
-    # train_set = None
-    # if use_real_data:
-    #     if train_set is None:
-    #         train_set = get_image_dataset(r'C:\Users\Frederik\Desktop\data\Train')
-    #     else:
-    #         train_set.concatenate(get_image_dataset(r'C:\Users\Frederik\Desktop\data\Train'))
-
-    train_set, val_set = tf.keras.utils.image_dataset_from_directory(r'C:\Users\Frederik\Desktop\data\Test',
-                                                             batch_size=batch_size,
-                                                             validation_split=0.2, subset='both', seed=123,
-                                                             image_size=(256, 256), label_mode='categorical')
-
-    model = create_model()
-    model.fit(x=train_set, validation_data=val_set, epochs=5)
+def train(checkpoint_path, model, train_set, val_set):
     print('Training...')
 
+    train_set = tf.keras.utils.image_dataset_from_directory(config['paths']['classifier']['train_data'],
+                                                            batch_size=batch_size, seed=123,
+                                                            image_size=(256, 256), label_mode='categorical')
 
-def evaluate(checkpoint_path):
-    print('Evaluating...')
+    val_set = tf.keras.utils.image_dataset_from_directory(config['paths']['classifier']['test_data'],
+                                                             batch_size=batch_size, seed=123,
+                                                             image_size=(256, 256), label_mode='categorical')
+
+    model.fit(x=train_set, validation_data=val_set, epochs=num_epochs)
+    model.save_weights(checkpoint_path)
 
 
 def main():

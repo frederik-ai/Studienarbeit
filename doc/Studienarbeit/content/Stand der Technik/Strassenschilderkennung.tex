@@ -37,7 +37,7 @@ Im Jahr 2019 hat eine Automobilzeitschrift die Straßenschilderkennung von unter
     \caption{LED Schilder}
     \label{fig:ledschild}
    \end{subfigure}
-      \caption{Erschwerende Einflüsse auf die Straßenschilderkennung}
+      \caption{Erschwerende Einflüsse auf die Straßenschilderkennung \cite{GTSRB}}
       \label{fig:einfluesse-strscherkennung}
 \end{figure}
 
@@ -77,7 +77,9 @@ Fahrzeuge verschiedener Hersteller haben in den Tests Aufhebungsschilder nicht k
       \label{fig:einfluesse-strscherkennung2}
 \end{figure}
 
-Ausgehend der Erkentnisse der Tests aus dem genannten Artikel, kann in einigen solcher Situationen davon ausgegangen werden, dass sich in vielen Fahrzeugen nicht auf die automatische Erkennung der Schilder verlassen werden kann. Ein Ziel der Hersteller ist das Anbieten von Fahrzeugen, die vollständig autonom, das heißt ohne menschliches Eingreifen, fahren können. Damit dies möglich ist, muss die Software der Fahrzeuge auch solche Grenzfälle korrekt interpretieren. Dies erfordert eine gewisse Menge an Daten, durch die diese Algorithmen trainiert werden.
+Eine weitere Publikation aus dem Jahre 2019 zeigt, dass die Qualität der Straßenschilderkennung von der Stärke der äußeren Einflüsse abhängt. Vergleichsweise geringfügig verdeckte Schilder hat das Testfahrzeug hier beispielsweise in der Regel korrekt klassifizieren können. Sobald eine größere Fläche des Schild verdeckt ist oder das Schild vermehrt beschmutzt ist, ist keine korrekte Klassifizierung erfolgt. Auch hier schreiben die Autoren, dass das Wetter und somit Sichtverhältnisse einen negativen Einfluss auf die Qualität der Erkennung zeigen. \cite{traffic-sign-anomalies}
+
+Die Erkenntnisse der Tests aus den genannten Artikeln geben Hinweise auf das folgende: In einigen genannten Situationen können sich die Fahrzeugführenden nicht vollständig auf die Straßenschilderkennung ihrer Fahrzeuge verlassen. Ein Ziel der Hersteller ist das Anbieten von Fahrzeugen, die vollständig autonom, das heißt ohne menschliches Eingreifen, fahren können. Damit das möglich ist, muss die Software der Fahrzeuge auch solche Grenzfälle korrekt interpretieren. Das erfordert eine gewisse Menge an Daten, durch die diese Algorithmen trainiert werden.
 
 Ziel dieser Arbeit ist ausgehend davon, gezielt Trainingsbilder erzeugen zu können, die einige dieser Aspekte simulieren. Es soll als alternative Möglichkeit dazu vorgeschlagen werden, sämtliche Trainingsdaten für Grenzfälle eigenständig in realen Fahrsituationen aufzunehmen.
 

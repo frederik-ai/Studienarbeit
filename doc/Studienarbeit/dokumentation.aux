@@ -54,15 +54,19 @@
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \newacro{CNN}[\AC@hyperlink{CNN}{CNN}]{Convolutional Neural Network}
+\newacro{cGAN}[\AC@hyperlink{cGAN}{cGAN}]{Conditional Generative Adversarial Network}
 \newacro{CycleGAN}[\AC@hyperlink{CycleGAN}{CycleGAN}]{Cycle-Consistent Generative Adversarial Network}
+\newacro{engl.}[\AC@hyperlink{engl.}{engl.}]{englisch}
 \newacro{GAN}[\AC@hyperlink{GAN}{GAN}]{Generative Adversarial Network}
+\newacro{GPU}[\AC@hyperlink{GPU}{GPU}]{Grafikkarte (engl.: Graphics Processing Unit)}
 \newacro{GTSRB}[\AC@hyperlink{GTSRB}{GTSRB}]{German Traffic Sign Recognition Benchmark}
 \newacro{KNN}[\AC@hyperlink{KNN}{KNN}]{Künstliches Neuronales Netz}
 \newacro{LSTM}[\AC@hyperlink{LSTM}{LSTM}]{Long Short-term Memory}
 \newacro{PixelRNN}[\AC@hyperlink{PixelRNN}{PixelRNN}]{Pixel Recurrent Neural Network}
-\newacro{SSIM}[\AC@hyperlink{SSIM}{SSIM}]{Index struktureller Ähnlichkeit (eng.: Structural Similarity Index)}
+\newacro{ResNet}[\AC@hyperlink{ResNet}{ResNet}]{Residual Neural Network}
+\newacro{SSIM}[\AC@hyperlink{SSIM}{SSIM}]{Index struktureller Ähnlichkeit (engl.: Structural Similarity Index)}
 \newacro{SVM}[\AC@hyperlink{SVM}{SVM}]{Support Vector Machine}
-\newacro{TOML}[\AC@hyperlink{TOML}{TOML}]{Tom\'s Obvious Minimal Language}
+\newacro{TOML}[\AC@hyperlink{TOML}{TOML}]{Tom's Obvious Minimal Language}
 \FN@pp@footnotehinttrue 
 \BKM@entry{id=2,dest={636861707465722A2E34},srcline={68}}{416262696C64756E67737665727A656963686E6973}
 \FN@pp@footnotehinttrue 
@@ -75,14 +79,17 @@
 \AC@undonewlabel{acro:GTSRB}
 \newlabel{acro:GTSRB}{{}{VI}{Abkürzungsverzeichnis}{section*.6}{}}
 \acronymused{GTSRB}
+\AC@undonewlabel{acro:CycleGAN}
+\newlabel{acro:CycleGAN}{{}{VI}{Abkürzungsverzeichnis}{section*.7}{}}
+\acronymused{CycleGAN}
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=3,dest={636861707465722A2E37},srcline={72}}{546162656C6C656E7665727A656963686E6973}
+\BKM@entry{id=3,dest={636861707465722A2E38},srcline={72}}{546162656C6C656E7665727A656963686E6973}
 \FN@pp@footnotehinttrue 
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.7}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{VII}{chapter*.8}\protected@file@percent }
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=4,dest={636861707465722A2E38},srcline={76}}{4C697374696E6773}
+\BKM@entry{id=4,dest={636861707465722A2E39},srcline={76}}{4C697374696E6773}
 \FN@pp@footnotehinttrue 
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.8}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\nonumberline Listings}{VIII}{chapter*.9}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
@@ -130,30 +137,39 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.1}Straßenschilderkennung}{2}{section.2.1}\protected@file@percent }
 \newlabel{chap:stand-der-technik-strassenschilderkennung}{{2.1}{2}{Straßenschilderkennung}{section.2.1}{}}
 \acronymused{KNN}
+\citation{GTSRB}
+\abx@aux@cite{GTSRB}
+\abx@aux@segm{0}{0}{GTSRB}
+\citation{GTSRB}
+\abx@aux@cite{GTSRB}
+\abx@aux@segm{0}{0}{GTSRB}
 \citation{traffic-sign-detection-review-2014}
 \abx@aux@cite{traffic-sign-detection-review-2014}
 \abx@aux@segm{0}{0}{traffic-sign-detection-review-2014}
+\citation{traffic-sign-anomalies}
+\abx@aux@cite{traffic-sign-anomalies}
+\abx@aux@segm{0}{0}{traffic-sign-anomalies}
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{fig:aufhebungsschild}{{2.1a}{3}{Aufhebung\relax }{figure.caption.9}{}}
-\newlabel{sub@fig:aufhebungsschild}{{a}{3}{Aufhebung\relax }{figure.caption.9}{}}
-\newlabel{fig:abgeklebt}{{2.1b}{3}{Ungültigkeit\relax }{figure.caption.9}{}}
-\newlabel{sub@fig:abgeklebt}{{b}{3}{Ungültigkeit\relax }{figure.caption.9}{}}
-\newlabel{fig:dunkelheit}{{2.1c}{3}{Dunkelheit\relax }{figure.caption.9}{}}
-\newlabel{sub@fig:dunkelheit}{{c}{3}{Dunkelheit\relax }{figure.caption.9}{}}
-\newlabel{fig:ledschild}{{2.1d}{3}{LED Schilder\relax }{figure.caption.9}{}}
-\newlabel{sub@fig:ledschild}{{d}{3}{LED Schilder\relax }{figure.caption.9}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:einfluesse-strscherkennung}{{2.1}{3}{Erschwerende Einflüsse auf die Straßenschilderkennung\relax }{figure.caption.9}{}}
-\newlabel{fig:witterung}{{2.2a}{3}{Witterung\relax }{figure.caption.10}{}}
-\newlabel{sub@fig:witterung}{{a}{3}{Witterung\relax }{figure.caption.10}{}}
-\newlabel{fig:motion-blur}{{2.2b}{3}{Unschärfe\relax }{figure.caption.10}{}}
-\newlabel{sub@fig:motion-blur}{{b}{3}{Unschärfe\relax }{figure.caption.10}{}}
-\newlabel{fig:ueberbelichtung}{{2.2c}{3}{Belichtung\relax }{figure.caption.10}{}}
-\newlabel{sub@fig:ueberbelichtung}{{c}{3}{Belichtung\relax }{figure.caption.10}{}}
-\newlabel{fig:vandalism}{{2.2d}{3}{Vandalismus\relax }{figure.caption.10}{}}
-\newlabel{sub@fig:vandalism}{{d}{3}{Vandalismus\relax }{figure.caption.10}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:einfluesse-strscherkennung2}{{2.2}{3}{Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }{figure.caption.10}{}}
+\newlabel{fig:aufhebungsschild}{{2.1a}{3}{Aufhebung\relax }{figure.caption.10}{}}
+\newlabel{sub@fig:aufhebungsschild}{{a}{3}{Aufhebung\relax }{figure.caption.10}{}}
+\newlabel{fig:abgeklebt}{{2.1b}{3}{Ungültigkeit\relax }{figure.caption.10}{}}
+\newlabel{sub@fig:abgeklebt}{{b}{3}{Ungültigkeit\relax }{figure.caption.10}{}}
+\newlabel{fig:dunkelheit}{{2.1c}{3}{Dunkelheit\relax }{figure.caption.10}{}}
+\newlabel{sub@fig:dunkelheit}{{c}{3}{Dunkelheit\relax }{figure.caption.10}{}}
+\newlabel{fig:ledschild}{{2.1d}{3}{LED Schilder\relax }{figure.caption.10}{}}
+\newlabel{sub@fig:ledschild}{{d}{3}{LED Schilder\relax }{figure.caption.10}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung \cite {GTSRB}\relax }}{3}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:einfluesse-strscherkennung}{{2.1}{3}{Erschwerende Einflüsse auf die Straßenschilderkennung \cite {GTSRB}\relax }{figure.caption.10}{}}
+\newlabel{fig:witterung}{{2.2a}{3}{Witterung\relax }{figure.caption.11}{}}
+\newlabel{sub@fig:witterung}{{a}{3}{Witterung\relax }{figure.caption.11}{}}
+\newlabel{fig:motion-blur}{{2.2b}{3}{Unschärfe\relax }{figure.caption.11}{}}
+\newlabel{sub@fig:motion-blur}{{b}{3}{Unschärfe\relax }{figure.caption.11}{}}
+\newlabel{fig:ueberbelichtung}{{2.2c}{3}{Belichtung\relax }{figure.caption.11}{}}
+\newlabel{sub@fig:ueberbelichtung}{{c}{3}{Belichtung\relax }{figure.caption.11}{}}
+\newlabel{fig:vandalism}{{2.2d}{3}{Vandalismus\relax }{figure.caption.11}{}}
+\newlabel{sub@fig:vandalism}{{d}{3}{Vandalismus\relax }{figure.caption.11}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:einfluesse-strscherkennung2}{{2.2}{3}{Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }{figure.caption.11}{}}
 \BKM@entry{id=11,dest={73656374696F6E2E322E32},srcline={5}}{322E32204B5C3337346E73746C69636865204E6575726F6E616C65204E65747A65}
 \citation{DeepLearningBook}
 \abx@aux@cite{DeepLearningBook}
@@ -161,9 +177,6 @@
 \citation{knnsKompakt}
 \abx@aux@cite{knnsKompakt}
 \abx@aux@segm{0}{0}{knnsKompakt}
-\citation{visualApproach}
-\abx@aux@cite{visualApproach}
-\abx@aux@segm{0}{0}{visualApproach}
 \citation{visualApproach}
 \abx@aux@cite{visualApproach}
 \abx@aux@segm{0}{0}{visualApproach}
@@ -182,6 +195,9 @@
 \citation{visualApproach}
 \abx@aux@cite{visualApproach}
 \abx@aux@segm{0}{0}{visualApproach}
+\citation{visualApproach}
+\abx@aux@cite{visualApproach}
+\abx@aux@segm{0}{0}{visualApproach}
 \citation{knnsKompakt}
 \abx@aux@cite{knnsKompakt}
 \abx@aux@segm{0}{0}{knnsKompakt}
@@ -191,21 +207,88 @@
 \citation{visualApproach}
 \abx@aux@cite{visualApproach}
 \abx@aux@segm{0}{0}{visualApproach}
+\citation{knnsKompakt}
+\abx@aux@cite{knnsKompakt}
+\abx@aux@segm{0}{0}{knnsKompakt}
 \acronymused{KNN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.11}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.12}\protected@file@percent }
 \acronymused{KNN}
 \acronymused{KNN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Vollständiges \ac {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.12}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Vollständiges \ac {KNN} \emph  {(angelehnt an \cite {visualApproach})}\relax }}{5}{figure.caption.13}\protected@file@percent }
 \acronymused{KNN}
-\BKM@entry{id=12,dest={73756273656374696F6E2E322E322E31},srcline={28}}{322E322E3120547261696E696E67}
+\newlabel{fig:KNN}{{2.4}{5}{Vollständiges \ac {KNN} \emph {(angelehnt an \cite {visualApproach})}\relax }{figure.caption.13}{}}
+\citation{knnsKompakt}
+\abx@aux@cite{knnsKompakt}
+\abx@aux@segm{0}{0}{knnsKompakt}
+\citation{visualApproach}
+\abx@aux@cite{visualApproach}
+\abx@aux@segm{0}{0}{visualApproach}
+\BKM@entry{id=12,dest={73756273656374696F6E2E322E322E31},srcline={73}}{322E322E3120547261696E696E67}
+\citation{knnsKompakt}
+\abx@aux@cite{knnsKompakt}
+\abx@aux@segm{0}{0}{knnsKompakt}
+\citation{DeepLearningBook}
+\abx@aux@cite{DeepLearningBook}
+\abx@aux@segm{0}{0}{DeepLearningBook}
+\acronymused{KNN}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.1}Training}{6}{subsection.2.2.1}\protected@file@percent }
-\newlabel{eq:costFunction}{{2.1}{6}{Training}{equation.2.2.1}{}}
-\newlabel{eq:costFunctionGeneral}{{2.2}{6}{Training}{equation.2.2.2}{}}
-\BKM@entry{id=13,dest={73756273656374696F6E2E322E322E32},srcline={50}}{322E322E3220436F6E766F6C7574696F6E616C204E657572616C204E6574776F726B73}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Convolutional Neural Networks}{7}{subsection.2.2.2}\protected@file@percent }
 \acronymused{KNN}
 \acronymused{KNN}
 \acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\citation{DeepLearningBook}
+\abx@aux@cite{DeepLearningBook}
+\abx@aux@segm{0}{0}{DeepLearningBook}
+\citation{DeepLearningBook}
+\abx@aux@cite{DeepLearningBook}
+\abx@aux@segm{0}{0}{DeepLearningBook}
+\citation{DeepLearningBook}
+\abx@aux@cite{DeepLearningBook}
+\abx@aux@segm{0}{0}{DeepLearningBook}
+\newlabel{eq:costFunctionGeneral}{{2.1}{7}{Training}{equation.2.2.1}{}}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\newlabel{eq:costFunctionExpectedValue}{{2.2}{7}{Training}{equation.2.2.2}{}}
+\acronymused{KNN}
+\acronymused{KNN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline $\mathcal  {L}_1$ Verlustfunktion}{7}{paragraph*.15}\protected@file@percent }
+\citation{bce-loss}
+\abx@aux@cite{bce-loss}
+\abx@aux@segm{0}{0}{bce-loss}
+\citation{knnsKompakt}
+\abx@aux@cite{knnsKompakt}
+\abx@aux@segm{0}{0}{knnsKompakt}
+\citation{knnsKompakt}
+\abx@aux@cite{knnsKompakt}
+\abx@aux@segm{0}{0}{knnsKompakt}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline $\mathcal  {L}_2$ Verlustfunktion}{8}{paragraph*.17}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Binary Crossentropy Loss}{8}{paragraph*.19}\protected@file@percent }
+\acronymused{KNN}
+\acronymused{KNN}
+\newlabel{eq:bce-loss}{{2.5}{8}{Binary Crossentropy Loss}{equation.2.2.5}{}}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\BKM@entry{id=13,dest={73756273656374696F6E2E322E322E32},srcline={126}}{322E322E3220436F6E766F6C7574696F6E616C204E657572616C204E6574776F726B73}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Auf Ableitung der Kostenfunktion für Berechnung des Gradienten eingehen?}{9}{section*.20}\protected@file@percent }
+\pgfsyspdfmark {pgfid2}{19562756}{46084293}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Hier schon Batches erklären und damit darauf eingehen wie mit einer Verlustfunktion über mehrere Trainingsbeispiele trainiert wird}{9}{section*.21}\protected@file@percent }
+\pgfsyspdfmark {pgfid3}{19562756}{43541020}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Convolutional Neural Networks}{9}{subsection.2.2.2}\protected@file@percent }
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\AC@undonewlabel{acro:CNN}
+\newlabel{acro:CNN}{{2.2.2}{9}{Convolutional Neural Networks}{section*.22}{}}
+\acronymused{CNN}
+\acronymused{CNN}
+\acronymused{CNN}
+\acronymused{CNN}
 \citation{cnnsIntroduction}
 \abx@aux@cite{cnnsIntroduction}
 \abx@aux@segm{0}{0}{cnnsIntroduction}
@@ -213,51 +296,71 @@
 \abx@aux@cite{cnnsIntroduction}
 \abx@aux@segm{0}{0}{cnnsIntroduction}
 \BKM@entry{id=14,dest={73656374696F6E2E322E33},srcline={8}}{322E332042696C6467656E6572696572756E67206D697474656C73204B5C3337346E73746C6963686572204E6575726F6E616C6572204E65747A65}
-\AC@undonewlabel{acro:CNN}
-\newlabel{acro:CNN}{{2.2.2}{8}{Convolutional Neural Networks}{section*.13}{}}
+\citation{generative-modellierung}
+\abx@aux@cite{generative-modellierung}
+\abx@aux@segm{0}{0}{generative-modellierung}
+\citation{generative-modellierung}
+\abx@aux@cite{generative-modellierung}
+\abx@aux@segm{0}{0}{generative-modellierung}
+\BKM@entry{id=15,dest={73756273656374696F6E2E322E332E31},srcline={7}}{322E332E31204D617468656D61746973636865722048696E7465726772756E64}
+\citation{generative-modellierung}
+\abx@aux@cite{generative-modellierung}
+\abx@aux@segm{0}{0}{generative-modellierung}
 \acronymused{CNN}
-\acronymused{CNN}
-\acronymused{CNN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }}{8}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:convolution}{{2.5}{8}{Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }{figure.caption.14}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Bildgenerierung mittels Künstlicher Neuronaler Netze}{8}{section.2.3}\protected@file@percent }
-\newlabel{chap:NoGANs}{{2.3}{8}{Bildgenerierung mittels Künstlicher Neuronaler Netze}{section.2.3}{}}
-\BKM@entry{id=15,dest={73756273656374696F6E2E322E332E31},srcline={5}}{322E332E31204D617468656D61746973636865722048696E7465726772756E64}
-\citation{openAiGenerativeNets}
-\abx@aux@cite{openAiGenerativeNets}
-\abx@aux@segm{0}{0}{openAiGenerativeNets}
-\citation{openAiGenerativeNets}
-\abx@aux@cite{openAiGenerativeNets}
-\abx@aux@segm{0}{0}{openAiGenerativeNets}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }}{10}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:convolution}{{2.5}{10}{Beispiel für eine Faltung (engl.: Convolution) \cite {cnnsIntroduction}\relax }{figure.caption.23}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.3}Bildgenerierung mittels Künstlicher Neuronaler Netze}{10}{section.2.3}\protected@file@percent }
+\newlabel{chap:NoGANs}{{2.3}{10}{Bildgenerierung mittels Künstlicher Neuronaler Netze}{section.2.3}{}}
 \acronymused{KNN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Mathematischer Hintergrund}{9}{subsection.2.3.1}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Beispielhafter Vergleich von $\hat  {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }}{9}{figure.caption.15}\protected@file@percent }
-\newlabel{fig:generativeNetsPx}{{2.6}{9}{Beispielhafter Vergleich von $\hat {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }{figure.caption.15}{}}
+\citation{generative-modellierung}
+\abx@aux@cite{generative-modellierung}
+\abx@aux@segm{0}{0}{generative-modellierung}
+\citation{openAiGenerativeNets}
+\abx@aux@cite{openAiGenerativeNets}
+\abx@aux@segm{0}{0}{openAiGenerativeNets}
+\citation{openAiGenerativeNets}
+\abx@aux@cite{openAiGenerativeNets}
+\abx@aux@segm{0}{0}{openAiGenerativeNets}
+\citation{openAiGenerativeNets}
+\abx@aux@cite{openAiGenerativeNets}
+\abx@aux@segm{0}{0}{openAiGenerativeNets}
+\citation{generative-modellierung}
+\abx@aux@cite{generative-modellierung}
+\abx@aux@segm{0}{0}{generative-modellierung}
+\citation{openAiGenerativeNets}
+\abx@aux@cite{openAiGenerativeNets}
+\abx@aux@segm{0}{0}{openAiGenerativeNets}
 \citation{generativeModelsBook}
 \abx@aux@cite{generativeModelsBook}
 \abx@aux@segm{0}{0}{generativeModelsBook}
 \citation{generativeModelsBook}
 \abx@aux@cite{generativeModelsBook}
 \abx@aux@segm{0}{0}{generativeModelsBook}
-\BKM@entry{id=16,dest={73756273656374696F6E2E322E332E32},srcline={32}}{322E332E3220506978656C20526563757272656E74204E657572616C204E6574776F726B73}
+\citation{generativeModelsBook}
+\abx@aux@cite{generativeModelsBook}
+\abx@aux@segm{0}{0}{generativeModelsBook}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Mathematischer Hintergrund}{11}{subsection.2.3.1}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Beispielhafter Vergleich von $\hat  {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }}{11}{figure.caption.24}\protected@file@percent }
+\newlabel{fig:generativeNetsPx}{{2.6}{11}{Beispielhafter Vergleich von $\hat {p}(x)$ und $p(x)$ \cite {openAiGenerativeNets}\relax }{figure.caption.24}{}}
+\BKM@entry{id=16,dest={73756273656374696F6E2E322E332E32},srcline={36}}{322E332E3220506978656C20526563757272656E74204E657572616C204E6574776F726B73}
 \citation{pixelRNN}
 \abx@aux@cite{pixelRNN}
 \abx@aux@segm{0}{0}{pixelRNN}
 \citation{pixelRNN}
 \abx@aux@cite{pixelRNN}
 \abx@aux@segm{0}{0}{pixelRNN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }}{10}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:generativeModelsTaxonomy}{{2.7}{10}{Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }{figure.caption.16}{}}
-\AC@undonewlabel{acro:GAN}
-\newlabel{acro:GAN}{{2.3.1}{10}{Mathematischer Hintergrund}{section*.17}{}}
-\acronymused{GAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Pixel Recurrent Neural Networks}{10}{subsection.2.3.2}\protected@file@percent }
+\citation{pixelRNN}
+\abx@aux@cite{pixelRNN}
+\abx@aux@segm{0}{0}{pixelRNN}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }}{12}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:generativeModelsTaxonomy}{{2.7}{12}{Taxonomie generativer Modelle \cite {generativeModelsBook}\relax }{figure.caption.25}{}}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Grafik ersetzen durch deutsche Taxonomie?}{12}{section*.26}\protected@file@percent }
+\pgfsyspdfmark {pgfid4}{19562756}{29835490}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Pixel Recurrent Neural Networks}{12}{subsection.2.3.2}\protected@file@percent }
 \AC@undonewlabel{acro:PixelRNN}
-\newlabel{acro:PixelRNN}{{2.3.2}{10}{Pixel Recurrent Neural Networks}{section*.18}{}}
+\newlabel{acro:PixelRNN}{{2.3.2}{12}{Pixel Recurrent Neural Networks}{section*.27}{}}
 \acronymused{PixelRNN}
-\citation{pixelRNN}
-\abx@aux@cite{pixelRNN}
-\abx@aux@segm{0}{0}{pixelRNN}
+\newlabel{eq-max-likelihood}{{2.8}{12}{Pixel Recurrent Neural Networks}{equation.2.3.8}{}}
 \citation{pixelRNN}
 \abx@aux@cite{pixelRNN}
 \abx@aux@segm{0}{0}{pixelRNN}
@@ -270,9 +373,8 @@
 \citation{ibmRNN}
 \abx@aux@cite{ibmRNN}
 \abx@aux@segm{0}{0}{ibmRNN}
-\newlabel{eq-max-likelihood}{{2.5}{11}{Pixel Recurrent Neural Networks}{equation.2.3.5}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Bestimmung von $\hat  {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }}{11}{figure.caption.19}\protected@file@percent }
-\newlabel{fig:pixelRNN}{{2.8}{11}{Bestimmung von $\hat {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }{figure.caption.19}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Bestimmung von $\hat  {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }}{13}{figure.caption.28}\protected@file@percent }
+\newlabel{fig:pixelRNN}{{2.8}{13}{Bestimmung von $\hat {p}(x)$ mit PixelRNNs \cite {pixelRNN}\relax }{figure.caption.28}{}}
 \acronymused{PixelRNN}
 \citation{generativeModelsSurvey}
 \abx@aux@cite{generativeModelsSurvey}
@@ -283,87 +385,199 @@
 \citation{pixelRNN}
 \abx@aux@cite{pixelRNN}
 \abx@aux@segm{0}{0}{pixelRNN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }}{12}{figure.caption.20}\protected@file@percent }
-\newlabel{fig:RNN}{{2.9}{12}{Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }{figure.caption.20}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }}{14}{figure.caption.29}\protected@file@percent }
+\newlabel{fig:RNN}{{2.9}{14}{Darstellung eines Recurrent Neural Networks \cite {ibmRNN}\relax }{figure.caption.29}{}}
 \acronymused{PixelRNN}
 \acronymused{PixelRNN}
 \acronymused{PixelRNN}
 \acronymused{PixelRNN}
-\BKM@entry{id=17,dest={73756273656374696F6E2E322E332E33},srcline={66}}{322E332E33204175746F656E636F646572}
+\BKM@entry{id=17,dest={73756273656374696F6E2E322E332E33},srcline={70}}{322E332E33204175746F656E636F646572}
 \acronymused{PixelRNN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Autoencoder}{13}{subsection.2.3.3}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces Architektur eines Autoencoders\relax }}{13}{figure.caption.21}\protected@file@percent }
-\newlabel{fig:Autoencoder}{{2.10}{13}{Architektur eines Autoencoders\relax }{figure.caption.21}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Autoencoder}{15}{subsection.2.3.3}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.10}{\ignorespaces Architektur eines Autoencoders\relax }}{15}{figure.caption.30}\protected@file@percent }
+\newlabel{fig:Autoencoder}{{2.10}{15}{Architektur eines Autoencoders\relax }{figure.caption.30}{}}
 \citation{visualApproach}
 \abx@aux@cite{visualApproach}
 \abx@aux@segm{0}{0}{visualApproach}
 \citation{autoencoders}
 \abx@aux@cite{autoencoders}
 \abx@aux@segm{0}{0}{autoencoders}
-\BKM@entry{id=18,dest={73756273656374696F6E2E322E332E34},srcline={102}}{322E332E342047656E6572617469766520416476657273617269616C204E6574776F726B73}
-\acronymused{PixelRNN}
-\acronymused{PixelRNN}
-\newlabel{chap:GANs}{{2.3.3}{14}{Autoencoder}{equation.2.3.6}{}}
+\BKM@entry{id=18,dest={73756273656374696F6E2E322E332E34},srcline={106}}{322E332E342047656E6572617469766520416476657273617269616C204E6574776F726B73}
 \citation{Goodfellow-GANs}
 \abx@aux@cite{Goodfellow-GANs}
 \abx@aux@segm{0}{0}{Goodfellow-GANs}
-\citation{visualApproach}
-\abx@aux@cite{visualApproach}
-\abx@aux@segm{0}{0}{visualApproach}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}Generative Adversarial Networks}{15}{subsection.2.3.4}\protected@file@percent }
+\citation{GANs}
+\abx@aux@cite{GANs}
+\abx@aux@segm{0}{0}{GANs}
+\acronymused{PixelRNN}
+\acronymused{PixelRNN}
+\newlabel{chap:GANs}{{2.3.3}{16}{Autoencoder}{equation.2.3.9}{}}
+\citation{GANs}
+\abx@aux@cite{GANs}
+\abx@aux@segm{0}{0}{GANs}
+\citation{GANs}
+\abx@aux@cite{GANs}
+\abx@aux@segm{0}{0}{GANs}
+\citation{GANs}
+\abx@aux@cite{GANs}
+\abx@aux@segm{0}{0}{GANs}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}Generative Adversarial Networks}{17}{subsection.2.3.4}\protected@file@percent }
+\acronymused{GAN}
+\AC@undonewlabel{acro:GAN}
+\newlabel{acro:GAN}{{2.3.4}{17}{Generative Adversarial Networks}{section*.31}{}}
+\acronymused{GAN}
 \acronymused{GAN}
 \acronymused{GAN}
 \acronymused{KNN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces Zusammenspiel zwischen Generator und Discriminator\relax }}{15}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:gan}{{2.11}{15}{Zusammenspiel zwischen Generator und Discriminator\relax }{figure.caption.22}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Training}{15}{paragraph*.24}\protected@file@percent }
-\acronymused{GAN}
-\newlabel{eq:adv_loss}{{2.7}{15}{Training}{equation.2.3.7}{}}
-\citation{visualApproach}
-\abx@aux@cite{visualApproach}
-\abx@aux@segm{0}{0}{visualApproach}
-\citation{visualApproach}
-\abx@aux@cite{visualApproach}
-\abx@aux@segm{0}{0}{visualApproach}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.11}{\ignorespaces Zusammenspiel zwischen Generator und Diskriminator\relax }}{17}{figure.caption.32}\protected@file@percent }
+\newlabel{fig:gan}{{2.11}{17}{Zusammenspiel zwischen Generator und Diskriminator\relax }{figure.caption.32}{}}
 \citation{Goodfellow-GANs}
 \abx@aux@cite{Goodfellow-GANs}
 \abx@aux@segm{0}{0}{Goodfellow-GANs}
+\citation{GANs}
+\abx@aux@cite{GANs}
+\abx@aux@segm{0}{0}{GANs}
 \citation{visualApproach}
 \abx@aux@cite{visualApproach}
 \abx@aux@segm{0}{0}{visualApproach}
-\newlabel{eq:real_adv_loss}{{2.8}{16}{Training}{equation.2.3.8}{}}
-\newlabel{eq:fake_adv_loss}{{2.9}{16}{Training}{equation.2.3.9}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Training}{18}{paragraph*.34}\protected@file@percent }
 \acronymused{GAN}
+\newlabel{eq:adv_loss}{{2.10}{18}{Training}{equation.2.3.10}{}}
+\acronymused{KNN}
 \acronymused{GAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\AC@undonewlabel{acro:CycleGAN}
-\newlabel{acro:CycleGAN}{{2.3.4}{16}{Training}{section*.25}{}}
-\acronymused{CycleGAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline CycleGANs}{17}{paragraph*.27}\protected@file@percent }
-\acronymused{CycleGAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{CycleGAN}
-\acronymused{CycleGAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{CycleGAN}
-\acronymused{GAN}
-\acronymused{GAN}
-\acronymused{CycleGAN}
+\newlabel{eq:real_adv_loss}{{2.11}{18}{Training}{equation.2.3.11}{}}
+\newlabel{eq:fake_adv_loss}{{2.12}{18}{Training}{equation.2.3.12}{}}
+\citation{visualApproach}
+\abx@aux@cite{visualApproach}
+\abx@aux@segm{0}{0}{visualApproach}
+\citation{visualApproach}
+\abx@aux@cite{visualApproach}
+\abx@aux@segm{0}{0}{visualApproach}
 \citation{cycleGAN}
 \abx@aux@cite{cycleGAN}
 \abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline CycleGANs}{19}{paragraph*.36}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{GAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cyclegan-tutorial}
+\abx@aux@cite{cyclegan-tutorial}
+\abx@aux@segm{0}{0}{cyclegan-tutorial}
+\citation{cyclegan-resnet}
+\abx@aux@cite{cyclegan-resnet}
+\abx@aux@segm{0}{0}{cyclegan-resnet}
+\acronymused{CycleGAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{CycleGAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\newlabel{eq:cycle-loss}{{2.15}{20}{CycleGANs}{equation.2.3.15}{}}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\citation{cyclegan-tutorial}
+\abx@aux@cite{cyclegan-tutorial}
+\abx@aux@segm{0}{0}{cyclegan-tutorial}
+\citation{visualApproach}
+\abx@aux@cite{visualApproach}
+\abx@aux@segm{0}{0}{visualApproach}
+\citation{resnet}
+\abx@aux@cite{resnet}
+\abx@aux@segm{0}{0}{resnet}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\newlabel{eq:cyclegan-losses}{{2.17}{21}{CycleGANs}{equation.2.3.17}{}}
+\acronymused{KNN}
+\acronymused{CycleGAN}
+\acronymused{CNN}
+\AC@undonewlabel{acro:ResNet}
+\newlabel{acro:ResNet}{{2.3.4}{21}{CycleGANs}{section*.37}{}}
+\acronymused{ResNet}
+\acronymused{CycleGAN}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Erklären, was ein Residual Block ist.}{21}{section*.38}\protected@file@percent }
+\pgfsyspdfmark {pgfid5}{19562756}{19912708}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Conditional GANs}{21}{paragraph*.40}\protected@file@percent }
+\acronymused{GAN}
+\AC@undonewlabel{acro:cGAN}
+\newlabel{acro:cGAN}{{2.3.4}{21}{Conditional GANs}{section*.41}{}}
+\acronymused{cGAN}
+\newlabel{eq:cond_gan}{{2.18}{21}{Conditional GANs}{equation.2.3.18}{}}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\citation{unet}
+\abx@aux@cite{unet}
+\abx@aux@segm{0}{0}{unet}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
 \citation{cycleGAN}
 \abx@aux@cite{cycleGAN}
 \abx@aux@segm{0}{0}{cycleGAN}
 \BKM@entry{id=19,dest={73656374696F6E2E322E34},srcline={14}}{322E3420566F7268657269676520417262656974656E}
+\acronymused{cGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{cGAN}
+\acronymused{CycleGAN}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Auf Taxonomie eingehen}{22}{section*.42}\protected@file@percent }
+\pgfsyspdfmark {pgfid6}{19562756}{13688168}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Vorherige Arbeiten}{22}{section.2.4}\protected@file@percent }
+\acronymused{KNN}
 \BKM@entry{id=20,dest={73756273656374696F6E2E322E342E31},srcline={3}}{322E342E312047656E6572696572756E672054616977616E69736368657220537472615C333337656E736368696C646572206D697474656C7320444347414E}
 \citation{taiwanGAN}
 \abx@aux@cite{taiwanGAN}
@@ -371,48 +585,50 @@
 \citation{taiwanGAN}
 \abx@aux@cite{taiwanGAN}
 \abx@aux@segm{0}{0}{taiwanGAN}
-\newlabel{eq:cycle-loss}{{2.12}{18}{CycleGANs}{equation.2.3.12}{}}
-\acronymused{CycleGAN}
-\acronymused{CycleGAN}
-\acronymused{CycleGAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Wasserstein GANs}{18}{paragraph*.29}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.4}Vorherige Arbeiten}{18}{section.2.4}\protected@file@percent }
-\acronymused{KNN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Generierung Taiwanischer Straßenschilder mittels DCGAN}{18}{subsection.2.4.1}\protected@file@percent }
+\citation{taiwanGAN}
+\abx@aux@cite{taiwanGAN}
+\abx@aux@segm{0}{0}{taiwanGAN}
+\citation{taiwanGAN}
+\abx@aux@cite{taiwanGAN}
+\abx@aux@segm{0}{0}{taiwanGAN}
+\citation{taiwanGAN}
+\abx@aux@cite{taiwanGAN}
+\abx@aux@segm{0}{0}{taiwanGAN}
+\citation{taiwanGAN}
+\abx@aux@cite{taiwanGAN}
+\abx@aux@segm{0}{0}{taiwanGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.1}Generierung Taiwanischer Straßenschilder mittels DCGAN}{23}{subsection.2.4.1}\protected@file@percent }
 \acronymused{GAN}
 \acronymused{CNN}
 \acronymused{GAN}
-\citation{taiwanGAN}
-\abx@aux@cite{taiwanGAN}
-\abx@aux@segm{0}{0}{taiwanGAN}
-\citation{taiwanGAN}
-\abx@aux@cite{taiwanGAN}
-\abx@aux@segm{0}{0}{taiwanGAN}
-\citation{taiwanGAN}
-\abx@aux@cite{taiwanGAN}
-\abx@aux@segm{0}{0}{taiwanGAN}
-\citation{taiwanGAN}
-\abx@aux@cite{taiwanGAN}
-\abx@aux@segm{0}{0}{taiwanGAN}
-\citation{taiwanGAN}
-\abx@aux@cite{taiwanGAN}
-\abx@aux@segm{0}{0}{taiwanGAN}
 \acronymused{GAN}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }}{19}{figure.caption.30}\protected@file@percent }
-\newlabel{fig:taiwan-gen-schilder}{{2.12}{19}{Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }{figure.caption.30}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {2.12}{\ignorespaces Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }}{23}{figure.caption.43}\protected@file@percent }
+\newlabel{fig:taiwan-gen-schilder}{{2.12}{23}{Beispielergebnisse der Generierung taiwanischer SChilder \cite {taiwanGAN}\relax }{figure.caption.43}{}}
 \AC@undonewlabel{acro:SSIM}
-\newlabel{acro:SSIM}{{2.4.1}{19}{Generierung Taiwanischer Straßenschilder mittels DCGAN}{section*.31}{}}
+\newlabel{acro:SSIM}{{2.4.1}{23}{Generierung Taiwanischer Straßenschilder mittels DCGAN}{section*.44}{}}
 \acronymused{SSIM}
-\acronymused{GAN}
-\acronymused{GAN}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Vergleich der Objekterkennung mit und ohne künstliche Trainingsdaten\relax }}{19}{table.caption.32}\protected@file@percent }
-\BKM@entry{id=21,dest={73756273656374696F6E2E322E342E32},srcline={113}}{322E342E322047656E6572696572756E672044657574736368657220537472615C333337656E736368696C646572206D697474656C73204379636C6547414E}
+\citation{taiwanGAN}
+\abx@aux@cite{taiwanGAN}
+\abx@aux@segm{0}{0}{taiwanGAN}
+\BKM@entry{id=21,dest={73756273656374696F6E2E322E342E32},srcline={115}}{322E342E322047656E6572696572756E672044657574736368657220537472615C333337656E736368696C646572206D697474656C73204379636C6547414E}
 \citation{GTSRB}
 \abx@aux@cite{GTSRB}
 \abx@aux@segm{0}{0}{GTSRB}
 \citation{gtsrbGAN}
 \abx@aux@cite{gtsrbGAN}
 \abx@aux@segm{0}{0}{gtsrbGAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {2.1}{\ignorespaces Vergleich der Objekterkennung mit und ohne künstliche Trainingsdaten\relax }}{24}{table.caption.45}\protected@file@percent }
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{24}{subsection.2.4.2}\protected@file@percent }
+\newlabel{chap:vorherige-arbeiten-rub}{{2.4.2}{24}{Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{subsection.2.4.2}{}}
+\acronymused{GTSRB}
+\acronymused{GTSRB}
+\acronymused{CycleGAN}
+\acronymused{GAN}
+\acronymused{CycleGAN}
+\acronymused{GTSRB}
 \citation{gtsrbGAN}
 \abx@aux@cite{gtsrbGAN}
 \abx@aux@segm{0}{0}{gtsrbGAN}
@@ -422,21 +638,6 @@
 \citation{gtsrbGAN}
 \abx@aux@cite{gtsrbGAN}
 \abx@aux@segm{0}{0}{gtsrbGAN}
-\acronymused{CycleGAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.4.2}Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{20}{subsection.2.4.2}\protected@file@percent }
-\newlabel{chap:vorherige-arbeiten-rub}{{2.4.2}{20}{Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{subsection.2.4.2}{}}
-\acronymused{GTSRB}
-\acronymused{GTSRB}
-\acronymused{CycleGAN}
-\acronymused{GAN}
-\acronymused{CycleGAN}
-\acronymused{GTSRB}
-\AC@undonewlabel{acro:SVM}
-\newlabel{acro:SVM}{{2.4.2}{20}{Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{section*.33}{}}
-\acronymused{SVM}
-\acronymused{CNN}
-\acronymused{SVM}
-\acronymused{KNN}
 \citation{gtsrbGAN}
 \abx@aux@cite{gtsrbGAN}
 \abx@aux@segm{0}{0}{gtsrbGAN}
@@ -444,18 +645,40 @@
 \abx@aux@cite{gtsrbGAN}
 \abx@aux@segm{0}{0}{gtsrbGAN}
 \BKM@entry{id=22,dest={73656374696F6E2E322E35},srcline={17}}{322E35204D616368696E65204C6561726E696E67204672616D65776F726B73}
-\BKM@entry{id=23,dest={73756273656374696F6E2E322E352E31},srcline={18}}{322E352E312054656E736F72466C6F77}
-\BKM@entry{id=24,dest={73756273656374696F6E2E322E352E32},srcline={19}}{322E352E32205079746F726368}
-\BKM@entry{id=25,dest={73756273656374696F6E2E322E352E33},srcline={20}}{322E352E332057656974657265}
-\newlabel{tab:cyclegan-eval}{{\caption@xref {tab:cyclegan-eval}{ on input line 133}}{21}{Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{table.caption.34}{}}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Vergleich der Klassifikation mit echten und künstlichen Trainingsdaten \cite {gtsrbGAN}\relax }}{21}{table.caption.34}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.5}Machine Learning Frameworks}{21}{section.2.5}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.1}TensorFlow}{21}{subsection.2.5.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.2}Pytorch}{21}{subsection.2.5.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {2.5.3}Weitere}{21}{subsection.2.5.3}\protected@file@percent }
+\citation{frameworks}
+\abx@aux@cite{frameworks}
+\abx@aux@segm{0}{0}{frameworks}
+\AC@undonewlabel{acro:SVM}
+\newlabel{acro:SVM}{{2.4.2}{25}{Generierung Deutscher Straßenschilder mittels \acs {CycleGAN}}{section*.46}{}}
+\acronymused{SVM}
+\acronymused{CNN}
+\acronymused{SVM}
+\acronymused{KNN}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {2.2}{\ignorespaces Vergleich der Klassifikation mit echten und künstlichen Trainingsdaten \cite {gtsrbGAN}\relax }}{25}{table.caption.47}\protected@file@percent }
+\newlabel{tab:cyclegan-eval}{{2.2}{25}{Vergleich der Klassifikation mit echten und künstlichen Trainingsdaten \cite {gtsrbGAN}\relax }{table.caption.47}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {2.5}Machine Learning Frameworks}{25}{section.2.5}\protected@file@percent }
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{GPU}
+\citation{frameworks}
+\abx@aux@cite{frameworks}
+\abx@aux@segm{0}{0}{frameworks}
+\citation{tf-dataset}
+\abx@aux@cite{tf-dataset}
+\abx@aux@segm{0}{0}{tf-dataset}
+\citation{learn-tensorflow}
+\abx@aux@cite{learn-tensorflow}
+\abx@aux@segm{0}{0}{learn-tensorflow}
+\acronymused{GPU}
+\acronymused{KNN}
+\acronymused{GPU}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{KNN}
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=26,dest={636861707465722E33},srcline={1}}{33204B6F6E7A657074696F6E20646573204D6F64656C6C73}
-\BKM@entry{id=27,dest={73656374696F6E2E332E31},srcline={1}}{332E3120446174656E7361747A}
+\BKM@entry{id=23,dest={636861707465722E33},srcline={1}}{33204B6F6E7A657074696F6E20646573204D6F64656C6C73}
+\BKM@entry{id=24,dest={73656374696F6E2E332E31},srcline={1}}{332E3120446174656E7361747A}
 \citation{GTSRB}
 \abx@aux@cite{GTSRB}
 \abx@aux@segm{0}{0}{GTSRB}
@@ -468,29 +691,29 @@
 \citation{GTSRB}
 \abx@aux@cite{GTSRB}
 \abx@aux@segm{0}{0}{GTSRB}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {3}Konzeption des Modells}{22}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {3}Konzeption des Modells}{27}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\newlabel{chap:konzept}{{3}{22}{Konzeption des Modells}{chapter.3}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.1}Datensatz}{22}{section.3.1}\protected@file@percent }
-\newlabel{chap:3-Datensatz}{{3.1}{22}{Datensatz}{section.3.1}{}}
+\newlabel{chap:konzept}{{3}{27}{Konzeption des Modells}{chapter.3}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.1}Datensatz}{27}{section.3.1}\protected@file@percent }
+\newlabel{chap:3-Datensatz}{{3.1}{27}{Datensatz}{section.3.1}{}}
 \acronymused{GTSRB}
 \acronymused{GTSRB}
 \acronymused{GTSRB}
-\newlabel{fig:gtrsb-paper-bsp-image-1}{{3.1a}{22}{\relax }{figure.caption.35}{}}
-\newlabel{sub@fig:gtrsb-paper-bsp-image-1}{{a}{22}{\relax }{figure.caption.35}{}}
-\newlabel{fig:gtrsb-paper-bsp-image-2}{{3.1b}{22}{\relax }{figure.caption.35}{}}
-\newlabel{sub@fig:gtrsb-paper-bsp-image-2}{{b}{22}{\relax }{figure.caption.35}{}}
-\newlabel{fig:gtrsb-paper-bsp-image-3}{{3.1c}{22}{\relax }{figure.caption.35}{}}
-\newlabel{sub@fig:gtrsb-paper-bsp-image-3}{{c}{22}{\relax }{figure.caption.35}{}}
-\newlabel{fig:gtrsb-paper-bsp-image-4}{{3.1d}{22}{\relax }{figure.caption.35}{}}
-\newlabel{sub@fig:gtrsb-paper-bsp-image-4}{{d}{22}{\relax }{figure.caption.35}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{22}{figure.caption.35}\protected@file@percent }
+\newlabel{fig:gtrsb-paper-bsp-image-1}{{3.1a}{27}{\relax }{figure.caption.48}{}}
+\newlabel{sub@fig:gtrsb-paper-bsp-image-1}{{a}{27}{\relax }{figure.caption.48}{}}
+\newlabel{fig:gtrsb-paper-bsp-image-2}{{3.1b}{27}{\relax }{figure.caption.48}{}}
+\newlabel{sub@fig:gtrsb-paper-bsp-image-2}{{b}{27}{\relax }{figure.caption.48}{}}
+\newlabel{fig:gtrsb-paper-bsp-image-3}{{3.1c}{27}{\relax }{figure.caption.48}{}}
+\newlabel{sub@fig:gtrsb-paper-bsp-image-3}{{c}{27}{\relax }{figure.caption.48}{}}
+\newlabel{fig:gtrsb-paper-bsp-image-4}{{3.1d}{27}{\relax }{figure.caption.48}{}}
+\newlabel{sub@fig:gtrsb-paper-bsp-image-4}{{d}{27}{\relax }{figure.caption.48}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }}{27}{figure.caption.48}\protected@file@percent }
 \acronymused{GTSRB}
-\newlabel{fig:gtrsb-paper-bsp-images}{{3.1}{22}{Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }{figure.caption.35}{}}
+\newlabel{fig:gtrsb-paper-bsp-images}{{3.1}{27}{Beispielbilder aus dem \acs {GTSRB} Datensatz \cite {GTSRB}\relax }{figure.caption.48}{}}
 \acronymused{GTSRB}
 \acronymused{GTSRB}
 \acronymused{GTSRB}
@@ -508,7 +731,7 @@
 \abx@aux@cite{chinese-dataset}
 \abx@aux@segm{0}{0}{chinese-dataset}
 \acronymused{GTSRB}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten \ac {GTSRB}\relax }}{23}{figure.caption.36}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten \ac {GTSRB}\relax }}{28}{figure.caption.49}\protected@file@percent }
 \acronymused{GTSRB}
 \acronymused{GTSRB}
 \acronymused{GTSRB}
@@ -535,23 +758,60 @@
 \citation{dataset-make-ml}
 \abx@aux@cite{dataset-make-ml}
 \abx@aux@segm{0}{0}{dataset-make-ml}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Beispielbilder aus der chinesischen Traffic Sign Recognition Database \cite {chinese-dataset}\relax }}{24}{figure.caption.37}\protected@file@percent }
-\newlabel{fig:chinese-dataset-bsp-images}{{3.3}{24}{Beispielbilder aus der chinesischen Traffic Sign Recognition Database \cite {chinese-dataset}\relax }{figure.caption.37}{}}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Beispielbild aus dem \emph  {Mapillary} Datensatz \cite {dataset-mapillary}\relax }}{24}{figure.caption.38}\protected@file@percent }
-\newlabel{fig:full-mapillary-image}{{3.4}{24}{Beispielbild aus dem \emph {Mapillary} Datensatz \cite {dataset-mapillary}\relax }{figure.caption.38}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Beispielbilder aus der chinesischen Traffic Sign Recognition Database \cite {chinese-dataset}\relax }}{29}{figure.caption.50}\protected@file@percent }
+\newlabel{fig:chinese-dataset-bsp-images}{{3.3}{29}{Beispielbilder aus der chinesischen Traffic Sign Recognition Database \cite {chinese-dataset}\relax }{figure.caption.50}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.4}{\ignorespaces Beispielbild aus dem \emph  {Mapillary} Datensatz \cite {dataset-mapillary}\relax }}{29}{figure.caption.51}\protected@file@percent }
+\newlabel{fig:full-mapillary-image}{{3.4}{29}{Beispielbild aus dem \emph {Mapillary} Datensatz \cite {dataset-mapillary}\relax }{figure.caption.51}{}}
 \acronymused{GTSRB}
-\BKM@entry{id=28,dest={73656374696F6E2E332E32},srcline={1}}{332E32204672616D65776F726B}
+\citation{dataset-mapillary}
+\abx@aux@cite{dataset-mapillary}
+\abx@aux@segm{0}{0}{dataset-mapillary}
+\BKM@entry{id=25,dest={73656374696F6E2E332E32},srcline={1}}{332E32204672616D65776F726B}
+\citation{frameworks}
+\abx@aux@cite{frameworks}
+\abx@aux@segm{0}{0}{frameworks}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz\relax }}{30}{figure.caption.52}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.2}Framework}{30}{section.3.2}\protected@file@percent }
 \citation{learn-tensorflow}
 \abx@aux@cite{learn-tensorflow}
 \abx@aux@segm{0}{0}{learn-tensorflow}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.5}{\ignorespaces Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz\relax }}{25}{figure.caption.39}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.2}Framework}{25}{section.3.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Tensorflow Addons}{25}{paragraph*.41}\protected@file@percent }
-\BKM@entry{id=29,dest={73656374696F6E2E332E33},srcline={1}}{332E3320417263686974656B747572}
+\citation{tensorflow-graphics}
+\abx@aux@cite{tensorflow-graphics}
+\abx@aux@segm{0}{0}{tensorflow-graphics}
+\citation{opencv}
+\abx@aux@cite{opencv}
+\abx@aux@segm{0}{0}{opencv}
+\citation{pillow}
+\abx@aux@cite{pillow}
+\abx@aux@segm{0}{0}{pillow}
+\BKM@entry{id=26,dest={73656374696F6E2E332E33},srcline={1}}{332E3320417263686974656B747572}
+\citation{generativeModelsSurvey}
+\abx@aux@cite{generativeModelsSurvey}
+\abx@aux@segm{0}{0}{generativeModelsSurvey}
 \citation{generative-models-comparison}
 \abx@aux@cite{generative-models-comparison}
 \abx@aux@segm{0}{0}{generative-models-comparison}
-\BKM@entry{id=30,dest={73656374696F6E2E332E34},srcline={10}}{332E3420446174656E6175676D656E746174696F6E}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Numpy erklären}{31}{section*.53}\protected@file@percent }
+\pgfsyspdfmark {pgfid11}{19562756}{16046737}
+\citation{generativeModelsSurvey}
+\abx@aux@cite{generativeModelsSurvey}
+\abx@aux@segm{0}{0}{generativeModelsSurvey}
+\citation{piktogramme}
+\abx@aux@cite{piktogramme}
+\abx@aux@segm{0}{0}{piktogramme}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architektur}{32}{section.3.3}\protected@file@percent }
+\acronymused{PixelRNN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{cGAN}
+\acronymused{GAN}
+\acronymused{GTSRB}
+\acronymused{cGAN}
+\acronymused{CycleGAN}
+\BKM@entry{id=27,dest={73656374696F6E2E332E34},srcline={10}}{332E3420446174656E6175676D656E746174696F6E}
 \citation{geometric-ops}
 \abx@aux@cite{geometric-ops}
 \abx@aux@segm{0}{0}{geometric-ops}
@@ -561,139 +821,243 @@
 \citation{math-primer}
 \abx@aux@cite{math-primer}
 \abx@aux@segm{0}{0}{math-primer}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline Tensorflow Graphics}{26}{paragraph*.43}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {paragraph}{\nonumberline OpenCV}{26}{paragraph*.45}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.3}Architektur}{26}{section.3.3}\protected@file@percent }
-\acronymused{PixelRNN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.4}Datenaugmentation}{26}{section.3.4}\protected@file@percent }
-\newlabel{chap:3-datenaugmentation}{{3.4}{26}{Datenaugmentation}{section.3.4}{}}
+\newlabel{fig:domain-x}{{3.6a}{33}{Domäne \textbf {X}\relax }{figure.caption.54}{}}
+\newlabel{sub@fig:domain-x}{{a}{33}{Domäne \textbf {X}\relax }{figure.caption.54}{}}
+\newlabel{fig:domain-y}{{3.6b}{33}{Domäne \textbf {Y}\relax }{figure.caption.54}{}}
+\newlabel{sub@fig:domain-y}{{b}{33}{Domäne \textbf {Y}\relax }{figure.caption.54}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Domänen für die Bild-zu-Bild Übersetzung\relax }}{33}{figure.caption.54}\protected@file@percent }
+\newlabel{fig:domains}{{3.6}{33}{Domänen für die Bild-zu-Bild Übersetzung\relax }{figure.caption.54}{}}
+\acronymused{GTSRB}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.4}Datenaugmentation}{33}{section.3.4}\protected@file@percent }
+\newlabel{chap:3-datenaugmentation}{{3.4}{33}{Datenaugmentation}{section.3.4}{}}
 \citation{math-primer}
 \abx@aux@cite{math-primer}
 \abx@aux@segm{0}{0}{math-primer}
-\BKM@entry{id=31,dest={73656374696F6E2E332E35},srcline={109}}{332E3520547261696E696E67}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.6}{\ignorespaces Rotation der Straßenschilder mittels eulerscher Winkel\relax }}{27}{figure.caption.46}\protected@file@percent }
-\newlabel{fig:rotation}{{3.6}{27}{Rotation der Straßenschilder mittels eulerscher Winkel\relax }{figure.caption.46}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.5}Training}{27}{section.3.5}\protected@file@percent }
+\BKM@entry{id=28,dest={73656374696F6E2E332E35},srcline={109}}{332E3520547261696E696E67}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.7}{\ignorespaces Rotation der Straßenschilder mittels eulerscher Winkel\relax }}{34}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:rotation}{{3.7}{34}{Rotation der Straßenschilder mittels eulerscher Winkel\relax }{figure.caption.55}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {3.5}Training}{34}{section.3.5}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{KNN}
+\acronymused{KNN}
+\acronymused{CycleGAN}
+\citation{identity-loss}
+\abx@aux@cite{identity-loss}
+\abx@aux@segm{0}{0}{identity-loss}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {3.8}{\ignorespaces Trainingsschritte des \ac {CycleGAN}\relax }}{35}{figure.caption.56}\protected@file@percent }
+\acronymused{CycleGAN}
+\newlabel{fig:training}{{3.8}{35}{Trainingsschritte des \ac {CycleGAN}\relax }{figure.caption.56}{}}
+\acronymused{CycleGAN}
+\acronymused{GAN}
+\acronymused{GAN}
+\acronymused{CycleGAN}
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=32,dest={636861707465722E34},srcline={1}}{3420496D706C656D656E74696572756E6720756E6420547261696E696E67}
-\BKM@entry{id=33,dest={73656374696F6E2E342E31},srcline={1}}{342E31204D6F64656C6C}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementierung und Training}{28}{chapter.4}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\acronymused{CycleGAN}
-\acronymused{CycleGAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.1}Modell}{28}{section.4.1}\protected@file@percent }
-\acronymused{CycleGAN}
-\acronymused{CycleGAN}
-\FN@pp@footnote@aux{1}{28}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Auswahl an Methoden aus der CycleGAN Klasse\relax }}{28}{table.caption.47}\protected@file@percent }
+\BKM@entry{id=29,dest={636861707465722E34},srcline={1}}{3420496D706C656D656E74696572756E6720756E6420547261696E696E67}
+\BKM@entry{id=30,dest={73656374696F6E2E342E31},srcline={1}}{342E31204D6F64656C6C}
 \citation{cyclegan-tutorial}
 \abx@aux@cite{cyclegan-tutorial}
 \abx@aux@segm{0}{0}{cyclegan-tutorial}
-\BKM@entry{id=34,dest={73656374696F6E2E342E32},srcline={32}}{342E322047656E657261746F722D20756E64204469736B72696D696E61746F72617263686974656B747572656E}
-\BKM@entry{id=35,dest={73756273656374696F6E2E342E322E31},srcline={35}}{342E322E3120552D4E6574}
-\BKM@entry{id=36,dest={73656374696F6E2E342E33},srcline={1}}{342E3320446174656E6175676D656E746174696F6E}
+\citation{feature-scaling}
+\abx@aux@cite{feature-scaling}
+\abx@aux@segm{0}{0}{feature-scaling}
+\citation{cyclegan-resnet}
+\abx@aux@cite{cyclegan-resnet}
+\abx@aux@segm{0}{0}{cyclegan-resnet}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {4}Implementierung und Training}{36}{chapter.4}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \acronymused{CycleGAN}
 \acronymused{CycleGAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.2}Generator- und Diskriminatorarchitekturen}{29}{section.4.2}\protected@file@percent }
 \acronymused{CycleGAN}
-\acronymused{KNN}
-\acronymused{KNN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}U-Net}{29}{subsection.4.2.1}\protected@file@percent }
-\acronymused{GAN}
-\citation{tensorflow-graphics}
-\abx@aux@cite{tensorflow-graphics}
-\abx@aux@segm{0}{0}{tensorflow-graphics}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.3}Datenaugmentation}{30}{section.4.3}\protected@file@percent }
-\BKM@entry{id=37,dest={73756273656374696F6E2E342E332E31},srcline={41}}{342E332E3120536B616C696572756E67}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.1}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{31}{listing.caption.48}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Skalierung}{31}{subsection.4.3.1}\protected@file@percent }
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.2}{\ignorespaces Skalieren der Bild-Tensoren\relax }}{31}{listing.caption.49}\protected@file@percent }
-\BKM@entry{id=38,dest={73756273656374696F6E2E342E332E32},srcline={67}}{342E332E3220526F746174696F6E}
-\citation{math-primer}
-\abx@aux@cite{math-primer}
-\abx@aux@segm{0}{0}{math-primer}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Rotation}{33}{subsection.4.3.2}\protected@file@percent }
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.3}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{33}{listing.caption.50}\protected@file@percent }
-\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Herausfinden, was der Grund dafür ist}{33}{section*.51}\protected@file@percent }
-\pgfsyspdfmark {pgfid5}{14782364}{20838092}
-\pgfsyspdfmark {pgfid8}{37414271}{20842025}
-\pgfsyspdfmark {pgfid9}{39490472}{20585058}
-\BKM@entry{id=39,dest={73656374696F6E2E342E34},srcline={1}}{342E3420547261696E696E67}
-\BKM@entry{id=40,dest={73756273656374696F6E2E342E342E31},srcline={3}}{342E342E31204C6164656E2064657220446174656E735C333434747A65}
-\citation{tf-keras-utils}
-\abx@aux@cite{tf-keras-utils}
-\abx@aux@segm{0}{0}{tf-keras-utils}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.4}Training}{34}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Laden der Datensätze}{34}{subsection.4.4.1}\protected@file@percent }
 \acronymused{TOML}
-\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Erklären was TOML ist und wie es geladen wird.}{34}{section*.52}\protected@file@percent }
-\pgfsyspdfmark {pgfid10}{19562756}{38599301}
-\newlabel{code:train-set-laden}{{\caption@xref {code:train-set-laden}{ on input line 15}}{34}{Laden der Datensätze}{listing.caption.53}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.4}{\ignorespaces \lstinline {train.py} - Laden des Trainingsdatensatzes\relax }}{34}{listing.caption.53}\protected@file@percent }
+\AC@undonewlabel{acro:TOML}
+\newlabel{acro:TOML}{{4}{36}{Implementierung und Training}{section*.57}{}}
+\acronymused{TOML}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.1}Modell}{36}{section.4.1}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\BKM@entry{id=31,dest={73756273656374696F6E2E342E312E31},srcline={22}}{342E312E31204B6F6E737472756B746F72}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\FN@pp@footnote@aux{1}{37}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Auswahl an Methoden aus der CycleGAN Klasse\relax }}{37}{table.caption.58}\protected@file@percent }
+\newlabel{cyclegan-methods}{{4.1}{37}{Auswahl an Methoden aus der CycleGAN Klasse\relax }{table.caption.58}{}}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{KNN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Konstruktor}{37}{subsection.4.1.1}\protected@file@percent }
+\acronymused{TOML}
+\acronymused{CycleGAN}
+\citation{pix2pix}
+\abx@aux@cite{pix2pix}
+\abx@aux@segm{0}{0}{pix2pix}
+\citation{tensorflow-examples}
+\abx@aux@cite{tensorflow-examples}
+\abx@aux@segm{0}{0}{tensorflow-examples}
+\citation{cyclegan-tutorial}
+\abx@aux@cite{cyclegan-tutorial}
+\abx@aux@segm{0}{0}{cyclegan-tutorial}
+\citation{cycleGAN}
+\abx@aux@cite{cycleGAN}
+\abx@aux@segm{0}{0}{cycleGAN}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.1}{\ignorespaces \lstinline {model.py} - Auswahl der Generator-Architektur\relax }}{38}{listing.caption.59}\protected@file@percent }
+\newlabel{lst:generator-type}{{4.1}{38}{\lstinline {model.py} - Auswahl der Generator-Architektur\relax }{listing.caption.59}{}}
+\acronymused{CNN}
+\acronymused{CycleGAN}
+\BKM@entry{id=32,dest={73756273656374696F6E2E342E312E32},srcline={70}}{342E312E32206669742D4D6574686F6465}
 \citation{tf-dataset}
 \abx@aux@cite{tf-dataset}
 \abx@aux@segm{0}{0}{tf-dataset}
-\BKM@entry{id=41,dest={73756273656374696F6E2E342E342E32},srcline={40}}{342E342E32204C6F6767696E67}
-\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Bilineare Interpolation erklären. Abbildung einfügen, die vergrößertes Bild zeigt}{35}{section*.54}\protected@file@percent }
-\pgfsyspdfmark {pgfid11}{19562756}{46084293}
+\citation{tf-dataset}
+\abx@aux@cite{tf-dataset}
+\abx@aux@segm{0}{0}{tf-dataset}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.2}{\ignorespaces \lstinline {model.py} - Initialisierung der Generatoren\relax }}{39}{listing.caption.60}\protected@file@percent }
+\newlabel{lst:generator-init}{{4.2}{39}{\lstinline {model.py} - Initialisierung der Generatoren\relax }{listing.caption.60}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}fit-Methode}{39}{subsection.4.1.2}\protected@file@percent }
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.3}{\ignorespaces \lstinline {model.py} - \FVExtraRobustCommand \RobustMintInline \FVExtraAlwaysUnexpanded {\FVExtraUnexpandedReadStarOArgMArgBVArg {python}{fit}}-Methode\relax }}{40}{listing.caption.61}\protected@file@percent }
+\newlabel{lst:fit}{{4.3}{40}{\lstinline {model.py} - \mintinline {python}{fit}-Methode\relax }{listing.caption.61}{}}
 \acronymused{CycleGAN}
-\acronymused{GAN}
-\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Abbildung einfügen}{35}{section*.55}\protected@file@percent }
-\pgfsyspdfmark {pgfid12}{19562756}{28614361}
-\BKM@entry{id=42,dest={73756273656374696F6E2E342E342E33},srcline={49}}{342E342E332045726765626E69737365}
-\BKM@entry{id=43,dest={73656374696F6E2E342E35},srcline={22}}{342E352047656E6572696572756E67}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Logging}{36}{subsection.4.4.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Ergebnisse}{36}{subsection.4.4.3}\protected@file@percent }
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Vergleich von UNet und ResNet\relax }}{36}{table.caption.57}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.5}Generierung}{36}{section.4.5}\protected@file@percent }
-\FN@pp@footnotehinttrue 
-\BKM@entry{id=44,dest={636861707465722E35},srcline={1}}{35204175676D656E746174696F6E206465722067656E657269657274656E2042696C646572}
-\BKM@entry{id=45,dest={73656374696F6E2E352E31},srcline={4}}{352E3120556E675C3337346C7469676520537472615C333337656E736368696C646572}
-\BKM@entry{id=46,dest={73656374696F6E2E352E32},srcline={13}}{352E32204265776567756E6773756E7363685C333434726665}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{37}{chapter.5}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
-\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\newlabel{chap:5}{{5}{37}{Augmentation der generierten Bilder}{chapter.5}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{37}{section.5.1}\protected@file@percent }
 \acronymused{CycleGAN}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{37}{section.5.2}\protected@file@percent }
-\BKM@entry{id=47,dest={73656374696F6E2E352E33},srcline={19}}{352E33205363686E6565}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.3}Schnee}{38}{section.5.3}\protected@file@percent }
-\newlabel{code:snow-delcaration}{{\caption@xref {code:snow-delcaration}{ on input line 30}}{38}{Schnee}{listing.caption.58}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {5.1}{\ignorespaces Hizufügen von Schnee: Funktionsdeklaration\relax }}{38}{listing.caption.58}\protected@file@percent }
+\BKM@entry{id=33,dest={73756273656374696F6E2E342E312E33},srcline={106}}{342E312E332067656E65726174652D4D6574686F6465}
+\BKM@entry{id=34,dest={73656374696F6E2E342E32},srcline={1}}{342E3220446174656E6175676D656E74696572756E67}
+\BKM@entry{id=35,dest={73756273656374696F6E2E342E322E31},srcline={6}}{342E322E3120536B616C696572756E67}
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}generate-Methode}{41}{subsection.4.1.3}\protected@file@percent }
+\acronymused{CycleGAN}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.4}{\ignorespaces \lstinline {model.py} - generate-Methode\relax }}{41}{listing.caption.62}\protected@file@percent }
+\newlabel{lst:generate}{{4.4}{41}{\lstinline {model.py} - generate-Methode\relax }{listing.caption.62}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.2}Datenaugmentierung}{41}{section.4.2}\protected@file@percent }
+\citation{tf-map-fn}
+\abx@aux@cite{tf-map-fn}
+\abx@aux@segm{0}{0}{tf-map-fn}
+\citation{tf-map-fn}
+\abx@aux@cite{tf-map-fn}
+\abx@aux@segm{0}{0}{tf-map-fn}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Skalierung}{42}{subsection.4.2.1}\protected@file@percent }
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.5}{\ignorespaces Skalieren der Bild-Tensoren\relax }}{42}{listing.caption.63}\protected@file@percent }
+\newlabel{lst:content-scaling}{{4.5}{42}{Skalieren der Bild-Tensoren\relax }{listing.caption.63}{}}
+\BKM@entry{id=36,dest={73756273656374696F6E2E342E322E32},srcline={27}}{342E322E3220526F746174696F6E}
+\citation{math-primer}
+\abx@aux@cite{math-primer}
+\abx@aux@segm{0}{0}{math-primer}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Rotation}{43}{subsection.4.2.2}\protected@file@percent }
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.6}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{43}{listing.caption.64}\protected@file@percent }
+\newlabel{lst:alpha-z-value}{{4.6}{43}{Augmentierung eines Batches von Bildern\relax }{listing.caption.64}{}}
+\BKM@entry{id=37,dest={73656374696F6E2E342E33},srcline={1}}{342E3320547261696E696E67}
+\BKM@entry{id=38,dest={73756273656374696F6E2E342E332E31},srcline={4}}{342E332E31204C6164656E2064657220446174656E735C333434747A65}
+\citation{tf-keras-utils}
+\abx@aux@cite{tf-keras-utils}
+\abx@aux@segm{0}{0}{tf-keras-utils}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.3}Training}{44}{section.4.3}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Laden der Datensätze}{44}{subsection.4.3.1}\protected@file@percent }
+\newlabel{code:train-set-laden}{{\caption@xref {code:train-set-laden}{ on input line 8}}{44}{Laden der Datensätze}{listing.caption.65}{}}
+\BKM@entry{id=39,dest={73756273656374696F6E2E342E332E32},srcline={27}}{342E332E3220417573665C3337346872656E2064657320547261696E696E6773}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.7}{\ignorespaces \lstinline {train.py} - Laden des Trainingsdatensatzes\relax }}{45}{listing.caption.65}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{KNN}
+\BKM@entry{id=40,dest={73756273656374696F6E2E342E332E33},srcline={40}}{342E332E33204C6F6767696E67}
+\BKM@entry{id=41,dest={73756273656374696F6E2E342E332E34},srcline={49}}{342E332E3420566F72676568656E737765697365}
+\BKM@entry{id=42,dest={73656374696F6E2E342E34},srcline={51}}{342E3420547261696E696E677365726765626E69737365}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Ausführen des Trainings}{46}{subsection.4.3.2}\protected@file@percent }
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.8}{\ignorespaces \lstinline {train.py} - Laden des Trainingsdatensatzes\relax }}{46}{listing.caption.66}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Logging}{46}{subsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.4}Vorgehensweise}{46}{subsection.4.3.4}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.4}Trainingsergebnisse}{46}{section.4.4}\protected@file@percent }
+\acronymused{CycleGAN}
+\BKM@entry{id=43,dest={73756273656374696F6E2E342E342E31},srcline={72}}{342E342E3120552D4E6574}
+\BKM@entry{id=44,dest={73756273656374696F6E2E342E342E32},srcline={81}}{342E342E32205265734E6574}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {4.2}{\ignorespaces Vergleich von UNet und ResNet\relax }}{47}{table.caption.68}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}U-Net}{47}{subsection.4.4.1}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\@writefile{tdo}{\defcounter {refsection}{0}\relax }\@writefile{tdo}{\contentsline {todo}{Wurde jetzt auf 200 Epochen trainiert. Hier scheint der total loss gegen einen Wert zu konvergieren. Die Qualität der Schilder sieht etwas besser aus als nach 150 Epochen. Die Hintergründe sind kaum bessser. In der Evaluation den Unterschied der Prozentzahl von 150 Epochen zu 200 Epochen zeigen.}{47}{section*.69}\protected@file@percent }
+\pgfsyspdfmark {pgfid12}{19562756}{8576172}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}ResNet}{48}{subsection.4.4.2}\protected@file@percent }
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\acronymused{CycleGAN}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Modal Collaps des ResNet nach 200 Trainingsepochen\relax }}{48}{figure.caption.70}\protected@file@percent }
+\newlabel{fig:modal-collaps}{{4.1}{48}{Modal Collaps des ResNet nach 200 Trainingsepochen\relax }{figure.caption.70}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Positiv herausstechende Bilder des ResNets verschiedener Epochen\relax }}{48}{figure.caption.71}\protected@file@percent }
+\newlabel{fig:resnet-gute-bilder}{{4.2}{48}{Positiv herausstechende Bilder des ResNets verschiedener Epochen\relax }{figure.caption.71}{}}
+\BKM@entry{id=45,dest={73656374696F6E2E342E35},srcline={1}}{342E352047656E6572696572756E67}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Negativ herausstechende Bilder des ResNets verschiedener Epochen\relax }}{49}{figure.caption.72}\protected@file@percent }
+\newlabel{fig:resnet-schlechte-bilder}{{4.3}{49}{Negativ herausstechende Bilder des ResNets verschiedener Epochen\relax }{figure.caption.72}{}}
+\acronymused{CycleGAN}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks\relax }}{49}{figure.caption.73}\protected@file@percent }
+\newlabel{fig:resnet-6-blocks}{{4.4}{49}{Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks\relax }{figure.caption.73}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.5}Generierung}{49}{section.4.5}\protected@file@percent }
+\acronymused{CycleGAN}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {4.3}{\ignorespaces Auswahl an Methoden aus der CycleGAN Klasse\relax }}{50}{table.caption.74}\protected@file@percent }
+\acronymused{TOML}
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=48,dest={636861707465722E36},srcline={1}}{36204576616C756174696F6E}
-\BKM@entry{id=49,dest={73656374696F6E2E362E31},srcline={5}}{362E31204576616C756174696F6E206465722047656E6572696572756E67}
-\BKM@entry{id=50,dest={73756273656374696F6E2E362E312E31},srcline={6}}{362E312E312046617262686973746F6772616D6D65}
-\BKM@entry{id=51,dest={73756273656374696F6E2E362E312E32},srcline={7}}{362E312E3220576173736572737465696E2D44697374616E7A}
-\BKM@entry{id=52,dest={73756273656374696F6E2E362E312E33},srcline={8}}{362E312E33204B6C6173736966697A696572756E67}
-\BKM@entry{id=53,dest={73656374696F6E2E362E32},srcline={9}}{362E32204576616C756174696F6E20646572204175676D656E74696572756E67}
-\BKM@entry{id=54,dest={73756273656374696F6E2E362E322E31},srcline={10}}{362E322E31204D65616E204F70696E696F6E2053636F7265}
-\BKM@entry{id=55,dest={73656374696F6E2E362E33},srcline={12}}{362E3320566572626573736572756E67736D5C333636676C6963686B656974656E}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{39}{chapter.6}\protected@file@percent }
+\BKM@entry{id=46,dest={636861707465722E35},srcline={1}}{35204175676D656E746174696F6E206465722067656E657269657274656E2042696C646572}
+\BKM@entry{id=47,dest={73656374696F6E2E352E31},srcline={4}}{352E3120556E675C3337346C7469676520537472615C333337656E736368696C646572}
+\BKM@entry{id=48,dest={73656374696F6E2E352E32},srcline={13}}{352E32204265776567756E6773756E7363685C333434726665}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {5}Augmentation der generierten Bilder}{51}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\newlabel{chap:Evaluation}{{6}{39}{Evaluation}{chapter.6}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{39}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}Farbhistogramme}{39}{subsection.6.1.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Wasserstein-Distanz}{39}{subsection.6.1.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}Klassifizierung}{39}{subsection.6.1.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{39}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}Mean Opinion Score}{39}{subsection.6.2.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.3}Verbesserungsmöglichkeiten}{39}{section.6.3}\protected@file@percent }
+\newlabel{chap:5}{{5}{51}{Augmentation der generierten Bilder}{chapter.5}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.1}Ungültige Straßenschilder}{51}{section.5.1}\protected@file@percent }
+\acronymused{CycleGAN}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}Bewegungsunschärfe}{51}{section.5.2}\protected@file@percent }
+\BKM@entry{id=49,dest={73656374696F6E2E352E33},srcline={19}}{352E33205363686E6565}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.3}Schnee}{52}{section.5.3}\protected@file@percent }
+\newlabel{code:snow-delcaration}{{\caption@xref {code:snow-delcaration}{ on input line 30}}{52}{Schnee}{listing.caption.76}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {5.1}{\ignorespaces Hizufügen von Schnee: Funktionsdeklaration\relax }}{52}{listing.caption.76}\protected@file@percent }
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=56,dest={636861707465722E37},srcline={1}}{37205A7573616D6D656E66617373756E67}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {7}Zusammenfassung}{40}{chapter.7}\protected@file@percent }
+\BKM@entry{id=50,dest={636861707465722E36},srcline={1}}{36204576616C756174696F6E}
+\BKM@entry{id=51,dest={73656374696F6E2E362E31},srcline={5}}{362E31204576616C756174696F6E206465722047656E6572696572756E67}
+\BKM@entry{id=52,dest={73656374696F6E2E362E32},srcline={42}}{362E32204576616C756174696F6E20646572204175676D656E74696572756E67}
+\BKM@entry{id=53,dest={73656374696F6E2E362E33},srcline={44}}{362E3320566572626573736572756E67736D5C333636676C6963686B656974656E}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {6}Evaluation}{53}{chapter.6}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
+\newlabel{chap:Evaluation}{{6}{53}{Evaluation}{chapter.6}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{53}{section.6.1}\protected@file@percent }
+\@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\contentsline {table}{\numberline {6.1}{\ignorespaces Ergebnisse des Trainings eines VGG16 Klassifikators\relax }}{53}{table.caption.77}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{53}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.3}Verbesserungsmöglichkeiten}{53}{section.6.3}\protected@file@percent }
+\FN@pp@footnotehinttrue 
+\BKM@entry{id=54,dest={636861707465722E37},srcline={1}}{37205A7573616D6D656E66617373756E67}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {7}Zusammenfassung}{54}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
@@ -703,9 +1067,9 @@
 \FN@pp@footnotehinttrue 
 \FN@pp@footnotehinttrue 
 \FN@pp@footnotehinttrue 
-\BKM@entry{id=57,dest={636861707465722A2E3630},srcline={3}}{416E68616E67}
+\BKM@entry{id=55,dest={636861707465722A2E3739},srcline={3}}{416E68616E67}
 \FN@pp@footnotehinttrue 
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\nonumberline Anhang}{44}{chapter*.60}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\nonumberline Anhang}{59}{chapter*.79}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
@@ -718,68 +1082,172 @@
 \abx@aux@cite{piktogramme}
 \abx@aux@segm{0}{0}{piktogramme}
 \FN@pp@footnotehinttrue 
-\newlabel{fig:all-pictograms}{{.1}{45}{Alle 43 Piktogramme zu den generierten Klassen von Straßenschildern \cite {piktogramme}\relax }{figure.caption.62}{}}
+\newlabel{fig:all-pictograms}{{A.1}{60}{Alle 43 Piktogramme zu den generierten Klassen von Straßenschildern \cite {piktogramme}\relax }{figure.caption.81}{}}
+\newlabel{fig:unet-tensorboard}{{A.2}{61}{Trainingsverlauf des U-Net bis Epoche 200 (x-Achse: Trainingsschritt, y-Achse: Verlust)\relax }{figure.caption.82}{}}
+\acronymused{CycleGAN}
+\newlabel{fig:unet-generated-imgs}{{A.3}{62}{Trainingsverlauf des U-Net-basierten \ac {CycleGAN} bis Epoche 100\relax }{figure.caption.83}{}}
+\FN@pp@footnotehinttrue 
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {1}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{64}{listing.caption.86}\protected@file@percent }
+\newlabel{lst:pictogram-augmentation}{{1}{64}{Augmentierung eines Batches von Bildern\relax }{listing.caption.86}{}}
 \gdef\minted@oldcachelist{,
   default.pygstyle,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
   41389FAD42B57BA2C32816B9BFF3476886128093F1F526EE85E28E01609014F2.pygtex,
   B67B006BB35A84CED3AD15B7AFA190C986128093F1F526EE85E28E01609014F2.pygtex,
+  369990B384D3CB76276C5AA5C98725C986128093F1F526EE85E28E01609014F2.pygtex,
   22835E41435B9E4750EA8EB71F66B94F86128093F1F526EE85E28E01609014F2.pygtex,
   EDC6F24823F445DB0DA9CE539827FA5586128093F1F526EE85E28E01609014F2.pygtex,
   D4EFF36DF2BFC11E32C862260F5FD4C486128093F1F526EE85E28E01609014F2.pygtex,
   26B69AE10C4913EF2E80CAF0F8968D3486128093F1F526EE85E28E01609014F2.pygtex,
   ADA304CE7E2A159206CB3882BEE2B94C86128093F1F526EE85E28E01609014F2.pygtex,
-  EDC6F24823F445DB0DA9CE539827FA5586128093F1F526EE85E28E01609014F2.pygtex,
+  EED33F61BF2988CCB2E98450A2BE166886128093F1F526EE85E28E01609014F2.pygtex,
+  458D5F1AFC81AE7291A7AAAD852DC12A86128093F1F526EE85E28E01609014F2.pygtex,
+  36700C2F72721EE5886B8F7AC4C8E44486128093F1F526EE85E28E01609014F2.pygtex,
+  EDB0BACF1F2CD448B8D22F1A9B4F026E86128093F1F526EE85E28E01609014F2.pygtex,
+  E35EDFFD2F020512C75C12D9F00C9E0E86128093F1F526EE85E28E01609014F2.pygtex,
   D4EFF36DF2BFC11E32C862260F5FD4C486128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  D3C42C45B5668B2762A03ED1312743FD86128093F1F526EE85E28E01609014F2.pygtex,
+  BFC6A1135AFA48B74C5EC08E144F0E1086128093F1F526EE85E28E01609014F2.pygtex,
+  18FB798905F246068B33462AA18C8C6986128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  C71C9C5C45B37CDEDA0702E35FC8DD2686128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  7A551238893DDAB5B7B84162826C31CD86128093F1F526EE85E28E01609014F2.pygtex,
+  C71C9C5C45B37CDEDA0702E35FC8DD2686128093F1F526EE85E28E01609014F2.pygtex,
+  7A551238893DDAB5B7B84162826C31CD86128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  3437D647B9E0F16D625D76731738651286128093F1F526EE85E28E01609014F2.pygtex,
+  01AFC7FD498E302B9BC212229E36E2AA86128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  F782201C0C2CC51CFE3C1BE50DB5CE5486128093F1F526EE85E28E01609014F2.pygtex,
+  7EFEDB2992FFCFBC3BE7E7E55F27258986128093F1F526EE85E28E01609014F2.pygtex,
+  CD8F876F98000D2019F742DD8701367486128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
+  6E65F0172AD14627765DA4EA9F9FD66F86128093F1F526EE85E28E01609014F2.pygtex,
+  C586230025963973C3A2CEB6532ACD2686128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  60432E9FA87DAC8B04FACEBAA343851186128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  A6D18EDD23A33458C35DD5AF34EEE61986128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
+  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  C586230025963973C3A2CEB6532ACD2686128093F1F526EE85E28E01609014F2.pygtex,
+  0E9E1D61C217A23419DDC4BF5BF7052586128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
+  9A791CC5219F6F4D627591113AE747DB86128093F1F526EE85E28E01609014F2.pygtex,
+  2646680AA2CD7A84E121F94825A16D2686128093F1F526EE85E28E01609014F2.pygtex,
+  1CDE195E59F59BE27B2233C0D490CBCA86128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
+  38719A8C85A7FEBD312538019839AC1186128093F1F526EE85E28E01609014F2.pygtex,
+  EDC6F24823F445DB0DA9CE539827FA5586128093F1F526EE85E28E01609014F2.pygtex,
+  38719A8C85A7FEBD312538019839AC1186128093F1F526EE85E28E01609014F2.pygtex,
+  92520A5A9CF893220B9CD447F585F14486128093F1F526EE85E28E01609014F2.pygtex,
+  C0C59B7B9DA6B30D5EB4363257CDDBAF86128093F1F526EE85E28E01609014F2.pygtex,
+  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  C0C59B7B9DA6B30D5EB4363257CDDBAF86128093F1F526EE85E28E01609014F2.pygtex,
+  F1FC258E19D2E389B16985AA19A4F4A786128093F1F526EE85E28E01609014F2.pygtex,
+  F1FC258E19D2E389B16985AA19A4F4A786128093F1F526EE85E28E01609014F2.pygtex,
+  F1FC258E19D2E389B16985AA19A4F4A786128093F1F526EE85E28E01609014F2.pygtex,
+  F544ADF47F2961AAE7106D361900CA8286128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
   74CB8AC7178AECE56DD0FAE2FDE956CC86128093F1F526EE85E28E01609014F2.pygtex,
   38719A8C85A7FEBD312538019839AC1186128093F1F526EE85E28E01609014F2.pygtex,
-  F6896964804EE5DB3E6B2E40C263112786128093F1F526EE85E28E01609014F2.pygtex,
   F6C0B3553EA45DD7B3462BD594D4336186128093F1F526EE85E28E01609014F2.pygtex,
   6B7FE42AEDCFB229B687A03B3224720986128093F1F526EE85E28E01609014F2.pygtex,
   BAF6EA0FCABD372DD0B6A66D863F46DD86128093F1F526EE85E28E01609014F2.pygtex,
+  38719A8C85A7FEBD312538019839AC1186128093F1F526EE85E28E01609014F2.pygtex,
   6B7FE42AEDCFB229B687A03B3224720986128093F1F526EE85E28E01609014F2.pygtex,
-  A18E04E26829EEFC58CB2FA71BA6492486128093F1F526EE85E28E01609014F2.pygtex,
+  6B7FE42AEDCFB229B687A03B3224720986128093F1F526EE85E28E01609014F2.pygtex,
+  B014CEA44E2258E207961099FA31A48D86128093F1F526EE85E28E01609014F2.pygtex,
+  42DB59124E74C76ED9E9865DDF4CF35586128093F1F526EE85E28E01609014F2.pygtex,
   6B7FE42AEDCFB229B687A03B3224720986128093F1F526EE85E28E01609014F2.pygtex,
   DAC5B6CD3782CD1FD37383CD7532B43F86128093F1F526EE85E28E01609014F2.pygtex,
-  65A7BC13D1F908D9E83B5425DB48EEC786128093F1F526EE85E28E01609014F2.pygtex,
-  65A7BC13D1F908D9E83B5425DB48EEC786128093F1F526EE85E28E01609014F2.pygtex,
-  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
-  65A7BC13D1F908D9E83B5425DB48EEC786128093F1F526EE85E28E01609014F2.pygtex,
-  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
   B014CEA44E2258E207961099FA31A48D86128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
+  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
+  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
+  B014CEA44E2258E207961099FA31A48D86128093F1F526EE85E28E01609014F2.pygtex,
+  AE82BB93AAAC427F66A65FFD48385F3186128093F1F526EE85E28E01609014F2.pygtex,
+  A186AFF908E1B88369D21C7246E7B85786128093F1F526EE85E28E01609014F2.pygtex,
   B014CEA44E2258E207961099FA31A48D86128093F1F526EE85E28E01609014F2.pygtex,
   DAC5B6CD3782CD1FD37383CD7532B43F86128093F1F526EE85E28E01609014F2.pygtex,
+  90725E5BF0C6332A0F48168B1230712486128093F1F526EE85E28E01609014F2.pygtex,
   F0E914D42CF2F51BCFDBDD461106C0A986128093F1F526EE85E28E01609014F2.pygtex,
   38719A8C85A7FEBD312538019839AC1186128093F1F526EE85E28E01609014F2.pygtex,
-  1179ABFDD07BBC40757790653DA0848F86128093F1F526EE85E28E01609014F2.pygtex,
+  F0E914D42CF2F51BCFDBDD461106C0A986128093F1F526EE85E28E01609014F2.pygtex,
+  0DAEB6695663614E90022778C2B4E93C86128093F1F526EE85E28E01609014F2.pygtex,
   35E8FDF1750CA9B739C2E29AA323A38686128093F1F526EE85E28E01609014F2.pygtex,
   F9ED90681EBAFB6F3D9ADDDDF9C254AD86128093F1F526EE85E28E01609014F2.pygtex,
   EDB0BACF1F2CD448B8D22F1A9B4F026E86128093F1F526EE85E28E01609014F2.pygtex,
+  38719A8C85A7FEBD312538019839AC1186128093F1F526EE85E28E01609014F2.pygtex,
+  F9ED90681EBAFB6F3D9ADDDDF9C254AD86128093F1F526EE85E28E01609014F2.pygtex,
   0C2E8FD7D93CDEDEDBD98271EF4759E286128093F1F526EE85E28E01609014F2.pygtex,
   04639B3F8C908D537774F47C3D7CDD0086128093F1F526EE85E28E01609014F2.pygtex,
   26B69AE10C4913EF2E80CAF0F8968D3486128093F1F526EE85E28E01609014F2.pygtex,
-  D76A646C9C28CBC694D2828DC690463886128093F1F526EE85E28E01609014F2.pygtex,
   EED33F61BF2988CCB2E98450A2BE166886128093F1F526EE85E28E01609014F2.pygtex,
-  7671B8E2BEB9B3720AFFB750EF19541686128093F1F526EE85E28E01609014F2.pygtex,
+  D76A646C9C28CBC694D2828DC690463886128093F1F526EE85E28E01609014F2.pygtex,
   26B69AE10C4913EF2E80CAF0F8968D3486128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  7671B8E2BEB9B3720AFFB750EF19541686128093F1F526EE85E28E01609014F2.pygtex,
   864D2DEB97A1AF7D3F5CCF3DB95F909686128093F1F526EE85E28E01609014F2.pygtex,
   7671B8E2BEB9B3720AFFB750EF19541686128093F1F526EE85E28E01609014F2.pygtex,
   6C7189E7614B64AEE8498CCEF85A125486128093F1F526EE85E28E01609014F2.pygtex,
   08E9DE24AB150D083240557CEC091D5386128093F1F526EE85E28E01609014F2.pygtex,
+  9A791CC5219F6F4D627591113AE747DB86128093F1F526EE85E28E01609014F2.pygtex,
   7671B8E2BEB9B3720AFFB750EF19541686128093F1F526EE85E28E01609014F2.pygtex,
   1662C24032114A928A41A68C106B34DB86128093F1F526EE85E28E01609014F2.pygtex,
   7671B8E2BEB9B3720AFFB750EF19541686128093F1F526EE85E28E01609014F2.pygtex,
-  91E454EBA04C1ACA45D1EF5D17C6528586128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  F9545EE0A1585C2C8117F50298C423E386128093F1F526EE85E28E01609014F2.pygtex,
+  71FAC0801E38C44714D4F8875CCE820786128093F1F526EE85E28E01609014F2.pygtex,
+  5DA8F01331356CF06BC2231423BEEBB186128093F1F526EE85E28E01609014F2.pygtex,
+  FA1B36C4EC19F2C52744902742335F9686128093F1F526EE85E28E01609014F2.pygtex,
+  E0497EB9700071E2F71D1FDCC6769CB086128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  7B890A47DDBC1E37DD7221FE54D0253486128093F1F526EE85E28E01609014F2.pygtex,
+  26B69AE10C4913EF2E80CAF0F8968D3486128093F1F526EE85E28E01609014F2.pygtex,
+  7BFCFFBC4B0089A22BEDFCEF43012A3486128093F1F526EE85E28E01609014F2.pygtex,
+  4CC8121CB8BC8FC17A322DAEECDE3EAA86128093F1F526EE85E28E01609014F2.pygtex,
   66E226A57F621CF20B82D109BE379689B1ABB32D4BEE1E5C58576FCE74127926.pygtex,
-  A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex}
+  C0C59B7B9DA6B30D5EB4363257CDDBAF86128093F1F526EE85E28E01609014F2.pygtex,
+  ADA304CE7E2A159206CB3882BEE2B94C86128093F1F526EE85E28E01609014F2.pygtex,
+  322F6F83EB558227688A66481097CA6186128093F1F526EE85E28E01609014F2.pygtex,
+  81D5AC6AD5D19D2BFA99C7E03DF2EA9A86128093F1F526EE85E28E01609014F2.pygtex,
+  011D8654EBA0D738BA51E15A5D78BDDBB1ABB32D4BEE1E5C58576FCE74127926.pygtex,
+  7934C1897810850DE298E2288C830D54B1ABB32D4BEE1E5C58576FCE74127926.pygtex,
+  D9EEE52AD5A694A07EA68FFB7EBA8353B1ABB32D4BEE1E5C58576FCE74127926.pygtex,
+  971F1C241A70E1CFE0A6F166CBE8CB3CB1ABB32D4BEE1E5C58576FCE74127926.pygtex,
+  ADA304CE7E2A159206CB3882BEE2B94C86128093F1F526EE85E28E01609014F2.pygtex,
+  22EBB6F9F07354A9C83CE9733B7D831E86128093F1F526EE85E28E01609014F2.pygtex,
+  26F7061BE931B7A9DCBB827344D9302686128093F1F526EE85E28E01609014F2.pygtex,
+  A23AC6BA68F19551AB11213354B7E9EE86128093F1F526EE85E28E01609014F2.pygtex,
+  D60332A94CE5532F5A15E5FACED7D02F86128093F1F526EE85E28E01609014F2.pygtex,
+  8D15C10B16E5B3F3089D1223E61F504686128093F1F526EE85E28E01609014F2.pygtex}
 \abx@aux@refcontextdefaultsdone
 \abx@aux@defaultrefcontext{0}{Staron2021}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{eu-regulation}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{strassenschilderkennungTest}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{traffic-sign-detection-review-2014}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{GTSRB}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{traffic-sign-anomalies}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{DeepLearningBook}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{knnsKompakt}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{visualApproach}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{bce-loss}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{cnnsIntroduction}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{generative-modellierung}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{openAiGenerativeNets}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{generativeModelsBook}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{pixelRNN}{none/global//global/global}
@@ -787,32 +1255,47 @@
 \abx@aux@defaultrefcontext{0}{generativeModelsSurvey}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{autoencoders}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{Goodfellow-GANs}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{GANs}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{cycleGAN}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{cyclegan-tutorial}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{cyclegan-resnet}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{resnet}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{pix2pix}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{unet}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{taiwanGAN}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{GTSRB}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{gtsrbGAN}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{frameworks}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{tf-dataset}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{learn-tensorflow}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{chinese-dataset}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{vienna-convention}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{dataset-mapillary}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{dataset-belgiants}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{dataset-make-ml}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{learn-tensorflow}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{tensorflow-graphics}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{opencv}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{pillow}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{generative-models-comparison}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{piktogramme}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{geometric-ops}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{math-primer}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{cyclegan-tutorial}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{tensorflow-graphics}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{identity-loss}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{feature-scaling}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{tensorflow-examples}{none/global//global/global}
+\abx@aux@defaultrefcontext{0}{tf-map-fn}{none/global//global/global}
 \abx@aux@defaultrefcontext{0}{tf-keras-utils}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{tf-dataset}{none/global//global/global}
-\abx@aux@defaultrefcontext{0}{piktogramme}{none/global//global/global}
 \abx@aux@defaultlabelprefix{0}{Staron2021}{}
 \abx@aux@defaultlabelprefix{0}{eu-regulation}{}
 \abx@aux@defaultlabelprefix{0}{strassenschilderkennungTest}{}
 \abx@aux@defaultlabelprefix{0}{traffic-sign-detection-review-2014}{}
+\abx@aux@defaultlabelprefix{0}{GTSRB}{}
+\abx@aux@defaultlabelprefix{0}{traffic-sign-anomalies}{}
 \abx@aux@defaultlabelprefix{0}{DeepLearningBook}{}
 \abx@aux@defaultlabelprefix{0}{knnsKompakt}{}
 \abx@aux@defaultlabelprefix{0}{visualApproach}{}
+\abx@aux@defaultlabelprefix{0}{bce-loss}{}
 \abx@aux@defaultlabelprefix{0}{cnnsIntroduction}{}
+\abx@aux@defaultlabelprefix{0}{generative-modellierung}{}
 \abx@aux@defaultlabelprefix{0}{openAiGenerativeNets}{}
 \abx@aux@defaultlabelprefix{0}{generativeModelsBook}{}
 \abx@aux@defaultlabelprefix{0}{pixelRNN}{}
@@ -820,25 +1303,37 @@
 \abx@aux@defaultlabelprefix{0}{generativeModelsSurvey}{}
 \abx@aux@defaultlabelprefix{0}{autoencoders}{}
 \abx@aux@defaultlabelprefix{0}{Goodfellow-GANs}{}
+\abx@aux@defaultlabelprefix{0}{GANs}{}
 \abx@aux@defaultlabelprefix{0}{cycleGAN}{}
+\abx@aux@defaultlabelprefix{0}{cyclegan-tutorial}{}
+\abx@aux@defaultlabelprefix{0}{cyclegan-resnet}{}
+\abx@aux@defaultlabelprefix{0}{resnet}{}
+\abx@aux@defaultlabelprefix{0}{pix2pix}{}
+\abx@aux@defaultlabelprefix{0}{unet}{}
 \abx@aux@defaultlabelprefix{0}{taiwanGAN}{}
-\abx@aux@defaultlabelprefix{0}{GTSRB}{}
 \abx@aux@defaultlabelprefix{0}{gtsrbGAN}{}
+\abx@aux@defaultlabelprefix{0}{frameworks}{}
+\abx@aux@defaultlabelprefix{0}{tf-dataset}{}
+\abx@aux@defaultlabelprefix{0}{learn-tensorflow}{}
 \abx@aux@defaultlabelprefix{0}{chinese-dataset}{}
 \abx@aux@defaultlabelprefix{0}{vienna-convention}{}
 \abx@aux@defaultlabelprefix{0}{dataset-mapillary}{}
 \abx@aux@defaultlabelprefix{0}{dataset-belgiants}{}
 \abx@aux@defaultlabelprefix{0}{dataset-make-ml}{}
-\abx@aux@defaultlabelprefix{0}{learn-tensorflow}{}
+\abx@aux@defaultlabelprefix{0}{tensorflow-graphics}{}
+\abx@aux@defaultlabelprefix{0}{opencv}{}
+\abx@aux@defaultlabelprefix{0}{pillow}{}
 \abx@aux@defaultlabelprefix{0}{generative-models-comparison}{}
+\abx@aux@defaultlabelprefix{0}{piktogramme}{}
 \abx@aux@defaultlabelprefix{0}{geometric-ops}{}
 \abx@aux@defaultlabelprefix{0}{math-primer}{}
-\abx@aux@defaultlabelprefix{0}{cyclegan-tutorial}{}
-\abx@aux@defaultlabelprefix{0}{tensorflow-graphics}{}
+\abx@aux@defaultlabelprefix{0}{identity-loss}{}
+\abx@aux@defaultlabelprefix{0}{feature-scaling}{}
+\abx@aux@defaultlabelprefix{0}{tensorflow-examples}{}
+\abx@aux@defaultlabelprefix{0}{tf-map-fn}{}
 \abx@aux@defaultlabelprefix{0}{tf-keras-utils}{}
-\abx@aux@defaultlabelprefix{0}{tf-dataset}{}
-\abx@aux@defaultlabelprefix{0}{piktogramme}{}
-\FN@pp@footnotehinttrue 
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {2}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{66}{listing.caption.88}\protected@file@percent }
+\newlabel{lst:fit-full}{{2}{66}{Augmentierung eines Batches von Bildern\relax }{listing.caption.88}{}}
 \FN@pp@footnotehinttrue 
 \gdef\svg@ink@ver@settings{{\m@ne }{inkscape}{\m@ne }}
 \global\@namedef{scr@dte@chapter@lastmaxnumwidth}{10.96793pt}
@@ -849,4 +1344,4 @@
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\providecommand\tocbasic@end@toc@file{}\tocbasic@end@toc@file}
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\providecommand\tocbasic@end@toc@file{}\tocbasic@end@toc@file}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\providecommand\tocbasic@end@toc@file{}\tocbasic@end@toc@file}
-\gdef \@abspage@last{55}
+\gdef \@abspage@last{75}

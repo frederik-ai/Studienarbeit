@@ -3,11 +3,43 @@ Die Aufgabe der Evaluation ist prinzipiell folgende: Es soll gemessen werden, wi
 
 \label{chap:Evaluation}
 \section{Evaluation der Generierung}
-\subsection{Farbhistogramme}
-\subsection{Wasserstein-Distanz}
-\subsection{Klassifizierung}
+
+%\begin{table}[H]
+%	\centering
+%	\begin{tabular}{|l|c|c|c|}
+%	\hline
+%	Trainingsdatensatz & Trainingsbilder (\#) & Trainingsg.\tablefootnote{Genauigkeit auf den Trainingsdaten} (\%) & Epochen (\#) \\ \hline \hline
+%	Präparierter GTSRB & 4.554 & 100 & 20 \\ \hline
+%   Gesamte Trainingsdaten & 5.685 & 100 & 10 \\ \hline \hline
+%   U-Net & 4.300 & 99,60 & 16 \\ \hline
+%	ResNet (6 residual blocks) & 4.300  & 100 & 20 \\ \hline
+%   ResNet (9 residual blocks) & 4.300 & 99,33 & 20 \\ \hline \hline
+%   Piktogramme & 43 & 100 & 20 \\ \hline
+%   Augmentierte Piktogramme & 4.300 & 99,65 & 20
+%    \\ \hline \hline
+%	Gemischt & & & \\ \hline
+%	\end{tabular}
+%	\caption{Training eines VGG16 Klassifikators mit unterschiedlichen Trainingsdaten}
+%\end{table}
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|c|c|}
+	\hline
+	Trainingsdatensatz & Trainingsbilder (\#) & Testgenauigkeit (\%) \\ \hline \hline
+	Präparierter GTSRB & 4.554 & 82 \\ \hline
+   Gesamte Trainingsdaten & 5.685 & 83 \\ \hline \hline
+   U-Net & 4.300 & 62 \\ \hline
+	ResNet (6 residual blocks) & 4.300 & 46 \\ \hline
+   ResNet (9 residual blocks) & 4.300 & 53 \\ \hline \hline
+	Augmentierte Piktogramme & 4.300 & 19 \\ \hline
+   Piktogramme & 43 & 12 \\ \hline \hline
+	Gemischt & \\ \hline
+	\end{tabular}
+	\caption{Ergebnisse des Trainings eines VGG16 Klassifikators}
+\end{table}
+
 \section{Evaluation der Augmentierung}
-\subsection{Mean Opinion Score}
 
 \section{Verbesserungsmöglichkeiten}
 \begin{itemize}
