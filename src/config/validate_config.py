@@ -10,20 +10,29 @@ def main():
     config = toml.load('./config.toml')
 
     # PATHS
-    assert (isinstance(config['paths']['train_data'], str))
-    assert (isinstance(config['paths']['pictograms'], str))
-    assert (os.path.exists(config['paths']['train_data']))
-    assert (os.path.exists(config['paths']['pictograms']))
+    paths = ['train_data', 'pictograms', 'augmentation_data', 'destination']
+    classifier_paths = ['train_data', 'test_data']
+    for path in paths:
+        assert (path in config['paths'].keys())
+        assert (isinstance(config['paths'][path], str))
+        assert (os.path.exists(os.path.join('..', config['paths'][path])))
+    for path in classifier_paths:
+        assert (path in config['paths']['classifier'].keys())
+        assert (isinstance(config['paths']['classifier'][path], str))
+        assert (os.path.exists(config['paths']['classifier'][path]))
+    assert (isinstance(config['paths']['classifier']['checkpoint_directory_name'], str))
 
     # MODEL
-    image_dimensions = config['model']['image_dimensions']
-    assert (isinstance(image_dimensions, list))
-    assert (len(image_dimensions) == 2)
-    assert (image_dimensions[0] == image_dimensions[1])
+    assert (isinstance(config['model']['image_size'], int))
+    assert (isinstance(config['model']['generator_type'], str))
 
     # TRAINING
-    assert (isinstance(config['training']['batch_size'], int))
-    assert (isinstance(config['training']['number_of_epochs'], int))
+    integers = ['number_of_epochs', 'batch_size', 'lambda']
+    floats = ['learning_rate', 'beta_1', 'beta_2']
+    for integer in integers:
+        assert (isinstance(config['training'][integer], int))
+    for float_ in floats:
+        assert (isinstance(config['training'][float_], float))
 
     print('Successfully validated the configuration file.')
 

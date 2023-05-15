@@ -8,19 +8,39 @@ Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug m
 
 Ähnlich zu der Funktionsweise von \acp{CNN} basiert die küstliche Erzeugung von Bewegungsunschärfe auf einer Faltung. Die Idee ist, jeden Pixelwert durch einen Durchschnitt der umliegenden Pixelwerte zu ersetzen. Dabei jedoch nicht radial, sondern linear entlang einer bestimmten Richtung. Die Bewegungsunschärfe in dieser Studienarbeit ist entweder horizontal, vertikal oder diagonal. Je mehr Pixel in die Berechnung des Durchschnitts einbezogen werden, desto stärker erscheint die Bewegungsunschärfe. Es ergeben sich dadurch drei Arten von Faltmatrizen: \cite{motion-blur}
 
-\todo[inline]{Faltmatrizen zeigen}
+\begin{figure}
+	\centering
+	\begin{tikzpicture}[baseline=(current bounding box.center)]
+		\matrix (A) [nodes=draw,column sep=-0.2mm, minimum size=6mm] {
+			\node{0}; & \node{0}; & \node{0}; \\
+			\node{1}; & \node{1}; & \node{1}; \\
+			\node{0}; & \node{0}; & \node{0}; \\
+		};
+		\matrix (B) [nodes=draw,column sep=-0.2mm, minimum size=6mm, right= of A] {
+			\node{0}; & \node{1}; & \node{0}; \\
+			\node{0}; & \node{1}; & \node{0}; \\
+			\node{0}; & \node{1}; & \node{0}; \\
+		};
+		\matrix (C) [nodes=draw,column sep=-0.2mm, minimum size=6mm, right = of B] {
+			\node{1}; & \node{0}; & \node{0}; \\
+			\node{0}; & \node{1}; & \node{0}; \\
+			\node{0}; & \node{0}; & \node{1}; \\
+		};
+	\end{tikzpicture}
+	\caption{Horizontale, vertikale und diagonale Faltmatrix}
+\end{figure}
 
-Die Größe der Faltmatrix gibt die Stärke der Unschärfe an. Bei einer größeren Faltmatrix fließen nämlich mehr Pixel in die Berechnung des Durchschnitts ein. In dem Modul \mintinline{python}{utils.image_augmentation} existiert die Funktion \mintinline{python}{apply_motion_blur} um auf einen einzelnen Bild-Tensor der Stufe drei eine Bewegungsunschärfe auszuführen. Zusätzlich besitzt die Funktion verschiedene Parameter zur Steuerung der Intensität und der Richtung des Effekts. Die Faltmatrix wird in Numpy erstellt. Die diagonale Faltmatrix fügt 1en auf der Hauptdiagonalen hinzu. Deshalb handelt es sich dabei um eine Einheitsmatrix. Diese kann mit der folgenden Zeile Code erstellt werden:
+Die Größe der Faltmatrix gibt die Stärke der Unschärfe an. Bei einer größeren Faltmatrix fließen nämlich mehr Pixel in die Berechnung des Durchschnitts ein. In dem Modul \mintinline{python}{utils.image_augmentation} existiert die Funktion \mintinline{python}{apply_motion_blur} um auf einen einzelnen Bild-Tensor der Stufe drei eine Bewegungsunschärfe auszuführen. Zusätzlich besitzt die Funktion verschiedene Parameter zur Steuerung der Intensität und der Richtung des Effekts. Die Faltmatrix wird in Numpy erstellt. Die diagonale Faltmatrix fügt 1en auf der Hauptdiagonalen hinzu. Deshalb handelt es sich dabei um eine Einheitsmatrix \emph{(engl.: identity matrix)}. Diese kann mit der folgenden Zeile Code erstellt werden:
 
 \begin{code}
   \begin{minted}{python}
   kernel = np.identity(kernel_size)
   \end{minted}
-  \end{code}
+\end{code}
 
-Wobei \emph{kernel} englisch für Faltmatrix ist und die \emph{kernel_size} die Größe der Matrix in der Diagonalen angibt. 
+Wobei \emph{kernel} englisch für Faltmatrix ist und die \emph{kernel\_size} die Größe der Matrix in der Diagonalen angibt. 
 
-~Darauf eingehen, dass man das auch mit einer Fourier Transformation umgesetzen kann~
+Darauf eingehen, dass man das auch mit einer Fourier Transformation umgesetzen kann
 
 Eine Bewegungsunschärfe kann mittels einer Faltung des Bildes mit einer Faltmatrix realisiert werden.
 

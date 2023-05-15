@@ -1589,5 +1589,46 @@
     \field{urlmonth}{03}
     \field{urlyear}{2023}
   \endentry
+
+  \entry{motion-blur}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=LX}{%
+         family={Luo},
+         familyi={L\bibinitperiod},
+         given={Xuejiao},
+         giveni={X\bibinitperiod},
+      }}%
+      {{hash=SNZ}{%
+         family={Salamon},
+         familyi={S\bibinitperiod},
+         given={Nestor\bibnamedelima Z.},
+         giveni={N\bibinitperiod\bibinitdelim Z\bibinitperiod},
+      }}%
+      {{hash=EE}{%
+         family={Eisemann},
+         familyi={E\bibinitperiod},
+         given={Elmar},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Canadian Human-Computer Communications Society}%
+    }
+    \strng{namehash}{LXSNZEE1}
+    \strng{fullhash}{LXSNZEE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Proceedings of the 44th Graphics Interface Conference}
+    \verb{doi}
+    \verb 10.20380/GI2018.15
+    \endverb
+    \field{pages}{108–114}
+    \field{title}{Adding Motion Blur to Still Images}
+    \list{location}{1}{%
+      {Toronto, Canada}%
+    }
+    \field{year}{2018}
+    \warn{\item Can't use 'location' + 'address'}
+  \endentry
 \enddatalist
 \endinput
