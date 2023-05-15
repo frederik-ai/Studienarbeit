@@ -1,7 +1,7 @@
 \chapter{Augmentation der generierten Bilder}
 \label{chap:5}
 
-Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Straßenschild-Bildern. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \label{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Diese Augmentierung von generierten Bildern implementiert ein Modul \lstinline[texcl=false]{utils.image_augmentation}. Dieses Kapitel soll genauer auf diese Funktionen eingehen.
+Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Straßenschild-Bildern. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \label{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Diese Augmentierung von generierten Bildern implementiert ein Modul \mintinline{python}{utils.image_augmentation}. Dieses Kapitel soll genauer auf diese Funktionen eingehen.
 
 \section{Bewegungsunschärfe}
 Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug mit einer hohen Geschwindigkeit bewegt. Hierbei entsteht eine Bewegungsunschärfe. Dies tritt bei einer Kamera auf, wenn sich das Bild während der Belichtungszeit deutlich verändert. Wenn also die Geschwindigkeit des Fahrzeugs groß ist im Vergleich zur Belichtungszeit. Da sich das fotografiererte Objekt dazu unterschiedlichen Zeitpunkten an verschiedenen Positionen im Bild befindet, erscheint es als verschwommen. Während bei der Straßenschilderkennung eine Bewegungsunschärfe die Erkennung erschwert, existieren Bereiche, in denen Fotografen absichtlich versuchen sie zu erzeugen. Dazu zählt beispielsweise die Sportfotographie, in der Objekte schneller erscheinen, wenn sie verschwommen zu sehen sind. Die Literatur gibt jedoch Hinweise darauf, dass es nicht trivial sei, die Bewegungsunschärfe mit einer Kamera exakt zu steuern. Beispielsweise wenn die Unschärfe eine bestimmte Intensität haben soll. Aus diesem Grund besteht Interesse daran, Bewegungsunschärfe computergestützt zu erzeugen. \cite{motion-blur}
@@ -10,6 +10,15 @@ Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug m
 
 \todo[inline]{Faltmatrizen zeigen}
 
+Die Größe der Faltmatrix gibt die Stärke der Unschärfe an. Bei einer größeren Faltmatrix fließen nämlich mehr Pixel in die Berechnung des Durchschnitts ein. In dem Modul \mintinline{python}{utils.image_augmentation} existiert die Funktion \mintinline{python}{apply_motion_blur} um auf einen einzelnen Bild-Tensor der Stufe drei eine Bewegungsunschärfe auszuführen. Zusätzlich besitzt die Funktion verschiedene Parameter zur Steuerung der Intensität und der Richtung des Effekts. Die Faltmatrix wird in Numpy erstellt. Die diagonale Faltmatrix fügt 1en auf der Hauptdiagonalen hinzu. Deshalb handelt es sich dabei um eine Einheitsmatrix. Diese kann mit der folgenden Zeile Code erstellt werden:
+
+\begin{code}
+  \begin{minted}{python}
+  kernel = np.identity(kernel_size)
+  \end{minted}
+  \end{code}
+
+Wobei \emph{kernel} englisch für Faltmatrix ist und die \emph{kernel_size} die Größe der Matrix in der Diagonalen angibt. 
 
 ~Darauf eingehen, dass man das auch mit einer Fourier Transformation umgesetzen kann~
 
