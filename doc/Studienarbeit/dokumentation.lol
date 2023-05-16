@@ -57,7 +57,9 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {listing}{\numberline {5.1}{\ignorespaces Hizufügen von Schnee: Funktionsdeklaration\relax }}{53}{listing.caption.78}%
+\contentsline {listing}{\numberline {5.1}{\ignorespaces \lstinline [language=python]{utils.image_augmentation.py} - Hinzufügen einer diagonalen Bewegungsunschärfe\relax }}{52}{listing.caption.77}%
+\defcounter {refsection}{0}\relax 
+\contentsline {listing}{\numberline {5.2}{\ignorespaces Hizufügen von Schnee: Funktionsdeklaration\relax }}{54}{listing.caption.80}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -77,6 +79,6 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {listing}{\numberline {1}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{65}{listing.caption.88}%
+\contentsline {listing}{\numberline {1}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{66}{listing.caption.90}%
 \defcounter {refsection}{0}\relax 
-\contentsline {listing}{\numberline {2}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{67}{listing.caption.90}%
+\contentsline {listing}{\numberline {2}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{68}{listing.caption.92}%

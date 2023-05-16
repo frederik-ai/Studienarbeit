@@ -1,57 +1,71 @@
 \chapter{Augmentation der generierten Bilder}
 \label{chap:5}
 
-Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Straßenschild-Bildern. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \label{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Diese Augmentierung von generierten Bildern implementiert ein Modul \mintinline{python}{utils.image_augmentation}. Dieses Kapitel soll genauer auf diese Funktionen eingehen.
+Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Straßenschild-Bildern. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \ref{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Dafür dient ein Modul \mintinline{python}{utils.image_augmentation}. Für jede der Augmentierungen befinden sich Beispiel-Abbildungen im Anhang.
 
 \section{Bewegungsunschärfe}
-Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug mit einer hohen Geschwindigkeit bewegt. Hierbei entsteht eine Bewegungsunschärfe. Dies tritt bei einer Kamera auf, wenn sich das Bild während der Belichtungszeit deutlich verändert. Wenn also die Geschwindigkeit des Fahrzeugs groß ist im Vergleich zur Belichtungszeit. Da sich das fotografiererte Objekt dazu unterschiedlichen Zeitpunkten an verschiedenen Positionen im Bild befindet, erscheint es als verschwommen. Während bei der Straßenschilderkennung eine Bewegungsunschärfe die Erkennung erschwert, existieren Bereiche, in denen Fotografen absichtlich versuchen sie zu erzeugen. Dazu zählt beispielsweise die Sportfotographie, in der Objekte schneller erscheinen, wenn sie verschwommen zu sehen sind. Die Literatur gibt jedoch Hinweise darauf, dass es nicht trivial sei, die Bewegungsunschärfe mit einer Kamera exakt zu steuern. Beispielsweise wenn die Unschärfe eine bestimmte Intensität haben soll. Aus diesem Grund besteht Interesse daran, Bewegungsunschärfe computergestützt zu erzeugen. \cite{motion-blur}
+Verwackelte Bilder können insbesondere dann entstehen, wenn sich das Fahrzeug mit einer hohen Geschwindigkeit bewegt. Hierbei entsteht eine Bewegungsunschärfe. Dies tritt bei einer Kamera auf, wenn sich das Bild während der Belichtungszeit deutlich verändert. Wenn also die Geschwindigkeit des Fahrzeugs groß ist im Vergleich zur Belichtungszeit. Da sich das fotografierte Objekt zu unterschiedlichen Zeitpunkten an verschiedenen Positionen im Bild befindet, erscheint es als verschwommen. Während bei der Straßenschilderkennung eine Bewegungsunschärfe die Erkennung erschwert, existieren Bereiche, in denen Fotografen absichtlich versuchen sie zu erzeugen. Dazu zählt beispielsweise die Sportfotografie, in der Objekte schneller erscheinen, wenn sie verschwommen zu sehen sind. Die Literatur gibt jedoch Hinweise darauf, dass es nicht trivial sei, die Bewegungsunschärfe mit einer Kamera exakt zu steuern. Beispielsweise wenn die Unschärfe eine bestimmte Intensität haben soll. Aus diesem Grund besteht Interesse daran, Bewegungsunschärfe computergestützt zu erzeugen. \cite{motion-blur}
 
-Ähnlich zu der Funktionsweise von \acp{CNN} basiert die küstliche Erzeugung von Bewegungsunschärfe auf einer Faltung. Die Idee ist, jeden Pixelwert durch einen Durchschnitt der umliegenden Pixelwerte zu ersetzen. Dabei jedoch nicht radial, sondern linear entlang einer bestimmten Richtung. Die Bewegungsunschärfe in dieser Studienarbeit ist entweder horizontal, vertikal oder diagonal. Je mehr Pixel in die Berechnung des Durchschnitts einbezogen werden, desto stärker erscheint die Bewegungsunschärfe. Es ergeben sich dadurch drei Arten von Faltmatrizen: \cite{motion-blur}
+Ähnlich zu der Funktionsweise von \acp{CNN} basiert die küstliche Erzeugung von Bewegungsunschärfe auf einer Faltung des Bilds mit einer Faltmatrix. Die Idee ist, jeden Pixelwert durch einen Durchschnitt der umliegenden Pixelwerte zu ersetzen. Dabei jedoch linear entlang einer bestimmten Richtung, um eine lineare Bewegung zu simulieren. Je mehr Pixel in die Berechnung des Durchschnitts einbezogen werden, desto stärker erscheint die Bewegungsunschärfe. Die Bewegungsunschärfe in dieser Studienarbeit ist entweder horizontal, vertikal oder diagonal. Es ergeben sich dadurch drei Arten von Faltmatrizen, die in Abbildung \ref{fig:faltmatrizen} gezeigt sind. \cite{motion-blur}
 
-\begin{figure}
+\begin{figure}[h]
 	\centering
 	\begin{tikzpicture}[baseline=(current bounding box.center)]
-		\matrix (A) [nodes=draw,column sep=-0.2mm, minimum size=6mm] {
+		\matrix (A) [nodes={draw, minimum size=9mm}, column sep=-0.2mm] {
 			\node{0}; & \node{0}; & \node{0}; \\
-			\node{1}; & \node{1}; & \node{1}; \\
+			\node{$0.\bar{3}$}; & \node{$0.\bar{3}$}; & \node{$0.\bar{3}$}; \\
 			\node{0}; & \node{0}; & \node{0}; \\
 		};
-		\matrix (B) [nodes=draw,column sep=-0.2mm, minimum size=6mm, right= of A] {
-			\node{0}; & \node{1}; & \node{0}; \\
-			\node{0}; & \node{1}; & \node{0}; \\
-			\node{0}; & \node{1}; & \node{0}; \\
+		\matrix (B) [nodes={draw, minimum size=9mm}, column sep=-0.2mm, right= of A] {
+			\node{0}; & \node{$0.\bar{3}$}; & \node{0}; \\
+			\node{0}; & \node{$0.\bar{3}$}; & \node{0}; \\
+			\node{0}; & \node{$0.\bar{3}$}; & \node{0}; \\
 		};
-		\matrix (C) [nodes=draw,column sep=-0.2mm, minimum size=6mm, right = of B] {
-			\node{1}; & \node{0}; & \node{0}; \\
-			\node{0}; & \node{1}; & \node{0}; \\
-			\node{0}; & \node{0}; & \node{1}; \\
+		\matrix (C) [nodes={draw, minimum size=9mm}, column sep=-0.2mm, right= of B] {
+			\node{$0.\bar{3}$}; & \node{0}; & \node{0}; \\
+			\node{0}; & \node{$0.\bar{3}$}; & \node{0}; \\
+			\node{0}; & \node{0}; & \node{$0.\bar{3}$}; \\
 		};
 	\end{tikzpicture}
 	\caption{Horizontale, vertikale und diagonale Faltmatrix}
+	\label{fig:faltmatrizen}
 \end{figure}
 
-Die Größe der Faltmatrix gibt die Stärke der Unschärfe an. Bei einer größeren Faltmatrix fließen nämlich mehr Pixel in die Berechnung des Durchschnitts ein. In dem Modul \mintinline{python}{utils.image_augmentation} existiert die Funktion \mintinline{python}{apply_motion_blur} um auf einen einzelnen Bild-Tensor der Stufe drei eine Bewegungsunschärfe auszuführen. Zusätzlich besitzt die Funktion verschiedene Parameter zur Steuerung der Intensität und der Richtung des Effekts. Die Faltmatrix wird in Numpy erstellt. Die diagonale Faltmatrix fügt 1en auf der Hauptdiagonalen hinzu. Deshalb handelt es sich dabei um eine Einheitsmatrix \emph{(engl.: identity matrix)}. Diese kann mit der folgenden Zeile Code erstellt werden:
+Die Größe der Faltmatrix gibt die Stärke der Unschärfe an. Bei einer größeren Faltmatrix fließen nämlich mehr Pixel in die Berechnung des Durchschnitts ein. Da die Faltung hier jeden Pixel gleich stark gewichtet, sind alle Parameter der Faltmatrix entlang der simulierten Bewegungsrichtung identisch. Damit jeder Pixel dieselbe Helligkeit besitzt, müssen die Parameter zudem zusammen den Wert \emph{eins} ergeben \cite{motion-blur}. Das ist der Grund, wieso die 3x3-Matrizen in Abbildung \ref{fig:faltmatrizen} die Werte $0.\bar{3}$ haben. Eine 4x4-Matrix hingegen hätte die Werte $0.25$. In dem Modul \mintinline{python}{utils.image_augmentation} existiert die Funktion \mintinline{python}{apply_motion_blur} um auf einen einzelnen Bild-Tensor der Stufe drei eine Bewegungsunschärfe auszuführen. Zusätzlich besitzt die Funktion verschiedene Parameter zur Steuerung der Intensität und der Richtung des Effekts. Listing \ref{code:motion-blur} zeigt, wie die Funktion die Bewegungsunschärfe in diagonler Richtung durchführt.
 
 \begin{code}
   \begin{minted}{python}
   kernel = np.identity(kernel_size)
+  kernel = kernel / kernel_size
+  transformed_img = cv2.filter2D(img_tensor.numpy(), -1, kernel)
   \end{minted}
+  \caption{\lstinline[language=python]{utils.image_augmentation.py} - Hinzufügen einer diagonalen Bewegungsunschärfe}
+  \label{code:motion-blur}
 \end{code}
 
-Wobei \emph{kernel} englisch für Faltmatrix ist und die \emph{kernel\_size} die Größe der Matrix in der Diagonalen angibt. 
+Die Variable \mintinline{python}{kernel} steht für die Faltmatrix. Numpy besitzt eine Funktion \mintinline{python}{identity}, die eine Einheitsmatrix erzeugt. Diese Matrix besitzt auf der Hauptdiagolen Einsen und sonst Nullen. Die \mintinline{python}{kernel_size} gibt die Größe der Matrix an. Damit alle Werte der Matrix summiert den Wert \emph{eins} ergeben, teilt die Funktion die Matrix durch die \mintinline{python}{kernel_size}. In der letzten Codezeile in Listing \ref{code:motion-blur} faltet die Funktion \mintinline{python}{apply_motion_blur} das Eingangsbild mit der Faltmatrix. Dazu nutzt sie die Funktion \mintinline{python}{filter2D} aus der OpenCV Bibliothek. Die Funktion wird genutzt, da sich keine TensorFlow Funktion hat finden lassen, mit der eine derart definierte Faltmatrix auf einem Bild angewendet werden kann, ohne Convolutional Layer zu verwenden. Die Funktion erhält drei Parameter: Den Bild-Tensor, jedoch konvertiert in ein Numpy Array, den Wert $-1$ und die Faltmatrix. Der Wert $-1$ gibt an, dass die Funktion die Anzahl an Farbkanälen des Bilds beibehalten soll.
 
-Darauf eingehen, dass man das auch mit einer Fourier Transformation umgesetzen kann
-
-Eine Bewegungsunschärfe kann mittels einer Faltung des Bildes mit einer Faltmatrix realisiert werden.
+\todo[inline]{Irgendwo erklären was ein Numpy Array ist}
 
 \section{Ungültige Straßenschilder}
-In Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} ist bereits beschrieben, dass als ungültig markierte Schilder offenbar eine Herausforderung für heutige Straßenschilderkennungen darstellen können. Das Ziel dieser Studienarbeit ist, solche Fälle simulieren zu können. Aus diesem Grund ist dieser Anwendungsfall implementiert.
+In Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} ist bereits beschrieben, dass als ungültig markierte Schilder eine Herausforderung für heutige Straßenschilderkennungen darstellen können. Das Ziel dieser Studienarbeit ist, solche Fälle zu simulieren. Aus diesem Grund ist dieser Anwendungsfall implementiert. Dabei sind ungültige Schilder im Straßenverkehr meist durch ein orangefarbenes Kreuz gekennzeichnet.
 
-Beispiele für durch dieses Projekt erzeugte, ungültige Straßenschilder sind in der nachfolgenden Abbildung dargestellt:
+Bei der Umsetzung bieten sich verschiedene Möglichkeiten. Zum einen kann das \ac{CycleGAN} darauf trainiert werden, solche Bilder eigenständig zu generieren. Dafür benötigt das Modell Trainingsdaten, die ungültige Schilder zeigen. Der Datensatz müsste somit um reale Bilder ergänzt werden. Das ist nicht ohne weiteres möglich. Es wäre jedoch auch denkbar, bereits vorhandene Trainingsbilder mit einer Bildbearbeitungssoftware so anzupassen, dass sie ungültige Schilder zeigen.
 
-Bei der Umsetzung bieten sich zwei Möglichkeiten. Zum einen kann das \ac{CycleGAN} darauf trainiert werden, solche Bilder eigenständig zu generieren. Dafür würden Trainingsdaten benötigt, die solche Schilder zeigen. Der Datensatz müsste somit um weitere Bilder ergänzt werden. Weitere reale Bilder hinzuzufügen ist nicht ohne weiteres möglich. Es wäre jedoch auch denkbar, bereits vorhandene TRainingsbilder mit einer Bildbearbeitungssoftware so anzupassen, dass die ungültige Schilder zeigen.
+Eine weitere Möglichkeit ist, das Kreuz, das die Ungültigkeit eines Schilds markiert, nachträglich in die generierten Bilder einzufügen. Die Besonderheit ist hierbei, dass die Straßenschilder zufällig rotiert und skaliert sind. Die Augmentierungsfunktion muss das Kreuz vorher so transformieren, dass es sich stest zentral und mit einer angepassten Rotation auf dem Schild befindet. Da hierfür keine zusätzlichen Trainingsdaten nötig sind, implementiert das Modul  \mintinline{python}{utils.image_augmentation} dieses Vorgehen. Die Funktion heißt \mintinline{python}{make_street_sign_invalid}. 
 
-Eine weitere Möglichkeit ist, das Kreuz, das die Ungültigkeit eines Schildes markiert, nachträglich in die generierten Bilder einzufügen. Die Schwierigkeit ist hierbei, dass die Straßenschilder zufällig rotiert und skaliert sind. Das Kreuz muss so transformiert werden, dass es sich stest zentral und mit einer angepassten Rotation auf dem Schild befindet.
+Für zukünftige Arbeiten ist ein weiterer Ansatz, die Kreuze vor der Bild-zu-Bild Generierung auf die Piktogramme einzufügen. Dafür können Entwickelnde die Funktion \mintinline{python}{make_street_sign_invalid} verwenden. Sie müssen das entstehende Bild anschließend skalieren und rotieren und an das \c{CycleGAN} als Eingangsdomäne $X$ übergeben. Auch hierfür benötigt das Modell zusätzliche Trainingsdaten. Es muss jedoch nicht von alleine lernen, das Kreuz zu erzeugen, da dies bereits im Eingangsbild enhalten ist. Außerdem kann der Quellcode genutzt werden, um andere Objekte auf die Schilder einzufügen. Beispielsweise wenn Entwickelnde das \ac{CycleGAN} erweitern wollen, um Vandalismus auf Straßenschildern zu simulieren.
+
+In dem Ordner \mintinline{python}{Augmentation} unter \href{https://drive.google.com/drive/u/1/folders/1UlZNFEDLymyMFw2BJZcfB2toAIlTVwGb}{\textbf{dem Link des Datensatzes}} (Stand: 09.06.2023) befindet sich das rohe Bild eines orangefarbenen Kreuzes auf einem transparenten Hintergrund. Prinzipiell implementiert die Funktion \mintinline{python}{make_street_sign_invalid} folgendes: Sie augmentiert dieses Bild analog zu den Piktogrammen und fügt es dann auf ein generiertes Straßenschild ein. Aufrufende Funktionen müssen deshalb nicht nur ein generiertes Schild übergeben, sondern auch den Wert für die Skalierung sowie die Transformationsmatrix, die zu diesem generierten Bild geführt hat. Die Funktion \mintinline{python}{make_street_sign_invalid} kann das Kreuz dann mit den gleichen Parametern skalieren und rotieren wie das Straßenschild. Dadurch fügt die Funktion das Kreuz zentriert auf das Straßenschild ein. Die Funktion \mintinline{python}{make_street_sign_invalid} besteht in verkürzter Form aus dem Code in Listing \ref{code:invalid-sign}.
+
+\begin{code}
+	\begin{minted}{python}
+invalid_cross = preprocess_image.transform_image(invalid_cross, content_size, transformation_matrix, bg_is_white=False)
+img_tensor = tf.concat([img_tensor, tf.ones_like(img_tensor[:, :, 0:1])], axis=-1)
+img_tensor.paste(cross, (0, 0), cross)
+	\end{minted}
+\end{code}
+
 
 \section{Schnee}
 Die Generierung von Schnee erfolgt in mehreren Schritten:
