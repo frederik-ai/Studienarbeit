@@ -1,4 +1,7 @@
 \chapter{Augmentation der generierten Bilder}
+
+\todo[inline]{Erklären, inwiefern die benutzten Datensätze die Randbedindgungen zur Erschwerung der Erkennung nicht abbilden}
+
 \label{chap:5}
 
 Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Straßenschild-Bildern. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \ref{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Dafür dient ein Modul \mintinline{python}{utils.image_augmentation}. Für jede der Augmentierungen befinden sich Beispiel-Abbildungen im Anhang.
@@ -65,7 +68,6 @@ img_tensor = tf.concat([img_tensor, tf.ones_like(img_tensor[:, :, 0:1])], axis=-
 img_tensor.paste(cross, (0, 0), cross)
 	\end{minted}
 \end{code}
-
 
 \section{Schnee}
 Die Generierung von Schnee erfolgt in mehreren Schritten:
