@@ -33,7 +33,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.2.2}Convolutional Neural Networks}{9}{subsection.2.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Bildgenerierung mittels Künstlicher Neuronaler Netze}{10}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Bildgenerierung mit Künstlichen Neuronalen Netzen}{10}{section.2.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.1}Mathematischer Hintergrund}{11}{subsection.2.3.1}%
 \defcounter {refsection}{0}\relax 
@@ -109,18 +109,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.2}Ungültige Straßenschilder}{53}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Schnee}{54}{section.5.3}%
+\contentsline {section}{\numberline {5.3}Schnee}{55}{section.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Evaluation}{55}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Evaluation}{57}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{55}{section.6.1}%
+\contentsline {section}{\numberline {6.1}Evaluation der Generierung}{57}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{55}{section.6.2}%
+\contentsline {section}{\numberline {6.2}Evaluation der Augmentierung}{57}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Verbesserungsmöglichkeiten}{55}{section.6.3}%
+\contentsline {section}{\numberline {6.3}Verbesserungsmöglichkeiten}{57}{section.6.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Zusammenfassung}{56}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Zusammenfassung}{58}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\nonumberline Anhang}{61}{chapter*.83}%
+\contentsline {chapter}{\nonumberline Anhang}{63}{chapter*.85}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

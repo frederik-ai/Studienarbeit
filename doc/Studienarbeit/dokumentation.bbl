@@ -145,6 +145,49 @@
     \field{year}{2011}
   \endentry
 
+  \entry{led-schild}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=b}{%
+         family={bussgeldkatalog.org},
+         familyi={b\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{b1}
+    \strng{fullhash}{b1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Wechselverkehrszeichen: Anzeigenänderung im Bedarfsfall}
+    \verb{url}
+    \verb https://www.bussgeldkatalog.org/wechselverkehrszeichen/
+    \endverb
+    \field{urlday}{18}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{schnee-schild}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=BA}{%
+         family={Borbe},
+         familyi={B\bibinitperiod},
+         given={Andre},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BA1}
+    \strng{fullhash}{BA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Sind verschneite Verkehrsschilder eigentlich noch gültig?}
+    \verb{url}
+    \verb https://www.tz.de/auto/verkehrsschilder-gueltig-schnee-winter-verkehr
+    \verb srecht-zr-9989863.html
+    \endverb
+    \field{urlday}{18}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
   \entry{traffic-sign-anomalies}{inproceedings}{}
     \name{author}{2}{}{%
       {{hash=LH}{%
@@ -1417,7 +1460,7 @@
     \field{urlyear}{2023}
   \endentry
 
-  \entry{geometric-ops}{inbook}{}
+  \entry{geometric-ops}{book}{}
     \name{author}{2}{}{%
       {{hash=BW}{%
          family={Burger},
@@ -1439,7 +1482,6 @@
     \strng{fullhash}{BWBMJ1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{chapter}{Geometric Operations}
     \verb{doi}
     \verb 10.1007/978-3-031-05744-1
     \endverb

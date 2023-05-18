@@ -1,6 +1,5 @@
 \section{Generierung}
-Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu trainieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwender keinen Python-Code anpassen müssen. Das Skript besitzt die in Tabelle \label{tab:generate-cli} gezeigten Kommandozeilenargumente.
-
+Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu trainieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwender keinen Python-Code anpassen müssen. Das Skript besitzt die in Tabelle \ref{tab:generate-cli} gezeigten Kommandozeilenargumente.
 \begin{table}[h]
    \centering
    \begin{tabular}{|l|c|l|}
@@ -16,9 +15,8 @@ Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschil
    \caption{Auswahl an Methoden aus der CycleGAN Klasse}
    \label{tab:generate-cli}
 \end{table}
-
-Dabei können die Parameter \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} miteinander kombiniert werden. Beispielhafte Aufrufe des Skripts sind:
-
+Die Parameter \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} können miteinander kombiniert werden. Beispielhafte Aufrufe des Skripts zeigt Listing \ref{lst:generate-cli-examples}.
+\begin{samepage}
 \begin{code}
    \begin{minted}{bash}
       $ python generate.py --num-imgs 10 --motion-blur
@@ -26,8 +24,10 @@ Dabei können die Parameter \mintinline{bash}{--motion-blur}, \mintinline{bash}{
       $ python generate.py --num-imgs 10 --snow --motion-blur
       $ python generate.py --num-imgs 50 --model 'unet'
    \end{minted}
+   \caption{Beispielaufrufe des Skripts \lstinline[language=python]{generate.py}}
+   \label{lst:generate-cli-examples}
 \end{code}
+\end{samepage}
 
-Ein spezieller Anwendungsfall dieses Modells könnte der folgende sein: Anwender möchten nur für bestimmte Arten von Straßenschildern Bilder generieren, statt für alle 43. Beispielsweise nur für Stopp-Schilder. Das ist insbesondere dann relevant, wenn das Modell dazu genutzt werden soll, einen bestehenden Datensatz auszugleichen. Wenn etwa bestimmte Klassen unterrepräsentiert sind.
-
-Das Skript \mintinline{python}{generate.py} erlaubt explizit das folgende Vorgehen: Anwender können aus dem Ordner, in dem sich die Bilder der Piktogramme befinden, alle Arten von Straßenschildern löschen, die nicht generiert werden sollen. Befindet sich in dem Ordner beispielsweise nur ein Piktogramm für Stopp-Schilder, dann werden auch nur Bilder von Stopp-Schildern generiert. Dafür kann zum Beispiel ein zweiter Ordner für die Piktogramme angelegt werden, der dann in der \ac{TOML}-Konfigurationsdatei unter dem Wert \mintinline{python}{'pictograms'} innerhalb der Kategorie \mintinline{python}{'paths'} angegeben wird.
+Ein spezieller Anwendungsfall dieses Modells könnte der folgende sein: Anwendende möchten nur für bestimmte Arten von Straßenschildern Bilder generieren, statt für alle 43. Beispielsweise nur für Stopp-Schilder. Das ist insbesondere dann relevant, wenn das Modell dazu genutzt werden soll, einen bestehenden Datensatz auszugleichen. Wenn etwa bestimmte Klassen unterrepräsentiert sind.
+Das Skript \mintinline{python}{generate.py} erlaubt explizit das folgende Vorgehen: Anwendende können aus dem Ordner, in dem sich die Bilder der Piktogramme befinden, alle Arten von Straßenschildern löschen, die nicht generiert werden sollen. Befindet sich in dem Ordner beispielsweise nur ein Piktogramm für Stopp-Schilder, dann werden auch nur Bilder von Stopp-Schildern generiert. Dafür kann zum Beispiel ein zweiter Ordner für die Piktogramme angelegt werden, der dann in der \ac{TOML}-Konfigurationsdatei unter dem Wert \mintinline{python}{'pictograms'} innerhalb der Kategorie \mintinline{python}{'paths'} angegeben wird.

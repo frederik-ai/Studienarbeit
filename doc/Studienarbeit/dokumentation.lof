@@ -9,9 +9,9 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung \cite {GTSRB}\relax }}{3}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Erschwerende Einflüsse auf die Straßenschilderkennung \cite {GTSRB} \cite {led-schild}\relax }}{3}{figure.caption.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung\relax }}{3}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Weitere mögliche Einflüsse auf die Straßenschilderkennung \cite {GTSRB} \cite {schnee-schild}\relax }}{3}{figure.caption.11}%
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Einzelnes Neuron eines \acp {KNN} \cite {visualApproach}\relax }}{5}{figure.caption.12}%
 \defcounter {refsection}{0}\relax 
@@ -63,7 +63,9 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Horizontale, vertikale und diagonale Faltmatrix\relax }}{52}{figure.caption.76}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Horizontale, vertikale und diagonale Faltmatrix\relax }}{52}{figure.caption.77}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Kreuz auf transparentem Hintergrund, das Schilder als ungültig kennzeichnet\relax }}{53}{figure.caption.80}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
