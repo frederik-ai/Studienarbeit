@@ -69,34 +69,90 @@ Es existieren auch sogenannte \emph{PixelCNNs}, bei denen sich die Berechnung st
 
 \subsection{Autoencoder}
 
-Das Ziel von Autoencodern ist, den Eingang des Netzes am Ausgang zu rekonstruieren. Dazu setzen sich diese Netze aus drei Bestandteilen zusammen: dem Kodierer, dem latenten Raum und dem Dekodierer. In Abbildung \ref{fig:Autoencoder} ist eine beispielhafte Autoencoderarchitektur dargestellt.
-
-\begin{figure}[H]
+Das Ziel von Autoencodern ist, den Eingang des Netzes am Ausgang zu rekonstruieren. Dazu setzen sich diese Netze aus drei Bestandteilen zusammen: dem Kodierer, dem latenten Raum und dem Dekodierer. In Abbildung \ref{fig:Autoencoder} ist eine beispielhafte Autoencoderarchitektur dargestellt. \cite{autoencoder}
+\begin{figure}[h]
    \centering
-   \includegraphics[width=0.65\textwidth]{images/Generative Networks/autoencoder_architecture.png}
-   \caption{Architektur eines Autoencoders}
+   \begin{tikzpicture}[scale=0.8, transform shape,
+      neuron/.style={circle,draw,thick,minimum size=0.6cm}]
+   
+      % Encoder hidden layers
+      \foreach \h [count=\i] in {1,...,8}
+         \node[neuron, fill=encoder-x] (enc-first\i) at (0,\h-4) {$x_{\i}$};
+   
+      \foreach \h [count=\i] in {1,...,6}
+         \node[neuron, fill=encoder] (enc-second\i) at (2,\h-3) {};
+   
+      \foreach \h [count=\i] in {1,...,4}
+         \node[neuron, fill=encoder] (enc-third\i) at (4,\h-2) {};
+   
+      \foreach \h [count=\i] in {1,...,2}
+         \node[neuron, fill=latent] (enc-fourth\i) at (6,\h-1) {$z_{\i}$};
+   
+      % Decoder hidden layers
+      \foreach \h [count=\i] in {1,...,4}
+         \node[neuron, fill=decoder] (dec-first\i) at (8,\h-2) {};
+   
+      \foreach \h [count=\i] in {1,...,6}
+         \node[neuron, fill=decoder] (dec-second\i) at (10,\h-3) {};
+   
+      \foreach \h [count=\i] in {1,...,8}
+         \node[neuron, fill=decoder-x] (dec-third\i) at (12,\h-4) {$\hat{x}_{\i}$};
+   
+      % Connections
+      \foreach \i in {1,...,8}
+         \foreach \h in {1,...,6}
+            \draw[lightgray] (enc-first\i) -- (enc-second\h);
+   
+      \foreach \i in {1,...,6}
+         \foreach \h in {1,...,4}
+            \draw[lightgray] (enc-second\i) -- (enc-third\h);
+   
+      \foreach \i in {1,...,4}
+         \foreach \h in {1,...,2}
+            \draw[lightgray] (enc-third\i) -- (enc-fourth\h);
+   
+      \foreach \i in {1,...,2}
+         \foreach \h in {1,...,4}
+            \draw[lightgray] (enc-fourth\i) -- (dec-first\h);
+   
+      \foreach \i in {1,...,4}
+         \foreach \h in {1,...,6}
+            \draw[lightgray] (dec-first\i) -- (dec-second\h);
+   
+      \foreach \i in {1,...,6}
+         \foreach \h in {1,...,8}
+            \draw[lightgray] (dec-second\i) -- (dec-third\h);
+   
+      \node[above] at (0, -4.5) {Eingang};
+      \node[above] at (6,-1.5) {latenter Raum};
+      \node[above] at (12,-4.5) {Nachgebildeter Eingang};
+      \node[above, rotate=0, text=encoder-x] at (3, 4) {\large \textbf{Kodierer}};
+      \node[above right, rotate=0, text=decoder-x] at (7.5, 4) {\large \textbf{Dekodierer}};
+   \end{tikzpicture}
+   %\includegraphics[width=0.65\textwidth]{images/Generative Networks/autoencoder_architecture.png}
+   \caption{Architektur eines Autoencoders \emph{(angelehnt an \cite{autoencoder-img})}}
    \label{fig:Autoencoder}
 \end{figure}
 
-Der \textbf{Kodierer} besitzt die Aufgabe, Merkmale aus dem Eingang des Netzes zu extrahieren. Diese Merkmale sollen daraufhin mit einer begrenzten Anzahl an Parametern durch den latenten Raum repäsentiert werden. Somit besteht die Aufgabe des Kodierers darin, den Eingang auf seine für das Netz wesentlichen Eigenschaften zu reduzieren. Und zwar erfolgt die Komprimierung dabei so, dass die Informationen gerade so durch den latenten Raum dargestellt werden können. 
+Der \textbf{Kodierer} besitzt die Aufgabe, Merkmale aus dem Eingang des Netzes zu extrahieren. Diese Merkmale sollen daraufhin mit einer begrenzten Anzahl an Parametern durch den latenten Raum repäsentiert werden. Somit besteht die Aufgabe des Kodierers darin, den Eingang auf seine für das Netz wesentlichen Eigenschaften zu reduzieren. Und zwar erfolgt die Komprimierung dabei so, dass die Informationen gerade so durch den latenten Raum dargestellt werden können. \cite{autoencoder}
 
-Bei dem \textbf{latenten Raum} handelt es sich um eine einzelne Schicht von Parametern, oder in diesem Kontext: Neuronen. Je mehr Neuronen sich in dem latenten Raum befinden, desto mehr Informationen können von der Kodierung an die Dekodierung übertragen werden. Die Merkmale, die sich in dem latenden Raum befinden, können durch einen Vektor $\vec{z}$ beschrieben werden. Der latente Raum sollte klein genug sein, damit dort nicht alle Merkmale des Eingangs gespeichert werden können. So wird der Kodierer dazu gezwungen, vereinzeilte Merkmale zu extrahieren. 
+Bei dem \textbf{latenten Raum} handelt es sich um eine einzelne Schicht von Parametern, oder in diesem Kontext: Neuronen. Je mehr Neuronen sich in dem latenten Raum befinden, desto mehr Informationen können von der Kodierung an die Dekodierung übertragen werden. Die Merkmale, die sich in dem latenden Raum befinden, können durch einen Vektor $\vec{z}$ beschrieben werden. Der latente Raum sollte klein genug sein, damit dort nicht alle Merkmale des Eingangs gespeichert werden können. So wird der Kodierer dazu gezwungen, vereinzeilte Merkmale zu extrahieren. \cite{autoencoder}
 
-Der \textbf{Dekodierer} nutzt die Werte aus dem latenten Raum, um den Eingang nachzubilden. Diese Nachbildung stellt den Ausgang des Autoencoders dar. Die Kosten eines Autoencoders können durch die Abweichung zwischen Ein- und Ausgang festgestellt werden. 
+Der \textbf{Dekodierer} nutzt die Werte aus dem latenten Raum, um den Eingang nachzubilden. Diese Nachbildung stellt den Ausgang des Autoencoders dar. Die Kosten eines Autoencoders können durch die Abweichung zwischen Ein- und Ausgang festgestellt werden. \cite{autoencoder}
 
-Da der Zweck von Autoencodern darin besteht, einen Eingang auf seine relevanten Merkmale zu reduzieren, wird der Dekodierer nur während des Trainings verwendet. Beim praktischen Einsatz eines Autoencoders werden lediglich der Kodierer und der latente Raum eingesetzt. Im Gegensatz zu \acp{PixelRNN} basieren Autoencoder klassischerweise nicht auf Recurrent Neural Networks, sondern auf Feedforward Netzen.
+Da der Zweck von Autoencodern darin besteht, einen Eingang auf seine relevanten Merkmale zu reduzieren, wird der Dekodierer nur während des Trainings verwendet. Beim praktischen Einsatz eines Autoencoders werden lediglich der Kodierer und der latente Raum eingesetzt. Im Gegensatz zu \acp{PixelRNN} basieren Autoencoder klassischerweise nicht auf Recurrent Neural Networks, sondern auf Feedforward Netzen. \cite{generativeModelsSurvey}
 
-Diese beschriebene Architektur der Autoencoder ist nicht für die generative Modellierung geeignet, da sie deterministisch ist. Erhält das Modell bestimmte Eingangswerte, so liefert es stets die gleichen Ausgangswerte. Es versucht den Eingang möglichst zu rekonstruieren, wobei der Inhalt $\vec{z}$ des latenten Raums für ein gegebenes Eingangsbild stets gleich ist. Eine zufällige Erzeugung neuer Bilder ist damit nicht möglich. Die sogenannten \emph{Variational Autoencoder} sind eine Architektur, die für die Generierung neuer Daten verwendet werden können. \cite{visualApproach}
+Diese beschriebene Architektur der Autoencoder ist nicht für die generative Modellierung geeignet, da sie deterministisch ist. Erhält das Modell bestimmte Eingangswerte, so liefert es stets die gleichen Ausgangswerte. Es versucht den Eingang möglichst zu rekonstruieren, wobei der Inhalt $\vec{z}$ des latenten Raums für ein gegebenes Eingangsbild stets gleich ist. Eine zufällige Erzeugung neuer Bilder ist damit nicht möglich. Die sogenannten \emph{Variational Autoencoder} sind eine Architektur, die für die Generierung neuer Daten verwendet werden können. \cite{visualApproach} \cite{generativeModelsSurvey}
 
-\textbf{Variational Autoencoder} verfolgen das Ziel, eine Zufallskomponente in die Bilderzeugung einfließen zu lassen. Ein entscheidender Unterschied zu klassischen Autoencodern ist deshalb der folgende: Ein gegebener Eingang $x$ wird auf kein festes $\vec{z}$ kodiert, sondern auf eine Wahrscheinlichkeitsverteilung. Sie wird bezeichnet als:
+\textbf{Variational Autoencoder} verfolgen das Ziel, eine Zufallskomponente in die Bilderzeugung einfließen zu lassen. Ein entscheidender Unterschied zu klassischen Autoencodern ist deshalb der folgende: Ein gegebener Eingang $x$ wird auf kein festes $\vec{z}$ kodiert, sondern auf eine Wahrscheinlichkeitsverteilung. Sie wird bezeichnet als: \cite{autoencoders}
 \begin{equation}
    p(z|x)
 \end{equation}
 Im Gegensatz zu \acp{PixelRNN} versucht das Netz somit nicht die Verteilung der Trainingsdaten $p(x)$ zu approximieren, sondern die Verteilung der Merkmale $\vec{z}$ der Trainingsdaten $x$.
-Es wird angenommen, dass jedes Merkmal normalverteilt ist. Damit kann jede Komponente $z_{i}$ des Vektors $\vec{z} = [z_{1}, z_{2}, ..., z_{n}]^\mathsf{T}$ durch eine Gaußsche Normalverteilung $\mathcal{N}(\mu_{i}, {\sigma_{i}}^{2})$ beschrieben werden. Aufgabe des Kodierers ist damit nicht mehr, aus einem gegebenen $x$ eine Menge von Merkmalen $\vec{z}$ zu bestimmen. Stattdessen soll der Kodierer die Vektoren $\vec{\mu}$ und $\vec{\sigma}$ bestimmen, durch die sich die einzelnen Normalerteilungen von $\vec{z}$ beschreiben lassen. 
+Es wird angenommen, dass jedes Merkmal normalverteilt ist. Damit kann jede Komponente $z_{i}$ des Vektors $\vec{z} = [z_{1}, z_{2}, ..., z_{n}]^\mathsf{T}$ durch eine Gaußsche Normalverteilung $\mathcal{N}(\mu_{i}, {\sigma_{i}}^{2})$ beschrieben werden. Aufgabe des Kodierers ist damit nicht mehr, aus einem gegebenen $x$ eine Menge von Merkmalen $\vec{z}$ zu bestimmen. Stattdessen soll der Kodierer die Vektoren $\vec{\mu}$ und $\vec{\sigma}$ bestimmen, durch die sich die einzelnen Normalerteilungen von $\vec{z}$ beschreiben lassen. \cite{generativeModelsSurvey} \cite{autoencoders}
 
 An den Dekodierer wird ein zufällig aus der Verteilung $p(z|x)$ entnommenes Set an Merkmalen $\vec{z}$ übergeben.
-Der Dekodierer übersetzt dieses gegebene $\vec{z}$ daraufhin in ein Bild. Im praktischen Einsatz werden bei einem Variational Autoencoder nur der latente Raum und der Dekodierer genutzt. Der Dekodierer erhält zufällige Werte für $\vec{z}$, also zufällige Merkmale, und generiert daraus ein Bild.
+Der Dekodierer übersetzt dieses gegebene $\vec{z}$ daraufhin in ein Bild. Im praktischen Einsatz werden bei einem Variational Autoencoder nur der latente Raum und der Dekodierer genutzt. Der Dekodierer erhält zufällige Werte für $\vec{z}$, also zufällige Merkmale, und generiert daraus ein Bild. \cite{autoencoders} \cite{visualApproach}
 
 \textbf{Vor- Nachteile?}
 

@@ -46,51 +46,6 @@
     \field{year}{2021}
   \endentry
 
-  \entry{eu-regulation}{misc}{}
-    \name{author}{1}{}{%
-      {{hash=E}{%
-         family={{EU-Kommission}},
-         familyi={E\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{E1}
-    \strng{fullhash}{E1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{note}{Art. 6 Abs. 2c}
-    \field{title}{Regulation (EU) 2019/2144 of the European Parliament and of
-  the Council}
-    \field{day}{05}
-    \field{month}{09}
-    \field{year}{2021}
-  \endentry
-
-  \entry{strassenschilderkennungTest}{article}{}
-    \name{author}{2}{}{%
-      {{hash=IH}{%
-         family={Ippen},
-         familyi={I\bibinitperiod},
-         given={Holger},
-         giveni={H\bibinitperiod},
-      }}%
-      {{hash=BM}{%
-         family={Bach},
-         familyi={B\bibinitperiod},
-         given={Markus},
-         giveni={M\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{IHBM1}
-    \strng{fullhash}{IHBM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{title}{Verkehrsschild-Erkennung Test}
-    \field{journaltitle}{Autozeitung}
-    \field{day}{02}
-    \field{month}{04}
-    \field{year}{2019}
-  \endentry
-
   \entry{traffic-sign-detection-review-2014}{article}{}
     \name{author}{3}{}{%
       {{hash=GA}{%
@@ -143,6 +98,51 @@
     \field{title}{{The German Traffic Sign Recognition Benchmark: A multi-class
   classification competition}}
     \field{year}{2011}
+  \endentry
+
+  \entry{eu-regulation}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=E}{%
+         family={{EU-Kommission}},
+         familyi={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{E1}
+    \strng{fullhash}{E1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{note}{Art. 6 Abs. 2c}
+    \field{title}{Regulation (EU) 2019/2144 of the European Parliament and of
+  the Council}
+    \field{day}{05}
+    \field{month}{09}
+    \field{year}{2021}
+  \endentry
+
+  \entry{strassenschilderkennungTest}{article}{}
+    \name{author}{2}{}{%
+      {{hash=IH}{%
+         family={Ippen},
+         familyi={I\bibinitperiod},
+         given={Holger},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Bach},
+         familyi={B\bibinitperiod},
+         given={Markus},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{IHBM1}
+    \strng{fullhash}{IHBM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Verkehrsschild-Erkennung Test}
+    \field{journaltitle}{Autozeitung}
+    \field{day}{02}
+    \field{month}{04}
+    \field{year}{2019}
   \endentry
 
   \entry{led-schild}{misc}{}
@@ -335,36 +335,46 @@
     \field{year}{2020}
   \endentry
 
-  \entry{cnnsIntroduction}{misc}{}
-    \name{author}{2}{}{%
-      {{hash=OK}{%
-         family={O'Shea},
-         familyi={O\bibinitperiod},
-         given={Keiron},
-         giveni={K\bibinitperiod},
-      }}%
-      {{hash=NR}{%
-         family={Nash},
-         familyi={N\bibinitperiod},
-         given={Ryan},
-         giveni={R\bibinitperiod},
+  \entry{cnn-img}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=RJ}{%
+         family={Riebesell},
+         familyi={R\bibinitperiod},
+         given={Janosh},
+         giveni={J\bibinitperiod},
       }}%
     }
-    \list{publisher}{1}{%
-      {arXiv}%
-    }
-    \keyw{Neural and Evolutionary Computing (cs.NE), Computer Vision and
-  Pattern Recognition (cs.CV), Machine Learning (cs.LG), FOS: Computer and
-  information sciences, FOS: Computer and information sciences}
-    \strng{namehash}{OKNR1}
-    \strng{fullhash}{OKNR1}
+    \strng{namehash}{RJ1}
+    \strng{fullhash}{RJ1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \verb{doi}
-    \verb 10.48550/ARXIV.1511.08458
+    \field{title}{Convolutional Operator}
+    \verb{url}
+    \verb https://tikz.net/conv2d/
     \endverb
-    \field{title}{An Introduction to Convolutional Neural Networks}
-    \field{year}{2015}
+    \field{urlday}{20}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
+  \endentry
+
+  \entry{cnn-architektur-img}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=Q}{%
+         family={{Qualcomm Developer Network}},
+         familyi={Q\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{Q1}
+    \strng{fullhash}{Q1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Deep Learning and Convolutional Neural Networks for Computer
+  Vision}
+    \verb{url}
+    \verb https://developer.qualcomm.com/software/qualcomm-neural-processing-sd
+    \verb k/learning-resources/cnn-architectures/deep-learning-convolutional-ne
+    \verb ural-networks-computer-vision
+    \endverb
   \endentry
 
   \entry{generative-modellierung}{inbook}{}
@@ -621,6 +631,73 @@
     \field{pages}{1\bibrangedash 8}
     \field{title}{Deep generative models: Survey}
     \field{year}{2018}
+  \endentry
+
+  \entry{autoencoder}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=ZJ}{%
+         family={Zhai},
+         familyi={Z\bibinitperiod},
+         given={Junhai},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=ZS}{%
+         family={Zhang},
+         familyi={Z\bibinitperiod},
+         given={Sufang},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=CJ}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Junfen},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HQ}{%
+         family={He},
+         familyi={H\bibinitperiod},
+         given={Qiang},
+         giveni={Q\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{ZJZSCJ+1}
+    \strng{fullhash}{ZJZSCJHQ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{2018 IEEE International Conference on Systems, Man, and
+  Cybernetics (SMC)}
+    \verb{doi}
+    \verb 10.1109/SMC.2018.00080
+    \endverb
+    \field{pages}{415\bibrangedash 419}
+    \field{title}{Autoencoder and Its Various Variants}
+    \field{year}{2018}
+  \endentry
+
+  \entry{autoencoder-img}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=OR}{%
+         family={O'Connor},
+         familyi={O\bibinitperiod},
+         given={Ryan},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OR1}
+    \strng{fullhash}{OR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Introduction to Variational Autoencoders Using Keras}
+    \verb{url}
+    \verb https://www.assemblyai.com/blog/introduction-to-variational-autoencod
+    \verb ers-using-keras/
+    \endverb
+    \field{day}{03}
+    \field{month}{01}
+    \field{year}{2022}
+    \field{urlday}{20}
+    \field{urlmonth}{05}
+    \field{urlyear}{2023}
   \endentry
 
   \entry{autoencoders}{article}{}

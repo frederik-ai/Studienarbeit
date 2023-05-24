@@ -85,12 +85,12 @@ Für das ResNet-basierte \ac{CycleGAN} zeigen die Verlustfunktionen einen ähnli
 Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Collaps auftritt. Das ist in Abbildung \ref{fig:modal-collaps} dargestellt, wobei Epochen mit \emph{Ep.} abgekürzt ist. Für jedes Piktogramm und jede Perspektive erzeugt das Modell einen beinahe identischen Hintergrund. Das gibt Hinweise darauf, dass die Generatoren die Diskriminatoren derart überlisten, dass letztere nicht mehr lernen.
 
 % MODAL COLLAPS
-\begin{figure}[H]
+\begin{figure}[htpb]
     \centering
     \begin{subfigure}[b]{0.12\textwidth}
         \centering
         \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs.png}
-        \caption{200 Ep.}
+        \caption{200 Ep.\protect\footnotemark}
     \end{subfigure}
     \hspace{3em}%
     \begin{subfigure}[b]{0.12\textwidth}
@@ -119,11 +119,12 @@ Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Coll
         \caption{Modal Collaps des ResNet nach 200 Trainingsepochen}
         \label{fig:modal-collaps}
 \end{figure}
+\footnotetext{Ep.: Epochen}
 
 Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stopping)}. Diese Lösung wird gewählt. Dabei muss für jede infrage kommende Epochen manuell geprüft werden, welche davon das zufriedenstellendste Ergebnis zeigt. Auch da die Werte der Verlustfunktionen hierauf, wie bereits erwähnt, nur eine begrenzte Aussagekraft haben. Jede der Epochen 120 bis 190 erzeugt eine Bandbreite an Generierungsqualitäten. Abbildung \ref{fig:resnet-guter-bilder} zeigt positiv herausstechende Bilder für verschiedene Epochen, während \ref{fig:resnet-schlechte-bilder} negativ herausstechende Bilder zeigt. Die finale Entscheidung ist, das auf 170 Epochen trainierte ResNet-basierte Modell zu verwenden.
 
 % RESNET 9 BLOCK GUTE BILDER
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.12\textwidth}
         \centering
@@ -159,7 +160,7 @@ Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stoppin
 \end{figure}
 
 % RESNET 9 BLOCKS SCHLECHTE BILDER
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \begin{subfigure}[b]{0.12\textwidth}
         \centering

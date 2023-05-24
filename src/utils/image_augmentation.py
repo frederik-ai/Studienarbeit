@@ -69,7 +69,6 @@ def apply_motion_blur(img_tensor, intensity, direction=Direction.HORIZONTAL, min
 # endregion
 
 # region Invalid Street Sign
-# invalid_cross_path = r'C:\Users\Frederik\Documents\Studienarbeit\data\Augmentation\Schild Durchgestrichen.png'
 
 # region snow
 def add_snow(img_tensor, snow_intensity, motion_blur_intensity, motion_blur_direction=Direction.DIAGONAL,
@@ -98,7 +97,7 @@ def add_snow(img_tensor, snow_intensity, motion_blur_intensity, motion_blur_dire
     random_particles = tf.random.stateless_binomial(shape=(256, 256, 1), seed=[seed_1, seed_2], counts=1, probs=p,
                                                     output_dtype=tf.float32)
     random_particles = random_particles * 2.0 - 1.0  # normalize from range [0, 1] to range [-1, 1]
-    # add alpha channel to turn image into rgba; white pixels have alpha 1.0, black pixels have alpha -1.0
+    # copy the generated random values for red channel to green, blue and alpha channel 
     random_particles = tf.tile(random_particles, [1, 1, 4])
     # blur the snowflakes
     random_particles = tfa.image.gaussian_filter2d(random_particles, filter_shape=(3, 3), sigma=7)

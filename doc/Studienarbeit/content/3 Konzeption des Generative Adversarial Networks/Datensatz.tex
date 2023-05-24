@@ -46,63 +46,141 @@ Die Bilder, die durch diese Studienarbet generiert werden sollen, haben eine Auf
 Die Verteilung der Daten ist auch im präparierten Datensatz nicht homogen. Das nachfolgende Diagramm zeigt hierfür die Anzahl an Trainingsbildern pro Klasse.
 
 \definecolor{plotcolor}{HTML}{2b2b2b}
+\definecolor{Aufhebungen}{HTML}{58508d}
+\definecolor{Verbotszeichen}{HTML}{bc5090}
+\definecolor{Gefahrzeichen}{HTML}{ff6361}
+\definecolor{Einzigartig}{HTML}{ffa600}
+\definecolor{Richtungsweiser}{HTML}{444e86}
+\definecolor{Geschwindigkeitsbegrenzungen}{HTML}{003f5c}
+
 \definecolor{chinesedata}{HTML}{009F93}
 \definecolor{mapillary}{HTML}{FF6542}
 
+%\begin{figure}[H]
+%    \centering
+%    \begin{tikzpicture}
+%        \begin{axis} [ybar, ylabel={Absolute Häufigkeit}, xlabel={Klassen-ID}, width=\linewidth*0.9, height=\linewidth*0.3, scale only axis=true, xmin=-1, xmax=43, ymin=0, ymax=450, bar width=0.2cm, ytick={0, 100, 200, 300, 400},
+%            symbolic x coords={
+%                -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43}
+%        ]
+
+        % x+0.4
+%        \addplot[Geschwindigkeitsbegrenzungen, fill] coordinates {
+%            (0, 36)
+%            (1, 312) 
+%            (2, 184)
+%            (3, 102) 
+%            (4, 150)
+%            (5, 84)
+%            (7, 80)
+%            (8, 52)
+%        };
+        % x-0.45
+%        \addplot[Aufhebungen, fill] coordinates {
+%            (6, 13)
+%            (32, 10) %(17, 21)
+%            (41, 14)
+%            (42, 5)
+%        };
+        % x - 1
+%        \addplot[Verbotszeichen, fill] coordinates {
+%            (9, 141)
+%            (10, 73)
+%            (16, 71)
+%            (17, 20)
+%        };
+%        \addplot[Gefahrzeichen, fill] coordinates {
+%            (11, 301)
+%            (18, 279) %(26, 118)
+%            (19, 45) %(27, 62)
+%            (20, 24) %(28, 126)
+%            (21, 51) %(29, 60)
+%            (22, 45) %(30, 71)
+%            (23, 112) %(31, 117)
+%            (24, 40) %(6, 14)
+%            (25, 341) %(9, 214)
+%            (26, 88) %(10, 110)
+%            (27, 29) %(12, 424)
+%            (28, 93) %(13, 534)
+%            (29, 42) %(14, 269)
+%            (30, 63) %(15, 77)
+%            (31, 93) %(16, 85)
+%        };
+%        \addplot[Einzigartig, fill] coordinates {
+%            (12, 306) %(20, 31)
+%            (13, 405) %(21, 70)
+%            (14, 203) %(22, 58)
+%            (15, 53) %(23, 144)
+%        };
+%        \addplot[Richtungsweiser, fill] coordinates {
+%            (33, 94) %(32, 12)
+%            (34, 33) %(33, 116)
+%            (35, 90)
+%            (36, 23)
+%            (37, 28)
+%            (38, 148)
+%            (39, 66)
+%            (40, 68)
+%        };
+%        \end{axis}
+%    \end{tikzpicture}
+%    \caption{Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten \ac{GTSRB}}
+%    \end{figure}
+
 \begin{figure}[H]
-\centering
-\begin{tikzpicture}
-    \begin{axis} [ybar, ylabel={Absolute Häufigkeit}, xlabel={Klassen-ID}, width=\linewidth*0.9, height=\linewidth*0.3, scale only axis=true, xmin=-1, xmax=43, ymin=0, ymax=450, bar width=0.2cm, ytick={0, 100, 200, 300, 400}]
-    \addplot[plotcolor, fill] coordinates {
-        (0, 36) %(0, 40)
-        (1, 312) %(1, 390) 
-        (2, 184) %(2, 270)
-        (3, 102) 
-        (4, 150) %(3, 127)
-        (5, 84) %(4, 192)
-        (6, 13) %(5, 113)
-        (7, 80) %(7, 101)
-        (8, 52) %(8, 69)
-        (9, 141) %(11, 396)
-        (10, 73) %(18, 342)
-        (11, 301) %(19, 56)
-        (12, 306) %(20, 31)
-        (13, 405) %(21, 70)
-        (14, 203) %(22, 58)
-        (15, 53) %(23, 144)
-        (16, 71) %(24, 75)
-        (17, 20) %(25, 451)
-        (18, 279) %(26, 118)
-        (19, 45) %(27, 62)
-        (20, 24) %(28, 126)
-        (21, 51) %(29, 60)
-        (22, 45) %(30, 71)
-        (23, 112) %(31, 117)
-        (24, 40) %(6, 14)
-        (25, 341) %(9, 214)
-        (26, 88) %(10, 110)
-        (27, 29) %(12, 424)
-        (28, 93) %(13, 534)
-        (29, 42) %(14, 269)
-        (30, 63) %(15, 77)
-        (31, 93) %(16, 85)
-        (32, 10) %(17, 21)
-        (33, 94) %(32, 12)
-        (34, 33) %(33, 116)
-        (35, 90) %(34, 39)
-        (36, 23) %(35, 121)
-        (37, 28) %(36, 53)
-        (38, 148) %(37, 31)
-        (39, 66) %(38, 195)
-        (40, 68) %(39, 87)
-        (41, 14) %(40, 88)
-        (42, 5) %(41, 19)
-                 %(42, 10)
-    };
-    \end{axis}
-\end{tikzpicture}
-\caption{Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten \ac{GTSRB}}
-\end{figure}
+    \centering
+    \begin{tikzpicture}
+        \begin{axis} [ybar, ylabel={Absolute Häufigkeit}, xlabel={Klassen-ID}, width=\linewidth*0.9, height=\linewidth*0.3, scale only axis=true, xmin=-1, xmax=43, ymin=0, ymax=450, bar width=0.2cm, ytick={0, 100, 200, 300, 400}]
+        \addplot[plotcolor, fill] coordinates {
+            (0, 36) %(0, 40)
+            (1, 312) %(1, 390) 
+            (2, 184) %(2, 270)
+            (3, 102) 
+            (4, 150) %(3, 127)
+            (5, 84) %(4, 192)
+            (6, 13) %(5, 113)
+            (7, 80) %(7, 101)
+            (8, 52) %(8, 69)
+            (9, 141) %(11, 396)
+            (10, 73) %(18, 342)
+            (11, 301) %(19, 56)
+            (12, 306) %(20, 31)
+            (13, 405) %(21, 70)
+            (14, 203) %(22, 58)
+            (15, 53) %(23, 144)
+            (16, 71) %(24, 75)
+            (17, 20) %(25, 451)
+            (18, 279) %(26, 118)
+            (19, 45) %(27, 62)
+            (20, 24) %(28, 126)
+            (21, 51) %(29, 60)
+            (22, 45) %(30, 71)
+            (23, 112) %(31, 117)
+            (24, 40) %(6, 14)
+            (25, 341) %(9, 214)
+            (26, 88) %(10, 110)
+            (27, 29) %(12, 424)
+            (28, 93) %(13, 534)
+            (29, 42) %(14, 269)
+            (30, 63) %(15, 77)
+            (31, 93) %(16, 85)
+            (32, 10) %(17, 21)
+            (33, 94) %(32, 12)
+            (34, 33) %(33, 116)
+            (35, 90) %(34, 39)
+            (36, 23) %(35, 121)
+            (37, 28) %(36, 53)
+            (38, 148) %(37, 31)
+            (39, 66) %(38, 195)
+            (40, 68) %(39, 87)
+            (41, 14) %(40, 88)
+            (42, 5) %(41, 19)
+                     %(42, 10)
+        };
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Häufigkeitsverteilung der Klassen von Straßenschildern im präparierten \ac{GTSRB}}
+    \end{figure}
 
 Eine ungleiche Verteilung der Trainingsdaten kann die Qualität der generierten Bilder negativ beeinflussen. Die in Kapitel \ref{chap:vorherige-arbeiten-rub} beschriebene Veröffentlichung gibt hierauf bereits Hinweise \cite{gtsrbGAN}. Aus diesem Grund, und da die Größe des präparierten Datensatzes als zu gering bewertet werden kann, ist der Datensatz derart erweitert, dass er einerseits mehr Trainingsbilder enthält und andererseits eine gleichmäßigere Verteilung der Klassen vorliegt. Dabei wird nicht darauf geachtet, jede einzelne Klasse möglichst gleich oft zu repräsentieren, sondern jede Kategorie von Klassen. Die 43 Klassen werden dazu in die Kategorien \emph{Geschwindigkeitsbegrenzungen}, \emph{Richtungsweiser}, \emph{Aufhebungen}, \emph{Verbotszeichen}, \emph{Gefahrzeichen} und \emph{Einzigartig} unterteilt. Es zeigt sich nämlich, dass das Modell zwischen Straßenschildern, die eine ähnliche Bedeutung und damit auch äußerliche Ähnlichkleiten besitzen, recht gut transferieren kann. Diese Einteilung der Schilder in unterschiedliche Kategorien erfolgt auch in der ursprünglichen Veröffentlichung des \ac{GTSRB}. Die Kategorisierung für diese Studienarbeit ist identisch, verwendet jedoch deutschen Bezeichnungen für die Kategorien. Im Anhang befindet sich eine übersicht über die Kategorien von Schildern und ihre zugeordneten Klassen.
 
@@ -178,7 +256,7 @@ ytick=data, xmax=2000, xtick={0, 500, 1000, 1500, 2000}
     (630,Richtungsweiser)
     (42,Aufhebungen)
     (358,Verbotszeichen) 
-    (1737,Gefahrzeichen)
+    (1646,Gefahrzeichen)
 };
 \addplot+[chinesedata, fill] coordinates {
     (268,Einzigartig)

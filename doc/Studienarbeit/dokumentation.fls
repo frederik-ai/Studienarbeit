@@ -1652,6 +1652,9 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\blx-bib
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\biblatex.def
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\biblatex.def
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\biblatex.def
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\blx-natbib.def
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\blx-natbib.def
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex\blx-natbib.def
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex-ieee\ieee.bbx
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex-ieee\ieee.bbx
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\biblatex-ieee\ieee.bbx
@@ -2308,6 +2311,8 @@ INPUT .\content\2 Stand der Technik.tex
 INPUT content\2 Stand der Technik.tex
 INPUT .\content\2 Stand der Technik.tex
 INPUT content\2 Stand der Technik.tex
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
 INPUT .\content\Stand der Technik\Strassenschilderkennung.tex
 INPUT content\Stand der Technik\Strassenschilderkennung.tex
 INPUT .\content\Stand der Technik\Strassenschilderkennung.tex
@@ -2369,8 +2374,6 @@ INPUT .\images\\..\images\Schilder Beispiele\Vandalismus.png
 INPUT .\images\\..\images\Schilder Beispiele\Vandalismus.png
 INPUT .\images\\..\images\Schilder Beispiele\Vandalismus.png
 INPUT .\images\\..\images\Schilder Beispiele\Vandalismus.png
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-t1--base.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineT-tlf-t1.vf
@@ -2395,13 +2398,19 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\kpfonts\jkpmn7t.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmne.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmn8r.tfm
-INPUT .\images\KNNs\CNN Convolution.png
-INPUT .\images\KNNs\CNN Convolution.png
-INPUT images\KNNs\CNN Convolution.png
-INPUT .\images\KNNs\CNN Convolution.png
-INPUT .\images\KNNs\CNN Convolution.png
-INPUT .\images\KNNs\CNN Convolution.png
-INPUT .\images\KNNs\CNN Convolution.png
+INPUT .\images\KNNs\convolution.pdf
+INPUT .\images\KNNs\convolution.pdf
+INPUT images\KNNs\convolution.pdf
+INPUT .\images\KNNs\convolution.pdf
+INPUT .\images\KNNs\convolution.pdf
+INPUT .\images\KNNs\convolution.pdf
+INPUT .\images\KNNs\cnn-architektur.png
+INPUT .\images\KNNs\cnn-architektur.png
+INPUT images\KNNs\cnn-architektur.png
+INPUT .\images\KNNs\cnn-architektur.png
+INPUT .\images\KNNs\cnn-architektur.png
+INPUT .\images\KNNs\cnn-architektur.png
+INPUT .\images\KNNs\cnn-architektur.png
 INPUT .\content\Stand der Technik\NoGANs.tex
 INPUT content\Stand der Technik\NoGANs.tex
 INPUT .\content\Stand der Technik\NoGANs.tex
@@ -2450,9 +2459,6 @@ INPUT .\images\Generative Networks\Taxonomy of Generative Models.png
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\kpfonts\jkpmn7t.vf
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmne.tfm
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmn8r.tfm
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\kpfonts\jkpmn7t.vf
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmne.tfm
-INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmn8r.tfm
 INPUT .\images\Generative Networks\PixelRNN.png
 INPUT .\images\Generative Networks\PixelRNN.png
 INPUT images\Generative Networks\PixelRNN.png
@@ -2460,6 +2466,9 @@ INPUT .\images\Generative Networks\PixelRNN.png
 INPUT .\images\Generative Networks\PixelRNN.png
 INPUT .\images\Generative Networks\PixelRNN.png
 INPUT .\images\Generative Networks\PixelRNN.png
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\kpfonts\jkpmn7t.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmne.tfm
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\kpfonts\jkpmn8r.tfm
 INPUT .\images\Generative Networks\RNN.png
 INPUT .\images\Generative Networks\RNN.png
 INPUT images\Generative Networks\RNN.png
@@ -2467,13 +2476,6 @@ INPUT .\images\Generative Networks\RNN.png
 INPUT .\images\Generative Networks\RNN.png
 INPUT .\images\Generative Networks\RNN.png
 INPUT .\images\Generative Networks\RNN.png
-INPUT .\images\Generative Networks\autoencoder_architecture.png
-INPUT .\images\Generative Networks\autoencoder_architecture.png
-INPUT images\Generative Networks\autoencoder_architecture.png
-INPUT .\images\Generative Networks\autoencoder_architecture.png
-INPUT .\images\Generative Networks\autoencoder_architecture.png
-INPUT .\images\Generative Networks\autoencoder_architecture.png
-INPUT .\images\Generative Networks\autoencoder_architecture.png
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\kpfonts\ot1jkpss.fd
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\kpfonts\ot1jkpss.fd
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\tex\latex\kpfonts\ot1jkpss.fd
@@ -4043,6 +4045,7 @@ INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Ep
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Modal collaps\200 epochs.png
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Modal collaps\200 epochs.png
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Modal collaps\200 epochs.png
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1.tfm
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Modal collaps\200 epochs 2.png
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Modal collaps\200 epochs 2.png
 INPUT images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Modal collaps\200 epochs 2.png
@@ -4141,6 +4144,8 @@ INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Ep
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Schlechte Bilder\180 epochs.png
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Schlechte Bilder\180 epochs.png
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 9 res blocks\Schlechte Bilder\180 epochs.png
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\vf\public\libertine\LinLibertineTI-tlf-t1.vf
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\tfm\public\libertine\LinLibertineTI-tlf-t1--base.tfm
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 6 res blocks\Schlechte Bilder\epoche 140.png
 INPUT .\images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 6 res blocks\Schlechte Bilder\epoche 140.png
 INPUT images\\..\images\4 Implementierung und Training\Generierte Bilder je Epoche\ResNet 6 res blocks\Schlechte Bilder\epoche 140.png
@@ -4689,6 +4694,13 @@ INPUT .\content\6 Evaluation.tex
 INPUT content\6 Evaluation.tex
 INPUT .\content\6 Evaluation.tex
 INPUT content\6 Evaluation.tex
+INPUT .\images\\..\images\Eval\Eval.png
+INPUT .\images\\..\images\Eval\Eval.png
+INPUT images\\..\images\Eval\Eval.png
+INPUT .\images\\..\images\Eval\Eval.png
+INPUT .\images\\..\images\Eval\Eval.png
+INPUT .\images\\..\images\Eval\Eval.png
+INPUT .\images\\..\images\Eval\Eval.png
 INPUT .\content\7 Zusammenfassung.tex
 INPUT content\7 Zusammenfassung.tex
 INPUT .\content\7 Zusammenfassung.tex
@@ -5499,6 +5511,10 @@ INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\liberti
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTB.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTI.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\libertine\LinLibertineTI.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\kpfonts\jkpbn8a.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\kpfonts\jkpbn8a.pfb
 INPUT C:\Users\Frederik\AppData\Local\Programs\MiKTeX\fonts\type1\public\kpfonts\jkpex.pfb

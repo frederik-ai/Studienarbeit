@@ -1,8 +1,46 @@
 \chapter{Evaluation}
-Die Aufgabe der Evaluation ist prinzipiell folgende: Es soll gemessen werden, wie ähnlich die Wahrscheinlichkeitsverteilung der generierten Bilder zu der Verteilung der Trainingsbilder ist. Außerdem soll bestimmt werden, wie realistisch die generierten Bilder sind.
+
+Die Evaluation soll prüfen, inwieweit die Implementierung dieser Studienarbeit die in Kapitel \ref{chap:ziel-der-arbeit} definierten Ziele erreicht. Somit beurteilt die Evaluation die folgenden Fragestellungen:
+\begin{itemize}
+	\item Wie \textbf{fotorealistisch} sind die generierten Bilder des Modells? 
+	\item Wie \textbf{neuartig} sind die generierten Bilder des Modells?
+	\item Wie sehr eignen sich die augmentierten Grenzfälle als \textbf{Trainingsdaten} \\ für Straßenschilderkennungs-Software?
+\end{itemize}
+
+Dahingehend kann die Beurteilung in eine \textbf{Evaluation der Generierung} und eine \textbf{Evaluation der Augmentierung} unterteilt werden.
 
 \label{chap:Evaluation}
 \section{Evaluation der Generierung}
+
+\subsection{Vorgehen}
+
+Das Modell dieser Studienarbeit verfolgt das Ziel, die statistische Verteilung der Trainingsdaten möglichst gut abzubilden. In dem Trainingsdatensatz befinden sich ausschließlich reale Aufnahmen von Straßenschildern. Daher kann argumentiert werden, dass das Modell genau dann fotorealistische Bilder erzeugt, wenn die generierte Verteilung $\hat{p}(x)$ ähnlich ist zu der tatsächlichen Verteilung der Trainingsdaten $p(x)$. Das Ziel der Evaluierung ist somit ein Vergleich, wie ähnlich sich die beiden Verteilungen $\hat{p}(x)$ und $p(x)$ sind.
+
+In der Beurteilung generativer Modelle sind dafür der \emph{Inception Score} sowie die \emph{Fréchet Inception Distance} üblich. Beide Verfahren nutzen ein Klassifizierungsmodell namens \emph{Inception} und einen Datensatz namens \emph{ImageNet}. Der Datensatz ImageNet enthält 14 Millionen Bilder, die in 20.000 Kategorien eingeteilt sind. Das Klassifizierungsmodell Inception ist ein \ac{CNN} von Google. Sowohl der Inception Score als auch die Fréchet Inception Distance basieren auf folgendem Verfahren:
+\begin{itemize}
+	\item Ein Inception Modell wird auf dem ImageNet Datensatz trainiert
+	\item Das generative Modell wird darauf trainiert, Bilder zu generieren, die dem ImageNet Datensatz ähnlich sehen
+	\item Das Inception Modell soll die generierten Bilder klassifizieren
+	\item Je höher die Genauigkeit des Inception Modells ist, desto ähnlicher sind die generierten Bilder dem ImageNet Datensatz
+\end{itemize}
+Die Klassifizierungsgenauigkeit schafft dabei einen quantitativen Wert für die Ähnlichkeit der beiden Verteilungen $\hat{p}(x)$ und $p(x)$. Hiermit können generative Modelle verglichen werden.
+
+Das Verfahren kann für die Evaluierung nicht gewählt werden, da das \ac{CycleGAN} darauf trainiert ist, Bilder von Straßenschildern zu erzeugen. Es wäre notwendig, das Modell zusätzlich auf den ImageNet Datensatz zu trainieren.
+
+Stattdessen verwendet die Evaluation ein adaptiertes Vorgehen, das in Abbildung \ref{fig:eval} dargestellt ist.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../images/Eval/Eval.png}
+	\caption{Vorgehen der Evaluierung}
+	\label{fig:eval}
+\end{figure}
+
+Das Verfahren prüft folgendes: Wie genau kann ein Klassifikator die Testbilder des \ac{GTSRB} klassifizieren, wenn er mit einem bestimmten Datensatz trainiert ist? Der \ac{GTSRB} wird stellvertretend als die Verteilung $p(x)$ der Bilder von deutschen Straßenschildern betrachtet. Je ähnlicher dazu die Verteilung $\hat{p}(x)$ des Datensatzes ist, desto besser kann der Klassifikator daraus lernen, die Bilder des \ac{GTSRB} zu klassifizieren.
+
+Damit ist die Genauigkeit des Klassifikators, wenn er mit den Trainingsdaten des \ac{GTSRB} trainiert wird der \textbf{Referenzwert}. Die Genauigkeit des Klassifikators, wenn er mit dem zu evaluierenden Datensatz trainiert wird ist hingegen der \textbf{Testwert}. Die absolute Differenz zwischen Referenz- und Testwert stellt die Evaluationsmetrik dar. Je geringer die Differenz ist, desto ähnlicher sind die generierten Bilder dem \ac{GTSRB} Datensatz.
+
+Der Klassifikator ist ein VGG16 Modell. Das ist eine \ac{CNN}-Architektur aus dem Jahre 2014, die an der Oxford Universität entwickelt wurde. Ein Inception Klassifikator könnte bei dieser Problemstellung eine zu 
 
 %\begin{table}[H]
 %	\centering
@@ -22,7 +60,11 @@ Die Aufgabe der Evaluation ist prinzipiell folgende: Es soll gemessen werden, wi
 %	\caption{Training eines VGG16 Klassifikators mit unterschiedlichen Trainingsdaten}
 %\end{table}
 
-\begin{table}[H]
+\subsection{Ergebnisse}
+
+Tabelle \ref{tab:results} zeigt die Ergebnisse der Evaluierung.
+
+\begin{table}[h]
 	\centering
 	\begin{tabular}{|l|c|c|}
 	\hline
@@ -34,9 +76,10 @@ Die Aufgabe der Evaluation ist prinzipiell folgende: Es soll gemessen werden, wi
    ResNet (9 residual blocks) & 4.300 & 53 \\ \hline \hline
 	Augmentierte Piktogramme & 4.300 & 19 \\ \hline
    Piktogramme & 43 & 12 \\ \hline \hline
-	Gemischt & \\ \hline
+	Gemischt & 8.868 & \\ \hline
 	\end{tabular}
 	\caption{Ergebnisse des Trainings eines VGG16 Klassifikators}
+	\label{tab:results}
 \end{table}
 
 \section{Evaluation der Augmentierung}
