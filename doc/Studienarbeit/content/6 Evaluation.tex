@@ -82,9 +82,48 @@ Tabelle \ref{tab:results} zeigt die Ergebnisse der Evaluierung.
 	\label{tab:results}
 \end{table}
 
+Die Referenzgenauigkeit des \ac{GTSRB} beträgt 82\%. Der gesamte in Kapitel \ref{chap:3-Datensatz} beschriebene Datensatz hat eine vergleichbare Genauigkeit von 83\% auf den Testdaten des \ac{GTSRB}. Das deutet darauf hin, dass die hinzugefügten Datensätze die Verteilung $p(x)$ von deutschen Straßenschildern nicht verzerren.
+
+Die drei Varianten des \ac{CylceGAN} -- U-Net-basiert, ResNet-basiert mit 9 Residual Blocks und ResNet-basiert mit 6 Residual Blocks -- erzeugen Bilder, die zu einer signifikant niedrigeren Genauigkeit führen. Das bedeutet, dass sich die Bilder zu einem gewissen Grad von denen des \ac{GTSRB} unterscheiden. Analog zu den Beobachtungen in Kapitel \ref{chap:trainingsergebnisse} zeigt dabei das U-Net-basierte \ac{CycleGAN} die geringste Abweichung zum Referenzwert von 82\%. Somit trifft auf dieses Modell mindestens eine der beiden Aussagen zu:
+\begin{enumerate}
+	\item Das U-Net-basierte \ac{CycleGAN} erzeugt \textbf{fotorealistischere} Bilder als die ResNet-basierten Modelle
+	\item Das U-Net-basierte \ac{CycleGAN} erzeugt eine \textbf{größere Varianz} an unterschiedlichen Bildern pro Klasse
+\end{enumerate}
+Von den beiden ResNet-basierten \acp{CycleGAN} zeigt die Variante mit 9 Residual Blocks die höhere Testgenauigkeit.
+
+Das \ac{CycleGAN} übersetzt die Piktogramme aus der Domäne X in die Domäne Y. Eine Fragestellung ist hier, ob die Bilder der Domäne Y eine höhere Genauigkeit erzielen als die rohen Piktogramme. Ist das nicht der Fall, dann würde das zeigen, dass die von dem \ac{CycleGAN} implementierte Funktion keinen Mehrwert bietet. Es wäre ebenso möglich, den Datensatz um Bilder von Piktogrammen zu erweitern.
+
+Hier zeigt sich jedoch ein signifikanter Unterschied. Die augmentierten Piktogramme erzielen eine Testgenauigkeit von 19\%. Der Abstand dieses Datensatzes zum U-Net-basierten Datensatz beträgt 43\%. Der Abstand vom U-Net-basierten Datensatz zum \ac{GTSRB} ist hingegen geringer mit einem Wert von 20\%.
+
+\subsection{Ergründung}
+Wie bereits in Kapitel \ref{chap:trainingsergebnisse} erwähnt, erzeugen die drei trainierten Varianten des \ac{CycleGAN} für einige Klassen weniger fotorealistische Bilder als für andere. So zum Beispiel für die vier Arten von Aufhebungsschildern, für die der 5685 Bilder umfassende Trainingsdatensatz lediglich 44 Beispielbilder enthält. Es ist zu erwarten, dass der VGG16-Klassifikator hieraus nicht lernen kann, echte Bilder von Aufhebungsschildern korrekt zu klassifizeren. Diese Kategorie von Straßenschildern macht 9\% aller 43 Klassen aus.
+
+Weitere Eigenheiten der Modelle sind die folgenden:
+\begin{itemize}
+	\item \textbf{U-Net-basiertes \ac{CycleGAN}}
+		\begin{itemize}
+			\item Vorfahrtschilder (Klassen-ID 12) zeigen in Epoche 150 weder eine hohe Varianz auf, noch sind die fotorialistisch. Epoche 200 verbessert das 
+			\item Richtungsweisende Schilder (Klassen-IDs 33-40) sind nach einer subjektiven Beurteilung die fotorealistischsten Bilder
+			\item C
+		\end{itemize}
+	\item \textbf{ResNet-basiertes \ac{CycleGAN} (9 Residual Blocks)}
+		\begin{itemize}
+			\item A
+			\item B
+			\item C
+		\end{itemize}
+	\item \textbf{ResNet-basiertes \ac{CycleGAN} (6 Residual Blocks)}
+		\begin{itemize}
+			\item A
+			\item B
+			\item C
+		\end{itemize}
+\end{itemize}
+
 \section{Evaluation der Augmentierung}
 
 \section{Verbesserungsmöglichkeiten}
 \begin{itemize}
    \item Bestimmte Funktionen in TensorFlow Graphen umwandeln; Dadurch Performance der Implementierung verbessern
+   \item Learning Rate Decay
 \end{itemize}

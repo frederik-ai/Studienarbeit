@@ -49,7 +49,7 @@ $ tensorboard --logdir ./logs/resnet
 \subsection{Vorgehensweise}
 
 \section{Trainingsergebnisse}
-
+\label{chap:trainingsergebnisse}
 Für das Training der U-Net- und ResNet-basierten \acp{CycleGAN} dienen zwei verschiedene Systeme. Dabei zum einen Google Colab. Hier bietet Google eine kostenfreie Version sowie ein Premium-Abonnement an. In der kostenfreien Version ist jedoch kein Training über Nacht möglich, da das System nach einer etwa zwanzig-minütigen Inaktivität die Verbindung zum Rechner trennt. Unter anderem aus diesem Grund wird das Training zusätzlich auf einem Server der DHBW durchgeführt. Dieser besitzt eine Grafikkarte mit 25 Gigabyte Speicher und ist damit leistungsstärker als die von Google Colab angebotenen Systeme. Die Trainingsdauer pro Epoche ist für die traininerten Modelle in der nachfolgenden Tabelle aufgeführt. Es zeigt sich hier außerdem, dass das U-Net signifikant schneller trainiert als das ResNet, jedoch Checkpoints besitzt, die mehr Speicherplatz verbrauchen. 
 
 \begin{table}[H]
