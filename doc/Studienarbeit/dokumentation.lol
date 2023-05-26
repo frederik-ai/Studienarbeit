@@ -81,6 +81,8 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {listing}{\numberline {1}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{75}{listing.caption.95}%
+\contentsline {listing}{\numberline {1}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{82}{listing.caption.102}%
 \defcounter {refsection}{0}\relax 
-\contentsline {listing}{\numberline {2}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{77}{listing.caption.97}%
+\contentsline {listing}{\numberline {2}{\ignorespaces Augmentierung eines Batches von Bildern\relax }}{84}{listing.caption.104}%
+\defcounter {refsection}{0}\relax 
+\contentsline {listing}{\numberline {3}{\ignorespaces Anpassen des VGG16 Modells für die Klassifikation von der Straßenschilder \cite {transfer-learning}\relax }}{84}{listing.caption.106}%

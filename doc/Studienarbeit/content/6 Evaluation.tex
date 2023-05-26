@@ -2,9 +2,9 @@
 
 Die Evaluation soll prüfen, inwieweit die Implementierung dieser Studienarbeit die in Kapitel \ref{chap:ziel-der-arbeit} definierten Ziele erreicht. Somit beurteilt die Evaluation die folgenden Fragestellungen:
 \begin{itemize}
-	\item Wie \textbf{fotorealistisch} sind die generierten Bilder des Modells? 
-	\item Wie \textbf{neuartig} sind die generierten Bilder des Modells?
-	\item Wie sehr eignen sich die augmentierten Grenzfälle als \textbf{Trainingsdaten} \\ für Straßenschilderkennungs-Software?
+	\item Wie fotorealistisch sind die generierten Bilder des Modells? 
+	\item Wie neuartig sind die generierten Bilder des Modells?
+	\item Wie sehr eignen sich die augmentierten Grenzfälle als Trainingsdaten \\ für Straßenschilderkennungs-Software?
 \end{itemize}
 
 Dahingehend kann die Beurteilung in eine \textbf{Evaluation der Generierung} und eine \textbf{Evaluation der Augmentierung} unterteilt werden.
@@ -12,11 +12,13 @@ Dahingehend kann die Beurteilung in eine \textbf{Evaluation der Generierung} und
 \label{chap:Evaluation}
 \section{Evaluation der Generierung}
 
+Die Evaluation der Generierung bewertet die Qualität der generierten Bilder des \ac{CycleGAN}. Die Augmentierung der Bilder ist hier nicht einbezogen.
+
 \subsection{Vorgehen}
 
-Das Modell dieser Studienarbeit verfolgt das Ziel, die statistische Verteilung der Trainingsdaten möglichst gut abzubilden. In dem Trainingsdatensatz befinden sich ausschließlich reale Aufnahmen von Straßenschildern. Daher kann argumentiert werden, dass das Modell genau dann fotorealistische Bilder erzeugt, wenn die generierte Verteilung $\hat{p}(x)$ ähnlich ist zu der tatsächlichen Verteilung der Trainingsdaten $p(x)$. Das Ziel der Evaluierung ist somit ein Vergleich, wie ähnlich sich die beiden Verteilungen $\hat{p}(x)$ und $p(x)$ sind.
+Das Modell dieser Studienarbeit verfolgt das Ziel, die statistische Verteilung der Trainingsdaten möglichst genau abzubilden. In dem Trainingsdatensatz befinden sich ausschließlich reale Aufnahmen von Straßenschildern. Daher kann argumentiert werden, dass das Modell genau dann fotorealistische Bilder erzeugt, wenn die generierte Verteilung $\hat{p}(x)$ ähnlich ist zu der tatsächlichen Verteilung der Trainingsdaten $p(x)$. Das Ziel der Evaluation ist somit ein Vergleich, wie ähnlich sich die beiden Verteilungen $\hat{p}(x)$ und $p(x)$ sind.
 
-In der Beurteilung generativer Modelle sind dafür der \emph{Inception Score} sowie die \emph{Fréchet Inception Distance} üblich. Beide Verfahren nutzen ein Klassifizierungsmodell namens \emph{Inception} und einen Datensatz namens \emph{ImageNet}. Der Datensatz ImageNet enthält 14 Millionen Bilder, die in 20.000 Kategorien eingeteilt sind. Das Klassifizierungsmodell Inception ist ein \ac{CNN} von Google. Sowohl der Inception Score als auch die Fréchet Inception Distance basieren auf folgendem Verfahren:
+In der Beurteilung generativer Modelle sind dafür der \emph{Inception Score} sowie die \emph{Fréchet Inception Distance} üblich. Beide Verfahren nutzen ein Klassifizierungsmodell namens \emph{Inception} und einen Datensatz namens \emph{ImageNet}. Der Datensatz ImageNet enthält 14 Millionen Bilder, die in 20.000 Kategorien eingeteilt sind \cite{imagenet}. Das Klassifizierungsmodell Inception ist ein \ac{CNN}, das mitunter von Google entwickelt wurde \cite{inception}. Sowohl der Inception Score als auch die Fréchet Inception Distance basieren auf folgendem Verfahren: \cite{generative-models-evaluation}
 \begin{itemize}
 	\item Ein Inception Modell wird auf dem ImageNet Datensatz trainiert
 	\item Das generative Modell wird darauf trainiert, Bilder zu generieren, die dem ImageNet Datensatz ähnlich sehen
@@ -25,14 +27,12 @@ In der Beurteilung generativer Modelle sind dafür der \emph{Inception Score} so
 \end{itemize}
 Die Klassifizierungsgenauigkeit schafft dabei einen quantitativen Wert für die Ähnlichkeit der beiden Verteilungen $\hat{p}(x)$ und $p(x)$. Hiermit können generative Modelle verglichen werden.
 
-Das Verfahren kann für die Evaluierung nicht gewählt werden, da das \ac{CycleGAN} darauf trainiert ist, Bilder von Straßenschildern zu erzeugen. Es wäre notwendig, das Modell zusätzlich auf den ImageNet Datensatz zu trainieren.
-
-Stattdessen verwendet die Evaluation ein adaptiertes Vorgehen, das in Abbildung \ref{fig:eval} dargestellt ist.
+Das Verfahren kann für die Evaluation dieser Studienarbeit nicht gewählt werden, da das \ac{CycleGAN} darauf trainiert ist, Bilder von Straßenschildern zu erzeugen. Es wäre notwendig, das Modell zusätzlich auf den ImageNet Datensatz zu trainieren. Stattdessen verwendet die Evaluation ein adaptiertes Vorgehen, das in Abbildung \ref{fig:eval} dargestellt ist.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.8\textwidth]{../images/Eval/Eval.png}
-	\caption{Vorgehen der Evaluierung}
+	\caption{Vorgehen der Evaluation}
 	\label{fig:eval}
 \end{figure}
 
@@ -40,7 +40,11 @@ Das Verfahren prüft folgendes: Wie genau kann ein Klassifikator die Testbilder 
 
 Damit ist die Genauigkeit des Klassifikators, wenn er mit den Trainingsdaten des \ac{GTSRB} trainiert wird der \textbf{Referenzwert}. Die Genauigkeit des Klassifikators, wenn er mit dem zu evaluierenden Datensatz trainiert wird ist hingegen der \textbf{Testwert}. Die absolute Differenz zwischen Referenz- und Testwert stellt die Evaluationsmetrik dar. Je geringer die Differenz ist, desto ähnlicher sind die generierten Bilder dem \ac{GTSRB} Datensatz.
 
-Der Klassifikator ist ein VGG16 Modell. Das ist eine \ac{CNN}-Architektur aus dem Jahre 2014, die an der Oxford Universität entwickelt wurde. Ein Inception Klassifikator könnte bei dieser Problemstellung eine zu 
+Im Unterschied zu dem Inception Score und der Fréchet Inception Distance wird der Klassifikator auf dem Datensatz trainiert und nicht getestet. Die Evaluation basiert auf diesem Vorgehen, weil die generierten Daten als \textbf{Trainingsdaten} für die Straßenschilderkennung dienen sollen. Die Metrik prüft damit zudem, wie geeignet der jeweilige Datensatz als Trainingsdaten sind.
+
+Der Klassifikator ist ein VGG16 Modell. Das ist eine \ac{CNN}-Architektur aus dem Jahre 2014, die an der Oxford Universität entwickelt wurde. Das VGG16 besitzt weniger Schichten als das Inception Modell und damit auch weniger Parameter. Die Evaluation verwendet ein VGG16, da dadurch die Wahrscheinlichkeit verringert wird, dass der Klassifikator den \ac{GTSRB} \emph{auswendig lernt}. Damit ist gemeint, dass das Modell beispielsweise lernt, dass in den Trainingsdaten ein bestimmter Hintergrund nur bei einer einzelnen Art von Straßenschildern vorkommt. Das Modell könnte hierdurch womöglich die gelernte Klassifizierung weder auf die Testdaten des \ac{GTSRB} noch auf andere fotorealistische Datensätze transferieren. Eine Veröffentlichung hat beispielsweise für ihren Anwendungsfall gezeigt, dass das VGG16 die Daten besser generalisieren kann als das Inception Modell. \cite{vgg16-vs-inception}
+
+Der Quellcode der Evaluation befindet sich in dem Pfad \mintinline{python}{classifier/run.py}. Der Klassifikator basiert auf einem VGG16, das auf den ImageNet Datensatz vortrainiert ist. Aus der Literatur wird Code verwendet, der diesem Modell eine neue trainierbare Schicht hinzufügt \cite{transfer-learning}. Die vorherigen Schichten zur Merkmalsextraktion für den ImageNet Datensatz behalten ihre Parameter bei, während die hinzugefügte Schicht auf dem entsprechenden Datensatz (zum Beispiel dem \ac{GTSRB}) trainiert wird. Auf Englisch heißt dieses Verfahren \emph{transfer learning}. \cite{transfer-learning}
 
 %\begin{table}[H]
 %	\centering
@@ -62,65 +66,68 @@ Der Klassifikator ist ein VGG16 Modell. Das ist eine \ac{CNN}-Architektur aus de
 
 \subsection{Ergebnisse}
 
-Tabelle \ref{tab:results} zeigt die Ergebnisse der Evaluierung.
+Tabelle \ref{tab:results} zeigt die Ergebnisse der Evaluation. Das VGG16 ist auf jeden der aufgelisteten Datensätze bis zu einer Trainingsgenauigkeit von nahezu oder genau 100\% trainiert. Das entspricht in den meisten Fällen 20 Trainingsepochen. Die Testgenauigkeit gibt an, wie viel Prozent der \textbf{\ac{GTSRB} Testbilder} das VGG16 korrekt klassifiziert, wenn es \textbf{ausschließlich} mit dem jeweiligen Datensatz trainiert ist.
+
+Die Referenzgenauigkeit des \ac{GTSRB} beträgt laut den Ergebnsisen 82\%. Der gesamte in Kapitel \ref{chap:3-Datensatz} beschriebene Datensatz hat eine vergleichbare Genauigkeit von 83\% auf den Testdaten des \ac{GTSRB}. Das deutet darauf hin, dass die hinzugefügten Datensätze die Verteilung $p(x)$ von deutschen Straßenschildern nicht verzerren.
+
+Die drei Varianten des \ac{CycleGAN} -- U-Net-basiert, ResNet-basiert mit 9 Residual Blocks und ResNet-basiert mit 6 Residual Blocks -- erzeugen Bilder, die zu einer signifikant niedrigeren Genauigkeit führen. Das bedeutet, dass sich die Bilder zu einem gewissen Grad von denen des \ac{GTSRB} unterscheiden. Analog zu den Beobachtungen in Kapitel \ref{chap:trainingsergebnisse} zeigt dabei das U-Net-basierte \ac{CycleGAN} die geringste Abweichung zum Referenzwert. Somit trifft auf dieses Modell mindestens eine der beiden Aussagen zu:
+\begin{enumerate}
+	\item Das U-Net-\ac{CycleGAN} erzeugt \textbf{fotorealistischere} Bilder als die ResNet-basierten Modelle
+	\item Das U-Net-\ac{CycleGAN} erzeugt eine \textbf{größere Varianz} an unterschiedlichen Bildern pro Klasse
+\end{enumerate}
 
 \begin{table}[h]
 	\centering
 	\begin{tabular}{|l|c|c|}
 	\hline
-	Trainingsdatensatz & Trainingsbilder (\#) & Testgenauigkeit (\%) \\ \hline \hline
-	Präparierter GTSRB & 4.554 & 82 \\ \hline
+	Trainingsdatensatz & Trainingsbilder (\#) & Testgenauigkeit\tablefootnote{Des trainierten Klassifikators auf dem \ac{GTSRB}} (\%) \\ \hline \hline
+	\textbf{Präparierter GTSRB} & \textbf{4.554} & \textbf{82} \\ \hline
    Gesamte Trainingsdaten & 5.685 & 83 \\ \hline \hline
-   U-Net & 4.300 & 62 \\ \hline
-	ResNet (6 residual blocks) & 4.300 & 46 \\ \hline
-   ResNet (9 residual blocks) & 4.300 & 53 \\ \hline \hline
+   \textbf{U-Net} & \textbf{4.300} & \textbf{62} \\ \hline
+	ResNet (9 residual blocks) & 4.300 & 53 \\ \hline
+	ResNet (6 residual blocks) & 4.300 & 46 \\ \hline \hline
 	Augmentierte Piktogramme & 4.300 & 19 \\ \hline
    Piktogramme & 43 & 12 \\ \hline \hline
-	Gemischt & 8.868 & \\ \hline
+	\textbf{Gemischt} & \textbf{8.868} & \textbf{87} \\ \hline
 	\end{tabular}
 	\caption{Ergebnisse des Trainings eines VGG16 Klassifikators}
 	\label{tab:results}
 \end{table}
 
-Die Referenzgenauigkeit des \ac{GTSRB} beträgt 82\%. Der gesamte in Kapitel \ref{chap:3-Datensatz} beschriebene Datensatz hat eine vergleichbare Genauigkeit von 83\% auf den Testdaten des \ac{GTSRB}. Das deutet darauf hin, dass die hinzugefügten Datensätze die Verteilung $p(x)$ von deutschen Straßenschildern nicht verzerren.
-
-Die drei Varianten des \ac{CylceGAN} -- U-Net-basiert, ResNet-basiert mit 9 Residual Blocks und ResNet-basiert mit 6 Residual Blocks -- erzeugen Bilder, die zu einer signifikant niedrigeren Genauigkeit führen. Das bedeutet, dass sich die Bilder zu einem gewissen Grad von denen des \ac{GTSRB} unterscheiden. Analog zu den Beobachtungen in Kapitel \ref{chap:trainingsergebnisse} zeigt dabei das U-Net-basierte \ac{CycleGAN} die geringste Abweichung zum Referenzwert von 82\%. Somit trifft auf dieses Modell mindestens eine der beiden Aussagen zu:
-\begin{enumerate}
-	\item Das U-Net-basierte \ac{CycleGAN} erzeugt \textbf{fotorealistischere} Bilder als die ResNet-basierten Modelle
-	\item Das U-Net-basierte \ac{CycleGAN} erzeugt eine \textbf{größere Varianz} an unterschiedlichen Bildern pro Klasse
-\end{enumerate}
 Von den beiden ResNet-basierten \acp{CycleGAN} zeigt die Variante mit 9 Residual Blocks die höhere Testgenauigkeit.
 
-Das \ac{CycleGAN} übersetzt die Piktogramme aus der Domäne X in die Domäne Y. Eine Fragestellung ist hier, ob die Bilder der Domäne Y eine höhere Genauigkeit erzielen als die rohen Piktogramme. Ist das nicht der Fall, dann würde das zeigen, dass die von dem \ac{CycleGAN} implementierte Funktion keinen Mehrwert bietet. Es wäre ebenso möglich, den Datensatz um Bilder von Piktogrammen zu erweitern.
+Für eine Beurteilung der \textbf{Varianz} an generierten Bildern verwendet diese Evaluation kein quantitaves Verfahren. Es zeigt sich, dass die Hintergründe der generierten Bilder meist mindestens einem Hintergrund aus den Trainingsdaten ähnlich sehen. Dennoch erzeugt das \ac{CycleGAN} neuartige Bilder. Das U-Net-basierte \ac{CycleGAN} erzeugt pro Klasse etwa 5-10 verschiedene Hintergründe. Die beiden ResNet-basierten Modelle zeigen eine geringere Varianz verschiedener Hintergründe von maximal fünf verschiedenen Hintergründen.
 
-Hier zeigt sich jedoch ein signifikanter Unterschied. Die augmentierten Piktogramme erzielen eine Testgenauigkeit von 19\%. Der Abstand dieses Datensatzes zum U-Net-basierten Datensatz beträgt 43\%. Der Abstand vom U-Net-basierten Datensatz zum \ac{GTSRB} ist hingegen geringer mit einem Wert von 20\%.
+Eine subjektive Beurteilung kommt zu dem Schluss, dass die Bilder des U-Net-basierten \ac{CycleGAN} sowohl fotorealistischer sind als auch eine größere Varianz besitzen als die ResNet-basierten Varianten. Die Ergebnisse aus Tabelle \ref{tab:results} stützen diese Beobachtung.
 
-\subsection{Ergründung}
-Wie bereits in Kapitel \ref{chap:trainingsergebnisse} erwähnt, erzeugen die drei trainierten Varianten des \ac{CycleGAN} für einige Klassen weniger fotorealistische Bilder als für andere. So zum Beispiel für die vier Arten von Aufhebungsschildern, für die der 5685 Bilder umfassende Trainingsdatensatz lediglich 44 Beispielbilder enthält. Es ist zu erwarten, dass der VGG16-Klassifikator hieraus nicht lernen kann, echte Bilder von Aufhebungsschildern korrekt zu klassifizeren. Diese Kategorie von Straßenschildern macht 9\% aller 43 Klassen aus.
+Eine allgemeine Fragestellung ist, ob die generierten Bilder eine höhere Genauigkeit erzielen als die augmentierten Piktogramme.Ist das nicht der Fall, dann würde das zeigen, dass die von dem \ac{CycleGAN} implementierte Funktion keinen Mehrwert bietet. Es wäre ebenso möglich, den Datensatz um Bilder von Piktogrammen zu erweitern. Hier zeigt sich jedoch ein signifikanter Unterschied. Die augmentierten Piktogramme erzielen eine Testgenauigkeit von 19\% und damit weniger als die Varianten des \ac{CycleGAN}.
 
-Weitere Eigenheiten der Modelle sind die folgenden:
-\begin{itemize}
-	\item \textbf{U-Net-basiertes \ac{CycleGAN}}
-		\begin{itemize}
-			\item Vorfahrtschilder (Klassen-ID 12) zeigen in Epoche 150 weder eine hohe Varianz auf, noch sind die fotorialistisch. Epoche 200 verbessert das 
-			\item Richtungsweisende Schilder (Klassen-IDs 33-40) sind nach einer subjektiven Beurteilung die fotorealistischsten Bilder
-			\item C
-		\end{itemize}
-	\item \textbf{ResNet-basiertes \ac{CycleGAN} (9 Residual Blocks)}
-		\begin{itemize}
-			\item A
-			\item B
-			\item C
-		\end{itemize}
-	\item \textbf{ResNet-basiertes \ac{CycleGAN} (6 Residual Blocks)}
-		\begin{itemize}
-			\item A
-			\item B
-			\item C
-		\end{itemize}
-\end{itemize}
+Ein zentraler Aspekt ist zudem, ob ein erweiterter Datensatz, der aus realen und künstlich erzeugten Datensätzen besteht, eine höhere Genauigkeit erzielt als ein Satz an aussschließlich realen Bildern. Der Datensatz mit der Bezeichnung \emph{Gemischt} besteht aus Bildern aller drei Varianten des \ac{CycleGAN} sowie den gesamten Trainingsdaten des \ac{CycleGAN}. Die Klassifizierungsgenauigkeit liegt vier Prozentpunkte über der Genauigkeit der gesamten realen Trainingsdaten. Das zeigt, dass die künstlich erzeugten Bilder die Trainingsdaten erweitern können, um die Genauigkeit der Straßenschilderkennung zu verbessern.
 
 \section{Evaluation der Augmentierung}
+
+Das Ziel der augmentierten Bilder ist, dass sie sich als Trainingsbilder für die Straßenschilderkennung eignen. Die Evaluation soll deshalb zu zeigen, dass ein Klassifikator eine geringere Genauigkeit auf augmentierten Bildern erzielt als auf nicht-augmentierten Bildern. Wenn die augmentierten Bilder fotorealistisch sind, dann zeigt das, dass Grenzfälle wie etwa Bewegungsunschärfe und Schnee die Genauigkeit der Straßenschilderkennung verringern. In dem Fall können solche Bilder verwendet werden, um Software zur Straßenschilderkennung für solche Grenzfälle zu trainieren.
+
+Tabelle \ref{tab:augmentation-classification-acc} zeigt die Ergebnisse dieser Evaluation. Der Klassifikator ist in jedem Fall auf dem \ac{GTSRB} \emph{trainiert} und auf Bildern mit der jeweiligen Augmentierung \emph{getestet}. Der Referenzwert ist die Genauigkeit des Klassifikators auf nicht-augmentierten Bildern des UNet-basierten \ac{CycleGAN}.
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{|l|c|c|}
+	\hline
+	Augmentierung & Testbilder (\#) & Testgenauigkeit\tablefootnote{Eines Klassifikators auf dieser Augmentierung. Der Klassifikator ist auf dem \ac{GTSRB} trainiert.} (\%) \\ \hline \hline
+	Keine Augmentierung & 645 & 60 \\ \hline \hline
+	Bewegungsunschärfe & 300 & 39 \\ \hline
+   Ungültige Schilder & 300 & 11 \\ \hline
+   Schnee & 300 & 10 \\ \hline \hline
+	Alle Augmentierungen & 300 & 4 \\ \hline
+	\end{tabular}
+	\caption{Genauigkeit des Klassifikators auf augmentierten Bildern des U-Net-basierten \ac{CycleGAN}}
+	\label{tab:augmentation-classification-acc}
+\end{table}
+
+Eine Bewegungsunschärfe zeigt den geringsten Einfluss auf die Genaugkeit. Ungültige Schilder und Schnee besitzen einen signifikant größeren Einfluss. Die Kombination aller drei Augmentierungen reduziert die Genauigkeit auf 4\%.
+
+Da die Evaluation hier nicht den Fotorealismus der Bilder quantitativ beurteilt, kann dadaus nicht eindeutig geschlussfolgert werden, dass sich die augmentierten Daten als Trainingsbilder eignen. Die Ergebnisse geben jedoch Hinweise darauf, dass Entwickelnde die Bilder als zusätzliche Trainingsdaten für die Straßenschilderkennung in Betracht ziehen können.
 
 \section{Verbesserungsmöglichkeiten}
 \begin{itemize}

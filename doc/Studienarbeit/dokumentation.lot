@@ -27,7 +27,9 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {table}{\numberline {6.1}{\ignorespaces Ergebnisse des Trainings eines VGG16 Klassifikators\relax }}{63}{table.caption.85}%
+\contentsline {table}{\numberline {6.1}{\ignorespaces Ergebnisse des Trainings eines VGG16 Klassifikators\relax }}{64}{table.caption.85}%
+\defcounter {refsection}{0}\relax 
+\contentsline {table}{\numberline {6.2}{\ignorespaces Genauigkeit des Klassifikators auf augmentierten Bildern des U-Net-basierten \ac {CycleGAN}\relax }}{65}{table.caption.86}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 

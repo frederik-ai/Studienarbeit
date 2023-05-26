@@ -4,8 +4,6 @@ Train or evaluate a traffic sign classifier.
 Usage:
     `$ python run.py (--train | --evaluate)`
 
-Options:
-
 Example:
     `$ python run.py --train`
     `$ python run.py --evaluate`
@@ -114,20 +112,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-def create_model():
-    model = tf.keras.Sequential()
-
-    model.add(tf.keras.layers.Conv2D(32, (3, 3), padding='same', activation='relu', input_shape=(256, 256, 3)))
-    model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(tf.keras.layers.Conv2D(64, (3, 3), padding='same', activation='relu'))
-    model.add(tf.keras.layers.MaxPooling2D(pool_size=(2, 2)))
-
-    model.add(tf.keras.layers.Flatten())
-    model.add(tf.keras.layers.Dense(256, activation='relu'))
-    model.add(tf.keras.layers.Dense(43, activation='softmax'))
-
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-    return model

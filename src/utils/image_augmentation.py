@@ -105,8 +105,9 @@ def add_snow(img_tensor, snow_intensity, motion_blur_intensity, motion_blur_dire
     random_particles = apply_motion_blur(random_particles, motion_blur_intensity,
                                          motion_blur_direction)
 
-    # add alpha channel to img_tensor
-    img_tensor = tf.concat([img_tensor, tf.ones_like(img_tensor[:, :, 0:1])], axis=-1)
+    # add alpha channel to img_tensor (if it doesnt already have one)
+    if tf.shape(img_tensor)[-1] < 4:
+        img_tensor = tf.concat([img_tensor, tf.ones_like(img_tensor[:, :, 0:1])], axis=-1)
     # paste generated snowflake image onto given image tensor
     snowy_image = tf.math.add(img_tensor, random_particles)
     # normalize to range [-1, 1]
