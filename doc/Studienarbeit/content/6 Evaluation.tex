@@ -68,7 +68,7 @@ Der Quellcode der Evaluation befindet sich in dem Pfad \mintinline{python}{class
 
 Tabelle \ref{tab:results} zeigt die Ergebnisse der Evaluation. Das VGG16 ist auf jeden der aufgelisteten Datensätze bis zu einer Trainingsgenauigkeit von nahezu oder genau 100\% trainiert. Das entspricht in den meisten Fällen 20 Trainingsepochen. Die Testgenauigkeit gibt an, wie viel Prozent der \textbf{\ac{GTSRB} Testbilder} das VGG16 korrekt klassifiziert, wenn es \textbf{ausschließlich} mit dem jeweiligen Datensatz trainiert ist.
 
-Die Referenzgenauigkeit des \ac{GTSRB} beträgt laut den Ergebnsisen 82\%. Der gesamte in Kapitel \ref{chap:3-Datensatz} beschriebene Datensatz hat eine vergleichbare Genauigkeit von 83\% auf den Testdaten des \ac{GTSRB}. Das deutet darauf hin, dass die hinzugefügten Datensätze die Verteilung $p(x)$ von deutschen Straßenschildern nicht verzerren.
+Die Referenzgenauigkeit des \ac{GTSRB} beträgt laut den Ergebnissen 82\%. Der gesamte in Kapitel \ref{chap:3-Datensatz} beschriebene Datensatz hat eine vergleichbare Genauigkeit von 83\% auf den Testdaten des \ac{GTSRB}. Das deutet darauf hin, dass die hinzugefügten Datensätze die Verteilung $p(x)$ von deutschen Straßenschildern nicht verzerren.
 
 Die drei Varianten des \ac{CycleGAN} -- U-Net-basiert, ResNet-basiert mit 9 Residual Blocks und ResNet-basiert mit 6 Residual Blocks -- erzeugen Bilder, die zu einer signifikant niedrigeren Genauigkeit führen. Das bedeutet, dass sich die Bilder zu einem gewissen Grad von denen des \ac{GTSRB} unterscheiden. Analog zu den Beobachtungen in Kapitel \ref{chap:trainingsergebnisse} zeigt dabei das U-Net-basierte \ac{CycleGAN} die geringste Abweichung zum Referenzwert. Somit trifft auf dieses Modell mindestens eine der beiden Aussagen zu:
 \begin{enumerate}
@@ -80,7 +80,7 @@ Die drei Varianten des \ac{CycleGAN} -- U-Net-basiert, ResNet-basiert mit 9 Resi
 	\centering
 	\begin{tabular}{|l|c|c|}
 	\hline
-	Trainingsdatensatz & Trainingsbilder (\#) & Testgenauigkeit\tablefootnote{Des trainierten Klassifikators auf dem \ac{GTSRB}} (\%) \\ \hline \hline
+	Trainingsdatensatz & Trainingsbilder (\#) & Testgenauigkeit\tablefootnote{Des Klassifikators auf dem \ac{GTSRB}, wenn er mit dem jeweiligen Trainingsdatensatz trainiert ist} (\%) \\ \hline \hline
 	\textbf{Präparierter GTSRB} & \textbf{4.554} & \textbf{82} \\ \hline
    Gesamte Trainingsdaten & 5.685 & 83 \\ \hline \hline
    \textbf{U-Net} & \textbf{4.300} & \textbf{62} \\ \hline
@@ -114,7 +114,7 @@ Tabelle \ref{tab:augmentation-classification-acc} zeigt die Ergebnisse dieser Ev
 	\centering
 	\begin{tabular}{|l|c|c|}
 	\hline
-	Augmentierung & Testbilder (\#) & Testgenauigkeit\tablefootnote{Eines Klassifikators auf dieser Augmentierung. Der Klassifikator ist auf dem \ac{GTSRB} trainiert.} (\%) \\ \hline \hline
+	Augmentierung & Testbilder (\#) & Testgenauigkeit\tablefootnote{Des Klassifikators auf dieser Augmentierung, wenn er auf dem \ac{GTSRB} trainiert ist} (\%) \\ \hline \hline
 	Keine Augmentierung & 645 & 60 \\ \hline \hline
 	Bewegungsunschärfe & 300 & 39 \\ \hline
    Ungültige Schilder & 300 & 11 \\ \hline
@@ -130,7 +130,9 @@ Eine Bewegungsunschärfe zeigt den geringsten Einfluss auf die Genaugkeit. Ungü
 Da die Evaluation hier nicht den Fotorealismus der Bilder quantitativ beurteilt, kann dadaus nicht eindeutig geschlussfolgert werden, dass sich die augmentierten Daten als Trainingsbilder eignen. Die Ergebnisse geben jedoch Hinweise darauf, dass Entwickelnde die Bilder als zusätzliche Trainingsdaten für die Straßenschilderkennung in Betracht ziehen können.
 
 \section{Verbesserungsmöglichkeiten}
-\begin{itemize}
-   \item Bestimmte Funktionen in TensorFlow Graphen umwandeln; Dadurch Performance der Implementierung verbessern
-   \item Learning Rate Decay
-\end{itemize}
+
+Es existieren verschiedene Verbesserungsmöglichkeiten, damit das \ac{CycleGAN} fotorealistischere Bilder erzeugt. Eine Möglichkeit ist, dass das Training einen sogenannten \emph{Learning Rate Decay} verwendet. Damit ist gemeint, dass die Lernrate, die die Größe der Parameteränderungen pro Trainingsschritt angibt, mit der Zeit abnimmt. Das schlägt auch die \ac{CycleGAN}-Veröffentlichung vor.
+
+Eine weitere Möglichkeit ist, ein ResNet-Modell speziell für diesen Anwendungsfall zu entwickeln.
+
+\todo[inline]{zu Ende schreiben}

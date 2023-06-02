@@ -36,7 +36,7 @@ def main():
     # Setup
     config = toml.load('./config/config.toml')
     batch_size = config['training']['batch_size']
-    IMAGE_SIZE = config['model']['image_size']
+    image_size = config['model']['image_size']
 
     # Command line arguments
     parser = argparse.ArgumentParser()
@@ -61,10 +61,9 @@ def main():
     make_signs_invalid = args.make_invalid
     motion_blur = args.motion_blur
 
-    # PATH_TO_PICTOGRAMS = r'C:\Users\Frederik\Documents\Studienarbeit\data\Pictograms'
     path_to_pictograms = config['paths']['pictograms']
     x_pictograms = tf.keras.utils.image_dataset_from_directory(path_to_pictograms, batch_size=batch_size,
-                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+                                                               image_size=(image_size, image_size), labels=None)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
 
     # Currently, batch size cannot be larger than the number of pictograms

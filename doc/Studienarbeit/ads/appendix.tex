@@ -2416,16 +2416,22 @@
 
 \begin{code}
   \begin{minted}{python}
-def randomly_transform_image_batch(img_tensor_batch, target_size=256):
+def randomly_transform_image_batch(img_tensor_batch, 
+                                  target_size=256):
   batch_size = img_tensor_batch.shape[0]
 
   # resize content
   min_content_size = target_size / 1.5
   # we have to work with default python lists because we need the pop function
-  content_sizes = [np.random.randint(low=min_content_size, high=target_size) for el in range(batch_size)]
+  content_sizes = [
+    np.random.randint(low=min_content_size, high=target_size) for el in range(batch_size)
+  ]
   # copy of content_sizes; will be used to pop the elements
   content_sizes_tmp = content_sizes[:]
-  transformed_imgs = tf.map_fn(lambda img: resize_content_of_img(img, target_size, content_sizes_tmp.pop(0)), img_tensor_batch)
+  transformed_imgs = tf.map_fn(
+    lambda img: resize_content_of_img(
+      img, target_size, content_sizes_tmp.pop(0)), 
+    img_tensor_batch)
 
   # randomly rotate the image in x,y and z direction; scale values are empirically chosen
   bank_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
@@ -2434,10 +2440,12 @@ def randomly_transform_image_batch(img_tensor_batch, target_size=256):
   transform_matrices = np.zeros((batch_size, 3, 3))
   for i in range(batch_size):
         transform_matrices[i] = create_rotation_matrix(bank_values[i], pitch_values[i], heading_values[i])
-  transform_matrices = tf.convert_to_tensor(transform_matrices, dtype=tf.float32)
+  transform_matrices = tf.convert_to_tensor(transform_matrices, 
+                                            dtype=tf.float32)
 
   transformed_imgs = 1 - transformed_imgs
-  transformed_imgs = tfg_image_transformer.perspective_transform(transformed_imgs, transform_matrices)
+  transformed_imgs = tfg_image_transformer.perspective_transform(transformed_imgs,
+                                                              transform_matrices)
   transformed_imgs = 1 - transformed_imgs
 
   return transformed_imgs, content_sizes, transform_matrices
@@ -2475,21 +2483,23 @@ def fit(self, pictograms, real_images, epochs=1):
                     single_pictogram_batch)
 
                 # Train the model
-                losses = self.train_step(single_pictogram_batch, image_batch)
+                losses = self.train_step(single_pictogram_batch, 
+                                        image_batch)
 
                 # For Tensorboard; Log the losses
                 for loss_name in losses:
-                    tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
+                    tf.summary.scalar(loss_name, losses[loss_name], 
+                                      int(self.total_steps))
 
             # After each epoch: Generate an image
-            pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+            pictograms.shuffle(buffer_size=100, 
+                              reshuffle_each_iteration=True)
             single_pictogram_batch = pictograms.take(1).get_single_element()
             single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
                 single_pictogram_batch)
             generator_test_result = self.generator_g(single_pictogram_batch)
             random_filename = str(uuid.uuid4())
-            utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
-                                            relative_path='generated_images')
+            utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename, relative_path='generated_images')
             
             self.summary_writer.flush()  # write tensorboard logs to log file
 
@@ -2500,7 +2510,7 @@ def fit(self, pictograms, real_images, epochs=1):
     print('Checkpoint saved for this training')
     
 \end{minted}
-  \captionof{listing}{Augmentierung eines Batches von Bildern}
+  \captionof{listing}{Vollständige Trainingsfunktion}
   \label{lst:fit-full}
   \end{code}
 
@@ -2510,7 +2520,8 @@ def fit(self, pictograms, real_images, epochs=1):
 \begin{minted}{python}
 def get_model():
   num_classes = 43
-  base_model = VGG16(weights='imagenet', include_top=False, input_shape=(256, 256, 3))
+  base_model = VGG16(weights='imagenet', include_top=False, 
+                    input_shape=(256, 256, 3))
 
   # Freeze all layers
   for layer in base_model.layers:
@@ -2526,7 +2537,8 @@ def get_model():
 
   # Compile the model with a low learning rate
   optimizer = tf.keras.optimizers.Adam(lr=1e-5)
-  model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
+  model.compile(loss='categorical_crossentropy', optimizer=optimizer, 
+                metrics=['accuracy'])
 
   return model
 \end{minted}

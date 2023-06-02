@@ -1,9 +1,9 @@
 \section{Datensatz}
 
 \label{chap:3-Datensatz}
-Analog zu der in Kapitel \ref{chap:vorherige-arbeiten-rub} beschriebenen Arbeit verwendet diese Studienarbeit den \ac{GTSRB} als Datensatz. Dass dies der größte veröffentlichte Datensatz für deutsche Straßenschilder ist, stellt hierbei den ausschlaggebenden Punkt dar.
+Analog zu der in Kapitel \ref{chap:vorherige-arbeiten-rub} beschriebenen Arbeit verwendet diese Studienarbeit den \ac{GTSRB} als Datensatz. Dass dies mit 39.209 Bildern der größte veröffentlichte Datensatz für deutsche Straßenschilder ist, stellt hierbei den ausschlaggebenden Punkt dar.
 
-Die Bilder des \ac{GTSRB} verteilen sich auf 43 Klassen respektive 43 verschiedene Arten von Straßenschildern. Eine Auflistung aller Klassen ist im Anhang in Abbildung \ref{fig:all-pictograms} dargestellt. Beispielbilder aus dem \ac{GTSRB} zeigt Abbildung \ref{fig:gtrsb-paper-bsp-images}: \cite{GTSRB}
+Die Bilder des \ac{GTSRB} verteilen sich auf 43 Klassen respektive 43 verschiedene Arten von Straßenschildern. Eine Auflistung aller Klassen ist im Anhang in Abbildung \ref{fig:all-pictograms} dargestellt. Beispielbilder aus dem \ac{GTSRB} zeigt Abbildung \ref{fig:gtrsb-paper-bsp-images}. \cite{GTSRB}
 
 
 \begin{figure}[H]
@@ -41,7 +41,7 @@ Die Bilder des \ac{GTSRB} verteilen sich auf 43 Klassen respektive 43 verschiede
 
 Der \ac{GTSRB} setzt sich aus Bildern zusammen, die unterschiedliche Seitenverhältnisse und verschiedene Auflösungen besitzen. Ein Großteil davon ist kleiner als 100x100 Pixel. Auf jedem Bild ist genau ein Straßenschild zu sehen. Die Bilder basieren auf Videos, die durch die Autoren tagsüber im Straßenverkehr aufgenommen wurden. Dabei sind die Trainingsbilder ungleich auf die Anzahl an Klassen verteilt. Dies hängt mitunter damit zusammen, dass die jeweiligen Schilder nicht gleich häufig im Straßenverkehr vorkommen. Zusätzlich zu den Trainingsbildern besitzt der \ac{GTSRB} 12.630 Testbilder, welche in dieser Arbeit zur Evaluation des Modells verwendet werden können. Eine nennenswerte Eigenschaft des \ac{GTSRB} ist, dass eine signifikante Anzahl an Bildern einer Klasse sich ähnlich sehen. Das hängt damit zusammen, dass sie mit zeitlicher Verzögerung aus der selben Fahrsituation stammen. \cite{GTSRB}
 
-Die Bilder, die durch diese Studienarbet generiert werden sollen, haben eine Auflösung von 256x256 Pixel. Auf den genauen Hintergrund hierzu wird zu einem späteren Zeitpunt eingegangen. Unter anderem deshalb ist der \ac{GTSRB} für diese Arbeit zunächst so präpariert, dass nur Bilder verwendet werden, die mindestens 50 Pixel breit oder hoch sind. Dies wird im Verlauf geändert, sodass die Mindestgröße 75 Pixel beträgt. Das verringert die Anzahl an verfügbaren Trainingsbildern signifikant verringert. Der präparierte Datensatz besteht aus 4.510 Bildern, wodurch nur etwa 11\% des \ac{GTSRB} genutzt werden.
+Die Bilder, die durch diese Studienarbet generiert werden sollen, haben eine Auflösung von 256x256 Pixel. Auf den genauen Hintergrund hierzu wird zu einem späteren Zeitpunt eingegangen. Unter anderem deshalb ist der \ac{GTSRB} für diese Arbeit zunächst so präpariert, dass nur Bilder verwendet werden, die mindestens 50 Pixel breit oder hoch sind. Dies wird im Verlauf geändert, sodass die Mindestgröße 75 Pixel beträgt. Das verringert die Anzahl an verfügbaren Trainingsbildern signifikant. Der präparierte Datensatz besteht aus 4.510 Bildern, wodurch nur etwa 11\% des \ac{GTSRB} genutzt werden.
 
 Die Verteilung der Daten ist auch im präparierten Datensatz nicht homogen. Das nachfolgende Diagramm zeigt hierfür die Anzahl an Trainingsbildern pro Klasse.
 
@@ -229,7 +229,7 @@ Zusätzlich setzt sich der präparierte Datensatz aus Bildern weiterer Datensät
 
 Da diese Bilder manuell so zugeschnitten werden müssen, dass sie ähnlich zu dem \ac{GTSRB} und der chinesischen Traffic Sign Recognition Database einzelne Schilder mit wenig Hintergrund zeigen, macht diese Menge an Bildern einen geringeren Anteil aus. Aus einem dritten Datensatz werden weniger als 50 Bilder verwendet \cite{dataset-make-ml}. Hier sind größtenteils Stopschildern zu sehen mit einer Bildauflösung von etwa 190 bis zu 300 Pixel in der Höhe oder Breite.
 
-Der vollständige, präparierte Datensatz ist öffentlich unter \href{https://drive.google.com/drive/u/1/folders/1UlZNFEDLymyMFw2BJZcfB2toAIlTVwGb}{\textbf{diesem Link}} verfügbar (Stand: 09.06.2023). Er besteht aus 5.809 Bildern. In der nachfolgenden Abbildung ist die Häufigkeitsverteilung der Trainingsdaten (x-Achse) je Straßenschild-Kategorie (y-Achse) zu sehen. Die drei letztgenannten Datensätze sind in der Farbkodierung der Kategorie \emph{Sonstige} zugeordnet.
+Der vollständige, präparierte Datensatz ist öffentlich unter \href{https://drive.google.com/drive/u/1/folders/1UlZNFEDLymyMFw2BJZcfB2toAIlTVwGb}{\textbf{diesem Link}} verfügbar (Stand: 09.06.2023). In der nachfolgenden Abbildung ist die Häufigkeitsverteilung der Trainingsdaten (x-Achse) je Straßenschild-Kategorie (y-Achse) zu sehen. Die drei letztgenannten Datensätze sind in der Farbkodierung der Kategorie \emph{Sonstige} zugeordnet.
 
 \begin{figure}[H]
 \begin{tikzpicture}
@@ -285,5 +285,9 @@ ytick=data, xmax=2000, xtick={0, 500, 1000, 1500, 2000}
 \end{tikzpicture} %width=6cm,height=7.59cm
 \caption{Häufigkeitsverteilung der Kategorien von Straßenschildern im präparierten Datensatz}
 \end{figure}
+
+\begin{center}
+\textbf{Der Datensatz besteht damit aus 5.809 Bildern.}
+\end{center}
 
 Die Kategorie \emph{Aufhebungen} ist nach wie vor signifikant unterrepräsentiert. Eine mögliche Lösung, für die der zeitliche Rahmen nicht ausreicht, wäre, manuell auf \href{https://www.mapillary.com/}{Mapillary} nach solchen Bildern zu suchen. Mapillary ist eine Webseite, auf der Nutzer Bilder zu bestimmten GPS-Koordinaten hochladen können. Das Ziel von Mapillary ist, Straßenansichten für alle Straßen auf der Welt bereitzustellen. Hier ist es möglich, explizit nach bestimmten Arten von Straßenschildern zu suchen. Einer der genannten Datensätze stammt aus einer Mischung von weltweiten Mapillary-Bildern. \cite{dataset-mapillary}

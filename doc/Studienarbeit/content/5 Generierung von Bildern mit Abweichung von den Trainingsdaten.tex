@@ -100,4 +100,71 @@ Der Algorithmus besteht aus folgenden Schritten:
 
 Die Funktion \mintinline{python}{add_snow} implementiert diesen Algorithmus. Sie erzeugt die zufälligen schwarzen und weißen Pixel mittels einer Binomialverteilung. Für jeden Pixel existieren zwei Mögliche \emph{Ziehungen} aus der Verteilung: Schwarz (0) oder weiß (1). Ein $p$ gibt an, wie hoch die Wahrscheinlichkeit dafür ist, dass ein weißer Pixel gezogen wird. Die Problemstellung lässt sich für jeden Pixel als ein Zufallsexperiment mit zwei möglichen Ausgängen beschreiben. Das ist der Grund, wieso die Funktion hier eine Binomialverteilung implementiert. Dafür bietet TensorFlow die Funktion \mintinline{python}{tf.random.stateless_binomial}. Das auf dem Bild ausgeführte gaußsche Weichzeichen sorgt dafür, dass jeder Pixel \emph{verschwommen} wird. Das kann mit dem vorgehen für die Bewegungsunschärfe verglichen werden. Mit dem Unterschied, dass die Unschärfe hier nicht linear in eine Richtung zeigt, sondern kreisförmig um jeden Pixel ist. Damit wird aus jedem weißen Pixel ein kreisförmiger Punkt, der eine Schneeflocke darstellen soll. Für das gaußsche Weichzeichen bietet die Bilbiothek TensorFlow Addons die Funktion \mintinline{python}{tfa.image.gaussian_filter2d}. Für die anschließende Bewegungsunschärfe ruft die Funktion \mintinline{python}{add_snow} die in Abschnitt \ref{sec:motion-blur} beschriebene Funktion \mintinline{python}{add_motion_blur} auf. \cite{geometric-ops}
 
-\todo[inline]{Beispielbilder in den Anhang einfügen}
+\todo[inline]{Auf Generierung von Bildern mit Schnee durch das Modell eingehen}
+
+\begin{figure}[H]
+	\centering
+  \captionsetup[subfigure]{labelformat=empty}
+	\begin{subfigure}[b]{0.125\textwidth}
+		 \centering
+		 \includegraphics[height=\textwidth]{../images/snow generation/training/1.png}
+	\end{subfigure}
+	\hspace{0.5em}%
+	\begin{subfigure}[b]{0.125\textwidth}
+		 \centering
+		 \includegraphics[height=\textwidth]{../images/snow generation/training/2.png}
+	\end{subfigure}
+	\hspace{0.5em}%
+	\begin{subfigure}[b]{0.125\textwidth}
+		 \centering
+		 \includegraphics[height=\textwidth]{../images/snow generation/training/6.png}
+	\end{subfigure}
+	\hspace{0.5em}%
+	\begin{subfigure}[b]{0.125\textwidth}
+	 \centering
+	 \includegraphics[height=\textwidth]{../images/snow generation/training/8.png}
+  \end{subfigure}
+  \hspace{0.5em}%
+  \begin{subfigure}[b]{0.125\textwidth}
+	\centering
+	\includegraphics[height=\textwidth]{../images/snow generation/training/11.png}
+	\end{subfigure}
+	\hspace{0.5em}%
+	\begin{subfigure}[b]{0.125\textwidth}
+		\centering
+		\includegraphics[height=\textwidth]{../images/snow generation/training/12.png}
+	\end{subfigure}
+	\hspace{0.5em}%
+	\begin{subfigure}[b]{0.125\textwidth}
+		\centering
+		\includegraphics[height=\textwidth]{../images/snow generation/training/18.png}
+	\end{subfigure}
+ \caption{Trainingsverlauf des \ac{CycleGAN} um Bilder mit Schnee zu erzeugen}
+ \label{fig:snow-imgs}
+ \end{figure}
+ 
+ \begin{figure}[H]
+	\centering
+  \captionsetup[subfigure]{labelformat=empty}
+	\begin{subfigure}[b]{0.15\textwidth}
+		 \centering
+		 \includegraphics[height=\textwidth]{../images/snow generation/1.png}
+	\end{subfigure}
+	\hspace{1em}%
+	\begin{subfigure}[b]{0.15\textwidth}
+		 \centering
+		 \includegraphics[height=\textwidth]{../images/snow generation/2.png}
+	\end{subfigure}
+	\hspace{1em}%
+	\begin{subfigure}[b]{0.15\textwidth}
+		 \centering
+		 \includegraphics[height=\textwidth]{../images/snow generation/3.png}
+	\end{subfigure}
+	\hspace{1em}%
+	\begin{subfigure}[b]{0.15\textwidth}
+	 \centering
+	 \includegraphics[height=\textwidth]{../images/snow generation/4.png}
+  \end{subfigure}
+ \caption{Generierte Bilder des \ac{CycleGAN} mit Schnee}
+ \label{fig:snow-imgs}
+ \end{figure}

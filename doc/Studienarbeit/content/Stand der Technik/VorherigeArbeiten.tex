@@ -1,7 +1,8 @@
 Durch eine Recherche haben sich zwei Arbeiten gezeigt, die sich, analog zu dieser Studienarbeit, mit der künstlichen generierung von Straßenschildern mittels \acp{KNN} beschäftigen. Beide Arbeiten konzentrieren sich darauf, Bildausschnitte zu erzeugen, die ein Straßenschild zeigen und eine geringfügige Menge an Hintergrund um das Schild.
 
 \subsection{Generierung Taiwanischer Straßenschilder mittels DCGAN}
-Eine der beiden Arbeiten wurde im Jahr 2021 veröffentlicht. Sie konzentriert sich auf die Generierung taiwanischer Straßenschilder. Dafür wird ein \emph{DCGAN} verwendet, ein \ac{GAN}, das im Generator und im Discriminator eine tiefe \ac{CNN} Architektur besitzt. Getestet wird, inwiefern künstlich generierte Trainingsbilder die Erkennung von Straßenschildern verbessern können. Es werden in der Arbeit vier Arten von Verkehrsschildern generiert. \cite{taiwanGAN}
+\label{chap:vorherige-arbeiten-taiwan}
+Eine der beiden Arbeiten wurde im Jahr 2021 veröffentlicht. Sie konzentriert sich auf die Generierung taiwanischer Straßenschilder. Dafür verwenden die Autoren ein \emph{DCGAN}. Das ist ein \ac{GAN}, das im Generator und im Diskriminator eine tiefe \ac{CNN} Architektur besitzt. Die Autoren testen, inwiefern künstlich generierte Trainingsbilder die Erkennung von Straßenschildern verbessern können. Die Arbeit konzentriert sich auf die Generierung vier verschiedener Arten von Verkehrsschildern. \cite{taiwanGAN}
 %\begin{figure}[H]
 %   \centering
 %   \captionsetup[subfigure]{labelformat=empty}
@@ -32,12 +33,12 @@ Eine der beiden Arbeiten wurde im Jahr 2021 veröffentlicht. Sie konzentriert si
 %      \label{fig:taiwan-schilder}
 %\end{figure}
 
-Für jede der vier Klassen wird das \ac{GAN} mit 350 Bildern trainiert. Die Bildgrößen variieren dabei, wobei die Maximalgröße bei 200x200 Pixel liegt. Die generierten Bildgrößen korrespondieren zu denen der Trainingsbilder. Es sollen in der Arbeit bewusst keine größeren Bilder als 200x200 Pixel erzeugt werden, da Straßenschilder häufig nur einen kleinen Teil des Sichtfelds auf der Straße ausmachen.
-Das Training erstreckt sich auf bis zu 2000 Epochen, was bedeutet, dass das \ac{GAN} während des Trainings 2000 mal alle Trainingsbilder als Eingabe erhält. \cite{taiwanGAN}
+Für jede der vier Klassen ist das DCGAN mit 350 Bildern trainiert. Die Bildgrößen variieren dabei, wobei die Maximalgröße bei 200x200 Pixel liegt. Die generierten Bildgrößen korrespondieren zu denen der Trainingsbilder. Es sollen in der Arbeit bewusst keine größeren Bilder als 200x200 Pixel erzeugt werden, da Straßenschilder laut den Autoren häufig nur einen kleinen Teil des Sichtfelds auf der Straße ausmachen.
+Das Training erstreckt sich auf bis zu 2000 Epochen. Die Qualität der generierten Bilder nimmt auch bei 1000 und 2000 Trainingsepochen zu. Das kann bei der Evaluierung dieser Studienarbeit einbezogen werden, da hier die Anzahl an Epochen um einen Faktor 10 geringer ist. \cite{taiwanGAN}
 
-Da die Anzahl an Trainingsbildern beschränkt ist, generiert das Modell keine völlig neuartigen Bilder, sondern für jede Klasse jeweils vergleichsweise ähnlich aussehende:
+Da die Anzahl an Trainingsbildern beschränkt ist, generiert das Modell keine völlig neuartigen Bilder, sondern für jede Klasse jeweils vergleichsweise ähnlich aussehende. Abbildung \ref{fig:taiwan-gen-schilder} zeigt beispielhaft einige der generierten Bilder. \cite{taiwanGAN}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \captionsetup[subfigure]{labelformat=empty}
     \begin{subfigure}{0.125\textwidth}
@@ -92,48 +93,55 @@ Da die Anzahl an Trainingsbildern beschränkt ist, generiert das Modell keine v�
        \label{fig:taiwan-gen-schilder}
  \end{figure}
 
-Zur Beurteilung der Generierung wird mitunter der sogenannte \ac{SSIM} verwendet. Statt dass beispielsweise die Differenz aller entsprechenden Pixelwerte berechnet wird, werden hier die Aspekte \emph{Kontrast}, \emph{Leuchtdichte} und \emph{Struktur} der generierten und der echten Bilder verglichen. Dafür werden keine Berechnungen mit einzelnen Pixelwerten durchgeführt, sondern es wird mit den Mittelwerten und der Standardabweichung der Pixelwerte gerechnet. Auf die zugehörigen Formeln wird in Kapitel \ref{chap:Evaluation} eingegangen. \cite{taiwanGAN}
+Zur Beurteilung der Generierung nutzen die Autoren mitunter den sogenannte \ac{SSIM}. Damit prüfen sie, wie ähnlich sich die generierten Bilder und die Trainingsbeispiele sind. Statt dass die Differenz aller entsprechenden Pixelwerte berechnet wird, vergleicht der \ac{SSIM} hier die Aspekte \emph{Kontrast}, \emph{Leuchtdichte} und \emph{Struktur} der generierten und der echten Bilder. Dafür werden keine Berechnungen mit einzelnen Pixelwerten durchgeführt, sondern es wird mit den Mittelwerten und der Standardabweichung der Pixelwerte gerechnet. \cite{taiwanGAN}
 
-Der Nutzen der generierten Bildern wird anhand eines Modells zur Objektdetektion getestet. In dem Fall, ein sogenanntes \emph{YOLO} Modell. Die Detektion erfolgt auf größeren Bildern, auf denen mehrere Straßenschilder zu sehen sind. Für das Training des Modells werden mit etwa gleicher Gewichtung die für das \ac{GAN} verwendete Trainingsdaten und generierte Daten des \acp{GAN} verwendet. Zur Evaluation wurden hierbei Bilder verwendet, die insgesamt 40 Straßenschilder beinhalten. Die Ergebnisse können folgender Tabelle entnommen werden: \cite{taiwanGAN}
+Den Nutzen der generierten Bildern testen die Autoren anhand eines Modells zur Objektdetektion. In dem Fall ein sogenanntes \emph{YOLO} Modell. Die Detektion erfolgt auf größeren Bildern, auf denen mehrere Straßenschilder zu sehen sind. Für das Training des Modells werden mit etwa gleicher Gewichtung die Trainingsdaten und generierte Daten des \acp{GAN} verwendet. Zur Evaluation wurden hierbei Bilder verwendet, die insgesamt 40 Straßenschilder beinhalten. Die Ergebnisse können folgender Tabelle entnommen werden: \cite{taiwanGAN}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l||c|c||l|}
+    \begin{tabular}{|l||c|c||c|}
     \hline
     Modell   & \begin{tabular}[c]{@{}c@{}}Reale Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Künstliche Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}} Genauigkeit\end{tabular} \\ \hline \hline
-    Densenet & Ja                                                                & Ja                                                                    & 92\%                                                                  \\
-    Resnet   & Ja                                                                & Ja                                                                    & 91\%                                                                  \\
-    Densenet & Ja                                                                & Nein                                                                  & 88\%                                                                  \\
-    Resnet   & Ja                                                                & Nein                                                                  & 63\%  \\                                                               
+    DenseNet & Ja                                                                & Ja                                                                    & 92\%                                                                  \\
+    ResNet   & Ja                                                                & Ja                                                                    & 91\%                                                                  \\
+    DenseNet & Ja                                                                & Nein                                                                  & 88\%                                                                  \\
+    ResNet   & Ja                                                                & Nein                                                                  & 63\%  \\                                                               
     \hline
     \end{tabular}
     \caption{Vergleich der Objekterkennung mit und ohne künstliche Trainingsdaten}
 \end{table}
 
-Das Resultat ist, dass die Erkennung durch die generierten Trainingsdaten verbessert wird. Sowohl das Densenet als auch das Resnet liefern durch sie genauere Ergebnisse. \cite{taiwanGAN}
+Das Resultat ist, dass die Erkennung durch die generierten Trainingsdaten verbessert wird. Sowohl das DenseNet als auch das ResNet liefern durch sie genauere Ergebnisse. Diese Arbeit zeigt die Möglichkeiten, die künstlich erzeugte Bilder für die Straßenschilderkennung bieten können. Der konkrete Ansatz mit einem klassischen DCGAN spielt für diese Studienarbeit jedoch eine untergeordnete Rolle, da das Ziel ist, eine größere Bandbreite an Bildern zu erzeugen. \cite{taiwanGAN}
 
 \subsection{Generierung Deutscher Straßenschilder mittels \acs{CycleGAN}}
+\todo[inline]{überarbeiten}
 \label{chap:vorherige-arbeiten-rub}
 Eine weitere Publikation, die sich mit der künstlichen Generierung von Bildern mit Straßenschildern konzentriert, verwendet einen Datensatz, der deutsche Straßenschilder enthält. Er ist unter dem Namen \ac{GTSRB} bekannt. Auf den Datensatz wird näher in Kapitel \ref{chap:konzept} eingeganen, da er auch die Basis für diese Arbeit bildet. Die genannte Publikation ist aus einer Masterarbeit an der Ruhr Universität Bochum entstanden. Dort wurde auch der \ac{GTSRB} veröffentlicht. 
 
-Die Architektur des Modells ist hier eine andere als bei der bisher beschriebenen Generierung taiwanischer Schilder. In dieser Arbeit wird ein \ac{CycleGAN} statt eines \emph{Vanilla \acp{GAN}} verwendet. Die beiden Generatoren basieren auf einem Resnet. \cite{GTSRB} \cite{gtsrbGAN}
+Die Veröffentlichung verwendet im Gegensatz zu der bisher beschriebenen Generierung taiwanischer Schilder ein \ac{CycleGAN} statt eines \emph{Vannila \acp{GAN}}. Die beiden Generatoren basieren, wie in der \ac{CycleGAN}-Veröffentlichung vorgeschlagen, auf einem ResNet \cite{cycleGAN}. \cite{GTSRB} \cite{gtsrbGAN}
 
 Für die Generierung erhält das Netzwerk das Piktogramm eines Straßenschilds als Eingang. Das \ac{CycleGAN} soll einen möglichst realistisch wirkenden Hintergrund um das Straßenschild erzeugen. Vor der Generierung werden die Piktogramme der Straßenschilder zufällig rotiert und ein zufälliger einfarbiger Hintergrund erzeugt. Letzteres soll eine weitere stochastische Komponente für die Generierung bilden, damit eine größere Varianz an Hintergründen erzeugt wird. Für das Training des Netzes verwendet die Arbeit eine präparierte Version des \ac{GTSRB}. Der Datensatz beinhaltet dadurch folgende Eigenschaften:
 \begin{itemize}
-    \item Nur Bilder mit einer Mindestauflösung von 64x64 Pixeln werden verwendet
-    \item Die Bilder werden so zugeschnitten, dass sie quadratisch sind
-    \item Die Klassen werden ausbalanciert, um der asymmetrischen Verteilung an Trainingsbildern pro Klasse entgegenzuwirken
+    \item Der Datensatz beinhaltet nur Bilder mit einer Mindestauflösung von 64x64 Pixeln
+    \item Die Klassen sind ausbalanciert, um der asymmetrischen Verteilung an Trainingsbildern pro Klasse entgegenzuwirken
     \item Insgesamt besteht der präparierte Datensatz aus 12.212 Bildern
   \end{itemize}
 \cite{gtsrbGAN}
 
-\textbf{generierte Beispiele einfügen}
+Abbildung \ref{fig:ruhr-uni-bochum} zeigt beispielhaft einige der generierten Bilder. Dabei zeigt die Abbildung paarweise links ein echtes Bild aus den Trainingsdaten und rechts daneben das generierte Bild, das die ähnlichsten Pixelwerte dazu besitzt. Es ist zu erkennen, dass die generierten Bilder der Verteilung der Trainingsdaten ähnlich sehen, während sie dennoch neuartig sind. \cite{gtsrbGAN}
 
-Es erfolgt eine Evaluation, inwiefern die künstlich generierten Trainingsbilder zwei verschiedene Klassifikatoren verbessern können. Dabei handelt es sich um eine sogenannte \ac{SVM} und ein \ac{CNN}. \acp{SVM} sind eine Art von trainierbaren Klassifikatoren, die nicht auf \acp{KNN} basieren \cite{visualApproach}. Einerseits werden die Algorithmen mit realen Trainingsdaten trainiert und andererseits vollständig mit generierten Daten. Die Ergebnisse bezüglich der Genauigkeit der Klassifikation je nach der Art der Trainingsbilder ist in Tabelle \ref{tab:cyclegan-eval} dargestellt. Es lässt sich erkennen, dass die Klassifikation um jeweils etwa 7-9\% ungenauer ist, als mit realen Trainingsdaten. Es ist jedoch auch erwartbar, dass die Genauigkeit etwas geringer ausfällt, da die generierten Bilder der Verteilung des echten Trainingsdatensatzes folgen sollen, dies jedoch nicht zu 100\% möglich ist. \cite{gtsrbGAN}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{../images/ruhr-uni-bochum.png}
+    \caption{Beispielergebnisse der Generierung deutscher Schilder \cite{gtsrbGAN}}
+    \label{fig:ruhr-uni-bochum}
+\end{figure}
+
+Die Autoren führen eine Evaluation durch, inwiefern die künstlich generierten Trainingsbilder zwei verschiedene Klassifikatoren verbessern können. Dabei handelt es sich um eine sogenannte \ac{SVM} und ein \ac{CNN}. \acp{SVM} sind eine Art von trainierbaren Klassifikatoren, die nicht auf \acp{KNN} basieren \cite{visualApproach}. Einerseits werden die Algorithmen mit realen Trainingsdaten trainiert und andererseits vollständig mit generierten Daten. Die Ergebnisse bezüglich der Genauigkeit der Klassifikation je nach der Art der Trainingsbilder ist in Tabelle \ref{tab:cyclegan-eval} dargestellt. Es lässt sich erkennen, dass die Klassifikation um jeweils etwa 7-9\% ungenauer ist, als mit realen Trainingsdaten. Es ist jedoch auch erwartbar, dass die Genauigkeit etwas geringer ausfällt, da die generierten Bilder der Verteilung des echten Trainingsdatensatzes folgen sollen, dies jedoch nicht zu 100\% möglich ist. \cite{gtsrbGAN}
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|l||c|c||l|}
+    \begin{tabular}{|l||c|c||c|}
     \hline
     Modell & \begin{tabular}[c]{@{}c@{}}Reale Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Künstliche Trainingsbilder?\end{tabular} & \begin{tabular}[c]{@{}c@{}}Genauigkeit\end{tabular} \\ \hline \hline
     CNN    & Ja                                                                & Nein                                                                  & 95,42\%                                                               \\
@@ -145,3 +153,5 @@ Es erfolgt eine Evaluation, inwiefern die künstlich generierten Trainingsbilder
     \caption{Vergleich der Klassifikation mit echten und künstlichen Trainingsdaten \cite{gtsrbGAN}}
     \label{tab:cyclegan-eval}
 \end{table}
+
+Die Veröffentlichung spielt eine übergeordnete Rolle für diese Studienarbeit. Sie zeigt, dass die Generierung deutscher Straßenschilder mit einem \ac{CycleGAN} möglich ist.

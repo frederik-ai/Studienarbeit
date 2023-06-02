@@ -9,7 +9,10 @@ Die Skalierung des Bildinhalts besteht aus mehreren Schritten. Die Funktion \min
 \begin{code}
    \begin{minted}{python}
 content_sizes_tmp = content_sizes[:]
-transformed_imgs = tf.map_fn(lambda img: resize_content_of_img(img, target_size, content_sizes_tmp.pop(0)), img_tensor_batch)
+transformed_imgs = tf.map_fn(
+   lambda img: resize_content_of_img(
+      img, target_size, content_sizes_tmp.pop(0)), 
+   img_tensor_batch)
 \end{minted}
    \captionof{listing}{Skalieren der Bild-Tensoren}
    \label{lst:content-scaling}
@@ -31,9 +34,10 @@ Bevor die Funktion \mintinline{python}{randomly_transform_image_batch} die Funkt
 
 \begin{code}
    \begin{minted}{python}
-alpha_z_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
+alpha_z_values = np.random.normal(loc=0.0, scale=3.5, 
+                                 size=batch_size)
 \end{minted}
-   \captionof{listing}{Augmentierung eines Batches von Bildern}
+   \captionof{listing}{Zufällige Generierung der Rotationswinkel $\alpha_z$}
    \label{lst:alpha-z-value}
    \end{code}
 

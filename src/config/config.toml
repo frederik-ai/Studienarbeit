@@ -17,7 +17,7 @@ destination = "generator_test"  # Images generated with generate.py will be stor
 
 [model]
 image_size = 256                  # Changing this can lead to errors
-generator_type = 'resnet'         # 'resnet' or 'unet'
+generator_type = 'unet'         # 'resnet' or 'unet'
 
 [training]
 number_of_epochs = 50

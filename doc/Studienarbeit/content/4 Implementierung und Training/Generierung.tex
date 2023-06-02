@@ -1,6 +1,6 @@
 \section{Generierung}
-Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu trainieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwender keinen Python-Code anpassen müssen. Das Skript besitzt die in Tabelle \ref{tab:generate-cli} gezeigten Kommandozeilenargumente.
-\begin{table}[h]
+Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu trainieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwendende keinen Python-Code anpassen müssen. Das Skript besitzt die in Tabelle \ref{tab:generate-cli} gezeigten Kommandozeilenargumente.
+\begin{table}[H]
    \centering
    \begin{tabular}{|l|c|l|}
    \hline
@@ -12,10 +12,13 @@ Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschil
    -{}-snow & - & Fügt Schnee hinzu \\
    \hline
    \end{tabular}
-   \caption{Auswahl an Methoden aus der CycleGAN Klasse}
+   \caption{Kommandozeilenargumente des Skripts \lstinline[language=python]{generate.py}}
    \label{tab:generate-cli}
 \end{table}
-Die Parameter \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} können miteinander kombiniert werden. Beispielhafte Aufrufe des Skripts zeigt Listing \ref{lst:generate-cli-examples}.
+
+Standardmäßig nutzt das Skript \mintinline{python}|generate.py| das Modell aus der Konfigurationsdatei, mit dem Kommandozeilenargumenten \mintinline{python}|--model| können Anwendende diesen Wert jedoch überschreiben. Die Argumente \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} können außerdem miteinander kombiniert werden. Dann erzeugt das Skript mehrere Augmentationen gleichzeitig. Auf die Implementierung dieser Augmentationen geht Kapitel \ref{chap:5} ein.
+
+Beispielhafte Aufrufe des Skripts \mintinline{python}|generate.py| mit verschiedenen Kommandozeilenargumenten zeigt Listing \ref{lst:generate-cli-examples}.
 \begin{samepage}
 \begin{code}
    \begin{minted}{bash}
@@ -31,3 +34,5 @@ Die Parameter \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid
 
 Ein spezieller Anwendungsfall dieses Modells könnte der folgende sein: Anwendende möchten nur für bestimmte Arten von Straßenschildern Bilder generieren, statt für alle 43. Beispielsweise nur für Stopp-Schilder. Das ist insbesondere dann relevant, wenn das Modell dazu genutzt werden soll, einen bestehenden Datensatz auszugleichen. Wenn etwa bestimmte Klassen unterrepräsentiert sind.
 Das Skript \mintinline{python}{generate.py} erlaubt explizit das folgende Vorgehen: Anwendende können aus dem Ordner, in dem sich die Bilder der Piktogramme befinden, alle Arten von Straßenschildern löschen, die nicht generiert werden sollen. Befindet sich in dem Ordner beispielsweise nur ein Piktogramm für Stopp-Schilder, dann werden auch nur Bilder von Stopp-Schildern generiert. Dafür kann zum Beispiel ein zweiter Ordner für die Piktogramme angelegt werden, der dann in der \ac{TOML}-Konfigurationsdatei unter dem Wert \mintinline{python}{'pictograms'} innerhalb der Kategorie \mintinline{python}{'paths'} angegeben wird.
+
+In dem Pfad \mintinline{python}{experimental/generate_single_classes.py} existiert ein Skript, dass dieses Vorgehen für alle Klassen automatisiert. Es ruft das Skript \mintinline{python}|generate.py| nacheinander für jede der 43 Arten von Straßenschildern auf und sortiert die generierten Bilder in separate Ordner ein.

@@ -15,7 +15,7 @@ Das Modell ist in der Datei \mintinline{python}{model.py} implementiert. Innerha
    \caption{Auswahl an Methoden aus der CycleGAN Klasse}
    \label{cyclegan-methods}
 \end{table}
-Der Inhalt dieser Klasse basiert zum Teil auf einem Beispiel von TensorFlow \cite{cyclegan-tutorial}. Dieses Beispiel beinhaltet eine Implementierung eines \ac{CycleGAN}. Teile des Quellcodes stellen die Basis für die Umsetzung der Studienarbeit dar. In erster Linie basieren die Trainingsfunktionen des \ac{CycleGAN} auf dem Beispiel sowie der Fakt, dass das Modell die Bilder auf Pixelwerte zwischen -1 und 1 skaliert. Die Skalierung kann das Training des Modells beschleunigen und stabilisieren \cite{feature-scaling}. Das Modell aus dem TensorFlow Beispiel verwendet einen U-Net Generator, wie es normalerweise bei pix2pix statt bei \acp{CycleGAN} der Fall ist. Aus diesem Grund beinhaltet die Implementierung dieser Studienarbeit zusätzlich einen ResNet Generator und den dazugehörigen Diskriminator. Diese befinden sich in dem Pfad \mintinline{python}{src/external/resnet.py} und entstammen ebenfalls einer bereits existierenden \ac{CycleGAN} Implementierung \cite{cyclegan-resnet}. Die Architekturen der \acp{KNN} entsprechen dabei den Vorgaben der \ac{CycleGAN} Veröffentlichung \cite{cycleGAN}. Die Klasse \mintinline{python}|CycleGAN| erlaubt eine Auswahl zwischen der U-Net- und der ResNet-Architektur. Das Ziel dieser Studienarbeit ist damit unter anderem zu prüfen, ob ein U-Net- oder ein ResNet-basierter Generator für diesen Anwendungsfall besser geeignet ist.
+Der Inhalt dieser Klasse basiert zum Teil auf einer Beispiel-Implementierung von TensorFlow \cite{cyclegan-tutorial}. Teile des Quellcodes stellen die Basis für die Umsetzung der Studienarbeit dar. In erster Linie basieren die Verlustfunktionen des \ac{CycleGAN} auf dem Beispiel sowie der Fakt, dass das Modell die Bilder auf Pixelwerte zwischen -1 und 1 skaliert. Die Skalierung kann das Training des Modells beschleunigen und stabilisieren \cite{feature-scaling}. Außerdem implementiert der Quellcode bereits eine Möglichkeit, die trainierten Parameter des Modells in sogenannten \emph{Checkpoints} zu speichern. Das Modell aus dem TensorFlow Beispiel verwendet einen U-Net Generator, wie es normalerweise bei pix2pix statt bei \acp{CycleGAN} der Fall ist. Die Implementierung dieser Studienarbeit erprobt ein \ac{CycleGAN} mit einem U-Net Generator, verwendet jedoch zusätzlich einen ResNet Generator und den dazugehörigen Diskriminator. Diese befinden sich in dem Pfad \mintinline{python}{src/external/resnet.py} und entstammen ebenfalls einer bereits existierenden \ac{CycleGAN} Implementierung \cite{cyclegan-resnet}. Die Architekturen der \acp{KNN} entsprechen dabei den Vorgaben der \ac{CycleGAN} Veröffentlichung \cite{cycleGAN}. Die Klasse \mintinline{python}|CycleGAN| erlaubt eine Auswahl zwischen der U-Net- und der ResNet-Architektur. Das Ziel dieser Studienarbeit ist damit unter anderem zu prüfen, ob ein U-Net- oder ein ResNet-basierter Generator für diesen Anwendungsfall besser geeignet ist.
 
 Nachfolgend soll näher auf einige Methoden der Klasse \ac{CycleGAN} eingegangen werden.
 
@@ -54,11 +54,16 @@ Der ResNet Generator erhält als einen Parameter die Dimensionen des Bilds, das 
    ...
       # Generators
       if self.generator_type == GeneratorType.U_NET:
-         self.generator_g = pix2pix.unet_generator(3, norm_type='instancenorm')
-         self.generator_f = pix2pix.unet_generator(3, norm_type='instancenorm')
+         self.generator_g = pix2pix.unet_generator(3, 
+                                             norm_type='instancenorm')
+         self.generator_f = pix2pix.unet_generator(3, 
+                                             norm_type='instancenorm')
       else:
-         self.generator_g = resnet.ResnetGenerator((self.image_size, self.image_size, 3), n_blocks=9)
-         self.generator_f = resnet.ResnetGenerator((self.image_size, self.image_size, 3), n_blocks=9)
+         image=_dimensions = (self.image_size, self.image_size, 3)
+         self.generator_g = resnet.ResnetGenerator(image_dimensions, 
+                                                   n_blocks=9)
+         self.generator_f = resnet.ResnetGenerator(image_dimensions, 
+                                                   n_blocks=9)
    ...
    \end{minted}
    \captionof{listing}{\lstinline{model.py} - Initialisierung der Generatoren}
@@ -82,13 +87,15 @@ def fit(self, pictograms, real_images, epochs=1):
       for image_batch in tqdm(real_images):
          ...
          # Transform the pictograms
-         pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+         pictograms.shuffle(buffer_size=100, 
+                           reshuffle_each_iteration=True)
          single_pictogram_batch = pictograms.take(1).get_single_element()
          single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
-               single_pictogram_batch)
+                                    single_pictogram_batch)
 
          # Train the model
-         losses = self.train_step(single_pictogram_batch, image_batch)
+         losses = self.train_step(single_pictogram_batch, 
+                                 image_batch)
          ...
    \end{minted}
    \captionof{listing}{\lstinline{model.py} - \lstinline{fit}-Methode}
@@ -101,7 +108,7 @@ Bevor das Modell auf einem einzelnen Batch trainiert, muss die \mintinline{pytho
 
 Zur Augmentierung der Piktogramme ruft die \mintinline{python}{fit}-Methode dann die Methode \mintinline{python}{randomly_transform_image_batch} auf. Diese Methode ist in dem für diese Studienarbeit erstelltem Modul \mintinline{python}{utils} implementiert. Diese Methode gibt nicht nur die augmentierten Bilder zurück, sondern auch sowohl eine Liste der Rotationsmatrizen als auch der zufälligen Skalierung der Piktogramme. Für das Training werden nur die augmentierten Bilder benötigt. Die zusätzlich zurückgegebnen Daten sind hierfür nicht notwendig. Dass die Rückgabewerte der Methode \mintinline{python}{randomly_transform_image_batch} nicht benötigt werden, soll der Variablenname \mintinline{python}{_} signalisieren.
 
-Anschließend dazu führt die Methode \mintinline{python}{train_step} den eigentlichen Trainingsdurchlauf durch. Sie erhält dabei den zufälligen Batch an Piktogrammen sowie den Batch an realen Straßenschildaufnahmen aus der \mintinline{python}{for}-Schleife. Damit berechnet sie die Verlustfunktionen des \ac{CycleGAN} und führt basierend darauf Gradientenabstiege für $G$, $F$, $D_y$ und $D_x$ aus. Da der Inhalt dieser Methode größtenteils durch das TensorFlow Beispiel gegeben ist, soll darauf nicht im Detail eingegangen werden. Die Methode implementiert die Kostenfunktionen \ref{eq:cyclegan-losses} sowie den Identity Loss. Es wird hier jedoch von Verlust- statt von Kostenfunktionen gesprochen, da sie sich hier auf einen einzelnen Batch statt auf den gesamten Datensatz beziehen. Deshalb verwenden die Veröffentlichungen häufig den Begriff \emph{loss} für die Kostenfunktionen. Hat die \mintinline{python}{train_step}-Methode die Verlustfunktionen berechnet, führt sie den Gradientenabstieg für das \ac{CycleGAN} durch.
+Anschließend dazu führt die Methode \mintinline{python}{train_step} den eigentlichen Trainingsdurchlauf durch. Sie erhält dabei den zufälligen Batch an Piktogrammen sowie den Batch an realen Straßenschildaufnahmen aus der \mintinline{python}{for}-Schleife. Damit berechnet sie die Verlustfunktionen des \ac{CycleGAN} und führt basierend darauf Gradientenabstiege für $G$, $F$, $D_y$ und $D_x$ aus. Die Methode implementiert die Kostenfunktionen \ref{eq:cyclegan-losses} sowie den Identity Loss. Hat die \mintinline{python}{train_step}-Methode die Verlustfunktionen berechnet, führt sie den Gradientenabstieg für das \ac{CycleGAN} durch.
 
 \subsection{generate-Methode}
 Ist ein \ac{CycleGAN} trainiert, dient die \mintinline{python}{generate}-Methode zur Generierung von Bildern. Dafür wird lediglich der Generator $G$ benötigt, der Bilder von Piktogrammen in Bilder von Straßenschildern übersetzt. Die \mintinline{python}{generate}-Methode besteht deshalb nur aus einer Zeile Code. Als Parameter erhält die Methode einen Batch an Piktogrammen, welche sie an Generator $G$ übergibt. Aus diesen Piktogrammen erzeugt der Generator Bilder von Straßenschildern. Die Methode gibt diese Bilder anschließend zurück. Listing \ref{lst:generate} zeigt die \mintinline{python}{generate}-Methode.
