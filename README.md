@@ -15,7 +15,7 @@ This project implements a generation of artificial traffic sign images using **g
 </div>
 
 <div align=center>
-<h2>ResNet</h2>
+<h2>ResNet</h2> 
 
 ![resnet_raw](https://user-images.githubusercontent.com/83597198/220563790-d180cd2a-8e52-400b-8883-e1ccd00856c1.gif) | ![resnet_motion_blur](https://user-images.githubusercontent.com/83597198/220563976-6202825f-febd-4966-b534-9c542a21b46d.gif) | ![resnet_invalid](https://user-images.githubusercontent.com/83597198/220564027-1718936e-0521-460a-aba3-b88d605a3f12.gif) |
 |:--:|:--:|:--:|
