@@ -2,7 +2,7 @@
 # These paths are relative to the directory src; you can also use absolute paths
 train_data = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Official Train/Final_Training/Images"
 # pictograms = "../1CZJ0LcpIzlDBauOcWnAAzpuq1XuOLAUL/data/Pictograms All Resized"
-pictograms = "C:\\Users\\Frederik\\Desktop\\data\\Pictograms All Resized"
+pictograms = "C:\\Users\\Frederik\\Desktop\\data\\Pictograms"
 # train_data = "C:\\Users\\Frederik\\Desktop\\data\\Train\\GTSRB"
 augmentation_data = "../data/Augmentation"
 destination = "generator_test"  # Images generated with generate.py will be stored here
