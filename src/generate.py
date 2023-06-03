@@ -55,7 +55,7 @@ def main():
         config['model']['generator_type'] = args.model
     else:
         raise ValueError('model must be "unet" or "resnet". This argument is optional')
-    destination_path = os.path.join(args.o, args.model)
+    destination_path = args.o
     num_generated_images = args.num_imgs
     snow = args.snow
     make_signs_invalid = args.make_invalid
