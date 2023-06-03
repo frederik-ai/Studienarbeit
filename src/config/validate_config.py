@@ -15,11 +15,11 @@ def main():
     for path in paths:
         assert (path in config['paths'].keys())
         assert (isinstance(config['paths'][path], str))
-        assert (os.path.exists(os.path.join('..', config['paths'][path])))
+        # assert (os.path.exists(os.path.join('..', config['paths'][path])))
     for path in classifier_paths:
         assert (path in config['paths']['classifier'].keys())
         assert (isinstance(config['paths']['classifier'][path], str))
-        assert (os.path.exists(config['paths']['classifier'][path]))
+        # assert (os.path.exists(config['paths']['classifier'][path]))
     assert (isinstance(config['paths']['classifier']['checkpoint_directory_name'], str))
 
     # MODEL

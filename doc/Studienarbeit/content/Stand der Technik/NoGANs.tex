@@ -176,11 +176,11 @@ Da der Zweck von Autoencodern darin besteht, einen Eingang auf seine relevanten 
 
 Diese beschriebene Architektur der Autoencoder eignet sich nicht für die generative Modellierung, da sie deterministisch ist. Erhält das Modell bestimmte Eingangswerte, so liefert es stets die gleichen Ausgangswerte. Es versucht den Eingang möglichst zu rekonstruieren, wobei der Inhalt $\vec{z}$ des latenten Raums für ein gegebenes Eingangsbild stets gleich ist. Zufällige Bilder kann ein Autoencoder somit nicht erzeugen. Die sogenannten \emph{Variational Autoencoder} sind hingegen eine Architektur, die für die Generierung neuer Daten verwendet werden können. \cite{visualApproach} \cite{generativeModelsSurvey}
 
-\textbf{Variational Autoencoder} \emph{(\acsp{VAE})} verfolgen das Ziel, eine Zufallskomponente in die Bilderzeugung einfließen zu lassen. Ein entscheidender Unterschied zu klassischen Autoencodern ist deshalb der folgende: Variational Autoencoder kodieren einen gegebenen Eingang $x$ nicht auf ein festes $\vec{z}$, sondern auf eine Wahrscheinlichkeitsverteilung. Sie wird bezeichnet als: \cite{autoencoders}
+\textbf{Variational Autoencoder} \emph{(\acsp{VAE})} verfolgen das Ziel, eine Zufallskomponente in die Bilderzeugung einfließen zu lassen. Ein entscheidender Unterschied zu klassischen Autoencodern ist deshalb der folgende: \acsp{VAE} kodieren einen gegebenen Eingang $x$ nicht auf ein festes $\vec{z}$, sondern auf eine Wahrscheinlichkeitsverteilung. Sie wird bezeichnet als: \cite{autoencoders}
 \begin{equation}
    p(z|x)
 \end{equation}
-\todo[inline]{Die Verteilung kurz erklären.}
+Für ein gegebenes Bild $x$ gibt $p(z|x)$ an, wie wahrscheinlich es ist, dass das Bild aus der Verteilung der Merkmale $\vec{z}$ stammt.
 Im Gegensatz zu \acp{PixelRNN} versucht ein \acs{VAE} somit nicht die Verteilung der Trainingsdaten $p(x)$ zu approximieren, sondern die Verteilung der Merkmale $\vec{z}$ aus den Trainingsdaten $x$.
 Es wird angenommen, dass jedes Merkmal normalverteilt ist. Damit ist jede jede Komponente $z_{i}$ des Vektors $\vec{z} = [z_{1}, z_{2}, ..., z_{n}]^\mathsf{T}$ durch eine Gaußsche Normalverteilung $\mathcal{N}(\mu_{i}, {\sigma_{i}}^{2})$ beschrieben. Aufgabe des Kodierers ist damit nicht mehr, aus einem gegebenen $x$ eine Menge von Merkmalen $\vec{z}$ zu bestimmen. Stattdessen soll der Kodierer die Vektoren $\vec{\mu}$ und $\vec{\sigma}$ bestimmen, durch die sich die einzelnen Normalerteilungen von $\vec{z}$ beschreiben lassen. \cite{generativeModelsSurvey} \cite{autoencoders}
 
@@ -189,7 +189,7 @@ Der Dekodierer übersetzt dieses gegebene $\vec{z}$ daraufhin in ein Bild. Im pr
 
 \acp{VAE} können die Maximum-Likelihood-Schätzung, ob ein gegebenes Bild der Verteilung $\hat{p}(x)$ entstammt, nicht direkt berechnen. Sie können lediglich die Verteilung der Merkmale $\vec{z}$ aus den Trainingsdaten $x$ approximieren.
 
-\textbf{Vor- Nachteile?}
+Ein Vorteil von \acsp{VAE} ist, dass der Merkmalsvektor $\vec{z}$ gezielt manipulierbar ist. Kleine Änderungen der Merkmale führen in der Regel zu einem leicht veränderten Bild. \acsp{VAE} sind jedoch schwieriger zu evaluieren als \acp{PixelRNN}. Das liegt daran, dass sie die Verteilung $p(x)$ approximieren, es jedoch nicht möglich ist, die Verteilung $\hat{p}(x)$ zu berechnen, die ein \acs{VAE} erzeugt. \cite{generativeModelsSurvey}
 
 \label{chap:GANs}
 \subsection{Generative Adversarial Networks}

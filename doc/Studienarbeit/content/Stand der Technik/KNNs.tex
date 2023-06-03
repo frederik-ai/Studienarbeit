@@ -103,12 +103,12 @@ Was in Gleichung \ref{eq:costFunctionGeneral} das arithmetische Mittel der Verlu
 
 Kostenfunktionen können verschiedene Arten von Verlustfunktionen verwenden. Für diese Arbeit sind sowohl die $\mathcal{L}_1$ und $\mathcal{L}_2$ Verlustfunktionen als auch der \emph{Binary Crossentropy Loss} von besonderer Relevanz.
 
-\paragraph{$\mathcal{L}_1$ Verlustfunktion} Die $\mathcal{L}_1$ Verlustfunktion berechnet für ein gegebenes Beispiel die absolute Abweichung der Vorhersage von dem erwarteten Wert. Sie wird auch als \emph{mittlere absolute Abweichung} \emph{(engl.: mean absolute error)} bezeichnet.
+\paragraph{$\mathcal{L}_1$ Verlustfunktion} Die $\mathcal{L}_1$ Verlustfunktion berechnet für ein gegebenes Beispiel die absolute Abweichung der Vorhersage von dem erwarteten Wert. Sie wird auch als \emph{mittlere absolute Abweichung} \emph{(engl.: mean absolute error)} bezeichnet. \cite{DeepLearningBook}
 \begin{equation}
    \mathcal{L}_1 = |\hat{y} - y|
 \end{equation}
 
-\paragraph{$\mathcal{L}_2$ Verlustfunktion} Die $\mathcal{L}_2$ Verlustfunktion berechnet hingegen die quadratische Abweichung von dem erwarteten Wert. Hier haben somit größe Abweichungen einen stärkeren Einfluss auf den \emph{Verlust} \emph{(eng.: loss)} als bei der $\mathcal{L}_1$ Funktion. Diese Verlustfunktion wird auch als \emph{mittlere quadratische Abweichung} \emph{(engl.: mean squared error)} bezeichnet.
+\paragraph{$\mathcal{L}_2$ Verlustfunktion} Die $\mathcal{L}_2$ Verlustfunktion berechnet hingegen die quadratische Abweichung von dem erwarteten Wert. Hier haben somit größe Abweichungen einen stärkeren Einfluss auf den \emph{Verlust} \emph{(eng.: loss)} als bei der $\mathcal{L}_1$ Funktion. Diese Verlustfunktion wird auch als \emph{mittlere quadratische Abweichung} \emph{(engl.: mean squared error)} bezeichnet. \cite{DeepLearningBook}
 \begin{equation}
    \mathcal{L}_2 = (\hat{y} - y)^2
 \end{equation}
@@ -124,9 +124,6 @@ Das Training des Modells besteht nicht nur daraus, die Vorhersagen des Modells z
 Nähern tut sich das \ac{KNN} dem Optimum, indem es den Punkt $\theta$ in Richtung des negativen Gradienten der Kostenfunktion bewegt. Also die Richtung, in die, aus der momentanen Ausgangsposition, die Kostenfunktion den steilsten Abstieg besitzt. Pro Trainingsiteration bewegen sich die Parameter $\theta$ nur um einen kleinen Betrag in Richtung des negativen Gradienten. In einem Trainingsschritt kann das \ac{KNN} auf mehrere annotierte Beispiele trainiert werden. Dann bezieht sich die Verlustfunktion $\mathcal{L}$ nicht mehr nur auf ein einzelnes Trainingsbeispiel, sondern auf einen Teil des gesamten Datensatzes. Die Berechnungsformel ist in dem Fall identisch zu den Kostenfunktionen in Gleichungen \ref{eq:costFunctionGeneral} und \ref{eq:costFunctionExpectedValue}. Das ist relevant für Kapitel \ref{chap:GANs}. \cite{knnsKompakt}
 
 Das Training eines \ac{KNN} wird so lange durchgeführt, bis der Gradient einen so geringen Betrag hat, dass sich die Parameter des \ac{KNN} nicht mehr signifikant verändern. Das \ac{KNN} befindet sich hier bestenfalls im globalen Optimum. Der Betrag der Annäherung pro Trainingsschritt ist durch eine sogennante Lernrate $\alpha$ bestimmt. Die Lernrate ist ein \emph{Hyperparameter}, und damit klassischerweise ein nicht-trainierbarer Parameter, da sie durch die Entwickler fest bestimmt wird und nicht durch das Modell selbst gelernt wird. Ist das \ac{KNN} ein mal mit jedem Trainingsbeispiel trainiert worden, spricht man von einer Trainingsepoche \emph{(kurz: Epoche)}. Üblicherweise werden \acp{KNN} über mehrere Epochen trainiert bis die Parameter des Netzes gegen das Optimum konvergieren \cite{knnsKompakt}
-
-\todo[inline]{Auf Ableitung der Kostenfunktion für Berechnung des Gradienten eingehen?}
-\todo[inline]{Hier schon Batches erklären und damit darauf eingehen wie mit einer Verlustfunktion über mehrere Trainingsbeispiele trainiert wird}
 
 %---------------------------------------------------------------------------------------------------------------
 \subsection{Convolutional Neural Networks}

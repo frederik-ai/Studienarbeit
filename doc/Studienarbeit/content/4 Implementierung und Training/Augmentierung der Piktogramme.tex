@@ -27,6 +27,8 @@ Die Funktion \mintinline{python}{resize_content_of_img} verwendet zwei Funktione
 
 Die Rolle der Liste \mintinline{python}{content_sizes_tmp} ist, dass während jedem Durchlauf der Funktion \mintinline{python}{tf.map_fn}
 
+\todo[inline]{Rolle der Liste content\_sizes\_tmp erklären}
+
 \subsection{Rotation}
 Der zweite Schritt der Augmentation ist, dass das Modell die Piktogramme rotiert. Es existieren Rotationsmatrizen, die Rotationen mittels eulerscher Winkel beschreiben. Die Drehungen um die x-, y- und z-Achse besitzen jeweils eigene Rotationsmatrizen $R_x$, $R_y$ und $R_z$. Der Aufbau dieser Matrizen ist der Literatur entnommen \cite{math-primer}. Um daraus eine einzelne Rotationsmatrix $R$ zu erhalten, werden die Rotationsmatrizen miteinander multipliziert. Dazu dient die Funktion \mintinline{python}{create_rotation_matrix}. Sie erhält die drei Winkel $\alpha_x$, $\alpha_y$ und $\alpha_z$ als Parameter und gibt eine einzelne Rotationsmatrix $R$ zurück.
 

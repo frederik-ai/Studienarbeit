@@ -74,9 +74,13 @@ Abbildung \ref{fig:unet-generated-imgs} im Anhang zeigt zudem für die Epochen 1
 
 Die generierten Bilder zeigen verschiedene Hintergründe. Diese Varianz an Hintergründen ist allgemein pro Kategorie von Straßenschild gleich. Somit besitzen beispielsweise alle Schilder der Kategorie Geschwindigkeitsbegrenzung die gleichen Arten von Hintergründen. Die Schilder der Kategorie Aufhebung können allgemein als wenig fotorealistisch bewertet werden. Das ist vermutlich auf die geringere Anzahl an Trainingsdaten für diese Klassen zurückzuführen.
 
-Abbildung \ref{fig:unet-generated-imgs} im Anhang zeigt Bilder, die das U-Net-basierte Modell nach 200 Epochen generiert.
-
-\todo[inline]{Begründen, wieso genau 200 Epochen trainiert.}
+Abbildung \ref{fig:unet-imgs} im Anhang zeigt Bilder, die das U-Net-basierte Modell nach 200 Epochen generiert. Ausgehend von den Erkenntnissen der in Kapitel \ref{chap:vorherige-arbeiten-taiwan} vorgestellte Veröffentlichung, könnte sich die Qualität der Generierung über noch mehr Trainingsepochen weiter verbessern. Aus folgenden Gründen ist das U-Net-basierte Modell genau 200 Epochen trainiert:
+\begin{itemize}
+    \item Die Verlustfunktionen scheinen zu konvergieren.
+    \item Für ein weiteres Training muss vermutlich die Lernrate verringert werden
+    \item Das Training von 200 Epochen dauert bereits 16 Stunden auf dem System der DHBW
+    \item U-Net und ResNet sollten für die Evaluation in Kapitel \ref{chap:Evaluation} die gleiche Anzahl an Epochen trainiert sein
+\end{itemize}
 
 \subsection{ResNet}
 
@@ -90,7 +94,7 @@ Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Coll
     \begin{subfigure}[b]{0.12\textwidth}
         \centering
         \includegraphics[height=\textwidth]{../images/4 Implementierung und Training/Generierte Bilder je Epoche/ResNet 9 res blocks/Modal collaps/200 epochs.png}
-        \caption{20}
+        \caption{200 Ep.}
     \end{subfigure}
     \hspace{3em}%
     \begin{subfigure}[b]{0.12\textwidth}
@@ -120,7 +124,7 @@ Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Coll
         \label{fig:modal-collaps}
 \end{figure}
 
-Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stopping)}. Diese Lösung wird gewählt. Dabei muss für jede infrage kommende Epoche manuell geprüft werden, welche davon das zufriedenstellendste Ergebnis zeigt. Auch da die Werte der Verlustfunktionen hierauf, wie bereits erwähnt, nur eine begrenzte Aussagekraft haben. Jede der Epochen 120 bis 190 erzeugt eine Bandbreite an Generierungsqualitäten. Abbildung \ref{fig:resnet-gute-bilder} zeigt positiv herausstechende Bilder für verschiedene Epochen, während \ref{fig:resnet-schlechte-bilder} negativ herausstechende Bilder zeigt. Die finale Entscheidung ist, das auf 170 Epochen trainierte ResNet-basierte Modell zu verwenden.
+Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stopping)}. Diese Lösung wird gewählt. Dabei muss für jede infrage kommende Epoche manuell geprüft werden, welche davon das zufriedenstellendste Ergebnis zeigt. Auch da die Werte der Verlustfunktionen hierauf, wie bereits erwähnt, nur eine begrenzte Aussagekraft haben. Jede der Epochen 120 bis 190 erzeugt eine Bandbreite an Generierungsqualitäten. Abbildung \ref{fig:resnet-gute-bilder} zeigt positiv herausstechende Bilder für verschiedene Epochen, während \ref{fig:resnet-schlechte-bilder} negativ herausstechende Bilder zeigt. Die finale Entscheidung ist, das auf 180 Epochen trainierte Modell zu verwenden.
 
 % RESNET 9 BLOCK GUTE BILDER
 \begin{figure}[h]
@@ -194,7 +198,9 @@ Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stoppin
         \label{fig:resnet-schlechte-bilder}
 \end{figure}
 
-Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass die Generatoren ein anderes ResNet-Modell verwenden. Ein Modell, das verhindern kann, dass die Generatoren die Diskriminatoren vollständig überlisten. Aus diesem Grund besitzen die Generatoren in einem nächsten Trainingsdurchlauf 6 Residual Blocks, statt der durch die \ac{CycleGAN} Veröffentlichung vorgeschlagene Anazahl an 9 für Bilder der Auflösung 256x256. Dadurch haben die Generatoren eine weniger komplexe Architektur mit einer geringeren Anzahl an lernbaren Parametern. Während hier kein Modal Collaps auftritt, ist das Training weiterhin oszillierend. Auch hier zeigt die Epoche 200 nicht die höchste Generierungsqualität. Bei diesem ResNet-basierten Modell wird deshalb Epoche 150 für die Evaluation in Kapitel \ref{chap:Evaluation} gewählt. Damit soll geprüft werden, welche Anzahl an Residual Blocks sich für das Modell eignet. Die Abbildung \ref{fig:resnet-6-blocks} zeigt Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks für verschiedene Epochen.
+Abbilung \ref{fig:resnet-generated-imgs} im Anhang zeigt Bilder, die das ResNet-basierte Modell nach 180 Epochen generiert.
+
+Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass die Generatoren ein anderes ResNet-Modell verwenden. Ein Modell, das verhindern kann, dass die Generatoren die Diskriminatoren vollständig überlisten. Aus diesem Grund besitzen die Generatoren in einem nächsten Trainingsdurchlauf 6 Residual Blocks, statt der durch die \ac{CycleGAN} Veröffentlichung vorgeschlagene Anzahl an 9 für Bilder der Auflösung 256x256. Dadurch haben die Generatoren eine weniger komplexe Architektur mit einer geringeren Anzahl an lernbaren Parametern. Während hier kein Modal Collaps auftritt, ist das Training weiterhin oszillierend. Auch hier zeigt die Epoche 200 nicht die höchste Generierungsqualität. Bei diesem ResNet-basierten Modell wird deshalb Epoche 150 für die Evaluation in Kapitel \ref{chap:Evaluation} gewählt. Damit soll geprüft werden, welche Anzahl an Residual Blocks sich für das Modell eignet. Die Abbildung \ref{fig:resnet-6-blocks} zeigt Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks für verschiedene Epochen.
 
 % RESNET 6 BLOCKS
 \begin{figure}[H]
@@ -237,3 +243,5 @@ Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass
         \caption{Beispielbilder des ResNets mit 6 Residual Blocks}
         \label{fig:resnet-6-blocks}
 \end{figure}
+
+Generierte Bilder des ResNet-basierten Modells mit 6 Residual Blocks befinden sich unter \href{https://drive.google.com/drive/folders/1310Eb5WDgaszu47k6V8St5m-QtQV1Ocg?usp=sharing}{\textbf{dem Link des Datensatzes}} in dem Ordner \mintinline{python}{'Generated Images'}. Hier sind zudem weitere generierte Bilder des ResNet-basierten Modells mit 9 Residual Blocks sowie des U-Net-basierten Modells.

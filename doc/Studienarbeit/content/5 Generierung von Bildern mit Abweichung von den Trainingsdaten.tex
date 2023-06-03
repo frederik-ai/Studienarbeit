@@ -1,10 +1,10 @@
 \chapter{Augmentation der generierten Bilder}
 
-\todo[inline]{Erklären, inwiefern die benutzten Datensätze die Randbedindgungen zur Erschwerung der Erkennung nicht abbilden}
-
 \label{chap:5}
 
-Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Straßenschild-Bildern. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \ref{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Dafür dient ein Modul \mintinline{python}{utils.image_augmentation}. Für jede der Augmentierungen befinden sich Beispiel-Abbildungen im Anhang.
+Wie bereits erwähnt ist das Ziel dieser Studienarbeit nicht alleine die Generierung von Bildern, die Straßenschilder zeigen. Zusätzlich soll die Arbeit einige der in Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} genannten Probleme für die Straßenschilderkennung simulieren. Das Skript \mintinline{python}{generate.py} erlaubt deshalb die Methoden der Augmentierung, die bereits in Tabelle \ref{tab:generate-cli} aufgeführt sind. Diese sind eine \textbf{Bewegungsunschärfe} das Hinzufügen von \textbf{Schnee} und das \textbf{markieren von Schildern als ungültig}. Dafür dient ein Modul \mintinline{python}{utils.image_augmentation}. Für jede der Augmentierungen befinden sich Beispiel-Abbildungen im Anhang.
+
+Die Augmentierung ist weitgehend prozedural implementiert, da keine ausreichend großen Datensätze bekannt sind, die solche Grenzfälle der Straßenschilderkennung zeigen. Diese wären als Trainingsgrundlage für das \ac{CycleGAN} notwendig.
 
 \section{Bewegungsunschärfe}
 \label{sec:motion-blur}
@@ -49,8 +49,6 @@ Die Größe der Faltmatrix gibt die Stärke der Unschärfe an. Bei einer größe
 
 Die Variable \mintinline{python}{kernel} steht für die Faltmatrix. Numpy besitzt eine Funktion \mintinline{python}{identity}, die eine Einheitsmatrix erzeugt. Diese Matrix besitzt auf der Hauptdiagolen Einsen und sonst Nullen. Die \mintinline{python}{kernel_size} gibt die Größe der Matrix an. Damit alle Werte der Matrix summiert den Wert \emph{eins} ergeben, teilt die Funktion die Matrix durch die \mintinline{python}{kernel_size}. In der letzten Codezeile in Listing \ref{code:motion-blur} faltet die Funktion \mintinline{python}{apply_motion_blur} das Eingangsbild mit der Faltmatrix. Dazu nutzt sie die Funktion \mintinline{python}{filter2D} aus der OpenCV Bibliothek. Die Funktion wird genutzt, da sich keine TensorFlow Funktion hat finden lassen, mit der eine derart definierte Faltmatrix auf einem Bild angewendet werden kann, ohne Convolutional Layer zu verwenden. Die Funktion erhält drei Parameter: Den Bild-Tensor, jedoch konvertiert in ein Numpy Array, den Wert $-1$ und die Faltmatrix. Der Wert $-1$ gibt an, dass die Funktion die Anzahl an Farbkanälen des Bilds beibehalten soll.
 
-\todo[inline]{Irgendwo erklären was ein Numpy Array ist}
-
 \section{Ungültige Straßenschilder}
 In Kapitel \ref{chap:stand-der-technik-strassenschilderkennung} ist bereits beschrieben, dass als ungültig markierte Schilder eine Herausforderung für heutige Straßenschilderkennungen darstellen können. Aus diesem Grund implementiert diese Studienarbeit den Anwendungsfall. Ungültige Schilder sind im Straßenverkehr meist durch ein orangefarbenes Kreuz gekennzeichnet.
 
@@ -60,7 +58,7 @@ Eine weitere Möglichkeit ist, das Kreuz, das die Ungültigkeit eines Schilds ma
 
 Für zukünftige Arbeiten ist ein weiterer Ansatz, die Kreuze vor der Bild-zu-Bild Generierung auf die Piktogramme einzufügen. Dafür können Entwickelnde die Funktion \mintinline{python}{make_street_sign_invalid} verwenden. Sie müssen das entstehende Bild anschließend skalieren und rotieren und an das \ac{CycleGAN} als Eingangsdomäne $X$ übergeben. Auch hierfür benötigt das Modell zusätzliche Trainingsdaten. Es muss jedoch nicht von alleine lernen, das Kreuz zu erzeugen, da dies bereits im Eingangsbild enhalten ist. Außerdem kann der Quellcode genutzt werden, um andere Objekte auf die Schilder einzufügen. Beispielsweise wenn Entwickelnde das \ac{CycleGAN} erweitern wollen, um Vandalismus auf Straßenschildern zu simulieren.
 
-In dem Ordner \mintinline{python}{Augmentation} unter \href{https://drive.google.com/drive/u/1/folders/1UlZNFEDLymyMFw2BJZcfB2toAIlTVwGb}{\textbf{dem Link des Datensatzes}} (Stand: 09.06.2023) befindet sich das rohe Bild eines orangefarbenen Kreuzes auf einem transparenten Hintergrund. Abbildung \ref{fig:cross} zeigt dieses Bild.
+In dem Ordner \mintinline{python}{Augmentation} unter \href{https://drive.google.com/drive/u/1/folders/1310Eb5WDgaszu47k6V8St5m-QtQV1Ocg}{\textbf{dem Link des Datensatzes}} (Stand: 09.06.2023) befindet sich das rohe Bild eines orangefarbenen Kreuzes auf einem transparenten Hintergrund. Abbildung \ref{fig:cross} zeigt dieses Bild.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.15\textwidth]{images/augmented images/cross.png}
@@ -100,7 +98,9 @@ Der Algorithmus besteht aus folgenden Schritten:
 
 Die Funktion \mintinline{python}{add_snow} implementiert diesen Algorithmus. Sie erzeugt die zufälligen schwarzen und weißen Pixel mittels einer Binomialverteilung. Für jeden Pixel existieren zwei Mögliche \emph{Ziehungen} aus der Verteilung: Schwarz (0) oder weiß (1). Ein $p$ gibt an, wie hoch die Wahrscheinlichkeit dafür ist, dass ein weißer Pixel gezogen wird. Die Problemstellung lässt sich für jeden Pixel als ein Zufallsexperiment mit zwei möglichen Ausgängen beschreiben. Das ist der Grund, wieso die Funktion hier eine Binomialverteilung implementiert. Dafür bietet TensorFlow die Funktion \mintinline{python}{tf.random.stateless_binomial}. Das auf dem Bild ausgeführte gaußsche Weichzeichen sorgt dafür, dass jeder Pixel \emph{verschwommen} wird. Das kann mit dem vorgehen für die Bewegungsunschärfe verglichen werden. Mit dem Unterschied, dass die Unschärfe hier nicht linear in eine Richtung zeigt, sondern kreisförmig um jeden Pixel ist. Damit wird aus jedem weißen Pixel ein kreisförmiger Punkt, der eine Schneeflocke darstellen soll. Für das gaußsche Weichzeichen bietet die Bilbiothek TensorFlow Addons die Funktion \mintinline{python}{tfa.image.gaussian_filter2d}. Für die anschließende Bewegungsunschärfe ruft die Funktion \mintinline{python}{add_snow} die in Abschnitt \ref{sec:motion-blur} beschriebene Funktion \mintinline{python}{add_motion_blur} auf. \cite{geometric-ops}
 
-\todo[inline]{Auf Generierung von Bildern mit Schnee durch das Modell eingehen}
+Diese Augmentierung der Bilder ist zusätzlich für eine weitere Fragestellung genutzt: \textbf{\emph{Kann das \ac{CycleGAN} lernen, verschneite Bilder eigenständig zu generieren?}}. Dazu existiert eine \emph{Checkpoint}-Datei, die Parameter des U-Net-Modells enthält, wenn es auf verschneiten Bildern trainiert ist. In dem \href{https://drive.google.com/drive/folders/1310Eb5WDgaszu47k6V8St5m-QtQV1Ocg?usp=sharing}{\textbf{Link des Datensatzes}} befinden sich die Trainingsbilder unter dem Pfad \mintinline{python}{'Train with Snow'}.
+
+Die Basis für das Training stellt das für 200 Epochen trainierte U-Net-basierte \ac{CycleGAN} da. Auf den verschneiten Bildern ist das Modell zusätzliche 20 Epochen trainiert. Abbildung \ref{fig:snow-imgs-training} zeigt den Verlauf des Trainings. Die Bilder stammen aus verschiedenen Trainingsepochen, wobei das erste Bild zu der ersten Epoche korrespondiert und das letzte Bild zu der zwangigsten Epoche.
 
 \begin{figure}[H]
 	\centering
@@ -140,8 +140,10 @@ Die Funktion \mintinline{python}{add_snow} implementiert diesen Algorithmus. Sie
 		\includegraphics[height=\textwidth]{../images/snow generation/training/18.png}
 	\end{subfigure}
  \caption{Trainingsverlauf des \ac{CycleGAN} um Bilder mit Schnee zu erzeugen}
- \label{fig:snow-imgs}
+ \label{fig:snow-imgs-training}
  \end{figure}
+
+Abbildung \ref{fig:snow-imgs-unet} zeigt Bilder, die das Modell am Ende des Trainings erzeugt. Es zeigt sich, dass das \ac{CycleGAN} eigenständig verschneite Bilder generieren kann. 20 Epochen werden hier als eine akzeptable Dauer für ein zusätzliches Training betrachtet. Ausgehend davon können Anwendende die vortrainierten Modelle dieser Studienarbeit nutzen, um es auf eigene Augmentation zu trainieren. Ebenso kann erprobt werden, inwiefern das \ac{CycleGAN} lernen kann, Bewegungsunschärfe und ungültige Schilder zu erzeugen.
  
  \begin{figure}[H]
 	\centering
@@ -164,7 +166,14 @@ Die Funktion \mintinline{python}{add_snow} implementiert diesen Algorithmus. Sie
 	\begin{subfigure}[b]{0.15\textwidth}
 	 \centering
 	 \includegraphics[height=\textwidth]{../images/snow generation/4.png}
+	\end{subfigure}
+	 \hspace{1em}%
+	\begin{subfigure}[b]{0.15\textwidth}
+	 \centering
+	 \includegraphics[height=\textwidth]{../images/snow generation/5.png}
   \end{subfigure}
  \caption{Generierte Bilder des \ac{CycleGAN} mit Schnee}
- \label{fig:snow-imgs}
+ \label{fig:snow-imgs-unet}
  \end{figure}
+
+ Abbildung \ref{fig:snow-imgs-generated} im Anhang zeigt weitere verschneite Bilder, die durch das \ac{CycleGAN} generiert sind.
