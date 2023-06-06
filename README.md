@@ -10,7 +10,7 @@
   </a>
 </p>
 
-Welcome 👋 This project implements a generation of artificial traffic sign images using **generative adversarial networks** (more specifically: **CycleGANs**).
+Welcome 👋 This project implements a generation of artificial traffic sign images using **Generative Adversarial Networks** (more specifically: **CycleGANs**).
 
 <details closed>
 <summary>Examples (outdated)</summary>
