@@ -1,10 +1,19 @@
-# TSIG
-Welcome to the Traffic Sign Image Generator 👋
+# Traffic Sign Image Generator
 
-This project implements a generation of artificial traffic sign images using **generative adversarial networks** (more specifically: **CycleGANs**).
+<p>
+ <a href="https://colab.research.google.com/drive/1lQibMvIwcPvm-8ZsNcnn7gqAYHlZJcQ7?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> 
+  <a href="doc/Software%20Documentation/src" target="_blank">
+    <img alt="software documentation" src="https://img.shields.io/badge/software%20documentation-html-blue" />
+  </a>
+  <a href="doc/dokumentation.pdf" target="_blank">
+    <img alt="project documentation" src="https://img.shields.io/badge/project%20documentation-pdf-blue" />
+  </a>
+</p>
 
-<details open>
-<summary>Examples</summary>
+Welcome 👋 This project implements a generation of artificial traffic sign images using **Generative Adversarial Networks** (more specifically: **CycleGANs**).
+
+<details closed>
+<summary>Examples (outdated)</summary>
 
 <div align=center>
 <h2>UNet</h2>
@@ -24,37 +33,24 @@ This project implements a generation of artificial traffic sign images using **g
 
 </details>
 
+# Local Setup
+It is recommended to use Google Colab, but you can also run this project locally. To train it, you can ask me for the dataset. I cannot make it public because of licensing issues. 
 
+1. Install ``requirements.txt``
+2. Run ``install_resnet.sh`` (optional, necessary to use the ResNet model)
+3. Adapt ``config/config.toml``
 
-# Getting Started
-## Google Colab
-<a href="https://colab.research.google.com/drive/1lQibMvIwcPvm-8ZsNcnn7gqAYHlZJcQ7?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> 
- 
-## Locally
-### Troubleshoot
-#### **[Windows]** Installation of Tensorflow Graphics fails because of OpenEXR
+Generate images with ``generate.py``. For pretrained checkpoints please refer to the Setup of the Google Colab notebook.
+
+## Troubleshoot
+### **[Windows]** Installation of Tensorflow Graphics fails because of OpenEXR
   ```bash
   $ pip install pipwin
   $ pipwin install openexr
   ```
   Then: re-run setup
 
-# Documentation
-<p>
-  <a href="doc/Software%20Documentation/src" target="_blank">
-    <img alt="software documentation" src="https://img.shields.io/badge/software%20documentation-html-blue" />
-  </a>
-  <a href="doc/dokumentation.pdf" target="_blank">
-    <img alt="project documentation" src="https://img.shields.io/badge/project%20documentation-pdf-blue" />
-  </a>
-</p>
-
-## Software Documentation
-Live Server
+# Software Documentation
 ```bash
 $ pdoc --http localhost:8080 src
 ```
-
-## About
-### Dataset
-TBD
