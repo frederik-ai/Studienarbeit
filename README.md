@@ -42,6 +42,8 @@ This project implements a generation of artificial traffic sign images using **g
 2. Run ``install_resnet.sh`` (optional, necessary to use the ResNet model)
 3. Adapt ``config/config.toml``
 
+Generate images with ``generate.py``. It is recommended to just use the Google Colab link for this. Otherwise you can download the latest checkpoint from the links used in the Colab notebook.
+
 ## Troubleshoot
 ### **[Windows]** Installation of Tensorflow Graphics fails because of OpenEXR
   ```bash
