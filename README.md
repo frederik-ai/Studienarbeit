@@ -1,4 +1,4 @@
-# TSIG
+# Traffic Sign Image Generator
 
 <p>
  <a href="https://colab.research.google.com/drive/1lQibMvIwcPvm-8ZsNcnn7gqAYHlZJcQ7?usp=sharing"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> 
@@ -10,11 +10,9 @@
   </a>
 </p>
 
-Welcome to the Traffic Sign Image Generator 👋
+Welcome 👋 This project implements a generation of artificial traffic sign images using **generative adversarial networks** (more specifically: **CycleGANs**).
 
-This project implements a generation of artificial traffic sign images using **generative adversarial networks** (more specifically: **CycleGANs**).
-
-<details open>
+<details closed>
 <summary>Examples (outdated)</summary>
 
 <div align=center>
@@ -35,14 +33,14 @@ This project implements a generation of artificial traffic sign images using **g
 
 </details>
 
-
-
 # Local Setup
+It is recommended to use Google Colab, but you can also run this project locally. To train it, you can ask me for the dataset. I cannot make it public because of licensing issues. 
+
 1. Install ``requirements.txt``
 2. Run ``install_resnet.sh`` (optional, necessary to use the ResNet model)
 3. Adapt ``config/config.toml``
 
-Generate images with ``generate.py``. It is recommended to just use the Google Colab link for this. Otherwise you can download the latest checkpoint from the links used in the Colab notebook.
+Generate images with ``generate.py``. For pretrained checkpoints please refer to the Setup of the Google Colab notebook.
 
 ## Troubleshoot
 ### **[Windows]** Installation of Tensorflow Graphics fails because of OpenEXR
