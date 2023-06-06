@@ -36,30 +36,28 @@ Used for augmentation of street sign pictograms before feeding them to generator
 Also used for post-processing of generated images.
 &#34;&#34;&#34;
 import tensorflow as tf
-import cv2
 import numpy as np
 import tensorflow_graphics.image.transformer as tfg_image_transformer
 
 
-def randomly_transform_image_batch(img_tensor_batch, target_size=256, max_theta_xy=0.1, max_theta_z=0.0001):
+def randomly_transform_image_batch(img_tensor_batch, target_size=256):
     batch_size = img_tensor_batch.shape[0]
 
     # resize content
     min_content_size = target_size / 1.5
     # we have to work with default python lists, because we need the pop function
     content_sizes = [np.random.randint(low=min_content_size, high=target_size) for el in range(batch_size)]
-    content_sizes_tmp = content_sizes[:]   # copy of content_sizes; will be used to pop the elements
+    content_sizes_tmp = content_sizes[:]  # copy of content_sizes; will be used to pop the elements
     transformed_imgs = tf.map_fn(lambda img: resize_content_of_img(img, target_size, content_sizes_tmp.pop(0)),
                                  img_tensor_batch)
 
-    # randomly rotate the image in x,y and z direction
-    all_theta_xy = np.random.uniform(low=-max_theta_xy, high=max_theta_xy, size=batch_size)  # angle for x,y rotation
-    all_theta_z = np.random.uniform(low=-max_theta_z, high=max_theta_z, size=batch_size)  # angle for z rotation
-    assert(len(all_theta_xy) == len(all_theta_z) == batch_size)
-
+    # randomly rotate the image in x,y and z direction; scale values are empirically chosen
+    alpha_z_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
+    alpha_y_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
+    alpha_x_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
     transform_matrices = np.zeros((batch_size, 3, 3))
     for i in range(batch_size):
-        transform_matrices[i] = create_rotation_matrix(all_theta_xy[i], all_theta_z[i])
+        transform_matrices[i] = create_rotation_matrix(alpha_z_values[i], alpha_y_values[i], alpha_x_values[i])
     transform_matrices = tf.convert_to_tensor(transform_matrices, dtype=tf.float32)
 
     transformed_imgs = 1 - transformed_imgs
@@ -70,25 +68,56 @@ def randomly_transform_image_batch(img_tensor_batch, target_size=256, max_theta_
 
 
 def transform_image(img_tensor, content_size, transformation_matrix, target_size=256, bg_is_white=True):
-    # convert to 4d tensor
+    # convert (..., ..., ...) to 4d tensor (1, ..., ..., ...)
     img_tensor = tf.expand_dims(img_tensor, axis=0)
     transformation_matrix = tf.expand_dims(transformation_matrix, axis=0)
     # transform
     img_tensor = resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=bg_is_white)
-    img_tensor = 1 - img_tensor
-    img_tensor = tfg_image_transformer.perspective_transform(img_tensor, transformation_matrix, border_type=tfg_image_transformer.BorderType.DUPLICATE)
+    img_tensor = 1 - img_tensor     # invert the image colors, because padding is black
+    img_tensor = tfg_image_transformer.perspective_transform(img_tensor, transformation_matrix,
+                                                             border_type=tfg_image_transformer.BorderType.DUPLICATE)
     img_tensor = 1 - img_tensor
     img_tensor = tf.squeeze(img_tensor, axis=0)
     return img_tensor
 
 
-def create_rotation_matrix(theta_xy, theta_z):
-    rotation_matrix = np.array([
-        [np.cos(theta_xy), -np.sin(theta_xy), 0],
-        [np.sin(theta_xy),  np.cos(theta_xy), 0],
-        [0,                 np.sin(theta_z),  1]
+def create_rotation_matrix(alpha_z, alpha_y, alpha_x, angles_in_degrees=True):
+    &#34;&#34;&#34;Create a rotation matrix from alpha_z, alpha_y and alpha_x angles.
+    All angles shall be provided in degrees or radians. Set the parameter &#39;angles_in_degrees&#39; accordingly.
+
+    Args:
+        alpha_z: rotation around z-axis
+        alpha_y: rotation around y-axis
+        alpha_x: rotation around x-axis
+        angles_in_degrees: whether the angles are provided in degrees. Otherwise radians are assumed.
+
+    Returns:
+        (3, 3) tensor containing the rotation matrix.
+    &#34;&#34;&#34;
+    if angles_in_degrees:
+        alpha_z = np.radians(alpha_z)
+        alpha_y = np.radians(alpha_y)
+        alpha_x = np.radians(alpha_x)
+
+    rotation_matrix_z = np.array([
+        [np.cos(alpha_z), -np.sin(alpha_z), 0],
+        [np.sin(alpha_z),  np.cos(alpha_z), 0],
+        [0,                0,               1]
     ])
-    return rotation_matrix
+    rotation_matrix_y = np.array([
+        [np.cos(alpha_y),  0, np.sin(alpha_y)],
+        [0,                1,               0],
+        [-np.sin(alpha_y), 0, np.cos(alpha_y)]
+    ])
+    rotation_matrix_x = np.array([
+        [1,               0,                0],
+        [0, np.cos(alpha_x), -np.sin(alpha_x)],
+        [0, np.sin(alpha_x),  np.cos(alpha_x)]
+    ])
+
+    rotation_matrix = rotation_matrix_z @ rotation_matrix_y @ rotation_matrix_x
+
+    return tf.convert_to_tensor(rotation_matrix, dtype=tf.float32)
 
 
 def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=True):
@@ -105,10 +134,9 @@ def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=Tru
         3d tensor of shape (target_size, target_size, channels)
     &#34;&#34;&#34;
     if bg_is_white:
-        img_tensor = 1 - img_tensor         # invert the image colors, because padding is black
+        img_tensor = 1 - img_tensor  # invert the image colors, because padding is black
     else:
-        img_tensor = (img_tensor + 1) / 2   # convert from range [-1, 1] to [0, 1] because added padding has value 0
-    transformed_image = img_tensor
+        img_tensor = (img_tensor + 1) / 2  # convert from range [-1, 1] to [0, 1] because added padding has value 0
 
     # shrink the content, add padding to preserve the target_size of the image
     shrink_size = (content_size, content_size)
@@ -116,9 +144,9 @@ def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=Tru
     img_tensor = tf.image.resize_with_crop_or_pad(img_tensor, target_size, target_size)
 
     if bg_is_white:
-        img_tensor = 1 - img_tensor         # revert to original colors
+        img_tensor = 1 - img_tensor  # revert to original colors
     else:
-        img_tensor = (img_tensor * 2) - 1   # convert back to range [-1, 1]
+        img_tensor = (img_tensor * 2) - 1  # convert back to range [-1, 1]
 
     return img_tensor</code></pre>
 </details>
@@ -131,25 +159,69 @@ def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=Tru
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="src.utils.preprocess_image.create_rotation_matrix"><code class="name flex">
-<span>def <span class="ident">create_rotation_matrix</span></span>(<span>theta_xy, theta_z)</span>
+<span>def <span class="ident">create_rotation_matrix</span></span>(<span>alpha_z, alpha_y, alpha_x, angles_in_degrees=True)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Create a rotation matrix from alpha_z, alpha_y and alpha_x angles.
+All angles shall be provided in degrees or radians. Set the parameter 'angles_in_degrees' accordingly.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>alpha_z</code></strong></dt>
+<dd>rotation around z-axis</dd>
+<dt><strong><code>alpha_y</code></strong></dt>
+<dd>rotation around y-axis</dd>
+<dt><strong><code>alpha_x</code></strong></dt>
+<dd>rotation around x-axis</dd>
+<dt><strong><code>angles_in_degrees</code></strong></dt>
+<dd>whether the angles are provided in degrees. Otherwise radians are assumed.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>(3, 3) tensor containing the rotation matrix.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def create_rotation_matrix(theta_xy, theta_z):
-    rotation_matrix = np.array([
-        [np.cos(theta_xy), -np.sin(theta_xy), 0],
-        [np.sin(theta_xy),  np.cos(theta_xy), 0],
-        [0,                 np.sin(theta_z),  1]
+<pre><code class="python">def create_rotation_matrix(alpha_z, alpha_y, alpha_x, angles_in_degrees=True):
+    &#34;&#34;&#34;Create a rotation matrix from alpha_z, alpha_y and alpha_x angles.
+    All angles shall be provided in degrees or radians. Set the parameter &#39;angles_in_degrees&#39; accordingly.
+
+    Args:
+        alpha_z: rotation around z-axis
+        alpha_y: rotation around y-axis
+        alpha_x: rotation around x-axis
+        angles_in_degrees: whether the angles are provided in degrees. Otherwise radians are assumed.
+
+    Returns:
+        (3, 3) tensor containing the rotation matrix.
+    &#34;&#34;&#34;
+    if angles_in_degrees:
+        alpha_z = np.radians(alpha_z)
+        alpha_y = np.radians(alpha_y)
+        alpha_x = np.radians(alpha_x)
+
+    rotation_matrix_z = np.array([
+        [np.cos(alpha_z), -np.sin(alpha_z), 0],
+        [np.sin(alpha_z),  np.cos(alpha_z), 0],
+        [0,                0,               1]
     ])
-    return rotation_matrix</code></pre>
+    rotation_matrix_y = np.array([
+        [np.cos(alpha_y),  0, np.sin(alpha_y)],
+        [0,                1,               0],
+        [-np.sin(alpha_y), 0, np.cos(alpha_y)]
+    ])
+    rotation_matrix_x = np.array([
+        [1,               0,                0],
+        [0, np.cos(alpha_x), -np.sin(alpha_x)],
+        [0, np.sin(alpha_x),  np.cos(alpha_x)]
+    ])
+
+    rotation_matrix = rotation_matrix_z @ rotation_matrix_y @ rotation_matrix_x
+
+    return tf.convert_to_tensor(rotation_matrix, dtype=tf.float32)</code></pre>
 </details>
 </dd>
 <dt id="src.utils.preprocess_image.randomly_transform_image_batch"><code class="name flex">
-<span>def <span class="ident">randomly_transform_image_batch</span></span>(<span>img_tensor_batch, target_size=256, max_theta_xy=0.1, max_theta_z=0.0001)</span>
+<span>def <span class="ident">randomly_transform_image_batch</span></span>(<span>img_tensor_batch, target_size=256)</span>
 </code></dt>
 <dd>
 <div class="desc"></div>
@@ -157,25 +229,24 @@ def resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=Tru
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def randomly_transform_image_batch(img_tensor_batch, target_size=256, max_theta_xy=0.1, max_theta_z=0.0001):
+<pre><code class="python">def randomly_transform_image_batch(img_tensor_batch, target_size=256):
     batch_size = img_tensor_batch.shape[0]
 
     # resize content
     min_content_size = target_size / 1.5
     # we have to work with default python lists, because we need the pop function
     content_sizes = [np.random.randint(low=min_content_size, high=target_size) for el in range(batch_size)]
-    content_sizes_tmp = content_sizes[:]   # copy of content_sizes; will be used to pop the elements
+    content_sizes_tmp = content_sizes[:]  # copy of content_sizes; will be used to pop the elements
     transformed_imgs = tf.map_fn(lambda img: resize_content_of_img(img, target_size, content_sizes_tmp.pop(0)),
                                  img_tensor_batch)
 
-    # randomly rotate the image in x,y and z direction
-    all_theta_xy = np.random.uniform(low=-max_theta_xy, high=max_theta_xy, size=batch_size)  # angle for x,y rotation
-    all_theta_z = np.random.uniform(low=-max_theta_z, high=max_theta_z, size=batch_size)  # angle for z rotation
-    assert(len(all_theta_xy) == len(all_theta_z) == batch_size)
-
+    # randomly rotate the image in x,y and z direction; scale values are empirically chosen
+    alpha_z_values = np.random.normal(loc=0.0, scale=3.5, size=batch_size)
+    alpha_y_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
+    alpha_x_values = np.random.normal(loc=0.0, scale=0.01, size=batch_size)
     transform_matrices = np.zeros((batch_size, 3, 3))
     for i in range(batch_size):
-        transform_matrices[i] = create_rotation_matrix(all_theta_xy[i], all_theta_z[i])
+        transform_matrices[i] = create_rotation_matrix(alpha_z_values[i], alpha_y_values[i], alpha_x_values[i])
     transform_matrices = tf.convert_to_tensor(transform_matrices, dtype=tf.float32)
 
     transformed_imgs = 1 - transformed_imgs
@@ -222,10 +293,9 @@ A padding is added to the shrunken content. The background of the input image ca
         3d tensor of shape (target_size, target_size, channels)
     &#34;&#34;&#34;
     if bg_is_white:
-        img_tensor = 1 - img_tensor         # invert the image colors, because padding is black
+        img_tensor = 1 - img_tensor  # invert the image colors, because padding is black
     else:
-        img_tensor = (img_tensor + 1) / 2   # convert from range [-1, 1] to [0, 1] because added padding has value 0
-    transformed_image = img_tensor
+        img_tensor = (img_tensor + 1) / 2  # convert from range [-1, 1] to [0, 1] because added padding has value 0
 
     # shrink the content, add padding to preserve the target_size of the image
     shrink_size = (content_size, content_size)
@@ -233,9 +303,9 @@ A padding is added to the shrunken content. The background of the input image ca
     img_tensor = tf.image.resize_with_crop_or_pad(img_tensor, target_size, target_size)
 
     if bg_is_white:
-        img_tensor = 1 - img_tensor         # revert to original colors
+        img_tensor = 1 - img_tensor  # revert to original colors
     else:
-        img_tensor = (img_tensor * 2) - 1   # convert back to range [-1, 1]
+        img_tensor = (img_tensor * 2) - 1  # convert back to range [-1, 1]
 
     return img_tensor</code></pre>
 </details>
@@ -250,13 +320,14 @@ A padding is added to the shrunken content. The background of the input image ca
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def transform_image(img_tensor, content_size, transformation_matrix, target_size=256, bg_is_white=True):
-    # convert to 4d tensor
+    # convert (..., ..., ...) to 4d tensor (1, ..., ..., ...)
     img_tensor = tf.expand_dims(img_tensor, axis=0)
     transformation_matrix = tf.expand_dims(transformation_matrix, axis=0)
     # transform
     img_tensor = resize_content_of_img(img_tensor, target_size, content_size, bg_is_white=bg_is_white)
-    img_tensor = 1 - img_tensor
-    img_tensor = tfg_image_transformer.perspective_transform(img_tensor, transformation_matrix, border_type=tfg_image_transformer.BorderType.DUPLICATE)
+    img_tensor = 1 - img_tensor     # invert the image colors, because padding is black
+    img_tensor = tfg_image_transformer.perspective_transform(img_tensor, transformation_matrix,
+                                                             border_type=tfg_image_transformer.BorderType.DUPLICATE)
     img_tensor = 1 - img_tensor
     img_tensor = tf.squeeze(img_tensor, axis=0)
     return img_tensor</code></pre>

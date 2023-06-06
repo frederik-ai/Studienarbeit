@@ -24,9 +24,9 @@
 <section id="section-intro">
 <p>Run traffic sign image generation with a trained CycleGAN model.</p>
 <h2 id="usage">Usage</h2>
-<p><code>$ python generate.py --num-imgs &lt;int&gt; [--o &lt;str&gt;] [--model &lt;str&gt;] [--make-invalid] [--motion-blur]</code></p>
+<p><code>$ python generate.py [--num-imgs &lt;int&gt;] [--o &lt;str&gt;] [--model &lt;str&gt;] [--make-invalid] [--motion-blur] [--snow]</code></p>
 <h2 id="options">Options</h2>
-<p><code>--num-imgs &lt;int&gt;</code>
+<p><code>[--num-imgs &lt;int&gt;]</code>
 Number of generated images. <br>
 <code>[--o &lt;str&gt;]</code>
 Path to directory where generated images are stored. Default: value from config file. <br>
@@ -35,7 +35,9 @@ Model name [unet or resnet]. Default: value from config file. <br>
 <code>[--make-invalid]</code>
 Make generated street signs invalid. <br>
 <code>[--motion-blur]</code>
-Add random motion blur to the generated images. <br></p>
+Add random motion blur to the generated images. <br>
+'[&ndash;snow]'
+Add random snow to the generated images. <br></p>
 <h2 id="example">Example</h2>
 <p><code>$ python generate.py --model unet --num-imgs 10 --make-invalid</code></p>
 <details class="source">
@@ -46,25 +48,28 @@ Add random motion blur to the generated images. <br></p>
 Run traffic sign image generation with a trained CycleGAN model.
 
 Usage:
-    `$ python generate.py --num-imgs &lt;int&gt; [--o &lt;str&gt;] [--model &lt;str&gt;] [--make-invalid] [--motion-blur]`
+    `$ python generate.py [--num-imgs &lt;int&gt;] [--o &lt;str&gt;] [--model &lt;str&gt;] [--make-invalid] [--motion-blur] [--snow]`
 
 Options:
-    `--num-imgs &lt;int&gt;`      Number of generated images. &lt;br&gt;
-    `[--o &lt;str&gt;]`             Path to directory where generated images are stored. Default: value from config file. &lt;br&gt;
-    `[--model &lt;str&gt;]`         Model name [unet or resnet]. Default: value from config file. &lt;br&gt;
-    `[--make-invalid]`        Make generated street signs invalid. &lt;br&gt;
-    `[--motion-blur]`         Add random motion blur to the generated images. &lt;br&gt;
+    `[--num-imgs &lt;int&gt;]`       Number of generated images. &lt;br&gt;
+    `[--o &lt;str&gt;]`           Path to directory where generated images are stored. Default: value from config file. &lt;br&gt;
+    `[--model &lt;str&gt;]`       Model name [unet or resnet]. Default: value from config file. &lt;br&gt;
+    `[--make-invalid]`      Make generated street signs invalid. &lt;br&gt;
+    `[--motion-blur]`       Add random motion blur to the generated images. &lt;br&gt;
+    &#39;[--snow]&#39;              Add random snow to the generated images. &lt;br&gt;
 
 Example:
     `$ python generate.py --model unet --num-imgs 10 --make-invalid`
 &#34;&#34;&#34;
 
-import tensorflow as tf
-import toml
+
 import uuid
 import argparse
 import math
+import os
+import tensorflow as tf
 from tqdm import tqdm
+import toml
 
 import utils.load_data
 import utils.preprocess_image
@@ -76,8 +81,8 @@ import model
 def main():
     # Setup
     config = toml.load(&#39;./config/config.toml&#39;)
-    BATCH_SIZE = config[&#39;training&#39;][&#39;batch_size&#39;]
-    IMAGE_SIZE = config[&#39;model&#39;][&#39;image_size&#39;]
+    batch_size = config[&#39;training&#39;][&#39;batch_size&#39;]
+    image_size = config[&#39;model&#39;][&#39;image_size&#39;]
 
     # Command line arguments
     parser = argparse.ArgumentParser()
@@ -90,21 +95,26 @@ def main():
                         help=&#39;make street signs invalid&#39;)
     parser.add_argument(&#39;--motion-blur&#39;, dest=&#39;motion_blur&#39;, default=False, action=&#39;store_true&#39;,
                         help=&#39;add random motion blur&#39;)
+    parser.add_argument(&#39;--snow&#39;, dest=&#39;snow&#39;, default=False, action=&#39;store_true&#39;, help=&#39;add snow&#39;)
     args = parser.parse_args()
     if args.model == &#39;unet&#39; or args.model == &#39;resnet&#39;:
         config[&#39;model&#39;][&#39;generator_type&#39;] = args.model
     else:
         raise ValueError(&#39;model must be &#34;unet&#34; or &#34;resnet&#34;. This argument is optional&#39;)
-    DESTINATION_PATH = args.o
-    NUM_GENERATED_IMAGES = args.num_imgs
-    MAKE_SIGNS_INVALID = args.make_invalid
-    MOTION_BLUR = args.motion_blur
+    destination_path = args.o
+    num_generated_images = args.num_imgs
+    snow = args.snow
+    make_signs_invalid = args.make_invalid
+    motion_blur = args.motion_blur
 
-    # PATH_TO_PICTOGRAMS = r&#39;C:\Users\Frederik\Documents\Studienarbeit\data\Pictograms&#39;
-    PATH_TO_PICTOGRAMS = config[&#39;paths&#39;][&#39;pictograms&#39;]
-    x_pictograms = tf.keras.utils.image_dataset_from_directory(PATH_TO_PICTOGRAMS, batch_size=BATCH_SIZE,
-                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+    path_to_pictograms = config[&#39;paths&#39;][&#39;pictograms&#39;]
+    x_pictograms = tf.keras.utils.image_dataset_from_directory(path_to_pictograms, batch_size=batch_size,
+                                                               image_size=(image_size, image_size), labels=None)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
+
+    # Currently, batch size cannot be larger than the number of pictograms
+    number_of_pictograms = x_pictograms_processed.cardinality().numpy()  # number of elements in pictogram dataset
+    batch_size = min(batch_size, number_of_pictograms)
 
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()
@@ -112,35 +122,43 @@ def main():
 
     # Generate images
     print(&#39;Generating images...&#39;)
-    num_iterations = math.ceil(NUM_GENERATED_IMAGES / BATCH_SIZE)
-    num_generated_images_left = NUM_GENERATED_IMAGES
+    num_iterations = math.ceil(num_generated_images / batch_size)
+    num_generated_images_left = num_generated_images
     for iteration in tqdm(range(num_iterations)):
         x_pictograms_processed.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+
+        # Transform pictograms
         single_pictogram_batch = x_pictograms_processed.take(1).get_single_element()
         single_pictogram_batch, content_sizes, transform_matrices = utils.preprocess_image.randomly_transform_image_batch(
             single_pictogram_batch)
         transform_matrices = [matrix for matrix in transform_matrices]  # convert to list to be able to pop() it
-        generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False)
 
-        if MAKE_SIGNS_INVALID:
+        # Put transformed pictograms into the generator
+        generator_result = cycle_gan.generate(single_pictogram_batch)
+
+        if make_signs_invalid:
             cross_img_path = config[&#39;paths&#39;][&#39;augmentation_data&#39;] + &#39;/cross.png&#39;
             generator_result = tf.map_fn(
                 lambda t: utils.image_augmentation.make_street_sign_invalid(t, cross_img_path, content_sizes.pop(0),
                                                                             transform_matrices.pop(0)),
                 generator_result)
-        if MOTION_BLUR:
-            generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_motion_blur(t, 100), generator_result)
-
-        if BATCH_SIZE &lt; num_generated_images_left:
-            num_images = BATCH_SIZE
-            num_generated_images_left -= BATCH_SIZE
+        if snow:
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 20, 30), generator_result)
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 10, 20), generator_result)
+        if motion_blur:
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_random_motion_blur(t),
+                                         generator_result)
+        if batch_size &lt; num_generated_images_left:
+            num_images = batch_size
+            num_generated_images_left -= batch_size
         else:
             num_images = num_generated_images_left
         for i in range(num_images):
-            utils.misc.store_tensor_as_img(generator_result[i, :], str(uuid.uuid4()), DESTINATION_PATH)
+            utils.misc.store_tensor_as_img(generator_result[i, :], str(uuid.uuid4()), destination_path)
 
 
 if __name__ == &#39;__main__&#39;:
+    tf.get_logger().setLevel(&#39;ERROR&#39;)
     main()</code></pre>
 </details>
 </section>
@@ -163,8 +181,8 @@ if __name__ == &#39;__main__&#39;:
 <pre><code class="python">def main():
     # Setup
     config = toml.load(&#39;./config/config.toml&#39;)
-    BATCH_SIZE = config[&#39;training&#39;][&#39;batch_size&#39;]
-    IMAGE_SIZE = config[&#39;model&#39;][&#39;image_size&#39;]
+    batch_size = config[&#39;training&#39;][&#39;batch_size&#39;]
+    image_size = config[&#39;model&#39;][&#39;image_size&#39;]
 
     # Command line arguments
     parser = argparse.ArgumentParser()
@@ -177,21 +195,26 @@ if __name__ == &#39;__main__&#39;:
                         help=&#39;make street signs invalid&#39;)
     parser.add_argument(&#39;--motion-blur&#39;, dest=&#39;motion_blur&#39;, default=False, action=&#39;store_true&#39;,
                         help=&#39;add random motion blur&#39;)
+    parser.add_argument(&#39;--snow&#39;, dest=&#39;snow&#39;, default=False, action=&#39;store_true&#39;, help=&#39;add snow&#39;)
     args = parser.parse_args()
     if args.model == &#39;unet&#39; or args.model == &#39;resnet&#39;:
         config[&#39;model&#39;][&#39;generator_type&#39;] = args.model
     else:
         raise ValueError(&#39;model must be &#34;unet&#34; or &#34;resnet&#34;. This argument is optional&#39;)
-    DESTINATION_PATH = args.o
-    NUM_GENERATED_IMAGES = args.num_imgs
-    MAKE_SIGNS_INVALID = args.make_invalid
-    MOTION_BLUR = args.motion_blur
+    destination_path = args.o
+    num_generated_images = args.num_imgs
+    snow = args.snow
+    make_signs_invalid = args.make_invalid
+    motion_blur = args.motion_blur
 
-    # PATH_TO_PICTOGRAMS = r&#39;C:\Users\Frederik\Documents\Studienarbeit\data\Pictograms&#39;
-    PATH_TO_PICTOGRAMS = config[&#39;paths&#39;][&#39;pictograms&#39;]
-    x_pictograms = tf.keras.utils.image_dataset_from_directory(PATH_TO_PICTOGRAMS, batch_size=BATCH_SIZE,
-                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+    path_to_pictograms = config[&#39;paths&#39;][&#39;pictograms&#39;]
+    x_pictograms = tf.keras.utils.image_dataset_from_directory(path_to_pictograms, batch_size=batch_size,
+                                                               image_size=(image_size, image_size), labels=None)
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
+
+    # Currently, batch size cannot be larger than the number of pictograms
+    number_of_pictograms = x_pictograms_processed.cardinality().numpy()  # number of elements in pictogram dataset
+    batch_size = min(batch_size, number_of_pictograms)
 
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()
@@ -199,32 +222,39 @@ if __name__ == &#39;__main__&#39;:
 
     # Generate images
     print(&#39;Generating images...&#39;)
-    num_iterations = math.ceil(NUM_GENERATED_IMAGES / BATCH_SIZE)
-    num_generated_images_left = NUM_GENERATED_IMAGES
+    num_iterations = math.ceil(num_generated_images / batch_size)
+    num_generated_images_left = num_generated_images
     for iteration in tqdm(range(num_iterations)):
         x_pictograms_processed.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+
+        # Transform pictograms
         single_pictogram_batch = x_pictograms_processed.take(1).get_single_element()
         single_pictogram_batch, content_sizes, transform_matrices = utils.preprocess_image.randomly_transform_image_batch(
             single_pictogram_batch)
         transform_matrices = [matrix for matrix in transform_matrices]  # convert to list to be able to pop() it
-        generator_result = cycle_gan.generator_g(single_pictogram_batch, training=False)
 
-        if MAKE_SIGNS_INVALID:
+        # Put transformed pictograms into the generator
+        generator_result = cycle_gan.generate(single_pictogram_batch)
+
+        if make_signs_invalid:
             cross_img_path = config[&#39;paths&#39;][&#39;augmentation_data&#39;] + &#39;/cross.png&#39;
             generator_result = tf.map_fn(
                 lambda t: utils.image_augmentation.make_street_sign_invalid(t, cross_img_path, content_sizes.pop(0),
                                                                             transform_matrices.pop(0)),
                 generator_result)
-        if MOTION_BLUR:
-            generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_motion_blur(t, 100), generator_result)
-
-        if BATCH_SIZE &lt; num_generated_images_left:
-            num_images = BATCH_SIZE
-            num_generated_images_left -= BATCH_SIZE
+        if snow:
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 20, 30), generator_result)
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.add_snow(t, 10, 20), generator_result)
+        if motion_blur:
+            generator_result = tf.map_fn(lambda t: utils.image_augmentation.apply_random_motion_blur(t),
+                                         generator_result)
+        if batch_size &lt; num_generated_images_left:
+            num_images = batch_size
+            num_generated_images_left -= batch_size
         else:
             num_images = num_generated_images_left
         for i in range(num_images):
-            utils.misc.store_tensor_as_img(generator_result[i, :], str(uuid.uuid4()), DESTINATION_PATH)</code></pre>
+            utils.misc.store_tensor_as_img(generator_result[i, :], str(uuid.uuid4()), destination_path)</code></pre>
 </details>
 </dd>
 </dl>

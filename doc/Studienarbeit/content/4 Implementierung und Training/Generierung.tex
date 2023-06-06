@@ -1,5 +1,5 @@
 \section{Generierung}
-Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu trainieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwendende keinen Python-Code anpassen müssen. Das Skript besitzt die in Tabelle \ref{tab:generate-cli} gezeigten Kommandozeilenargumente.
+Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschildern mittels eines trainierten \ac{CycleGAN} Modells zu generieren. Eine Design-Entscheidung ist hierbei, dass das Skript vollständig mittels der Kommandozeile konfiguriert werden kann. Dies folgt dem Leitprinzip dieser Studienarbeit, dass Anwendende keinen Python-Code anpassen müssen. Das Skript besitzt die in Tabelle \ref{tab:generate-cli} gezeigten Kommandozeilenargumente.
 \begin{table}[H]
    \centering
    \begin{tabular}{|l|c|l|}
@@ -16,7 +16,7 @@ Das Skript \mintinline{python}{generate.py} dient dazu, Bilder von Straßenschil
    \label{tab:generate-cli}
 \end{table}
 
-Standardmäßig nutzt das Skript \mintinline{python}|generate.py| das Modell aus der Konfigurationsdatei, mit dem Kommandozeilenargumenten \mintinline{python}|--model| können Anwendende diesen Wert jedoch überschreiben. Die Argumente \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} können außerdem miteinander kombiniert werden. Dann erzeugt das Skript mehrere Augmentationen gleichzeitig. Auf die Implementierung dieser Augmentationen geht Kapitel \ref{chap:5} ein.
+Standardmäßig nutzt das Skript \mintinline{python}|generate.py| das Modell aus der Konfigurationsdatei, mit dem Kommandozeilenargument \mintinline{python}|--model| können Anwendende diesen Wert jedoch überschreiben. Die Argumente \mintinline{bash}{--motion-blur}, \mintinline{bash}{--make-invalid} und \mintinline{bash}{--snow} können außerdem miteinander kombiniert werden. Dann erzeugt das Skript mehrere Augmentationen gleichzeitig. Auf die Implementierung dieser Augmentationen geht Kapitel \ref{chap:5} ein.
 
 Beispielhafte Aufrufe des Skripts \mintinline{python}|generate.py| mit verschiedenen Kommandozeilenargumenten zeigt Listing \ref{lst:generate-cli-examples}.
 \begin{samepage}

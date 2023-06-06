@@ -48,7 +48,7 @@ $ tensorboard --logdir ./logs/resnet
 
 \section{Trainingsergebnisse}
 \label{chap:trainingsergebnisse}
-Für das Training der U-Net- und ResNet-basierten \acp{CycleGAN} dienen zwei verschiedene Systeme. Dabei zum einen Google Colab. Hier bietet Google eine kostenfreie Version sowie ein Premium-Abonnement an. In der kostenfreien Version ist jedoch kein Training über Nacht möglich, da das System nach einer etwa zwanzig-minütigen Inaktivität die Verbindung zum Rechner trennt. Unter anderem aus diesem Grund wird das Training zusätzlich auf einem Server der DHBW durchgeführt. Dieser besitzt eine Grafikkarte mit 25 Gigabyte Speicher und ist damit leistungsstärker als die bei Google Colab verwendeten Systeme. Dort standen maximal 20 GB zur Verfügung. Die Trainingsdauer pro Epoche ist für die traininerten Modelle in der nachfolgenden Tabelle aufgeführt. Es zeigt sich hier außerdem, dass das U-Net signifikant schneller trainiert als das ResNet, jedoch Checkpoints besitzt, die mehr Speicherplatz verbrauchen. Das bedeutet, dass das Training des U-Net-basierten \ac{CycleGAN} weniger Rechenaufwand benötigt, obwohl es mehr Parameter besitzt.
+Für das Training der U-Net- und ResNet-basierten \acp{CycleGAN} dienen zwei verschiedene Systeme. Dabei zum einen Google Colab. Hier bietet Google eine kostenfreie Version sowie ein Premium-Abonnement an. In der kostenfreien Version ist jedoch kein Training über Nacht möglich, da das System nach einer etwa zwanzig-minütigen Inaktivität die Verbindung zum Rechner trennt. Unter anderem aus diesem Grund wird das Training zusätzlich auf einem Server der \ac{DHBW} durchgeführt. Dieser besitzt eine Grafikkarte mit 25 Gigabyte Speicher und ist damit leistungsstärker als die bei Google Colab verwendeten Systeme. Dort standen maximal 20 GB zur Verfügung. Die Trainingsdauer pro Epoche ist für die traininerten Modelle in der nachfolgenden Tabelle aufgeführt. Es zeigt sich hier außerdem, dass das U-Net signifikant schneller trainiert als das ResNet, jedoch Checkpoints besitzt, die mehr Speicherplatz verbrauchen. Das bedeutet, dass das Training des U-Net-basierten \ac{CycleGAN} weniger Rechenaufwand benötigt, obwohl es mehr Parameter besitzt.
 
 \begin{table}[H]
    \centering
@@ -58,9 +58,9 @@ Für das Training der U-Net- und ResNet-basierten \acp{CycleGAN} dienen zwei ver
    
    \cmidrule(r){2-3}
    
-   Modell & Google Colab & DHBW Server & Parameter & Checkpoint Größe \\
+   Modell & Google Colab & \ac{DHBW} Server & Parameter & Checkpoint Größe \\
    \midrule
-   U-Net & 30 min. & 5 min. & 114 Millionen & 1.340.240 Byte \\
+   U-Net & 30 min.\tablefootnote{Minuten} & 5 min. & 114 Millionen & 1.340.240 Byte \\
    ResNet & 90 min. & 30 min. & 28 Millionen & 331.709 Byte \\
    \bottomrule
     \end{tabular}
@@ -68,28 +68,27 @@ Für das Training der U-Net- und ResNet-basierten \acp{CycleGAN} dienen zwei ver
 \end{table}
 
 \subsection{U-Net}
-Das U-Net-basierte \ac{CycleGAN} verbessert sich während des Trainings nahezu kontinuierlich. Das Modell ist mit einer Anzahl von 200 Epochen trainiert. Der Verlauf der Verlustfunktionen über die Anzahl der Trainingsschritte ist im Anhang in Abbildung \ref{fig:unet-tensorboard} gezeigt. Ein Trainingsschritt eintspricht einem Durchlauf der \mintinline{python}{train_step} Funktion des \ac{CycleGAN} über einem Batch.  Es lassen sich verschiedene Dinge aus den Graphen ablesen: Die Verluste der Generatoren scheinen gegen einen Wert zu konvergieren. Die Verluste der Diskriminatoren zeigen hingegen deutliche Schwankungen ohne ein erkennbares Muster. Die Verluste der Generatoren sind beinahe um einen Faktor 10 größer als die der Diskriminatoren. Aus diesem Grund konvergiert der Gesamtverlust des \ac{CycleGAN} gegen einen Wert. Dieser liegt bei 6.
+Das U-Net-basierte \ac{CycleGAN} verbessert sich während des Trainings nahezu kontinuierlich. Das Modell ist mit einer Anzahl von 200 Epochen trainiert. Der Verlauf der Verlustfunktionen über die Anzahl der Trainingsschritte ist im Anhang in Abbildung \ref{fig:unet-tensorboard} gezeigt. Ein Trainingsschritt entspricht einem Durchlauf der \mintinline{python}{train_step} Funktion des \ac{CycleGAN} über einem Batch.  Es lassen sich verschiedene Dinge aus den Graphen ablesen: Die Verluste der Generatoren scheinen gegen einen Wert zu konvergieren. Die Verluste der Diskriminatoren zeigen hingegen deutliche Schwankungen ohne ein erkennbares Muster. Die Verluste der Generatoren sind beinahe um einen Faktor 10 größer als die der Diskriminatoren. Aus diesem Grund konvergiert der Gesamtverlust des \ac{CycleGAN} gegen einen Wert. Dieser liegt bei 6.
 
-Abbildung \ref{fig:unet-generated-imgs} im Anhang zeigt zudem für die Epochen 1 bis 100, wie sich die Qualität der Generierung mit den Trainingsepochen verbessert. Hier lässt sich außerdem erkennen, dass das Modell durch die Wahl einer Bild-zu-Bild-Übersetzung die Schilder nicht selber erzeugen muss. Verschiedenen Trainingsdurchläufe haben ergeben, dass der Identity Loss für das U-Net keinen signifikanten Einfluss hat. Damit kann argumentiert werden, dass er für dieses \ac{CycleGAN} nicht nötig sei.
+Abbildung \ref{fig:unet-generated-imgs} im Anhang zeigt zudem für die Epochen 1 bis 100, wie sich die Qualität der Generierung mit den Trainingsepochen verbessert. Hier lässt sich außerdem erkennen, dass das Modell durch die Wahl einer Bild-zu-Bild-Übersetzung die Schilder nicht selber erzeugen muss. Verschiedene Trainingsdurchläufe haben ergeben, dass der Identity Loss für das U-Net keinen signifikanten Einfluss hat. Damit kann argumentiert werden, dass er für dieses \ac{CycleGAN} nicht nötig sei.
 
 Die generierten Bilder zeigen verschiedene Hintergründe. Diese Varianz an Hintergründen ist allgemein pro Kategorie von Straßenschild gleich. Somit besitzen beispielsweise alle Schilder der Kategorie Geschwindigkeitsbegrenzung die gleichen Arten von Hintergründen. Die Schilder der Kategorie Aufhebung können allgemein als wenig fotorealistisch bewertet werden. Das ist vermutlich auf die geringere Anzahl an Trainingsdaten für diese Klassen zurückzuführen.
 
-Abbildung \ref{fig:unet-imgs} im Anhang zeigt Bilder, die das U-Net-basierte Modell nach 200 Epochen generiert. Ausgehend von den Erkenntnissen der in Kapitel \ref{chap:vorherige-arbeiten-taiwan} vorgestellte Veröffentlichung, könnte sich die Qualität der Generierung über noch mehr Trainingsepochen weiter verbessern. Aus folgenden Gründen ist das U-Net-basierte Modell genau 200 Epochen trainiert:
+Abbildung \ref{fig:unet-imgs} im Anhang zeigt Bilder, die das U-Net-basierte Modell nach 200 Epochen generiert. Ausgehend von den Erkenntnissen der in Kapitel \ref{chap:vorherige-arbeiten-taiwan} vorgestellte Veröffentlichung könnte sich die Qualität der Generierung über noch mehr Trainingsepochen weiter verbessern. Aus folgenden Gründen ist das U-Net-basierte Modell genau 200 Epochen trainiert:
 \begin{itemize}
     \item Die Verlustfunktionen scheinen zu konvergieren.
     \item Für ein weiteres Training muss vermutlich die Lernrate verringert werden
-    \item Das Training von 200 Epochen dauert bereits 16 Stunden auf dem System der DHBW
-    \item U-Net und ResNet sollten für die Evaluation in Kapitel \ref{chap:Evaluation} die gleiche Anzahl an Epochen trainiert sein
+    \item Das Training von 200 Epochen dauert bereits 16 Stunden auf dem System der \ac{DHBW}
+    \item U-Net und ResNet sollten für die Evaluation in Kapitel \ref{chap:Evaluation} in etwa die gleiche Anzahl an Epochen trainiert sein
 \end{itemize}
 
 \subsection{ResNet}
 
 Für das ResNet-basierte \ac{CycleGAN} zeigen die Verlustfunktionen einen ähnlichen Verlauf wie bei dem U-Net-basierten \ac{CycleGAN}. Aus diesem Grund sind hierfür die Graphen nicht im Anhang abgebildet. Der Unterschied ist, dass der Verlauf der Verlustfunktionen hier eine geringere Aussagekraft für die Qualität der generierten Bilder zu haben scheint. Das Training des ResNet-basierten Modells ist oszillierend, da das \ac{CycleGAN} einige Klassen in nachfolgenden Epochen besser erzeugt, während andere Klassen eine schlechtere Generierungsqualität als davor aufweisen. Um diesem Verhalten entgegenzuwirken, verwendet dieses \ac{CycleGAN}-Modell eine $\mathcal{L}_2$ Verlustfunktion für den Adversarial Loss, während das U-Net-basierte Modell weiterhin eine logarithmische Verlustfunktion verwendet. Auch diese Veränderung der Verlustfunktion, die laut der Literatur das Training stabilisieren kann, behebt das oszillierende Verhalten nicht.
 
-Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Collaps auftritt. Das ist in Abbildung \ref{fig:modal-collaps} dargestellt. Hier und in den folgenden Abbildungen steht die Abkürzung \emph{Ep.} für das Wort \emph{Epochen} und beschreibt damit die Anzahl an Trainingsepochen, aus der das Bild stammt. Für jedes Piktogramm und jede Perspektive erzeugt das Modell einen beinahe identischen Hintergrund. Das gibt Hinweise darauf, dass die Generatoren die Diskriminatoren derart überlisten, dass letztere nicht mehr lernen.
-
+Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Collaps auftritt. Das ist in Abbildung \ref{fig:modal-collaps} dargestellt. Hier und in den folgenden Abbildungen steht die Abkürzung \emph{Ep.} für das Wort \emph{Epochen} und beschreibt damit die Anzahl an Trainingsepochen, aus der das Bild stammt. 
 % MODAL COLLAPS
-\begin{figure}[htpb]
+\begin{figure}[H]
     \centering
     \begin{subfigure}[b]{0.12\textwidth}
         \centering
@@ -123,6 +122,7 @@ Eine weitere Eigenschaft dieses Modells ist, dass bei 200 Epochen ein Modal Coll
         \caption{Modal Collaps des ResNet nach 200 Trainingsepochen}
         \label{fig:modal-collaps}
 \end{figure}
+Für jedes Piktogramm und jede Perspektive erzeugt das Modell durch den Modal Collaps einen beinahe identischen Hintergrund. Das gibt Hinweise darauf, dass die Generatoren die Diskriminatoren derart überlisten, dass letztere nicht mehr lernen.
 
 Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stopping)}. Diese Lösung wird gewählt. Dabei muss für jede infrage kommende Epoche manuell geprüft werden, welche davon das zufriedenstellendste Ergebnis zeigt. Auch da die Werte der Verlustfunktionen hierauf, wie bereits erwähnt, nur eine begrenzte Aussagekraft haben. Jede der Epochen 120 bis 190 erzeugt eine Bandbreite an Generierungsqualitäten. Abbildung \ref{fig:resnet-gute-bilder} zeigt positiv herausstechende Bilder für verschiedene Epochen, während \ref{fig:resnet-schlechte-bilder} negativ herausstechende Bilder zeigt. Die finale Entscheidung ist, das auf 180 Epochen trainierte Modell zu verwenden.
 
@@ -200,7 +200,7 @@ Eine Lösung ist, das Training vorzeitig abzubrechen \emph{(engl.: early stoppin
 
 Abbilung \ref{fig:resnet-generated-imgs} im Anhang zeigt Bilder, die das ResNet-basierte Modell nach 180 Epochen generiert.
 
-Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass die Generatoren ein anderes ResNet-Modell verwenden. Ein Modell, das verhindern kann, dass die Generatoren die Diskriminatoren vollständig überlisten. Aus diesem Grund besitzen die Generatoren in einem nächsten Trainingsdurchlauf 6 Residual Blocks, statt der durch die \ac{CycleGAN} Veröffentlichung vorgeschlagene Anzahl an 9 für Bilder der Auflösung 256x256. Dadurch haben die Generatoren eine weniger komplexe Architektur mit einer geringeren Anzahl an lernbaren Parametern. Während hier kein Modal Collaps auftritt, ist das Training weiterhin oszillierend. Auch hier zeigt die Epoche 200 nicht die höchste Generierungsqualität. Bei diesem ResNet-basierten Modell wird deshalb Epoche 150 für die Evaluation in Kapitel \ref{chap:Evaluation} gewählt. Damit soll geprüft werden, welche Anzahl an Residual Blocks sich für das Modell eignet. Die Abbildung \ref{fig:resnet-6-blocks} zeigt Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks für verschiedene Epochen.
+Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass die Generatoren ein anderes ResNet-Modell verwenden. Ein Modell, das verhindern kann, dass die Generatoren die Diskriminatoren vollständig überlisten können. Aus diesem Grund besitzen die Generatoren in einem nächsten Trainingsdurchlauf 6 Residual Blocks, statt der durch die \ac{CycleGAN} Veröffentlichung vorgeschlagene Anzahl an 9 für Bilder der Auflösung 256x256. Dadurch haben die Generatoren eine weniger komplexe Architektur mit einer geringeren Anzahl an lernbaren Parametern. Während hier kein Modal Collaps auftritt, ist das Training weiterhin oszillierend. Auch hier zeigt die Epoche 200 nicht die höchste Generierungsqualität. Bei diesem ResNet-basierten Modell wird deshalb Epoche 150 für die Evaluation in Kapitel \ref{chap:Evaluation} gewählt. Damit soll geprüft werden, welche Anzahl an Residual Blocks sich für das Modell eignet. Die Abbildung \ref{fig:resnet-6-blocks} zeigt Beispielbilder des ResNet-basierten Modells mit 6 Residual Blocks für verschiedene Epochen.
 
 % RESNET 6 BLOCKS
 \begin{figure}[H]
@@ -244,4 +244,4 @@ Eine zweite Lösung im Gegensatz zum vorzeitigen Abbruch des Trainings ist, dass
         \label{fig:resnet-6-blocks}
 \end{figure}
 
-Generierte Bilder des ResNet-basierten Modells mit 6 Residual Blocks befinden sich unter \href{https://drive.google.com/drive/folders/1310Eb5WDgaszu47k6V8St5m-QtQV1Ocg?usp=sharing}{\textbf{dem Link des Datensatzes}} in dem Ordner \mintinline{python}{'Generated Images'}. Hier sind zudem weitere generierte Bilder des ResNet-basierten Modells mit 9 Residual Blocks sowie des U-Net-basierten Modells.
+Generierte Bilder des ResNet-basierten Modells mit 6 Residual Blocks befinden sich unter \href{https://drive.google.com/drive/folders/11gaUErheUYb0WlBPtWhxgCK7mE0URHYI?usp=sharing}{\textbf{dem Link des Datensatzes}} in dem Ordner \mintinline{python}{'Generated Images'}. Hier sind zudem weitere generierte Bilder des ResNet-basierten Modells mit 9 Residual Blocks sowie des U-Net-basierten Modells.

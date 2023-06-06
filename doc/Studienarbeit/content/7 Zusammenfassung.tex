@@ -1,6 +1,13 @@
 \chapter{Zusammenfassung}
 
-Diese Arbeit befasst sich mit der künstlichen Erzeugung von Bildern, die Straßenschilder zeigen.
+Diese Arbeit befasst sich mit der künstlichen Erzeugung von Bildern, die Straßenschilder zeigen. Zusätzlich ist eine Augmentierung der generierten Bilder auf Grenzfälle der Straßenschilderkennung implementiert.
 
-\todo[inline]{Zusammenfassung schreiben}
-\todo[inline]{Darauf eingehen, was meine Arbeit anders macht als die vorherigen Arbeiten}
+Wie bereits eine vorherige Arbeit gezeigt hat, ist die Generierung solcher Bilder mit \acp{CycleGAN} möglich. In dieser Arbeit erzielt ein U-Net-basiertes \ac{CycleGAN} dabei bessere Ergebnisse und ist schneller zu trainieren. Allgemein zeigt sich anhand der Evaluation, dass sich die erzeugten Datensätze von realen Trainingsdaten unterscheiden. Trotzdem können sie einen Klassifikator verbessern, indem sie als \textbf{zusätzliche} Trainingsdaten genutzt werden. Das deutet darauf hin, dass sie sich als zusätzliche Trainingsdaten eignen. Verschiedene Möglichkeiten der Verbesserung existieren dennoch.
+
+Diese Arbeit zeigt, dass \acp{CycleGAN} ebenso lernen können, bestimmte Augmentierungen für die Straßenschilderkennung eigenständig zu lernen. So etwa das Generieren von Bildern mit Schnee. Dabei sind in dieser Arbeit in etwa 20 zusätzliche Trainingsepochen nötig. Auf dem verwendeten System der \ac{DHBW} entspricht das einer Trainingsdauer des U-Net-basierten Modells von etwa $1,7$ Stunden.
+
+Die prozedural erzeugten Augmentierungen von Bewegungsunschärfe, ungültigen Schildern und Schnee verringern zudem die Genaugkeit eines Klassifikators für die Straßenschilderkennung. Das gibt Hinweise darauf, dass solche Bilder Datensätze für die Straßenschilderkennung erweitern können.
+
+Zusammenfassend lässt sich demnach sagen, dass die Arbeit einige der festgelegten Ziele erfüllt. Jedoch sind die generierten Bilder nicht vollständig fotorealistisch. Das gilt auch für die Augmentierungen.
+
+Zukünftige Arbeiten können hier anknüpfen, um inbesondere weitere Grenzfälle der Straßenschilderkennung zu simulieren. Auch um die momentanen Augmentierungen realistischer zu gestalten. Weitere Arbeiten auf dem Gebiet können sich zudem damit beschäftigen, Bilder für die Straßenschilderkennung zu erzeugen, die eine größere Menge an Hintergrund um die Schilder zeigen. Insbesondere um Grenzfälle der Straßenschilderkennung weiter zu simulieren. Auch ist denkbar, Videosequenzen künstlich zu generieren.

@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
 <title>src.scripts.convert_ppm_to_png API documentation</title>
-<meta name="description" content="Script to convert all ppm files in a folder to png files. Is used because training/test data is provided as ppm files." />
+<meta name="description" content="Script to convert all ppm files in a folder to png files. Is used because some training/test data is provided as ppm
+files." />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
 <link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
@@ -22,13 +23,15 @@
 <h1 class="title">Module <code>src.scripts.convert_ppm_to_png</code></h1>
 </header>
 <section id="section-intro">
-<p>Script to convert all ppm files in a folder to png files. Is used because training/test data is provided as ppm files.</p>
+<p>Script to convert all ppm files in a folder to png files. Is used because some training/test data is provided as ppm
+files.</p>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">&#34;&#34;&#34;
-Script to convert all ppm files in a folder to png files. Is used because training/test data is provided as ppm files.
+Script to convert all ppm files in a folder to png files. Is used because some training/test data is provided as ppm
+files.
 &#34;&#34;&#34;
 
 from PIL import Image
@@ -36,14 +39,14 @@ import os
 
 
 def main():
-    IMAGE_PATH = r&#34;C:\Users\Frederik\Documents\Studienarbeit\data\Official Test\Final_Test\Images&#34;
+    image_path = r&#34;C:\Users\Frederik\Documents\Studienarbeit\data\Official Test\Final_Test\Images&#34;
 
-    for file in os.listdir(IMAGE_PATH):
+    for file in os.listdir(image_path):
         if file.endswith(&#34;.ppm&#34;):
-            full_file_path = os.path.join(IMAGE_PATH, file)
-            image = Image.open(os.path.join(IMAGE_PATH, file))
+            full_file_path = os.path.join(image_path, file)
+            image = Image.open(os.path.join(image_path, file))
             image.save(full_file_path.replace(&#39;ppm&#39;, &#39;png&#39;))  # save the ppm file as a png file
-            os.remove(os.path.join(IMAGE_PATH, file))
+            os.remove(os.path.join(image_path, file))
 
 
 if __name__ == &#39;__main__&#39;:
@@ -67,14 +70,14 @@ if __name__ == &#39;__main__&#39;:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def main():
-    IMAGE_PATH = r&#34;C:\Users\Frederik\Documents\Studienarbeit\data\Official Test\Final_Test\Images&#34;
+    image_path = r&#34;C:\Users\Frederik\Documents\Studienarbeit\data\Official Test\Final_Test\Images&#34;
 
-    for file in os.listdir(IMAGE_PATH):
+    for file in os.listdir(image_path):
         if file.endswith(&#34;.ppm&#34;):
-            full_file_path = os.path.join(IMAGE_PATH, file)
-            image = Image.open(os.path.join(IMAGE_PATH, file))
+            full_file_path = os.path.join(image_path, file)
+            image = Image.open(os.path.join(image_path, file))
             image.save(full_file_path.replace(&#39;ppm&#39;, &#39;png&#39;))  # save the ppm file as a png file
-            os.remove(os.path.join(IMAGE_PATH, file))</code></pre>
+            os.remove(os.path.join(image_path, file))</code></pre>
 </details>
 </dd>
 </dl>

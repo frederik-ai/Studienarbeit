@@ -36,6 +36,8 @@ import os
 import utils.load_data
 import utils.misc
 import model
+import matplotlib.pyplot as plt
+import uuid
 
 
 def main():
@@ -48,17 +50,26 @@ def main():
     BUFFER_SIZE = 1000
     IMAGE_SIZE = config[&#39;model&#39;][&#39;image_size&#39;]
 
-    PATH_TO_TRAIN_DIRECTORY = config[&#39;paths&#39;][&#39;train_data&#39;]
-    training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, PATH_TO_TRAIN_DIRECTORY))
+    path_to_train_directory = config[&#39;paths&#39;][&#39;train_data&#39;]
+    #training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, path_to_train_directory))
+    training_path = path_to_train_directory
     x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE,
-                                                          image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+                                                          image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
+                                                          shuffle=True, crop_to_aspect_ratio=True)
     x_train_processed = utils.load_data.normalize_dataset(x_train)
 
     PATH_TO_PICTOGRAMS = config[&#39;paths&#39;][&#39;pictograms&#39;]
-    pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, PATH_TO_PICTOGRAMS))
+    # pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, PATH_TO_PICTOGRAMS))
+    pictograms_path = PATH_TO_PICTOGRAMS
     x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batch_size=BATCH_SIZE,
-                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
+                                                               shuffle=True, crop_to_aspect_ratio=False) # change last param to True!
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
+
+    #for pictograms in x_pictograms_processed:
+    #    for pictogram in pictograms:
+    #        plt.imshow(pictogram)
+    #        plt.show()
 
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()
@@ -98,17 +109,26 @@ if __name__ == &#39;__main__&#39;:
     BUFFER_SIZE = 1000
     IMAGE_SIZE = config[&#39;model&#39;][&#39;image_size&#39;]
 
-    PATH_TO_TRAIN_DIRECTORY = config[&#39;paths&#39;][&#39;train_data&#39;]
-    training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, PATH_TO_TRAIN_DIRECTORY))
+    path_to_train_directory = config[&#39;paths&#39;][&#39;train_data&#39;]
+    #training_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, path_to_train_directory))
+    training_path = path_to_train_directory
     x_train = tf.keras.utils.image_dataset_from_directory(training_path, batch_size=BATCH_SIZE,
-                                                          image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+                                                          image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
+                                                          shuffle=True, crop_to_aspect_ratio=True)
     x_train_processed = utils.load_data.normalize_dataset(x_train)
 
     PATH_TO_PICTOGRAMS = config[&#39;paths&#39;][&#39;pictograms&#39;]
-    pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, PATH_TO_PICTOGRAMS))
+    # pictograms_path = os.path.realpath(os.path.join(os.path.dirname(__file__), &#39;..&#39;, PATH_TO_PICTOGRAMS))
+    pictograms_path = PATH_TO_PICTOGRAMS
     x_pictograms = tf.keras.utils.image_dataset_from_directory(pictograms_path, batch_size=BATCH_SIZE,
-                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None)
+                                                               image_size=(IMAGE_SIZE, IMAGE_SIZE), labels=None,
+                                                               shuffle=True, crop_to_aspect_ratio=False) # change last param to True!
     x_pictograms_processed = utils.load_data.normalize_dataset(x_pictograms)
+
+    #for pictograms in x_pictograms_processed:
+    #    for pictogram in pictograms:
+    #        plt.imshow(pictogram)
+    #        plt.show()
 
     cycle_gan = model.CycleGan(config)
     cycle_gan.compile()

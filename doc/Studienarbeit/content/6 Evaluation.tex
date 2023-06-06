@@ -108,7 +108,7 @@ Ein zentraler Aspekt ist zudem, ob ein erweiterter Datensatz, der aus realen und
 
 Das Ziel der augmentierten Bilder ist, dass sie sich als Trainingsbilder für die Straßenschilderkennung eignen. Die Evaluation soll deshalb zu zeigen, dass ein Klassifikator eine geringere Genauigkeit auf augmentierten Bildern erzielt als auf nicht-augmentierten Bildern. Wenn die augmentierten Bilder fotorealistisch sind, dann zeigt das, dass Grenzfälle wie etwa Bewegungsunschärfe und Schnee die Genauigkeit der Straßenschilderkennung verringern. In dem Fall können solche Bilder verwendet werden, um Software zur Straßenschilderkennung für solche Grenzfälle zu trainieren.
 
-Tabelle \ref{tab:augmentation-classification-acc} zeigt die Ergebnisse dieser Evaluation. Der Klassifikator ist in jedem Fall auf dem \ac{GTSRB} \emph{trainiert} und auf Bildern mit der jeweiligen Augmentierung \emph{getestet}. Der Referenzwert ist die Genauigkeit des Klassifikators auf nicht-augmentierten Bildern des UNet-basierten \ac{CycleGAN}.
+Tabelle \ref{tab:augmentation-classification-acc} zeigt die Ergebnisse dieser Evaluation. Der Klassifikator ist in jedem Fall auf dem \ac{GTSRB} \emph{trainiert} und auf Bildern mit der jeweiligen Augmentierung \emph{getestet}. Der Referenzwert ist die Genauigkeit des Klassifikators auf nicht-augmentierten Bildern des U-Net-basierten \ac{CycleGAN}.
 
 \begin{table}[h]
 	\centering
@@ -127,12 +127,12 @@ Tabelle \ref{tab:augmentation-classification-acc} zeigt die Ergebnisse dieser Ev
 
 Eine Bewegungsunschärfe zeigt den geringsten Einfluss auf die Genaugkeit. Ungültige Schilder und Schnee besitzen einen signifikant größeren Einfluss. Die Kombination aller drei Augmentierungen reduziert die Genauigkeit auf 4\%.
 
-Da die Evaluation hier nicht den Fotorealismus der Bilder quantitativ beurteilt, kann dadaus nicht eindeutig geschlussfolgert werden, dass sich die augmentierten Daten als Trainingsbilder eignen. Die Ergebnisse geben jedoch Hinweise darauf, dass Entwickelnde die Bilder als zusätzliche Trainingsdaten für die Straßenschilderkennung in Betracht ziehen können.
+Da die Evaluation hier nicht den Fotorealismus der Bilder quantitativ beurteilt, kann daraus nicht eindeutig geschlussfolgert werden, dass sich die augmentierten Daten als Trainingsbilder eignen. Die Ergebnisse geben jedoch Hinweise darauf, dass Entwickelnde die Bilder als zusätzliche Trainingsdaten für die Straßenschilderkennung in Betracht ziehen können.
 
 \section{Verbesserungsmöglichkeiten}
 
 Es existieren verschiedene Verbesserungsmöglichkeiten, damit das \ac{CycleGAN} fotorealistischere Bilder erzeugt. Eine Möglichkeit ist, dass das Training einen sogenannten \emph{Learning Rate Decay} verwendet. Damit ist gemeint, dass die Lernrate, die die Größe der Parameteränderungen pro Trainingsschritt angibt, mit der Zeit abnimmt. Das schlägt auch die \ac{CycleGAN}-Veröffentlichung vor.
 
-Eine weitere Möglichkeit ist, ein ResNet-Modell speziell für diesen Anwendungsfall zu entwickeln.
+Eine weitere Möglichkeit ist, ein ResNet-Modell speziell für diesen Anwendungsfall zu entwickeln. Eigentlich ist ausgehend von der \ac{CycleGAN}-Veröffentlichung nämlich zu erwarten, dass ein ResNet-basiertes \ac{CycleGAN} zufriedenstellende Ergebnisse erzielt.
 
-\todo[inline]{zu Ende schreiben}
+Ein zusätzlicher Punkt ist, das Erzeugen von ungültigen Schildern fotorealistischer zu gestalten. Beispielsweise indem das Kreuz an die Helligkeit des Hintergrunds angepasst wird.

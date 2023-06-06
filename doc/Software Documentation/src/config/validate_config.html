@@ -39,20 +39,29 @@ def main():
     config = toml.load(&#39;./config.toml&#39;)
 
     # PATHS
-    assert (isinstance(config[&#39;paths&#39;][&#39;train_data&#39;], str))
-    assert (isinstance(config[&#39;paths&#39;][&#39;pictograms&#39;], str))
-    assert (os.path.exists(config[&#39;paths&#39;][&#39;train_data&#39;]))
-    assert (os.path.exists(config[&#39;paths&#39;][&#39;pictograms&#39;]))
+    paths = [&#39;train_data&#39;, &#39;pictograms&#39;, &#39;augmentation_data&#39;, &#39;destination&#39;]
+    classifier_paths = [&#39;train_data&#39;, &#39;test_data&#39;]
+    for path in paths:
+        assert (path in config[&#39;paths&#39;].keys())
+        assert (isinstance(config[&#39;paths&#39;][path], str))
+        # assert (os.path.exists(os.path.join(&#39;..&#39;, config[&#39;paths&#39;][path])))
+    for path in classifier_paths:
+        assert (path in config[&#39;paths&#39;][&#39;classifier&#39;].keys())
+        assert (isinstance(config[&#39;paths&#39;][&#39;classifier&#39;][path], str))
+        # assert (os.path.exists(config[&#39;paths&#39;][&#39;classifier&#39;][path]))
+    assert (isinstance(config[&#39;paths&#39;][&#39;classifier&#39;][&#39;checkpoint_directory_name&#39;], str))
 
     # MODEL
-    image_dimensions = config[&#39;model&#39;][&#39;image_dimensions&#39;]
-    assert (isinstance(image_dimensions, list))
-    assert (len(image_dimensions) == 2)
-    assert (image_dimensions[0] == image_dimensions[1])
+    assert (isinstance(config[&#39;model&#39;][&#39;image_size&#39;], int))
+    assert (isinstance(config[&#39;model&#39;][&#39;generator_type&#39;], str))
 
     # TRAINING
-    assert (isinstance(config[&#39;training&#39;][&#39;batch_size&#39;], int))
-    assert (isinstance(config[&#39;training&#39;][&#39;number_of_epochs&#39;], int))
+    integers = [&#39;number_of_epochs&#39;, &#39;batch_size&#39;, &#39;lambda&#39;]
+    floats = [&#39;learning_rate&#39;, &#39;beta_1&#39;, &#39;beta_2&#39;]
+    for integer in integers:
+        assert (isinstance(config[&#39;training&#39;][integer], int))
+    for float_ in floats:
+        assert (isinstance(config[&#39;training&#39;][float_], float))
 
     print(&#39;Successfully validated the configuration file.&#39;)
 
@@ -81,20 +90,29 @@ if __name__ == &#39;__main__&#39;:
     config = toml.load(&#39;./config.toml&#39;)
 
     # PATHS
-    assert (isinstance(config[&#39;paths&#39;][&#39;train_data&#39;], str))
-    assert (isinstance(config[&#39;paths&#39;][&#39;pictograms&#39;], str))
-    assert (os.path.exists(config[&#39;paths&#39;][&#39;train_data&#39;]))
-    assert (os.path.exists(config[&#39;paths&#39;][&#39;pictograms&#39;]))
+    paths = [&#39;train_data&#39;, &#39;pictograms&#39;, &#39;augmentation_data&#39;, &#39;destination&#39;]
+    classifier_paths = [&#39;train_data&#39;, &#39;test_data&#39;]
+    for path in paths:
+        assert (path in config[&#39;paths&#39;].keys())
+        assert (isinstance(config[&#39;paths&#39;][path], str))
+        # assert (os.path.exists(os.path.join(&#39;..&#39;, config[&#39;paths&#39;][path])))
+    for path in classifier_paths:
+        assert (path in config[&#39;paths&#39;][&#39;classifier&#39;].keys())
+        assert (isinstance(config[&#39;paths&#39;][&#39;classifier&#39;][path], str))
+        # assert (os.path.exists(config[&#39;paths&#39;][&#39;classifier&#39;][path]))
+    assert (isinstance(config[&#39;paths&#39;][&#39;classifier&#39;][&#39;checkpoint_directory_name&#39;], str))
 
     # MODEL
-    image_dimensions = config[&#39;model&#39;][&#39;image_dimensions&#39;]
-    assert (isinstance(image_dimensions, list))
-    assert (len(image_dimensions) == 2)
-    assert (image_dimensions[0] == image_dimensions[1])
+    assert (isinstance(config[&#39;model&#39;][&#39;image_size&#39;], int))
+    assert (isinstance(config[&#39;model&#39;][&#39;generator_type&#39;], str))
 
     # TRAINING
-    assert (isinstance(config[&#39;training&#39;][&#39;batch_size&#39;], int))
-    assert (isinstance(config[&#39;training&#39;][&#39;number_of_epochs&#39;], int))
+    integers = [&#39;number_of_epochs&#39;, &#39;batch_size&#39;, &#39;lambda&#39;]
+    floats = [&#39;learning_rate&#39;, &#39;beta_1&#39;, &#39;beta_2&#39;]
+    for integer in integers:
+        assert (isinstance(config[&#39;training&#39;][integer], int))
+    for float_ in floats:
+        assert (isinstance(config[&#39;training&#39;][float_], float))
 
     print(&#39;Successfully validated the configuration file.&#39;)</code></pre>
 </details>

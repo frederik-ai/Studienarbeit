@@ -32,17 +32,15 @@ Implementation of the CycleGAN model. Partly derived from: https://www.tensorflo
 &#34;&#34;&#34;
 
 import tensorflow as tf
-import time
 from tqdm import tqdm
 import uuid
-import os
 from enum import Enum
 
 from tensorflow_examples.models.pix2pix import pix2pix
 import utils.misc
 import utils.load_data
 import utils.preprocess_image
-import resnet
+import external.resnet as resnet
 
 
 class GeneratorType(Enum):
@@ -75,6 +73,9 @@ class CycleGan:
     &#34;&#34;&#34;
 
     def __init__(self, config):
+        # Set TensorFlow log level
+        tf.get_logger().setLevel(&#39;ERROR&#39;)  # Set TensorFlow log level to ERROR
+
         if config[&#39;model&#39;][&#39;generator_type&#39;] == &#39;unet&#39;:
             self.generator_type = GeneratorType.U_NET
         elif config[&#39;model&#39;][&#39;generator_type&#39;] == &#39;resnet&#39;:
@@ -93,8 +94,8 @@ class CycleGan:
             self.discriminator_x = pix2pix.discriminator(norm_type=&#39;instancenorm&#39;, target=False)
             self.discriminator_y = pix2pix.discriminator(norm_type=&#39;instancenorm&#39;, target=False)
         else:
-            self.discriminator_x = resnet.ConvDiscriminator((256, 256, 3))
-            self.discriminator_y = resnet.ConvDiscriminator((256, 256, 3))
+            self.discriminator_x = resnet.ConvDiscriminator((self.image_size, self.image_size, 3))
+            self.discriminator_y = resnet.ConvDiscriminator((self.image_size, self.image_size, 3))
 
         # Optimizers
         self.generator_g_optimizer = tf.keras.optimizers.legacy.Adam(2e-4, beta_1=0.5)
@@ -104,14 +105,22 @@ class CycleGan:
 
         # Loss functions
         if self.generator_type == GeneratorType.U_NET:
-            # Showed better performance with unet
             self.adversarial_loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         else:
+            # Because ResNet training is unstable
             self.adversarial_loss = tf.keras.losses.MeanSquaredError()
         self.l1_loss = tf.keras.losses.MeanAbsoluteError()
         self.LAMBDA = config[&#39;training&#39;][&#39;lambda&#39;]
 
-        # checkpoints
+        self.loss_obj = self.adversarial_loss
+
+        # For Tensorboard
+        self.total_epochs = tf.Variable(0)
+        self.total_steps = tf.Variable(0)
+        self.log_path = &#39;logs/&#39; + config[&#39;model&#39;][&#39;generator_type&#39;]
+        self.summary_writer = tf.summary.create_file_writer(self.log_path)
+
+        # Checkpoints
         self.checkpoint = self.init_checkpoint()
         if self.generator_type == GeneratorType.U_NET:
             checkpoint_path = &#39;./checkpoints/cyclegan_u_net&#39;
@@ -138,51 +147,66 @@ class CycleGan:
         &#34;&#34;&#34;
         return self.generator_g(input_pictogram, training=False)
 
-    def fit(self, pictograms, real_images, epochs=1):
-        &#34;&#34;&#34;Train the model for a specific number of epochs. Checkpoints are saved every epoch.
+    def fit(self, pictograms, real_images, epochs=1, epochs_per_checkpoint=10):
+        &#34;&#34;&#34;Train the model for a specific number of epochs. Checkpoints are saved every 10 epochs.
 
         Args:
             pictograms: 4d tensor containing the raw pictograms (batch_size, height, width, channels).
             real_images: 4d tensor containing the training images of street signs (batch_size, height, width, channels).
-            epochs (int): Number of epochs to train the model.
+            epochs: Number of epochs to train the model.
+            epochs_per_checkpoint: Number of epochs before a new checkpoint is saved.
         &#34;&#34;&#34;
         print(&#39;Training...&#39;)
-        start = time.time()
-        for epoch in range(epochs):
-            print(f&#39;Epoch: {epoch + 1} / {epochs}&#39;)
-            for image_batch in tqdm(real_images):
+        with self.summary_writer.as_default():
+            for epoch in range(epochs):
+                self.total_epochs.assign_add(1)  # increment
+                print(f&#39;Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs - (epoch + 1)}&#39;)
+
+                # Single training step
+                for image_batch in tqdm(real_images):
+                    self.total_steps.assign_add(1)  # increment
+
+                    # Transform the pictograms
+                    pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+                    single_pictogram_batch = pictograms.take(1).get_single_element()
+                    single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                        single_pictogram_batch)
+
+                    # Train the model
+                    losses = self.train_step(single_pictogram_batch, image_batch)
+
+                    # For Tensorboard; Log the losses
+                    for loss_name in losses:
+                        tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
+
+                # After each epoch: Generate an image
                 pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
                 single_pictogram_batch = pictograms.take(1).get_single_element()
-                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(single_pictogram_batch)
-                self.train_step(single_pictogram_batch, image_batch)
+                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                    single_pictogram_batch)
+                generator_test_result = self.generator_g(single_pictogram_batch)
+                random_filename = str(uuid.uuid4())
+                utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
+                                               relative_path=&#39;generated_images&#39;)
 
-            pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
-            single_pictogram = pictograms.take(1).get_single_element()[0]
-            generator_test_result = self.generator_g(single_pictogram)
-            random_filename = str(uuid.uuid4())
-            utils.misc.store_tensor_as_img(tensor=generator_test_result, filename=random_filename,
-                                           relative_path=&#39;generated_images&#39;)
+                self.summary_writer.flush()  # write tensorboard logs to log file
 
-            self.checkpoint_manager.save()
-            print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
-            # if ((epoch + 1) % 1 == 0) and ((epoch + 1) &lt; epochs):
-            #    self.checkpoint_manager.save()
-            #    print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
-
-        print(&#39;Time taken for training is {:.2f} sec\n&#39;.format(time.time() - start))
+                # Save a checkpoint each epochs_per_checkpoint epochs
+                if ((epoch + 1) % epochs_per_checkpoint == 0) and ((epoch + 1) &lt; epochs):
+                    self.checkpoint_manager.save()
+                    print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
         self.checkpoint_manager.save()
         print(&#39;Checkpoint saved for this training&#39;)
 
-    def calc_cycle_loss(self, real_image, cycled_image):
-        loss1 = tf.reduce_mean(tf.abs(real_image - cycled_image))
-        return self.LAMBDA * loss1
-
-    def train_step(self, real_pictogram, real_street_sign):
+    def train_step(self, real_pictogram, real_street_sign, identity_loss=False):
         &#34;&#34;&#34;Train the model on a single batch of images.
 
         Args:
             real_pictogram: 4d tensor containing the pictograms (batch_size, height, width, channels).
             real_street_sign: 4d tensor containing real street sign images (batch_size, height, width, channels).
+
+        Returns:
+            Losses (dict): Dictionary containing the losses of the generators and discriminators.
         &#34;&#34;&#34;
         with tf.GradientTape(persistent=True) as tape:
             # Generate
@@ -190,44 +214,69 @@ class CycleGan:
             generated_pictogram = self.generator_f(real_street_sign, training=True)
 
             # Discriminator X loss
+            # -- how well does it identify real pictograms as real?
             discriminator_x_real_pictogram = self.discriminator_x(real_pictogram, training=True)
             discriminator_x_real_loss = self.adversarial_loss(tf.ones_like(discriminator_x_real_pictogram),
                                                               discriminator_x_real_pictogram)
+            # -- how well does it identify fake pictograms as fake?
             discriminator_x_fake_pictogram = self.discriminator_x(generated_pictogram, training=True)
             discriminator_x_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_x_fake_pictogram),
                                                               discriminator_x_fake_pictogram)
-            disc_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
+            # -- total loss
+            discriminator_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
 
             # Discriminator Y loss
+            # -- how well does it identify real traffic signs as real?
             discriminator_y_real_street_sign = self.discriminator_y(real_street_sign, training=True)
             discriminator_y_real_loss = self.adversarial_loss(tf.ones_like(discriminator_y_real_street_sign),
                                                               discriminator_y_real_street_sign)
+            # -- how well does it identify fake traffic signs as fake?
             discriminator_y_fake_street_sign = self.discriminator_y(generated_street_sign, training=True)
             discriminator_y_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_y_fake_street_sign),
                                                               discriminator_y_fake_street_sign)
-            disc_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
+            # -- total loss
+            discriminator_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
 
             # Cycle consistency loss
+            # -- how well does the generated image match the input images?
+            # -- pictogram -&gt; street sign -&gt; pictogram
             cycled_pictogram = self.generator_f(generated_street_sign, training=True)
+            cycled_pictogram_loss = self.l1_loss(real_pictogram, cycled_pictogram)
+            # -- street sign -&gt; pictogram -&gt; street sign
             cycled_street_sign = self.generator_g(generated_pictogram, training=True)
-            total_cycle_loss = self.calc_cycle_loss(
-                real_pictogram, cycled_pictogram) + self.calc_cycle_loss(real_street_sign, cycled_street_sign)
+            cycled_street_sign_loss = self.l1_loss(real_street_sign, cycled_street_sign)
+            # -- total loss
+            cycle_consistency_loss = cycled_pictogram_loss + cycled_street_sign_loss
 
             # Generators G&amp;F loss
-            generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign), discriminator_y_fake_street_sign)
-            generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram), discriminator_x_fake_pictogram)
-            total_gen_g_loss = generator_g_loss + total_cycle_loss
-            total_gen_f_loss = generator_f_loss + total_cycle_loss
+            # -- how well do the generators fool the discriminators?
+            generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign),
+                                                     discriminator_y_fake_street_sign)
+            generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
+                                                     discriminator_x_fake_pictogram)
+            total_generator_g_loss = generator_g_loss + cycle_consistency_loss
+            total_generator_f_loss = generator_f_loss + cycle_consistency_loss
+
+            # -- how much do the generators change an image that is already from their target domain?
+            if identity_loss:
+                same_x = self.generator_f(real_pictogram, training=True)
+                generator_g_identity_loss = self.l1_loss(real_pictogram, same_x)
+                same_y = self.generator_g(real_street_sign, training=True)
+                generator_f_identity_loss = self.l1_loss(real_street_sign, same_y)
+                total_generator_g_loss += generator_g_identity_loss * self.LAMBDA * 0.5
+                total_generator_f_loss += generator_f_identity_loss * self.LAMBDA * 0.5
+
+            total_loss = discriminator_x_loss + discriminator_y_loss + total_generator_g_loss + total_generator_f_loss
 
         # Gradients for optimization
-        generator_g_gradients = tape.gradient(total_gen_g_loss,
+        generator_g_gradients = tape.gradient(total_generator_g_loss,
                                               self.generator_g.trainable_variables)
-        generator_f_gradients = tape.gradient(total_gen_f_loss,
+        generator_f_gradients = tape.gradient(total_generator_f_loss,
                                               self.generator_f.trainable_variables)
 
-        discriminator_x_gradients = tape.gradient(disc_x_loss,
+        discriminator_x_gradients = tape.gradient(discriminator_x_loss,
                                                   self.discriminator_x.trainable_variables)
-        discriminator_y_gradients = tape.gradient(disc_y_loss,
+        discriminator_y_gradients = tape.gradient(discriminator_y_loss,
                                                   self.discriminator_y.trainable_variables)
 
         # Apply the gradients
@@ -243,6 +292,14 @@ class CycleGan:
         self.discriminator_y_optimizer.apply_gradients(zip(discriminator_y_gradients,
                                                            self.discriminator_y.trainable_variables))
 
+        return {
+            &#39;discriminator_x_loss&#39;: discriminator_x_loss,
+            &#39;discriminator_y_loss&#39;: discriminator_y_loss,
+            &#39;generator_g_loss&#39;: total_generator_g_loss,
+            &#39;generator_f_loss&#39;: total_generator_f_loss,
+            &#39;total_loss&#39;: total_loss
+        }
+
     def init_checkpoint(self):
         &#34;&#34;&#34;Create a checkpoint object.
 
@@ -257,7 +314,9 @@ class CycleGan:
                                          generator_g_optimizer=self.generator_g_optimizer,
                                          generator_f_optimizer=self.generator_f_optimizer,
                                          discriminator_x_optimizer=self.discriminator_x_optimizer,
-                                         discriminator_y_optimizer=self.discriminator_y_optimizer)
+                                         discriminator_y_optimizer=self.discriminator_y_optimizer,
+                                         step=self.total_steps,
+                                         epoch=self.total_epochs)
         return checkpoint
 
     def restore_latest_checkpoint_if_exists(self):
@@ -361,6 +420,9 @@ class CycleGan:
     &#34;&#34;&#34;
 
     def __init__(self, config):
+        # Set TensorFlow log level
+        tf.get_logger().setLevel(&#39;ERROR&#39;)  # Set TensorFlow log level to ERROR
+
         if config[&#39;model&#39;][&#39;generator_type&#39;] == &#39;unet&#39;:
             self.generator_type = GeneratorType.U_NET
         elif config[&#39;model&#39;][&#39;generator_type&#39;] == &#39;resnet&#39;:
@@ -379,8 +441,8 @@ class CycleGan:
             self.discriminator_x = pix2pix.discriminator(norm_type=&#39;instancenorm&#39;, target=False)
             self.discriminator_y = pix2pix.discriminator(norm_type=&#39;instancenorm&#39;, target=False)
         else:
-            self.discriminator_x = resnet.ConvDiscriminator((256, 256, 3))
-            self.discriminator_y = resnet.ConvDiscriminator((256, 256, 3))
+            self.discriminator_x = resnet.ConvDiscriminator((self.image_size, self.image_size, 3))
+            self.discriminator_y = resnet.ConvDiscriminator((self.image_size, self.image_size, 3))
 
         # Optimizers
         self.generator_g_optimizer = tf.keras.optimizers.legacy.Adam(2e-4, beta_1=0.5)
@@ -390,14 +452,22 @@ class CycleGan:
 
         # Loss functions
         if self.generator_type == GeneratorType.U_NET:
-            # Showed better performance with unet
             self.adversarial_loss = tf.keras.losses.BinaryCrossentropy(from_logits=True)
         else:
+            # Because ResNet training is unstable
             self.adversarial_loss = tf.keras.losses.MeanSquaredError()
         self.l1_loss = tf.keras.losses.MeanAbsoluteError()
         self.LAMBDA = config[&#39;training&#39;][&#39;lambda&#39;]
 
-        # checkpoints
+        self.loss_obj = self.adversarial_loss
+
+        # For Tensorboard
+        self.total_epochs = tf.Variable(0)
+        self.total_steps = tf.Variable(0)
+        self.log_path = &#39;logs/&#39; + config[&#39;model&#39;][&#39;generator_type&#39;]
+        self.summary_writer = tf.summary.create_file_writer(self.log_path)
+
+        # Checkpoints
         self.checkpoint = self.init_checkpoint()
         if self.generator_type == GeneratorType.U_NET:
             checkpoint_path = &#39;./checkpoints/cyclegan_u_net&#39;
@@ -424,51 +494,66 @@ class CycleGan:
         &#34;&#34;&#34;
         return self.generator_g(input_pictogram, training=False)
 
-    def fit(self, pictograms, real_images, epochs=1):
-        &#34;&#34;&#34;Train the model for a specific number of epochs. Checkpoints are saved every epoch.
+    def fit(self, pictograms, real_images, epochs=1, epochs_per_checkpoint=10):
+        &#34;&#34;&#34;Train the model for a specific number of epochs. Checkpoints are saved every 10 epochs.
 
         Args:
             pictograms: 4d tensor containing the raw pictograms (batch_size, height, width, channels).
             real_images: 4d tensor containing the training images of street signs (batch_size, height, width, channels).
-            epochs (int): Number of epochs to train the model.
+            epochs: Number of epochs to train the model.
+            epochs_per_checkpoint: Number of epochs before a new checkpoint is saved.
         &#34;&#34;&#34;
         print(&#39;Training...&#39;)
-        start = time.time()
-        for epoch in range(epochs):
-            print(f&#39;Epoch: {epoch + 1} / {epochs}&#39;)
-            for image_batch in tqdm(real_images):
+        with self.summary_writer.as_default():
+            for epoch in range(epochs):
+                self.total_epochs.assign_add(1)  # increment
+                print(f&#39;Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs - (epoch + 1)}&#39;)
+
+                # Single training step
+                for image_batch in tqdm(real_images):
+                    self.total_steps.assign_add(1)  # increment
+
+                    # Transform the pictograms
+                    pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+                    single_pictogram_batch = pictograms.take(1).get_single_element()
+                    single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                        single_pictogram_batch)
+
+                    # Train the model
+                    losses = self.train_step(single_pictogram_batch, image_batch)
+
+                    # For Tensorboard; Log the losses
+                    for loss_name in losses:
+                        tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
+
+                # After each epoch: Generate an image
                 pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
                 single_pictogram_batch = pictograms.take(1).get_single_element()
-                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(single_pictogram_batch)
-                self.train_step(single_pictogram_batch, image_batch)
+                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                    single_pictogram_batch)
+                generator_test_result = self.generator_g(single_pictogram_batch)
+                random_filename = str(uuid.uuid4())
+                utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
+                                               relative_path=&#39;generated_images&#39;)
 
-            pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
-            single_pictogram = pictograms.take(1).get_single_element()[0]
-            generator_test_result = self.generator_g(single_pictogram)
-            random_filename = str(uuid.uuid4())
-            utils.misc.store_tensor_as_img(tensor=generator_test_result, filename=random_filename,
-                                           relative_path=&#39;generated_images&#39;)
+                self.summary_writer.flush()  # write tensorboard logs to log file
 
-            self.checkpoint_manager.save()
-            print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
-            # if ((epoch + 1) % 1 == 0) and ((epoch + 1) &lt; epochs):
-            #    self.checkpoint_manager.save()
-            #    print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
-
-        print(&#39;Time taken for training is {:.2f} sec\n&#39;.format(time.time() - start))
+                # Save a checkpoint each epochs_per_checkpoint epochs
+                if ((epoch + 1) % epochs_per_checkpoint == 0) and ((epoch + 1) &lt; epochs):
+                    self.checkpoint_manager.save()
+                    print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
         self.checkpoint_manager.save()
         print(&#39;Checkpoint saved for this training&#39;)
 
-    def calc_cycle_loss(self, real_image, cycled_image):
-        loss1 = tf.reduce_mean(tf.abs(real_image - cycled_image))
-        return self.LAMBDA * loss1
-
-    def train_step(self, real_pictogram, real_street_sign):
+    def train_step(self, real_pictogram, real_street_sign, identity_loss=False):
         &#34;&#34;&#34;Train the model on a single batch of images.
 
         Args:
             real_pictogram: 4d tensor containing the pictograms (batch_size, height, width, channels).
             real_street_sign: 4d tensor containing real street sign images (batch_size, height, width, channels).
+
+        Returns:
+            Losses (dict): Dictionary containing the losses of the generators and discriminators.
         &#34;&#34;&#34;
         with tf.GradientTape(persistent=True) as tape:
             # Generate
@@ -476,44 +561,69 @@ class CycleGan:
             generated_pictogram = self.generator_f(real_street_sign, training=True)
 
             # Discriminator X loss
+            # -- how well does it identify real pictograms as real?
             discriminator_x_real_pictogram = self.discriminator_x(real_pictogram, training=True)
             discriminator_x_real_loss = self.adversarial_loss(tf.ones_like(discriminator_x_real_pictogram),
                                                               discriminator_x_real_pictogram)
+            # -- how well does it identify fake pictograms as fake?
             discriminator_x_fake_pictogram = self.discriminator_x(generated_pictogram, training=True)
             discriminator_x_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_x_fake_pictogram),
                                                               discriminator_x_fake_pictogram)
-            disc_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
+            # -- total loss
+            discriminator_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
 
             # Discriminator Y loss
+            # -- how well does it identify real traffic signs as real?
             discriminator_y_real_street_sign = self.discriminator_y(real_street_sign, training=True)
             discriminator_y_real_loss = self.adversarial_loss(tf.ones_like(discriminator_y_real_street_sign),
                                                               discriminator_y_real_street_sign)
+            # -- how well does it identify fake traffic signs as fake?
             discriminator_y_fake_street_sign = self.discriminator_y(generated_street_sign, training=True)
             discriminator_y_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_y_fake_street_sign),
                                                               discriminator_y_fake_street_sign)
-            disc_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
+            # -- total loss
+            discriminator_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
 
             # Cycle consistency loss
+            # -- how well does the generated image match the input images?
+            # -- pictogram -&gt; street sign -&gt; pictogram
             cycled_pictogram = self.generator_f(generated_street_sign, training=True)
+            cycled_pictogram_loss = self.l1_loss(real_pictogram, cycled_pictogram)
+            # -- street sign -&gt; pictogram -&gt; street sign
             cycled_street_sign = self.generator_g(generated_pictogram, training=True)
-            total_cycle_loss = self.calc_cycle_loss(
-                real_pictogram, cycled_pictogram) + self.calc_cycle_loss(real_street_sign, cycled_street_sign)
+            cycled_street_sign_loss = self.l1_loss(real_street_sign, cycled_street_sign)
+            # -- total loss
+            cycle_consistency_loss = cycled_pictogram_loss + cycled_street_sign_loss
 
             # Generators G&amp;F loss
-            generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign), discriminator_y_fake_street_sign)
-            generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram), discriminator_x_fake_pictogram)
-            total_gen_g_loss = generator_g_loss + total_cycle_loss
-            total_gen_f_loss = generator_f_loss + total_cycle_loss
+            # -- how well do the generators fool the discriminators?
+            generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign),
+                                                     discriminator_y_fake_street_sign)
+            generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
+                                                     discriminator_x_fake_pictogram)
+            total_generator_g_loss = generator_g_loss + cycle_consistency_loss
+            total_generator_f_loss = generator_f_loss + cycle_consistency_loss
+
+            # -- how much do the generators change an image that is already from their target domain?
+            if identity_loss:
+                same_x = self.generator_f(real_pictogram, training=True)
+                generator_g_identity_loss = self.l1_loss(real_pictogram, same_x)
+                same_y = self.generator_g(real_street_sign, training=True)
+                generator_f_identity_loss = self.l1_loss(real_street_sign, same_y)
+                total_generator_g_loss += generator_g_identity_loss * self.LAMBDA * 0.5
+                total_generator_f_loss += generator_f_identity_loss * self.LAMBDA * 0.5
+
+            total_loss = discriminator_x_loss + discriminator_y_loss + total_generator_g_loss + total_generator_f_loss
 
         # Gradients for optimization
-        generator_g_gradients = tape.gradient(total_gen_g_loss,
+        generator_g_gradients = tape.gradient(total_generator_g_loss,
                                               self.generator_g.trainable_variables)
-        generator_f_gradients = tape.gradient(total_gen_f_loss,
+        generator_f_gradients = tape.gradient(total_generator_f_loss,
                                               self.generator_f.trainable_variables)
 
-        discriminator_x_gradients = tape.gradient(disc_x_loss,
+        discriminator_x_gradients = tape.gradient(discriminator_x_loss,
                                                   self.discriminator_x.trainable_variables)
-        discriminator_y_gradients = tape.gradient(disc_y_loss,
+        discriminator_y_gradients = tape.gradient(discriminator_y_loss,
                                                   self.discriminator_y.trainable_variables)
 
         # Apply the gradients
@@ -529,6 +639,14 @@ class CycleGan:
         self.discriminator_y_optimizer.apply_gradients(zip(discriminator_y_gradients,
                                                            self.discriminator_y.trainable_variables))
 
+        return {
+            &#39;discriminator_x_loss&#39;: discriminator_x_loss,
+            &#39;discriminator_y_loss&#39;: discriminator_y_loss,
+            &#39;generator_g_loss&#39;: total_generator_g_loss,
+            &#39;generator_f_loss&#39;: total_generator_f_loss,
+            &#39;total_loss&#39;: total_loss
+        }
+
     def init_checkpoint(self):
         &#34;&#34;&#34;Create a checkpoint object.
 
@@ -543,7 +661,9 @@ class CycleGan:
                                          generator_g_optimizer=self.generator_g_optimizer,
                                          generator_f_optimizer=self.generator_f_optimizer,
                                          discriminator_x_optimizer=self.discriminator_x_optimizer,
-                                         discriminator_y_optimizer=self.discriminator_y_optimizer)
+                                         discriminator_y_optimizer=self.discriminator_y_optimizer,
+                                         step=self.total_steps,
+                                         epoch=self.total_epochs)
         return checkpoint
 
     def restore_latest_checkpoint_if_exists(self):
@@ -566,20 +686,6 @@ class CycleGan:
 </details>
 <h3>Methods</h3>
 <dl>
-<dt id="src.model.CycleGan.calc_cycle_loss"><code class="name flex">
-<span>def <span class="ident">calc_cycle_loss</span></span>(<span>self, real_image, cycled_image)</span>
-</code></dt>
-<dd>
-<div class="desc"></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def calc_cycle_loss(self, real_image, cycled_image):
-    loss1 = tf.reduce_mean(tf.abs(real_image - cycled_image))
-    return self.LAMBDA * loss1</code></pre>
-</details>
-</dd>
 <dt id="src.model.CycleGan.compile"><code class="name flex">
 <span>def <span class="ident">compile</span></span>(<span>self)</span>
 </code></dt>
@@ -598,55 +704,73 @@ class CycleGan:
 </details>
 </dd>
 <dt id="src.model.CycleGan.fit"><code class="name flex">
-<span>def <span class="ident">fit</span></span>(<span>self, pictograms, real_images, epochs=1)</span>
+<span>def <span class="ident">fit</span></span>(<span>self, pictograms, real_images, epochs=1, epochs_per_checkpoint=10)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Train the model for a specific number of epochs. Checkpoints are saved every epoch.</p>
+<div class="desc"><p>Train the model for a specific number of epochs. Checkpoints are saved every 10 epochs.</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>pictograms</code></strong></dt>
 <dd>4d tensor containing the raw pictograms (batch_size, height, width, channels).</dd>
 <dt><strong><code>real_images</code></strong></dt>
 <dd>4d tensor containing the training images of street signs (batch_size, height, width, channels).</dd>
-<dt><strong><code>epochs</code></strong> :&ensp;<code>int</code></dt>
+<dt><strong><code>epochs</code></strong></dt>
 <dd>Number of epochs to train the model.</dd>
+<dt><strong><code>epochs_per_checkpoint</code></strong></dt>
+<dd>Number of epochs before a new checkpoint is saved.</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def fit(self, pictograms, real_images, epochs=1):
-    &#34;&#34;&#34;Train the model for a specific number of epochs. Checkpoints are saved every epoch.
+<pre><code class="python">def fit(self, pictograms, real_images, epochs=1, epochs_per_checkpoint=10):
+    &#34;&#34;&#34;Train the model for a specific number of epochs. Checkpoints are saved every 10 epochs.
 
     Args:
         pictograms: 4d tensor containing the raw pictograms (batch_size, height, width, channels).
         real_images: 4d tensor containing the training images of street signs (batch_size, height, width, channels).
-        epochs (int): Number of epochs to train the model.
+        epochs: Number of epochs to train the model.
+        epochs_per_checkpoint: Number of epochs before a new checkpoint is saved.
     &#34;&#34;&#34;
     print(&#39;Training...&#39;)
-    start = time.time()
-    for epoch in range(epochs):
-        print(f&#39;Epoch: {epoch + 1} / {epochs}&#39;)
-        for image_batch in tqdm(real_images):
+    with self.summary_writer.as_default():
+        for epoch in range(epochs):
+            self.total_epochs.assign_add(1)  # increment
+            print(f&#39;Epoch: {int(self.total_epochs)} / {int(self.total_epochs) + epochs - (epoch + 1)}&#39;)
+
+            # Single training step
+            for image_batch in tqdm(real_images):
+                self.total_steps.assign_add(1)  # increment
+
+                # Transform the pictograms
+                pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
+                single_pictogram_batch = pictograms.take(1).get_single_element()
+                single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                    single_pictogram_batch)
+
+                # Train the model
+                losses = self.train_step(single_pictogram_batch, image_batch)
+
+                # For Tensorboard; Log the losses
+                for loss_name in losses:
+                    tf.summary.scalar(loss_name, losses[loss_name], int(self.total_steps))
+
+            # After each epoch: Generate an image
             pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
             single_pictogram_batch = pictograms.take(1).get_single_element()
-            single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(single_pictogram_batch)
-            self.train_step(single_pictogram_batch, image_batch)
+            single_pictogram_batch, _, _ = utils.preprocess_image.randomly_transform_image_batch(
+                single_pictogram_batch)
+            generator_test_result = self.generator_g(single_pictogram_batch)
+            random_filename = str(uuid.uuid4())
+            utils.misc.store_tensor_as_img(tensor=generator_test_result[0], filename=random_filename,
+                                           relative_path=&#39;generated_images&#39;)
 
-        pictograms.shuffle(buffer_size=100, reshuffle_each_iteration=True)
-        single_pictogram = pictograms.take(1).get_single_element()[0]
-        generator_test_result = self.generator_g(single_pictogram)
-        random_filename = str(uuid.uuid4())
-        utils.misc.store_tensor_as_img(tensor=generator_test_result, filename=random_filename,
-                                       relative_path=&#39;generated_images&#39;)
+            self.summary_writer.flush()  # write tensorboard logs to log file
 
-        self.checkpoint_manager.save()
-        print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
-        # if ((epoch + 1) % 1 == 0) and ((epoch + 1) &lt; epochs):
-        #    self.checkpoint_manager.save()
-        #    print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
-
-    print(&#39;Time taken for training is {:.2f} sec\n&#39;.format(time.time() - start))
+            # Save a checkpoint each epochs_per_checkpoint epochs
+            if ((epoch + 1) % epochs_per_checkpoint == 0) and ((epoch + 1) &lt; epochs):
+                self.checkpoint_manager.save()
+                print(&#39;Checkpoint saved for epoch {}.&#39;.format(epoch + 1))
     self.checkpoint_manager.save()
     print(&#39;Checkpoint saved for this training&#39;)</code></pre>
 </details>
@@ -707,7 +831,9 @@ for all the components of the model.</p></div>
                                      generator_g_optimizer=self.generator_g_optimizer,
                                      generator_f_optimizer=self.generator_f_optimizer,
                                      discriminator_x_optimizer=self.discriminator_x_optimizer,
-                                     discriminator_y_optimizer=self.discriminator_y_optimizer)
+                                     discriminator_y_optimizer=self.discriminator_y_optimizer,
+                                     step=self.total_steps,
+                                     epoch=self.total_epochs)
     return checkpoint</code></pre>
 </details>
 </dd>
@@ -750,7 +876,7 @@ for all the components of the model.</p></div>
 </details>
 </dd>
 <dt id="src.model.CycleGan.train_step"><code class="name flex">
-<span>def <span class="ident">train_step</span></span>(<span>self, real_pictogram, real_street_sign)</span>
+<span>def <span class="ident">train_step</span></span>(<span>self, real_pictogram, real_street_sign, identity_loss=False)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Train the model on a single batch of images.</p>
@@ -760,17 +886,22 @@ for all the components of the model.</p></div>
 <dd>4d tensor containing the pictograms (batch_size, height, width, channels).</dd>
 <dt><strong><code>real_street_sign</code></strong></dt>
 <dd>4d tensor containing real street sign images (batch_size, height, width, channels).</dd>
-</dl></div>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>Losses (dict): Dictionary containing the losses of the generators and discriminators.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def train_step(self, real_pictogram, real_street_sign):
+<pre><code class="python">def train_step(self, real_pictogram, real_street_sign, identity_loss=False):
     &#34;&#34;&#34;Train the model on a single batch of images.
 
     Args:
         real_pictogram: 4d tensor containing the pictograms (batch_size, height, width, channels).
         real_street_sign: 4d tensor containing real street sign images (batch_size, height, width, channels).
+
+    Returns:
+        Losses (dict): Dictionary containing the losses of the generators and discriminators.
     &#34;&#34;&#34;
     with tf.GradientTape(persistent=True) as tape:
         # Generate
@@ -778,44 +909,69 @@ for all the components of the model.</p></div>
         generated_pictogram = self.generator_f(real_street_sign, training=True)
 
         # Discriminator X loss
+        # -- how well does it identify real pictograms as real?
         discriminator_x_real_pictogram = self.discriminator_x(real_pictogram, training=True)
         discriminator_x_real_loss = self.adversarial_loss(tf.ones_like(discriminator_x_real_pictogram),
                                                           discriminator_x_real_pictogram)
+        # -- how well does it identify fake pictograms as fake?
         discriminator_x_fake_pictogram = self.discriminator_x(generated_pictogram, training=True)
         discriminator_x_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_x_fake_pictogram),
                                                           discriminator_x_fake_pictogram)
-        disc_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
+        # -- total loss
+        discriminator_x_loss = (discriminator_x_real_loss + discriminator_x_fake_loss) * 0.5
 
         # Discriminator Y loss
+        # -- how well does it identify real traffic signs as real?
         discriminator_y_real_street_sign = self.discriminator_y(real_street_sign, training=True)
         discriminator_y_real_loss = self.adversarial_loss(tf.ones_like(discriminator_y_real_street_sign),
                                                           discriminator_y_real_street_sign)
+        # -- how well does it identify fake traffic signs as fake?
         discriminator_y_fake_street_sign = self.discriminator_y(generated_street_sign, training=True)
         discriminator_y_fake_loss = self.adversarial_loss(tf.zeros_like(discriminator_y_fake_street_sign),
                                                           discriminator_y_fake_street_sign)
-        disc_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
+        # -- total loss
+        discriminator_y_loss = (discriminator_y_real_loss + discriminator_y_fake_loss) * 0.5
 
         # Cycle consistency loss
+        # -- how well does the generated image match the input images?
+        # -- pictogram -&gt; street sign -&gt; pictogram
         cycled_pictogram = self.generator_f(generated_street_sign, training=True)
+        cycled_pictogram_loss = self.l1_loss(real_pictogram, cycled_pictogram)
+        # -- street sign -&gt; pictogram -&gt; street sign
         cycled_street_sign = self.generator_g(generated_pictogram, training=True)
-        total_cycle_loss = self.calc_cycle_loss(
-            real_pictogram, cycled_pictogram) + self.calc_cycle_loss(real_street_sign, cycled_street_sign)
+        cycled_street_sign_loss = self.l1_loss(real_street_sign, cycled_street_sign)
+        # -- total loss
+        cycle_consistency_loss = cycled_pictogram_loss + cycled_street_sign_loss
 
         # Generators G&amp;F loss
-        generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign), discriminator_y_fake_street_sign)
-        generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram), discriminator_x_fake_pictogram)
-        total_gen_g_loss = generator_g_loss + total_cycle_loss
-        total_gen_f_loss = generator_f_loss + total_cycle_loss
+        # -- how well do the generators fool the discriminators?
+        generator_g_loss = self.adversarial_loss(tf.ones_like(discriminator_y_fake_street_sign),
+                                                 discriminator_y_fake_street_sign)
+        generator_f_loss = self.adversarial_loss(tf.ones_like(discriminator_x_fake_pictogram),
+                                                 discriminator_x_fake_pictogram)
+        total_generator_g_loss = generator_g_loss + cycle_consistency_loss
+        total_generator_f_loss = generator_f_loss + cycle_consistency_loss
+
+        # -- how much do the generators change an image that is already from their target domain?
+        if identity_loss:
+            same_x = self.generator_f(real_pictogram, training=True)
+            generator_g_identity_loss = self.l1_loss(real_pictogram, same_x)
+            same_y = self.generator_g(real_street_sign, training=True)
+            generator_f_identity_loss = self.l1_loss(real_street_sign, same_y)
+            total_generator_g_loss += generator_g_identity_loss * self.LAMBDA * 0.5
+            total_generator_f_loss += generator_f_identity_loss * self.LAMBDA * 0.5
+
+        total_loss = discriminator_x_loss + discriminator_y_loss + total_generator_g_loss + total_generator_f_loss
 
     # Gradients for optimization
-    generator_g_gradients = tape.gradient(total_gen_g_loss,
+    generator_g_gradients = tape.gradient(total_generator_g_loss,
                                           self.generator_g.trainable_variables)
-    generator_f_gradients = tape.gradient(total_gen_f_loss,
+    generator_f_gradients = tape.gradient(total_generator_f_loss,
                                           self.generator_f.trainable_variables)
 
-    discriminator_x_gradients = tape.gradient(disc_x_loss,
+    discriminator_x_gradients = tape.gradient(discriminator_x_loss,
                                               self.discriminator_x.trainable_variables)
-    discriminator_y_gradients = tape.gradient(disc_y_loss,
+    discriminator_y_gradients = tape.gradient(discriminator_y_loss,
                                               self.discriminator_y.trainable_variables)
 
     # Apply the gradients
@@ -829,7 +985,15 @@ for all the components of the model.</p></div>
                                                        self.discriminator_x.trainable_variables))
 
     self.discriminator_y_optimizer.apply_gradients(zip(discriminator_y_gradients,
-                                                       self.discriminator_y.trainable_variables))</code></pre>
+                                                       self.discriminator_y.trainable_variables))
+
+    return {
+        &#39;discriminator_x_loss&#39;: discriminator_x_loss,
+        &#39;discriminator_y_loss&#39;: discriminator_y_loss,
+        &#39;generator_g_loss&#39;: total_generator_g_loss,
+        &#39;generator_f_loss&#39;: total_generator_f_loss,
+        &#39;total_loss&#39;: total_loss
+    }</code></pre>
 </details>
 </dd>
 </dl>
@@ -883,7 +1047,6 @@ for all the components of the model.</p></div>
 <li>
 <h4><code><a title="src.model.CycleGan" href="#src.model.CycleGan">CycleGan</a></code></h4>
 <ul class="">
-<li><code><a title="src.model.CycleGan.calc_cycle_loss" href="#src.model.CycleGan.calc_cycle_loss">calc_cycle_loss</a></code></li>
 <li><code><a title="src.model.CycleGan.compile" href="#src.model.CycleGan.compile">compile</a></code></li>
 <li><code><a title="src.model.CycleGan.fit" href="#src.model.CycleGan.fit">fit</a></code></li>
 <li><code><a title="src.model.CycleGan.generate" href="#src.model.CycleGan.generate">generate</a></code></li>

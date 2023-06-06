@@ -114,11 +114,10 @@ Den Nutzen der generierten Bildern testen die Autoren anhand eines Modells zur O
 Das Resultat ist, dass die Erkennung durch die generierten Trainingsdaten verbessert wird. Sowohl das DenseNet als auch das ResNet liefern durch sie genauere Ergebnisse. Diese Arbeit zeigt die Möglichkeiten, die künstlich erzeugte Bilder für die Straßenschilderkennung bieten können. Der konkrete Ansatz mit einem klassischen DCGAN spielt für diese Studienarbeit jedoch eine untergeordnete Rolle, da das Ziel ist, eine größere Bandbreite an Bildern zu erzeugen. \cite{taiwanGAN}
 
 \subsection{Generierung Deutscher Straßenschilder mittels \acs{CycleGAN}}
-\todo[inline]{überarbeiten}
 \label{chap:vorherige-arbeiten-rub}
 Eine weitere Publikation, die sich mit der künstlichen Generierung von Bildern mit Straßenschildern konzentriert, verwendet einen Datensatz, der deutsche Straßenschilder enthält. Er ist unter dem Namen \ac{GTSRB} bekannt. Auf den Datensatz wird näher in Kapitel \ref{chap:konzept} eingeganen, da er auch die Basis für diese Arbeit bildet. Die genannte Publikation ist aus einer Masterarbeit an der Ruhr Universität Bochum entstanden. Dort wurde auch der \ac{GTSRB} veröffentlicht. 
 
-Die Veröffentlichung verwendet im Gegensatz zu der bisher beschriebenen Generierung taiwanischer Schilder ein \ac{CycleGAN} statt eines \emph{Vannila \acp{GAN}}. Die beiden Generatoren basieren, wie in der \ac{CycleGAN}-Veröffentlichung vorgeschlagen, auf einem ResNet \cite{cycleGAN}. \cite{GTSRB} \cite{gtsrbGAN}
+Die Veröffentlichung verwendet, im Gegensatz zu der bisher beschriebenen Generierung taiwanischer Schilder, ein \ac{CycleGAN} statt eines \emph{Vannila \acp{GAN}}. Die beiden Generatoren basieren, wie in der \ac{CycleGAN}-Veröffentlichung vorgeschlagen, auf einem ResNet \cite{cycleGAN}. \cite{GTSRB} \cite{gtsrbGAN}
 
 Für die Generierung erhält das Netzwerk das Piktogramm eines Straßenschilds als Eingang. Das \ac{CycleGAN} soll einen möglichst realistisch wirkenden Hintergrund um das Straßenschild erzeugen. Vor der Generierung werden die Piktogramme der Straßenschilder zufällig rotiert und ein zufälliger einfarbiger Hintergrund erzeugt. Letzteres soll eine weitere stochastische Komponente für die Generierung bilden, damit eine größere Varianz an Hintergründen erzeugt wird. Für das Training des Netzes verwendet die Arbeit eine präparierte Version des \ac{GTSRB}. Der Datensatz beinhaltet dadurch folgende Eigenschaften:
 \begin{itemize}
@@ -128,7 +127,7 @@ Für die Generierung erhält das Netzwerk das Piktogramm eines Straßenschilds a
   \end{itemize}
 \cite{gtsrbGAN}
 
-Abbildung \ref{fig:ruhr-uni-bochum} zeigt beispielhaft einige der generierten Bilder. Dabei zeigt die Abbildung paarweise links ein echtes Bild aus den Trainingsdaten und rechts daneben das generierte Bild, das die ähnlichsten Pixelwerte dazu besitzt. Es ist zu erkennen, dass die generierten Bilder der Verteilung der Trainingsdaten ähnlich sehen, während sie dennoch neuartig sind. \cite{gtsrbGAN}
+Abbildung \ref{fig:ruhr-uni-bochum} zeigt beispielhaft einige der generierten Bilder. Dabei zeigt die Abbildung paarweise links ein echtes Bild aus den Trainingsdaten und rechts daneben das generierte Bild, das die ähnlichsten Pixelwerte dazu besitzt. Es ist zu erkennen, dass die generierten Bilder den Trainingsdaten ähnlich sehen, während sie dennoch neuartig sind. \cite{gtsrbGAN}
 
 \begin{figure}[h]
     \centering

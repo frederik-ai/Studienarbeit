@@ -20,12 +20,13 @@ from tensorflow.keras.models import Model
 
 tf.get_logger().setLevel('ERROR')
 
-config = toml.load('../config/config.toml')
 num_epochs = 20
 batch_size = 32
 
 
 def run():
+    config = toml.load('../config/config.toml')
+    
     parser = argparse.ArgumentParser()
     # Determine whether to train or evaluate the model
     train_or_eval = parser.add_mutually_exclusive_group(required=True)
@@ -89,22 +90,6 @@ def get_model():
     model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=['accuracy'])
 
     return model
-
-
-def train(checkpoint_path, model, train_set, val_set):
-    print('Training...')
-
-    train_set = tf.keras.utils.image_dataset_from_directory(config['paths']['classifier']['train_data'],
-                                                            batch_size=batch_size, seed=123,
-                                                            image_size=(256, 256), label_mode='categorical')
-
-    val_set = tf.keras.utils.image_dataset_from_directory(config['paths']['classifier']['test_data'],
-                                                             batch_size=batch_size, seed=123,
-                                                             image_size=(256, 256), label_mode='categorical')
-
-    model.fit(x=train_set, validation_data=val_set, epochs=num_epochs)
-    model.save_weights(checkpoint_path)
-
 
 def main():
     run()
